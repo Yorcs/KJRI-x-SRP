@@ -40,45 +40,49 @@ class WelcomePage extends StatelessWidget {
       builder: (context, constraints) {
         return Scaffold(
           body: Center(
-            child: SingleChildScrollView(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //Logo Image
-                        Image(
-                          image: AssetImage('images/logo.png'),
-                          width: 100,
-                          height: 100,),
-                        //Title
-                        Text(
-                          'Selamat Datang ke Lapor Diri', 
-                          style: TextStyling.headerTextStyle),
-                        //Freepik Illustration
-                        Image(
-                          image: AssetImage('images/ListImage.png'),
-                          ),
-                        //Text
-                        Text(
-                          'Kemudahan Pelayanan & Perlindungan Bagi WNI di Luar Negeri'
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //Logo Image
+                      Image(
+                        image: AssetImage('images/logo.png'),
+                        width: 97,
+                        height: 97,
+                        fit: BoxFit.contain
                         ),
-                        ElevatedButton(
-                          child: const Text('Next'),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const RequirementsPage()),
-                            );
-                          },
+                      //Title
+                      Text(
+                        'Selamat Datang ke Lapor Diri', 
+                        style: TextStyling.headerTextStyle),
+                      //Freepik Illustration
+                      Image(
+                        image: AssetImage('images/ListImage.png'),
+                        width: 349,
+                        height: 345,
+                        fit: BoxFit.contain
                         ),
-                      ],
-                    ),
+                      //Text
+                      Text(
+                        'Kemudahan Pelayanan & Perlindungan Bagi WNI di Luar Negeri',
+                        style: TextStyling.regularBoldTextStyle
+                      ),
+                      ElevatedButton(
+                        child: const Text('Next'),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const RequirementsPage()),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

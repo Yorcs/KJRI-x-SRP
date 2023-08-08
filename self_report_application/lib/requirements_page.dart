@@ -26,11 +26,16 @@ class RequirementsPage extends StatelessWidget {
 
                       //Sub header Text
                       Text(
-                        'Pengisian ini sesuai dengan peraturan/kebiasaan yang berlaku di Indonesia'
+                        'Pengisian ini sesuai dengan peraturan/kebiasaan yang berlaku di Indonesia',
+                        style: TextStyling.subHeaderTextStyle
                       ),
 
                       //text
-
+                        Text(
+                        'Sebelum mulai mengisi, siapkan dokumen pada perangkat:',
+                        style: TextStyling.subHeaderTextStyle
+                      ),
+                      
                       //List
                       
                       ElevatedButton(
