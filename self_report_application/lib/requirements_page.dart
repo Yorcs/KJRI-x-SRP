@@ -1,38 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:self_report_application/styling.dart';
-import 'package:self_report_application/requirements_page.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-//Application
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
-      child: MaterialApp(
-        title: 'Onboarding Lapor Diri',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        ),
-        home: WelcomePage(),
-      ),
-    );
-  }
-}
-
-class MyAppState extends ChangeNotifier {
-}
-
-//Welcome Page
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+//Requirements Page
+class RequirementsPage extends StatelessWidget {
+  const RequirementsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +21,18 @@ class WelcomePage extends StatelessWidget {
                       //Logo Image
                       //Title
                       Text(
-                        'Selamat Datang ke Lapor Diri', 
+                        'Persyaratan Pengisian Lapor Diri', 
                         style: TextStyling.headerTextStyle),
-                      //Freepik Illustration
-                      //Text
+
+                      //Sub header Text
                       Text(
-                        'Kemudahan Pelayanan & Perlindungan Bagi WNI di Luar Negeri'
+                        'Pengisian ini sesuai dengan peraturan/kebiasaan yang berlaku di Indonesia'
                       ),
+
+                      //text
+
+                      //List
+                      
                       ElevatedButton(
                         child: const Text('Next'),
                         onPressed: () {
