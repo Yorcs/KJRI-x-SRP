@@ -39,7 +39,7 @@ class RequirementsPage extends StatelessWidget {
                       //text
                         Text(
                         'Sebelum mulai mengisi, siapkan dokumen pada perangkat:',
-                        style: TextStyling.subHeaderTextStyle
+                        style: TextStyling.regularBoldTextStyle
                       ),
 
                       //List
