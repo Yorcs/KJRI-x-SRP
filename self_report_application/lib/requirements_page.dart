@@ -19,6 +19,12 @@ class RequirementsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       //Logo Image
+                      Image(
+                        image: AssetImage('images/logo.png'),
+                        width: 97,
+                        height: 97,
+                        fit: BoxFit.contain
+                        ),
                       //Title
                       Text(
                         'Persyaratan Pengisian Lapor Diri', 
@@ -35,7 +41,7 @@ class RequirementsPage extends StatelessWidget {
                         'Sebelum mulai mengisi, siapkan dokumen pada perangkat:',
                         style: TextStyling.subHeaderTextStyle
                       ),
-                      
+
                       //List
                       
                       ElevatedButton(
