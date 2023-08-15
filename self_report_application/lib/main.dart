@@ -43,6 +43,9 @@ class WelcomePage extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: Container(
+              //TODO: readjust margin
+              //TODO: readjust padding
+              //TODO: Make the Image and the text scale depending on the size of the screen
               margin: const EdgeInsets.all(10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
