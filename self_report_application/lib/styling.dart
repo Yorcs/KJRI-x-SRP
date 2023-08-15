@@ -7,7 +7,7 @@ class TextStyling {
   //needs readjust
   static const TextStyle headerTextStyle = TextStyle(
     fontSize: 32,
-    fontWeight: FontWeight.bold
+    fontWeight: FontWeight.bold,
   );
 
   //needs readjust
