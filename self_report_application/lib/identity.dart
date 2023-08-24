@@ -3,41 +3,53 @@ import 'package:provider/provider.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
 
-class TextEditingControllerIdentity extends StatefulWidget{
-  const TextEditingControllerIdentity({super.key});
-
-
+//Requirements Page
+class IdentityPage extends StatelessWidget {
+  const IdentityPage({super.key});
+  
   @override
-  State<TextEditingControllerIdentity> createState() => _TextEditingControllerIdentityState();
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
+}
 
-class _TextEditingControllerIdentityState extends State<TextEditingControllerIdentity>{
-  final TextEditingController _controller = TextEditingController();
-
+class IdentityForm extends StatefulWidget{
   @override
-  void initState(){
-    super.initState();
-    _controller.addListener(() {
-      final String text = _controller.text.toString();
-      _controller.value = _controller.value.copyWith(
-        text: text,
-        selection:TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing:TextRange.empty,
-      );
-    });
-  }
+  _IdentityFormState createState() => _IdentityFormState();
+}
 
+class _IdentityFormState extends State<IdentityForm>{
+  final identityKey = GlobalKey<FormState>();
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          body: Container(
+            child: Form(
+              key: identityKey,
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      labelText: 'Nama Lengkap'
+                    ),
+                    validator:(value){
+                      if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
 
-  @override
-  Widget build(BuildContext context){
-    return Scaffold(
-      //make the form
-      
+                      }
+                    },
+                  )
+
+                ],
+              ), 
+            ),
+          )
+        );
+      },
     );
   }
 }

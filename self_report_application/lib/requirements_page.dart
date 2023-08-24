@@ -16,6 +16,7 @@ class RequirementsPage extends StatelessWidget {
               //TODO: readjust padding
               //TODO: Make the Image and the text scale depending on the size of the screen
               margin: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(10.0),
               alignment: Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,8 +51,6 @@ class RequirementsPage extends StatelessWidget {
             
                   //List
                   Container(
-                    margin: const EdgeInsets.all(5.0),
-                    alignment: Alignment.centerLeft,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
