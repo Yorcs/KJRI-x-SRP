@@ -15,7 +15,8 @@ class RequirementsPage extends StatelessWidget {
               //TODO: readjust margin
               //TODO: readjust padding
               //TODO: Make the Image and the text scale depending on the size of the screen
-              margin: const EdgeInsets.all(10.0),
+              margin: const EdgeInsets.all(5.0),
+              alignment: Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -29,24 +30,30 @@ class RequirementsPage extends StatelessWidget {
                   //Title
                   Text(
                     'Persyaratan Pengisian Lapor Diri', 
-                    style: TextStyling.headerTextStyle
+                    style: TextStyling.headerTextStyle,
+                    textAlign: TextAlign.center,
                   ),
             
                   //Sub header Text
                   Text(
                     'Pengisian ini sesuai dengan peraturan/kebiasaan yang berlaku di Indonesia',
-                    style: TextStyling.subHeaderTextStyle
+                    style: TextStyling.subHeaderTextStyle,
+                    textAlign: TextAlign.center,
                   ),
                 
                   //text
                     Text(
                     'Sebelum mulai mengisi, siapkan dokumen pada perangkat:',
-                    style: TextStyling.regularBoldTextStyle
+                    style: TextStyling.regularBoldTextStyle,
+                    textAlign: TextAlign.center,
                   ),
             
                   //List
                   Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.centerLeft,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           '1. KTP',
