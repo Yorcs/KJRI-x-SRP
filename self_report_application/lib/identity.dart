@@ -21,7 +21,7 @@ class IdentityForm extends StatefulWidget{
 class _IdentityFormState extends State<IdentityForm>{
   final identityKey = GlobalKey<FormState>();
 
-  String initialDropDownValue = 'Laki-laki';
+  String? dropdownValue;
   var items = [
     'Laki-laki',
     'Perempuan',
@@ -54,7 +54,8 @@ class _IdentityFormState extends State<IdentityForm>{
                   TextFormField(
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelText: 'Tanggal Lahir'
+                      labelText: 'Tanggal Lahir',
+                      hintText: 'DD/MM/YYYY'
                     ),
                     validator:(value){
                       if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
@@ -91,7 +92,8 @@ class _IdentityFormState extends State<IdentityForm>{
                     },
                   ),
                   DropdownButton(
-                    value: initialDropDownValue,
+                    value: dropdownValue,
+                    hint: Text('Jenis Kelamin'),
                     items: items.map((String items){
                       return DropdownMenuItem(
                         value: items,
@@ -101,7 +103,7 @@ class _IdentityFormState extends State<IdentityForm>{
 
                     onChanged: (String? newValue){
                       setState(() {
-                        initialDropDownValue = newValue!;
+                        dropdownValue = newValue!;
                       });
                     },
                   )
