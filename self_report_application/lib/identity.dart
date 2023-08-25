@@ -9,8 +9,7 @@ class IdentityPage extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return IdentityForm();
   }
 }
 
@@ -21,6 +20,13 @@ class IdentityForm extends StatefulWidget{
 
 class _IdentityFormState extends State<IdentityForm>{
   final identityKey = GlobalKey<FormState>();
+
+  String initialDropDownValue = 'Laki-laki';
+  var items = [
+    'Laki-laki',
+    'Perempuan',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -39,8 +45,64 @@ class _IdentityFormState extends State<IdentityForm>{
                     ),
                     validator:(value){
                       if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
-
+                        return "Invalid input"; //TODO: Please change prompt
+                      } else{
+                        return null;
                       }
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      labelText: 'Tanggal Lahir'
+                    ),
+                    validator:(value){
+                      if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+                        return "Invalid input"; //TODO: Please change prompt
+                      } else{
+                        return null;
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      labelText: 'Nomor Paspor'
+                    ),
+                    validator:(value){
+                      if(value!.isEmpty || !RegExp(r'^[a-z A-Z 0-9]+$').hasMatch(value!)){
+                        return "Invalid input"; //TODO: Please change prompt
+                      } else{
+                        return null;
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      labelText: 'NIK'
+                    ),
+                    validator:(value){
+                      if(value!.isEmpty || !RegExp(r'^[0-9]+$').hasMatch(value!)){
+                        return "Invalid input"; //TODO: Please change prompt
+                      } else{
+                        return null;
+                      }
+                    },
+                  ),
+                  DropdownButton(
+                    value: initialDropDownValue,
+                    items: items.map((String items){
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items)
+                      );
+                    }).toList(),
+
+                    onChanged: (String? newValue){
+                      setState(() {
+                        initialDropDownValue = newValue!;
+                      });
                     },
                   )
 
