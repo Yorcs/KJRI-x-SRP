@@ -51,6 +51,7 @@ class RequirementsPage extends StatelessWidget {
                   ),
             
                   //List
+                  //TODO: Readjust margin padding
                   Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,6 +88,7 @@ class RequirementsPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  //TODO: Readjust position for button
                   ElevatedButton(
                     child: const Text('Next'),
                     onPressed: () {

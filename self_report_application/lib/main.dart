@@ -79,6 +79,7 @@ class WelcomePage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  //TODO: Adjust button position
                   ElevatedButton(
                     child: const Text('Next'),
                     onPressed: () {
