@@ -39,19 +39,7 @@ class _IdentityFormState extends State<IdentityForm>{
               child:Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelText: 'Nama Lengkap'
-                    ),
-                    validator:(value){
-                      if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)){
-                        return "Invalid input"; //TODO: Please change prompt
-                      } else{
-                        return null;
-                      }
-                    },
-                  ),
+                  TextsForm(labels: 'a'),
                   TextFormField(
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -66,6 +54,7 @@ class _IdentityFormState extends State<IdentityForm>{
                       }
                     },
                   ),
+                  TextsForm(labels: 'aaaaaaaaaaaaaaaaaaaaaaaa'),
                   TextFormField(
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -114,6 +103,31 @@ class _IdentityFormState extends State<IdentityForm>{
             ),
           )
         );
+      },
+    );
+  }
+}
+
+class TextsForm extends StatelessWidget {
+  const TextsForm({
+    super.key,
+    String? labels,
+  });
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        labelText: 'nama lengkap'
+      ),
+      validator:(value){
+        if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+          return "Invalid input"; //TODO: Please change prompt
+        } else{
+          return null;
+        }
       },
     );
   }
