@@ -28,4 +28,33 @@ class TextStyling {
   );
 }
 
+//Form
+//TODO: Needs refactoring
+class TextsForm extends StatelessWidget {
+  const TextsForm({
+    super.key,
+    required this.labels,
+  });
+
+  final String labels;
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        labelText: labels,
+      ),
+      validator:(value){
+        if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+          return "Invalid input"; //TODO: Please change prompt
+        } else{
+          return null;
+        }
+      },
+    );
+  }
+}
+
 //C

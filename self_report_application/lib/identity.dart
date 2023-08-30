@@ -32,57 +32,31 @@ class _IdentityFormState extends State<IdentityForm> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-            //TODO: Readjust margin and padding
-            body: Container(
-          child: Form(
-            key: identityKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextsForm(labels: 'a'),
-                TextFormField(
-                  decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelText: 'Nama Lengkap'),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      return "Invalid input"; //TODO: Please change prompt
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
+          //TODO: Readjust margin and padding
+          body: Container(
+            child: Form(
+              key: identityKey,
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextsForm(labels: 'Nama Lengkap'),
+                  TextFormField(
+                    decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       labelText: 'Tanggal Lahir',
-                      hintText: 'DD/MM/YYYY'),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      return "Invalid input"; //TODO: Please change prompt
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                TextsForm(labels: 'aaaaaaaaaaaaaaaaaaaaaaaa'),
-                TextFormField(
-                  decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                      labelText: 'Nomor Paspor'),
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        RegExp(r'^[a-z A-Z 0-9]+$').hasMatch(value)) {
-                      return "Invalid input"; //TODO: Please change prompt
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
+                      hintText: 'DD/MM/YYYY'
+                    ),
+                    validator:(value){
+                      if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+                        return "Invalid input"; //TODO: Please change prompt
+                      } else{
+                        return null;
+                      }
+                    },
+                  ),
+                  TextsForm(labels: 'Nomor Paspor'),
+                  TextFormField(
+                    decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       labelText: 'NIK'),
                   validator: (value) {
@@ -109,29 +83,6 @@ class _IdentityFormState extends State<IdentityForm> {
             ),
           ),
         ));
-      },
-    );
-  }
-}
-
-class TextsForm extends StatelessWidget {
-  const TextsForm({
-    super.key,
-    String? labels,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      decoration: InputDecoration(
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          labelText: 'nama lengkap'),
-      validator: (value) {
-        if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-          return "Invalid input"; //TODO: Please change prompt
-        } else {
-          return null;
-        }
       },
     );
   }
