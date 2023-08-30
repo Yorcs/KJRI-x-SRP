@@ -39,9 +39,7 @@ class _IdentityFormState extends State<IdentityForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-<<<<<<< Updated upstream
                 TextsForm(labels: 'a'),
-=======
                 TextFormField(
                   decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -55,7 +53,6 @@ class _IdentityFormState extends State<IdentityForm> {
                     }
                   },
                 ),
->>>>>>> Stashed changes
                 TextFormField(
                   decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -70,10 +67,7 @@ class _IdentityFormState extends State<IdentityForm> {
                     }
                   },
                 ),
-<<<<<<< Updated upstream
                 TextsForm(labels: 'aaaaaaaaaaaaaaaaaaaaaaaa'),
-=======
->>>>>>> Stashed changes
                 TextFormField(
                   decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -120,7 +114,6 @@ class _IdentityFormState extends State<IdentityForm> {
     );
   }
 }
-<<<<<<< Updated upstream
 
 class TextsForm extends StatelessWidget {
   const TextsForm({
@@ -144,5 +137,3 @@ class TextsForm extends StatelessWidget {
     );
   }
 }
-=======
->>>>>>> Stashed changes
