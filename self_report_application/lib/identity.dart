@@ -46,7 +46,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       labelText: 'Nama Lengkap'),
                   validator: (value) {
                     if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value!)) {
+                        RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
                       return "Invalid input"; //TODO: Please change prompt
                     } else {
                       return null;
@@ -74,7 +74,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       labelText: 'Nomor Paspor'),
                   validator: (value) {
                     if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z 0-9]+$').hasMatch(value!)) {
+                        RegExp(r'^[a-z A-Z 0-9]+$').hasMatch(value)) {
                       return "Invalid input"; //TODO: Please change prompt
                     } else {
                       return null;
@@ -86,8 +86,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       labelText: 'NIK'),
                   validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[0-9]+$').hasMatch(value!)) {
+                    if (value!.isEmpty || RegExp(r'^[0-9]+$').hasMatch(value)) {
                       return "Invalid input"; //TODO: Please change prompt
                     } else {
                       return null;
