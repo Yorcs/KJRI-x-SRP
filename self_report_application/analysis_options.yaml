@@ -5,6 +5,7 @@ include: package:flutter_lints/flutter.yaml
 
 linter:
   rules:
+    sized_box_for_whitespace: true
     prefer_const_constructors: false
     prefer_final_fields: false
     use_key_in_widget_constructors: false

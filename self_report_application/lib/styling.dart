@@ -29,25 +29,51 @@ class TextStyling {
 }
 
 //Form
-//TODO: Needs refactoring
+//TODO: Needs refactoring to reduce redundancy
+//TODO: change RegExp String according to what we need
+//TODO: Find a way to save the data
 class TextsForm extends StatelessWidget {
   const TextsForm({
     super.key,
     required this.labels,
+    required this.valueConstraints,
+    required this.requiredData,
+    required this.hintContent,
   });
 
+  //Constraints and Arguments
   final String labels;
+  final String hintContent;
+  final RegExp valueConstraints;
+  final bool requiredData;
+
+  // //Saved data string
+  // late String savedLabel;
+  // late String savedData;
   
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        labelText: labels,
+        hintText: hintContent,
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 2,
+            color: Colors.black
+            )
+          ),
       ),
+      // onSaved: (value){
+      //   if(!requiredData || !valueConstraints.hasMatch(value!)){
+          
+      //   } else {
+      //     savedLabel: labels;
+      //     savedData: value;
+      //   }
+      // },
       validator:(value){
-        if(value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value)){
+        if(!requiredData || !valueConstraints.hasMatch(value!)){
           return "Invalid input"; //TODO: Please change prompt
         } else{
           return null;
@@ -56,5 +82,33 @@ class TextsForm extends StatelessWidget {
     );
   }
 }
+
+//Pop up dialog button
+//TODO: Find a new placement since it cannot be placed next to the label text.
+//TODO: Change icon
+class InfoButton extends StatelessWidget {
+  const InfoButton({
+    super.key,
+    required this.contents,
+  });
+
+  final String contents;
+
+//TODO: Replace placeholders
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () => showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content: Text(contents),
+        )),
+      icon: const Icon(Icons.add_alert),
+      );
+  }
+}
+
+
+
 
 //C
