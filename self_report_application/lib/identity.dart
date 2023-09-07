@@ -45,7 +45,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       needsInfoButton: true,
                       isDataRequired: true,
                       hintContents: '',
-                      buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada). Contoh: Arena Sri Viktoria',
+                      buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
                       valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                     ),
                     FormContainer(
@@ -61,7 +61,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       needsInfoButton: true,
                       isDataRequired: true,
                       hintContents: '',
-                      buttonContent: 'Sesuai yang tertulis di paspor. Tidak ada spasi.',
+                      buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
                       valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                     ),
                     FormContainer(

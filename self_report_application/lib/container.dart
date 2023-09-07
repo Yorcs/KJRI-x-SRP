@@ -27,12 +27,12 @@ class FormContainer extends StatelessWidget {
         LabelingWidget(
           labelName: labels,
           needsInfo: needsInfoButton,
-          buttonInfo: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada). Contoh: Arena Sri Viktoria',
+          buttonInfo: buttonContent,
         ),
         TextsForm(
           labels: labels,
           requiredData: isDataRequired,
-          valueConstraints: RegExp(r'^[a-z A-Z]+$'), 
+          valueConstraints: valueConstraints, 
           hintContent: hintContents,
           ),
       ],
