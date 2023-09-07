@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/container.dart';
+import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 
 //Requirements Page
@@ -40,6 +41,17 @@ class _IdentityFormState extends State<IdentityForm> {
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    BuildHeader(
+                      pageName: 'Identitas',
+                      opacity1: 1,
+                      opacity2: 0.5,
+                      opacity3: 0.5,
+                      opacity4: 0.5,
+                      changeColor1: Colors.white,
+                      changeColor2: Colors.blue,
+                      changeColor3: Colors.blue,
+                      changeColor4: Colors.blue,
+                    ),
                     FormContainer(
                       labels: 'Nama Lengkap',
                       needsInfoButton: true,
@@ -62,7 +74,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       isDataRequired: true,
                       hintContents: '',
                       buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
-                      valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                      valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
                     ),
                     FormContainer(
                       labels: 'NIK',
@@ -70,7 +82,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       isDataRequired: false,
                       hintContents: '',
                       buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
-                      valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                      valueConstraints: RegExp(r'^[0-9]+$'),                    
                     ),
                     Text('Jenis kelamin'),
                     DropdownButton(

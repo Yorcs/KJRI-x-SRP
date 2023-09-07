@@ -55,7 +55,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                       isDataRequired: true,
                       hintContents: '',
                       buttonContent: '',
-                      valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                      valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
                     ),
                     FormContainer(
                       labels: 'Negara',
@@ -98,7 +98,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                       isDataRequired: true,
                       hintContents: '',
                       buttonContent: '',
-                      valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                      valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
                     ),
                     //TODO: Adjust button position
                     Row(
