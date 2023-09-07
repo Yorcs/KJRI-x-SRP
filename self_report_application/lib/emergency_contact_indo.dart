@@ -2,37 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
+import 'package:self_report_application/styling.dart';
 
-//Living Abroad First Page
-class LivingAbroadDataPage extends StatelessWidget {
-  const LivingAbroadDataPage({super.key});
+//Emergency Contact in Indonesia Page
+class EmergencyContactIndoPage extends StatelessWidget {
+  const EmergencyContactIndoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LivingAbroadDataForm();
+    return EmergencyContactIndoForm();
   }
 }
 
-class LivingAbroadDataForm extends StatefulWidget {
+class EmergencyContactIndoForm extends StatefulWidget {
   @override
-  _LivingAbroadDataFormState createState() => _LivingAbroadDataFormState();
+  _EmergencyContactIndoFormState createState() => _EmergencyContactIndoFormState();
 }
 
-class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
-  final livingAbroadDataKey = GlobalKey<FormState>();
+class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
+  final emergencyContactIndoKey = GlobalKey<FormState>();
 
-  String? provinceDropdownValue;
+  String? relationshipDropdownValue;
   String? cityDropdownValue;
 
-  var provinces = [
-    'Alberta',
-    'British Columbia',
-  ];
-
-  var cities = [
-    'Burnaby',
-    'Coquitlam',
-    'Surrey',
+  var relationship = [
+    'Keluarga',
+    'Rekan Kerja',
+    'Istri/Suami',
+    'Orang Tua',
+    'Teman',
   ];
 
   @override
@@ -45,63 +43,63 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
             child: Container(
               margin: const EdgeInsets.all(10.0),
               child: Form(
-                key: livingAbroadDataKey,
+                key: emergencyContactIndoKey,
                 child:ListView(
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Di Indonesia',
+                              style: TextStyling.regularBoldTextStyle,
+                            ),
+                            InfoButton(
+                              contents: 'Informasi kontak sesuai surat-surat pemerintah'
+                            ),
+                          ],
+                        ),
                         FormContainer(
-                        labels: 'Alamat Lengkap di Luar Negeri',
+                        labels: 'Nama',
                         needsInfoButton: false,
                         isDataRequired: true,
                         hintContents: '',
                         buttonContent: '',
-                        valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                         ),
-                        FormContainer(
-                          labels: 'Negara',
-                          needsInfoButton: false,
-                          isDataRequired: true,
-                          hintContents: 'Kanada',
-                          buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
-                        ),
-                        
-                        Text('Propinsi'),
+                        Text('Hubungan'),
                         DropdownButton(
-                          value: provinceDropdownValue,
-                          hint: Text('Pilih Propinsi'),
-                          items: provinces.map((String items) {
+                          value: relationshipDropdownValue,
+                          hint: Text('Pilih Hubungan'),
+                          items: relationship.map((String items) {
                             return DropdownMenuItem(value: items, child: Text(items));
                           }).toList(),
                           onChanged: (String? newValue) {
                             setState(() {
-                              provinceDropdownValue = newValue!;
+                              relationshipDropdownValue = newValue!;
                             });
                           },
                         ),
-                        Text('Kota'),
-                        DropdownButton(
-                          value: cityDropdownValue,
-                          hint: Text('Pilih Kota'),
-                          items: cities.map((String items) {
-                            return DropdownMenuItem(value: items, child: Text(items));
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              cityDropdownValue = newValue!;
-                            });
-                          },
-                        ),
+                        //TODO: Change RegExp
                         FormContainer(
-                          labels: 'Kode Pos',
+                          labels: 'Email',
                           needsInfoButton: false,
                           isDataRequired: true,
                           hintContents: '',
                           buttonContent: '',
                           valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                        ),
+                        //TODO: Change RegExp
+                        FormContainerWithDisabledText(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: true,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: RegExp(r'^[0-9]+$'),
+                          areaCode: '+62',                  
                         ),
                         //TODO: Adjust button position
                         Row(

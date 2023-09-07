@@ -2,39 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
+import 'package:self_report_application/styling.dart';
 
-//Living Abroad First Page
-class LivingAbroadDataPage extends StatelessWidget {
-  const LivingAbroadDataPage({super.key});
+//Emergency Contact Abroad Page
+class EmergencyContactAbroadPage extends StatelessWidget {
+  const EmergencyContactAbroadPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LivingAbroadDataForm();
+    return EmergencyContactAbroadForm();
   }
 }
 
-class LivingAbroadDataForm extends StatefulWidget {
+class EmergencyContactAbroadForm extends StatefulWidget {
   @override
-  _LivingAbroadDataFormState createState() => _LivingAbroadDataFormState();
+  _EmergencyContactAbroadFormState createState() => _EmergencyContactAbroadFormState();
 }
 
-class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
-  final livingAbroadDataKey = GlobalKey<FormState>();
+class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm> {
+  final emergencyContactAbroadKey = GlobalKey<FormState>();
 
-  String? provinceDropdownValue;
+  String? relationshipDropdownValue;
   String? cityDropdownValue;
 
-  var provinces = [
-    'Alberta',
-    'British Columbia',
+  var relationship = [
+    'Keluarga',
+    'Rekan Kerja',
+    'Istri/Suami',
+    'Orang Tua',
+    'Teman',
   ];
-
-  var cities = [
-    'Burnaby',
-    'Coquitlam',
-    'Surrey',
-  ];
-
+  
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -45,63 +43,56 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
             child: Container(
               margin: const EdgeInsets.all(10.0),
               child: Form(
-                key: livingAbroadDataKey,
+                key: emergencyContactAbroadKey,
                 child:ListView(
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          'Di Luar Negeri',
+                          style: TextStyling.regularBoldTextStyle,
+                        ),
                         FormContainer(
-                        labels: 'Alamat Lengkap di Luar Negeri',
+                        labels: 'Nama',
                         needsInfoButton: false,
                         isDataRequired: true,
                         hintContents: '',
                         buttonContent: '',
-                        valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                         ),
-                        FormContainer(
-                          labels: 'Negara',
-                          needsInfoButton: false,
-                          isDataRequired: true,
-                          hintContents: 'Kanada',
-                          buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
-                        ),
-                        
-                        Text('Propinsi'),
+                        Text('Hubungan'),
                         DropdownButton(
-                          value: provinceDropdownValue,
-                          hint: Text('Pilih Propinsi'),
-                          items: provinces.map((String items) {
+                          value: relationshipDropdownValue,
+                          hint: Text('Pilih Hubungan'),
+                          items: relationship.map((String items) {
                             return DropdownMenuItem(value: items, child: Text(items));
                           }).toList(),
                           onChanged: (String? newValue) {
                             setState(() {
-                              provinceDropdownValue = newValue!;
+                              relationshipDropdownValue = newValue!;
                             });
                           },
                         ),
-                        Text('Kota'),
-                        DropdownButton(
-                          value: cityDropdownValue,
-                          hint: Text('Pilih Kota'),
-                          items: cities.map((String items) {
-                            return DropdownMenuItem(value: items, child: Text(items));
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              cityDropdownValue = newValue!;
-                            });
-                          },
-                        ),
+                        //TODO: Change RegExp
                         FormContainer(
-                          labels: 'Kode Pos',
+                          labels: 'Email',
                           needsInfoButton: false,
                           isDataRequired: true,
                           hintContents: '',
                           buttonContent: '',
                           valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                        ),
+                        //TODO: Change RegExp
+                        FormContainerWithDisabledText(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: true,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: RegExp(r'^[0-9]+$'),
+                          areaCode: '+1',                  
                         ),
                         //TODO: Adjust button position
                         Row(

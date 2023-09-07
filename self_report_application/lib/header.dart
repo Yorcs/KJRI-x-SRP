@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:self_report_application/styling.dart';
 
 class BuildHeader extends StatelessWidget{
   const BuildHeader({

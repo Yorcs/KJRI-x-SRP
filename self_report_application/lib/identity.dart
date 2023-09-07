@@ -38,78 +38,82 @@ class _IdentityFormState extends State<IdentityForm> {
               margin: const EdgeInsets.all(10.0),
               child: Form(
                 key: identityKey,
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child:ListView(
                   children: [
-                    BuildHeader(
-                      pageName: 'Identitas',
-                      opacity1: 1,
-                      opacity2: 0.5,
-                      opacity3: 0.5,
-                      opacity4: 0.5,
-                      changeColor1: Colors.white,
-                      changeColor2: Colors.blue,
-                      changeColor3: Colors.blue,
-                      changeColor4: Colors.blue,
-                    ),
-                    FormContainer(
-                      labels: 'Nama Lengkap',
-                      needsInfoButton: true,
-                      isDataRequired: true,
-                      hintContents: '',
-                      buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
-                      valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
-                    ),
-                    FormContainer(
-                      labels: 'Tanggal Lahir',
-                      needsInfoButton: false,
-                      isDataRequired: true,
-                      hintContents: 'DD/MM/YYYY',
-                      buttonContent: '',
-                      valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
-                    ),
-                    FormContainer(
-                      labels: 'Nomor Paspor',
-                      needsInfoButton: true,
-                      isDataRequired: true,
-                      hintContents: '',
-                      buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
-                      valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
-                    ),
-                    FormContainer(
-                      labels: 'NIK',
-                      needsInfoButton: true,
-                      isDataRequired: false,
-                      hintContents: '',
-                      buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
-                      valueConstraints: RegExp(r'^[0-9]+$'),                    
-                    ),
-                    Text(
-                      'Jenis kelamin',
-                      textAlign: TextAlign.left,),
-                    DropdownButton(
-                      alignment: Alignment.centerLeft,
-                      value: dropdownValue,
-                      hint: Text('Pilih Jenis Kelamin'),
-                      items: items.map((String items) {
-                        return DropdownMenuItem(value: items, child: Text(items));
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValue = newValue!;
-                        });
-                      },
-                    ),
-                    //TODO: Adjust button position
-                    ElevatedButton(
-                      child: const Text('Next'),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const LivingAbroadDataPage()),
-                        );
-                      },
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:[
+                        BuildHeader(
+                        pageName: 'Identitas',
+                        opacity1: 1,
+                        opacity2: 0.5,
+                        opacity3: 0.5,
+                        opacity4: 0.5,
+                        changeColor1: Colors.white,
+                        changeColor2: Colors.blue,
+                        changeColor3: Colors.blue,
+                        changeColor4: Colors.blue,
+                        ),
+                        FormContainer(
+                        labels: 'Nama Lengkap',
+                        needsInfoButton: true,
+                        isDataRequired: true,
+                        hintContents: '',
+                        buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
+                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                        ),
+                        FormContainer(
+                          labels: 'Tanggal Lahir',
+                          needsInfoButton: false,
+                          isDataRequired: true,
+                          hintContents: 'DD/MM/YYYY',
+                          buttonContent: '',
+                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                        ),
+                        FormContainer(
+                          labels: 'Nomor Paspor',
+                          needsInfoButton: true,
+                          isDataRequired: true,
+                          hintContents: '',
+                          buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
+                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                        ),
+                        FormContainer(
+                          labels: 'NIK',
+                          needsInfoButton: true,
+                          isDataRequired: false,
+                          hintContents: '',
+                          buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
+                          valueConstraints: RegExp(r'^[0-9]+$'),                    
+                        ),
+                        Text(
+                          'Jenis kelamin',
+                          textAlign: TextAlign.left,),
+                        DropdownButton(
+                          alignment: Alignment.centerLeft,
+                          value: dropdownValue,
+                          hint: Text('Pilih Jenis Kelamin'),
+                          items: items.map((String items) {
+                            return DropdownMenuItem(value: items, child: Text(items));
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                            });
+                          },
+                        ),
+                        //TODO: Adjust button position
+                        ElevatedButton(
+                          child: const Text('Next'),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const LivingAbroadDataPage()),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
