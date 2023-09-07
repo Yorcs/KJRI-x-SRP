@@ -48,6 +48,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                 key: LivingAbroadDataKey,
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     FormContainer(
                       labels: 'Alamat Lengkap di Luar Negeri',

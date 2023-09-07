@@ -40,6 +40,7 @@ class _IdentityFormState extends State<IdentityForm> {
                 key: identityKey,
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BuildHeader(
                       pageName: 'Identitas',
@@ -84,8 +85,11 @@ class _IdentityFormState extends State<IdentityForm> {
                       buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
                       valueConstraints: RegExp(r'^[0-9]+$'),                    
                     ),
-                    Text('Jenis kelamin'),
+                    Text(
+                      'Jenis kelamin',
+                      textAlign: TextAlign.left,),
                     DropdownButton(
+                      alignment: Alignment.centerLeft,
                       value: dropdownValue,
                       hint: Text('Pilih Jenis Kelamin'),
                       items: items.map((String items) {

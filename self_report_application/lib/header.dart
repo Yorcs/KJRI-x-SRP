@@ -114,19 +114,19 @@ class LinePath extends StatelessWidget {
           pageNumber: '1',
           opacity: opacity1,
           changeColor: changeColor1,),
-        Expanded(child: Line()),
+        SizedBox(width: 20,),
         CircleAndLabel(
           labelName: "Data Luar Negeri",
           pageNumber: '2',
           opacity: opacity2,
           changeColor: changeColor2,),
-        Expanded(child: Line()),
+        SizedBox(width: 20,),
         CircleAndLabel(
           labelName: "Tujuan",
           pageNumber: '3',
           opacity: opacity3,
           changeColor: changeColor3,),
-        Expanded(child: Line()),
+        SizedBox(width: 30,),
         CircleAndLabel(
           labelName: "Kontak",
           pageNumber: '4',
