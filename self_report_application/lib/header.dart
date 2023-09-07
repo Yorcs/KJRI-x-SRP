@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/styling.dart';
 
 class BuildHeader extends StatelessWidget{
   const BuildHeader({
@@ -32,6 +33,7 @@ class BuildHeader extends StatelessWidget{
         TextHeader(
           pageName: pageName
         ),
+        SizedBox(height: 30,),
         LinePath(
           opacity1: opacity1,
           opacity2: opacity2,
@@ -58,20 +60,32 @@ class TextHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget> [
+        Padding(
+          padding: EdgeInsets.only(left: 10.0)
+        ),
         Image(
           image: AssetImage('images/logo.png'),
-          width: 97,
-          height: 97,
+          width: 50,
+          height: 50,
           fit: BoxFit.contain
           ),
+        Padding(
+          padding: EdgeInsets.only(left: 10.0)
+        ),
         Text(
           'Lapor Diri',
           textAlign: TextAlign.left,
+          style: TextStyling.subHeaderTextStyle,
         ),
-        Text(
-          pageName,
-          textAlign: TextAlign.right,
+        Expanded(
+          child: Text(
+            pageName,
+            textAlign: TextAlign.right,
+            style: TextStyling.blueregularBoldTextStyle,
+          ),
         ),
       ],
     );
@@ -132,23 +146,6 @@ class LinePath extends StatelessWidget {
           opacity: opacity4,
           changeColor: changeColor4,),
       ],
-    );
-  }
-}
-
-class Line extends StatelessWidget {
-  const Line({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Divider(
-      color: Colors.black,
-      height: 0,
-      thickness: 2,
-      indent: 0,
-      endIndent: 0,
     );
   }
 }

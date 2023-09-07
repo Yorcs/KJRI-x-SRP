@@ -17,6 +17,13 @@ class TextStyling {
   );
 
   //needs readjust
+  static const TextStyle blueregularBoldTextStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.blue,
+  );
+
+  //needs readjust
   static const TextStyle regularTextStyle = TextStyle(
     fontSize: 16,
   );

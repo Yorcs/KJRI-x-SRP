@@ -85,8 +85,22 @@ class FormContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        LabelingWidget(
+      children: <Widget> [
+        if(!needsInfoButton) ... [
+          LabelingWidget(
+          labelName: labels,
+          needsInfo: needsInfoButton,
+          buttonInfo: buttonContent,
+        ),
+        SizedBox(height: 10,),
+        TextsForm(
+          labels: labels,
+          requiredData: isDataRequired,
+          valueConstraints: valueConstraints, 
+          hintContent: hintContents,
+          ),
+        ] else ... [
+         LabelingWidget(
           labelName: labels,
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
@@ -96,7 +110,8 @@ class FormContainer extends StatelessWidget {
           requiredData: isDataRequired,
           valueConstraints: valueConstraints, 
           hintContent: hintContents,
-          ),
+          ), 
+        ]
       ],
     );
   }
@@ -131,9 +146,11 @@ class TextsForm extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         hintText: hintContent,
+        isDense: true,
+        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            width: 2,
+            width: 1,
             color: Colors.black
             )
           ),
@@ -174,7 +191,10 @@ class LabelingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Text(labelName),
+        Text(
+          labelName,
+          style: TextStyling.regularTextStyle,
+        ),
         if(!needsInfo) ... [
         ] else ... [
           InfoButton(contents: buttonInfo)

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
+import 'package:self_report_application/styling.dart';
 
 //Requirements Page
 class IdentityPage extends StatelessWidget {
@@ -36,6 +37,7 @@ class _IdentityFormState extends State<IdentityForm> {
           body: Center(
             child: Container(
               margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
                 key: identityKey,
                 child:ListView(
@@ -55,6 +57,7 @@ class _IdentityFormState extends State<IdentityForm> {
                         changeColor3: Colors.blue,
                         changeColor4: Colors.blue,
                         ),
+                        SizedBox(height: 20,),
                         FormContainer(
                         labels: 'Nama Lengkap',
                         needsInfoButton: true,
@@ -63,6 +66,7 @@ class _IdentityFormState extends State<IdentityForm> {
                         buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
                         valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                         ),
+                        SizedBox(height: 30,),
                         FormContainer(
                           labels: 'Tanggal Lahir',
                           needsInfoButton: false,
@@ -71,6 +75,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           buttonContent: '',
                           valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                         ),
+                        SizedBox(height: 20,),
                         FormContainer(
                           labels: 'Nomor Paspor',
                           needsInfoButton: true,
@@ -79,6 +84,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
                           valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
                         ),
+                        SizedBox(height: 20,),
                         FormContainer(
                           labels: 'NIK',
                           needsInfoButton: true,
@@ -87,9 +93,12 @@ class _IdentityFormState extends State<IdentityForm> {
                           buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
                           valueConstraints: RegExp(r'^[0-9]+$'),                    
                         ),
+                        SizedBox(height: 20,),
                         Text(
                           'Jenis kelamin',
-                          textAlign: TextAlign.left,),
+                          textAlign: TextAlign.left,
+                          style: TextStyling.regularTextStyle,
+                        ),
                         DropdownButton(
                           alignment: Alignment.centerLeft,
                           value: dropdownValue,
