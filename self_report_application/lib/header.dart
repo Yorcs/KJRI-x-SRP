@@ -61,11 +61,8 @@ class TextHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget> [
-        Padding(
-          padding: EdgeInsets.only(left: 10.0)
-        ),
         Image(
           image: AssetImage('images/logo.png'),
           width: 50,
@@ -120,31 +117,35 @@ class LinePath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget> [
         CircleAndLabel(
           labelName: "Identitas",
           pageNumber: '1',
           opacity: opacity1,
           changeColor: changeColor1,),
-        SizedBox(width: 20,),
+        SizedBox(width: 25,),
         CircleAndLabel(
-          labelName: "Data Luar Negeri",
+          labelName: "Luar Negeri",
           pageNumber: '2',
           opacity: opacity2,
           changeColor: changeColor2,),
         SizedBox(width: 20,),
-        CircleAndLabel(
-          labelName: "Tujuan",
-          pageNumber: '3',
-          opacity: opacity3,
-          changeColor: changeColor3,),
+        Expanded(
+          child: CircleAndLabel(
+            labelName: "Tujuan",
+            pageNumber: '3',
+            opacity: opacity3,
+            changeColor: changeColor3,),
+        ),
         SizedBox(width: 30,),
-        CircleAndLabel(
-          labelName: "Kontak",
-          pageNumber: '4',
-          opacity: opacity4,
-          changeColor: changeColor4,),
+        Expanded(
+          child: CircleAndLabel(
+            labelName: "Kontak",
+            pageNumber: '4',
+            opacity: opacity4,
+            changeColor: changeColor4,),
+        ),
       ],
     );
   }
