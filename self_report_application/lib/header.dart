@@ -30,6 +30,7 @@ class BuildHeader extends StatelessWidget{
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 10,),
         TextHeader(
           pageName: pageName
         ),

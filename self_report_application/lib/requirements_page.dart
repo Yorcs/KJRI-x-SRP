@@ -52,7 +52,8 @@ class RequirementsPage extends StatelessWidget {
             
                   //List
                   //TODO: Readjust margin padding
-                  Container(
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

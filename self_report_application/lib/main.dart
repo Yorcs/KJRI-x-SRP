@@ -58,10 +58,13 @@ class WelcomePage extends StatelessWidget {
                     fit: BoxFit.contain
                     ),
                   //Title
-                  Text(
-                    'Selamat Datang ke Lapor Diri', 
-                    style: TextStyling.headerTextStyle,
-                    textAlign: TextAlign.center,),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                    child: Text(
+                      'Selamat Datang ke Lapor Diri', 
+                      style: TextStyling.headerTextStyle,
+                      textAlign: TextAlign.center,),
+                  ),
                   //Freepik Illustration
                   Image(
                     image: AssetImage('images/ListImage.png'),

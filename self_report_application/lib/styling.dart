@@ -12,7 +12,7 @@ class TextStyling {
 
   //needs readjust
   static const TextStyle subHeaderTextStyle = TextStyle(
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: FontWeight.bold
   );
 
