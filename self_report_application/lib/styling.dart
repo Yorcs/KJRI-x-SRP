@@ -55,7 +55,9 @@ class InfoButton extends StatelessWidget {
         builder: (BuildContext context) => AlertDialog(
           content: Text(contents),
         )),
-      icon: const Icon(Icons.add_alert),
+      icon: const ImageIcon(
+        AssetImage('images/info-button.png'),
+      ),
       );
   }
 }

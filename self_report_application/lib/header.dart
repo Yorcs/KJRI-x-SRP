@@ -78,11 +78,17 @@ class TextHeader extends StatelessWidget {
           textAlign: TextAlign.left,
           style: TextStyling.subHeaderTextStyle,
         ),
-        Expanded(
-          child: Text(
-            pageName,
-            textAlign: TextAlign.right,
-            style: TextStyling.blueregularBoldTextStyle,
+        Flexible(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 95),
+              child: Text(
+                pageName,
+                textAlign: TextAlign.right,
+                style: TextStyling.blueregularBoldTextStyle,
+              ),
+            ),
           ),
         ),
       ],

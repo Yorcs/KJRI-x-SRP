@@ -4,7 +4,7 @@ import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
 
-//Requirements Page
+//Identity Page
 class IdentityPage extends StatelessWidget {
   const IdentityPage({super.key});
 
@@ -33,7 +33,6 @@ class _IdentityFormState extends State<IdentityForm> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          //TODO: Readjust margin and padding
           body: Center(
             child: Container(
               margin: const EdgeInsets.all(10.0),
@@ -116,11 +115,14 @@ class _IdentityFormState extends State<IdentityForm> {
                         ElevatedButton(
                           child: const Text('Next'),
                           onPressed: () {
-                            Navigator.push(
+                            if(identityKey.currentState!.validate()){
+                              identityKey.currentState?.save();
+                              Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => const LivingAbroadDataPage()),
                             );
-                          },
+                            }
+                          }
                         ),
                       ],
                     ),

@@ -121,8 +121,9 @@ class FormContainer extends StatelessWidget {
 //TODO: Needs refactoring to reduce redundancy
 //TODO: change RegExp String according to what we need
 //TODO: Find a way to save the data
+// ignore: must_be_immutable
 class TextsForm extends StatelessWidget {
-  const TextsForm({
+  TextsForm({
     super.key,
     required this.labels,
     required this.valueConstraints,
@@ -136,11 +137,10 @@ class TextsForm extends StatelessWidget {
   final RegExp valueConstraints;
   final bool requiredData;
 
-  // //Saved data string
-  // late String savedLabel;
-  // late String savedData;
-  
+  late String labelName;
+  late String valueContent;
 
+  
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -155,17 +155,13 @@ class TextsForm extends StatelessWidget {
             )
           ),
       ),
-      // onSaved: (value){
-      //   if(!requiredData || !valueConstraints.hasMatch(value!)){
-          
-      //   } else {
-      //     savedLabel: labels;
-      //     savedData: value;
-      //   }
-      // },
+      onSaved: (value){
+        labelName = labels;
+        valueContent = value!;
+      },
       validator:(value){
-        if(!requiredData || !valueConstraints.hasMatch(value!)){
-          return "Invalid input"; //TODO: Please change prompt
+        if(requiredData || !valueConstraints.hasMatch(value!)){
+          return "Invalid input on $labels" ; //TODO: Please change prompt
         } else{
           return null;
         }
@@ -203,4 +199,11 @@ class LabelingWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+class Model{
+  String labelName;
+  String? valueContent;
+
+  Model({required this.labelName, required this.valueContent});
 }

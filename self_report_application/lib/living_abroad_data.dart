@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/header.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
+import 'package:self_report_application/styling.dart';
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
@@ -44,6 +46,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
           body: Center(
             child: Container(
               margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
                 key: livingAbroadDataKey,
                 child:ListView(
@@ -52,6 +55,18 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        BuildHeader(
+                        pageName: 'Data di Luar negeri',
+                        opacity1: 0.5,
+                        opacity2: 1,
+                        opacity3: 0.5,
+                        opacity4: 0.5,
+                        changeColor1: Colors.blue,
+                        changeColor2: Colors.white,
+                        changeColor3: Colors.blue,
+                        changeColor4: Colors.blue,
+                        ),
+                        SizedBox(height: 30,),
                         FormContainer(
                         labels: 'Alamat Lengkap di Luar Negeri',
                         needsInfoButton: false,
@@ -60,6 +75,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         buttonContent: '',
                         valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
                         ),
+                        SizedBox(height: 30,),
                         FormContainer(
                           labels: 'Negara',
                           needsInfoButton: false,
@@ -68,8 +84,11 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           buttonContent: '',
                           valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                         ),
-                        
-                        Text('Propinsi'),
+                        SizedBox(height: 30,),
+                        Text(
+                          'Propinsi',
+                          style: TextStyling.regularTextStyle,
+                        ),
                         DropdownButton(
                           value: provinceDropdownValue,
                           hint: Text('Pilih Propinsi'),
@@ -82,7 +101,11 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                             });
                           },
                         ),
-                        Text('Kota'),
+                        SizedBox(height: 30,),
+                        Text(
+                          'Kota',
+                          style: TextStyling.regularTextStyle,
+                        ),
                         DropdownButton(
                           value: cityDropdownValue,
                           hint: Text('Pilih Kota'),
@@ -95,6 +118,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                             });
                           },
                         ),
+                        SizedBox(height: 30,),
                         FormContainer(
                           labels: 'Kode Pos',
                           needsInfoButton: false,

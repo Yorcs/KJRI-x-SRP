@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/header.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
@@ -42,6 +43,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
           body: Center(
             child: Container(
               margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
                 key: emergencyContactAbroadKey,
                 child:ListView(
@@ -50,10 +52,23 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        BuildHeader(
+                        pageName: 'Kontak Darurat',
+                        opacity1: 0.5,
+                        opacity2: 0.5,
+                        opacity3: 0.5,
+                        opacity4: 1,
+                        changeColor1: Colors.blue,
+                        changeColor2: Colors.blue,
+                        changeColor3: Colors.blue,
+                        changeColor4: Colors.white,
+                        ),
+                        SizedBox(height: 30,),
                         Text(
                           'Di Luar Negeri',
                           style: TextStyling.regularBoldTextStyle,
                         ),
+                        SizedBox(height: 30,),
                         FormContainer(
                         labels: 'Nama',
                         needsInfoButton: false,
@@ -62,6 +77,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                         buttonContent: '',
                         valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
                         ),
+                        SizedBox(height: 30,),
                         Text('Hubungan'),
                         DropdownButton(
                           value: relationshipDropdownValue,
@@ -75,6 +91,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                             });
                           },
                         ),
+                        SizedBox(height: 30,),
                         //TODO: Change RegExp
                         FormContainer(
                           labels: 'Email',
@@ -84,6 +101,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                           buttonContent: '',
                           valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
                         ),
+                        SizedBox(height: 30,),
                         //TODO: Change RegExp
                         FormContainerWithDisabledText(
                           labels: 'Telepon',
