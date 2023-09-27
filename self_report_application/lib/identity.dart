@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:self_report_application/container.dart';
+import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
@@ -89,7 +89,8 @@ class _IdentityFormState extends State<IdentityForm> {
           name: _name.toString(),
           passport: _passport.toString(),
           idNumber: _iDNumber.toString(),
-          dob: _dOB.toString(),       
+          dob: _dOB.toString(), 
+          gender: dropdownValue.toString(),      
         )
       )
     );
@@ -130,7 +131,7 @@ class _IdentityFormState extends State<IdentityForm> {
                         isDataRequired: true,
                         hintContents: '',
                         buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
-                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),   
+                        valueConstraints: RegExp(r'[a-z A-Z]+$'),   
                         controller: _name,                 
                         ),
                         SizedBox(height: 30,),
@@ -140,7 +141,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           isDataRequired: true,
                           hintContents: 'DD/MM/YYYY',
                           buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),   
+                          valueConstraints: RegExp(r'[a-z A-Z]+$'),   
                           controller: _dOB,                 
                         ),
                         SizedBox(height: 20,),
@@ -150,7 +151,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           isDataRequired: true,
                           hintContents: '',
                           buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
-                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),  
+                          valueConstraints: RegExp(r'[a-z A-Z 0-9]+$'),  
                           controller: _passport,                  
                         ),
                         SizedBox(height: 20,),
@@ -160,7 +161,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           isDataRequired: false,
                           hintContents: '',
                           buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
-                          valueConstraints: RegExp(r'^[0-9]+$'),   
+                          valueConstraints: RegExp(r'[0-9]+$'),   
                           controller: _iDNumber,                 
                         ),
                         SizedBox(height: 20,),
@@ -186,9 +187,9 @@ class _IdentityFormState extends State<IdentityForm> {
                         ElevatedButton(
                           child: const Text('Next'),
                           onPressed: () {
-                            if(identityKey.currentState!.validate()){
+                            // if(identityKey.currentState!.validate()){
                               getItemAndNavigate(context);
-                            }
+                            // }
                           }
                         ),
                       ],

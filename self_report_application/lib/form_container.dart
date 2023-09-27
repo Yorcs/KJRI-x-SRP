@@ -66,6 +66,76 @@ class FormContainerWithDisabledText extends StatelessWidget {
   }
 }
 
+class FormContainerWithTwoInputs extends StatelessWidget {
+  const FormContainerWithTwoInputs({
+    super.key,
+    required this.labels,
+    required this.valueConstraints,
+    required this.isDataRequired,
+    required this.hintContents,
+    required this.needsInfoButton, 
+    required this.buttonContent,
+    required this.controller,
+    required this.controller2,
+  });
+
+  //Constraints and Arguments
+  final String labels;
+  final String hintContents;
+  final String buttonContent;
+  final RegExp valueConstraints;
+  final bool isDataRequired;
+  final bool needsInfoButton;
+  final TextEditingController controller;
+  final TextEditingController controller2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget> [
+          LabelingWidget(
+            labelName: labels,
+            needsInfo: needsInfoButton,
+            buttonInfo: buttonContent,
+          ),
+        SizedBox(height: 10,),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children:[
+            SizedBox(
+              width: 100,
+              child: TextsForm(
+                controller: controller,
+                labels: labels,
+                requiredData: isDataRequired,
+                valueConstraints: valueConstraints, 
+                hintContent: hintContents,
+                ),
+            ),
+            SizedBox(
+              width: 80,
+              child: Text(
+                'Sampai',
+                textAlign: TextAlign.center,
+                ),
+              ),
+            SizedBox(
+              width: 100,
+              child: TextsForm(
+                controller: controller2,
+                labels: labels,
+                requiredData: isDataRequired,
+                valueConstraints: valueConstraints, 
+                hintContent: hintContents,
+              ),
+            ),
+          ]
+        ),
+      ],
+    );
+  }
+}
+
 class FormContainer extends StatelessWidget {
   const FormContainer({
     super.key,
@@ -91,22 +161,7 @@ class FormContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget> [
-        if(!needsInfoButton) ... [
-          LabelingWidget(
-          labelName: labels,
-          needsInfo: needsInfoButton,
-          buttonInfo: buttonContent,
-        ),
-        SizedBox(height: 10,),
-        TextsForm(
-          controller: controller,
-          labels: labels,
-          requiredData: isDataRequired,
-          valueConstraints: valueConstraints, 
-          hintContent: hintContents,
-          ),
-        ] else ... [
-         LabelingWidget(
+        LabelingWidget(
           labelName: labels,
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
@@ -117,9 +172,8 @@ class FormContainer extends StatelessWidget {
           requiredData: isDataRequired,
           valueConstraints: valueConstraints, 
           hintContent: hintContents,
-          ), 
-        ]
-      ],
+        ), 
+      ]
     );
   }
 }
@@ -127,7 +181,6 @@ class FormContainer extends StatelessWidget {
 //Form
 //TODO: Needs refactoring to reduce redundancy
 //TODO: change RegExp String according to what we need
-//TODO: Find a way to save the data
 // ignore: must_be_immutable
 class TextsForm extends StatelessWidget {
   TextsForm({
@@ -168,7 +221,7 @@ class TextsForm extends StatelessWidget {
       onSaved: (value){
       },
       validator:(value){
-        if(requiredData || !valueConstraints.hasMatch(value!)){
+        if(requiredData || valueConstraints.hasMatch(value!)){
           return "Invalid input on $labels" ; //TODO: Please change prompt
         } else{
           return null;
@@ -207,11 +260,4 @@ class LabelingWidget extends StatelessWidget {
       ],
     );
   }
-}
-
-class Model{
-  String labelName;
-  String? valueContent;
-
-  Model({required this.labelName, required this.valueContent});
 }

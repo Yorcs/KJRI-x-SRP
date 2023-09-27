@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/header.dart';
-import 'package:self_report_application/container.dart';
+import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:self_report_application/styling.dart';
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
-  const LivingAbroadDataPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport});
+  const LivingAbroadDataPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.gender});
   final String name;
   final String idNumber;
   final String dob;
   final String passport;
+  final String gender;
   
   @override
   Widget build(BuildContext context) {
@@ -19,17 +20,19 @@ class LivingAbroadDataPage extends StatelessWidget {
       idNumber: idNumber,
       dob: dob,
       passport: passport,
+      gender: gender,
     );
   }
 }
 
 class LivingAbroadDataForm extends StatefulWidget {
-  const LivingAbroadDataForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport});
+  const LivingAbroadDataForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.gender});
 
   final String name;
   final String idNumber;
   final String dob;
   final String passport;
+  final String gender;
 
   @override
   _LivingAbroadDataFormState createState() => _LivingAbroadDataFormState();
@@ -91,6 +94,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
           passport: widget.passport,
           idNumber: widget.idNumber,
           dob: widget.dob, 
+          gender: widget.gender,
           addressAbroad: _address.toString(),
           country: _country.toString(),
           postalCode: _postalCode.toString(),      
@@ -217,9 +221,9 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                             ElevatedButton(
                               child: const Text('Next'),
                               onPressed: () {
-                                if(livingAbroadDataKey.currentState!.validate()){
+                                // if(livingAbroadDataKey.currentState!.validate()){
                                   getItemAndNavigate(context);
-                                }
+                                // }
                               }
                             ),
                           ],

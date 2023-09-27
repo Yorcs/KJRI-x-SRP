@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 
@@ -36,7 +37,6 @@ class TextStyling {
 }
 
 //Pop up dialog button
-//TODO: Find a new placement since it cannot be placed next to the label text.
 //TODO: Change icon
 class InfoButton extends StatelessWidget {
   const InfoButton({
@@ -62,7 +62,26 @@ class InfoButton extends StatelessWidget {
   }
 }
 
+//File Picker
+//TODO: Work on it more
+class FilePickerButton extends StatelessWidget {
+  const FilePickerButton({
+    super.key,
+  });
 
+  void pickFiles() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
+    if (result == null) return;
+  }
 
-//C
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: const Text('Unggah File'),
+      onPressed: () {
+        pickFiles();
+      },
+    );
+  }
+}
