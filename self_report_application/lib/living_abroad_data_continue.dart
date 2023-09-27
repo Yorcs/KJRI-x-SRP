@@ -1,19 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:file_picker/file_picker.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
-  const LivingAbroadDataContinuePage({super.key});
+  const LivingAbroadDataContinuePage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode});
+  final String name;
+  final String idNumber;
+  final String dob;
+  final String passport;
+  final String addressAbroad;
+  final String country;
+  final String postalCode;
 
   @override
   Widget build(BuildContext context) {
-    return LivingAbroadDataContinueForm();
+    return LivingAbroadDataContinueForm(
+      name: name,
+      idNumber: idNumber,
+      dob: dob,
+      passport: passport,
+      addressAbroad: addressAbroad,
+      country: country,
+      postalCode: postalCode,
+    );
   }
 }
 
 class LivingAbroadDataContinueForm extends StatefulWidget {
+  const LivingAbroadDataContinueForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode});
+
+  final String name;
+  final String idNumber;
+  final String dob;
+  final String passport;
+  final String addressAbroad;
+  final String country;
+  final String postalCode;
+
   @override
   _LivingAbroadDataContinueFormState createState() => _LivingAbroadDataContinueFormState();
 }
@@ -34,6 +58,25 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     'Coquitlam',
     'Surrey',
   ];
+
+  goBack(BuildContext context)=> Navigator.pop(context);
+
+  getItemAndNavigate (BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LivingAbroadDataContinuePage(
+          name: widget.name,
+          passport: widget.passport,
+          idNumber: widget.idNumber,
+          dob: widget.dob, 
+          addressAbroad: widget.addressAbroad,
+          country: widget.country,
+          postalCode: widget.postalCode,      
+        )
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +100,17 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           children: [
                             ElevatedButton(
                               child: const Text('Back'),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const LivingAbroadDataPage()),
-                                );
-                              },
+                              onPressed: () => goBack(context),
                             ),
                             // TODO: Adjust button position
                             //TODO: Change source
                             ElevatedButton(
                               child: const Text('Next'),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
-                                );
-                              },
+                                if(livingAbroadDataContinueKey.currentState!.validate()){
+                                  getItemAndNavigate(context);
+                                }
+                              }
                             ),
                           ],
                         ),

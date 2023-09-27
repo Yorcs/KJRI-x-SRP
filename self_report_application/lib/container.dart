@@ -11,6 +11,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
     required this.needsInfoButton, 
     required this.buttonContent,
     required this.areaCode,
+    required this.controller,
   });
 
   //Constraints and Arguments
@@ -21,6 +22,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
   final RegExp valueConstraints;
   final bool isDataRequired;
   final bool needsInfoButton;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
             SizedBox(
               width: 200,
               child: TextsForm(
+                controller: controller,
                 labels: labels,
                 requiredData: isDataRequired,
                 valueConstraints: valueConstraints, 
@@ -72,6 +75,7 @@ class FormContainer extends StatelessWidget {
     required this.hintContents,
     required this.needsInfoButton, 
     required this.buttonContent,
+    required this.controller,
   });
 
   //Constraints and Arguments
@@ -81,6 +85,7 @@ class FormContainer extends StatelessWidget {
   final RegExp valueConstraints;
   final bool isDataRequired;
   final bool needsInfoButton;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +99,7 @@ class FormContainer extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         TextsForm(
+          controller: controller,
           labels: labels,
           requiredData: isDataRequired,
           valueConstraints: valueConstraints, 
@@ -106,6 +112,7 @@ class FormContainer extends StatelessWidget {
           buttonInfo: buttonContent,
         ),
         TextsForm(
+          controller: controller,
           labels: labels,
           requiredData: isDataRequired,
           valueConstraints: valueConstraints, 
@@ -129,6 +136,7 @@ class TextsForm extends StatelessWidget {
     required this.valueConstraints,
     required this.requiredData,
     required this.hintContent,
+    required this.controller,
   });
 
   //Constraints and Arguments
@@ -136,6 +144,7 @@ class TextsForm extends StatelessWidget {
   final String hintContent;
   final RegExp valueConstraints;
   final bool requiredData;
+  final TextEditingController controller;
 
   late String labelName;
   late String valueContent;
@@ -144,6 +153,7 @@ class TextsForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         hintText: hintContent,
         isDense: true,
@@ -156,8 +166,6 @@ class TextsForm extends StatelessWidget {
           ),
       ),
       onSaved: (value){
-        labelName = labels;
-        valueContent = value!;
       },
       validator:(value){
         if(requiredData || !valueConstraints.hasMatch(value!)){

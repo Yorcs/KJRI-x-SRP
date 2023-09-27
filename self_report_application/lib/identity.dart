@@ -21,12 +21,79 @@ class IdentityForm extends StatefulWidget {
 
 class _IdentityFormState extends State<IdentityForm> {
   final identityKey = GlobalKey<FormState>();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _dOB = TextEditingController();
+  final TextEditingController _passport = TextEditingController();
+  final TextEditingController _iDNumber = TextEditingController();
+
+  @override
+  void initState(){
+    super.initState();
+    _name.addListener(() {
+      final String text = _name.text.toString();
+      _name.value = _name.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _dOB.addListener(() {
+      final String text = _dOB.text;
+      _dOB.value = _dOB.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _passport.addListener(() {
+      final String text = _passport.text;
+      _passport.value = _passport.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _iDNumber.addListener(() {
+      final String text = _iDNumber.text;
+      _iDNumber.value = _iDNumber.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+  }
+
+  @override
+  void dispose(){
+    _name.dispose();
+    _dOB.dispose();
+    _passport.dispose();
+    _iDNumber.dispose();
+    super.dispose();
+  }
 
   String? dropdownValue;
   var items = [
     'Laki-laki',
     'Perempuan',
   ];
+
+  getItemAndNavigate (BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LivingAbroadDataPage(
+          name: _name.toString(),
+          passport: _passport.toString(),
+          idNumber: _iDNumber.toString(),
+          dob: _dOB.toString(),       
+        )
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +130,8 @@ class _IdentityFormState extends State<IdentityForm> {
                         isDataRequired: true,
                         hintContents: '',
                         buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
-                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),   
+                        controller: _name,                 
                         ),
                         SizedBox(height: 30,),
                         FormContainer(
@@ -72,7 +140,8 @@ class _IdentityFormState extends State<IdentityForm> {
                           isDataRequired: true,
                           hintContents: 'DD/MM/YYYY',
                           buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),   
+                          controller: _dOB,                 
                         ),
                         SizedBox(height: 20,),
                         FormContainer(
@@ -81,7 +150,8 @@ class _IdentityFormState extends State<IdentityForm> {
                           isDataRequired: true,
                           hintContents: '',
                           buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
-                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),  
+                          controller: _passport,                  
                         ),
                         SizedBox(height: 20,),
                         FormContainer(
@@ -90,7 +160,8 @@ class _IdentityFormState extends State<IdentityForm> {
                           isDataRequired: false,
                           hintContents: '',
                           buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
-                          valueConstraints: RegExp(r'^[0-9]+$'),                    
+                          valueConstraints: RegExp(r'^[0-9]+$'),   
+                          controller: _iDNumber,                 
                         ),
                         SizedBox(height: 20,),
                         Text(
@@ -116,11 +187,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           child: const Text('Next'),
                           onPressed: () {
                             if(identityKey.currentState!.validate()){
-                              identityKey.currentState?.save();
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const LivingAbroadDataPage()),
-                            );
+                              getItemAndNavigate(context);
                             }
                           }
                         ),

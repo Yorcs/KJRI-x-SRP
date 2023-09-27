@@ -1,27 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/header.dart';
-import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:self_report_application/styling.dart';
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
-  const LivingAbroadDataPage({super.key});
-
+  const LivingAbroadDataPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport});
+  final String name;
+  final String idNumber;
+  final String dob;
+  final String passport;
+  
   @override
   Widget build(BuildContext context) {
-    return LivingAbroadDataForm();
+    return LivingAbroadDataForm(
+      name: name,
+      idNumber: idNumber,
+      dob: dob,
+      passport: passport,
+    );
   }
 }
 
 class LivingAbroadDataForm extends StatefulWidget {
+  const LivingAbroadDataForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport});
+
+  final String name;
+  final String idNumber;
+  final String dob;
+  final String passport;
+
   @override
   _LivingAbroadDataFormState createState() => _LivingAbroadDataFormState();
 }
 
 class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final livingAbroadDataKey = GlobalKey<FormState>();
+  final TextEditingController _address = TextEditingController();
+  final TextEditingController _country = TextEditingController();
+  final TextEditingController _postalCode = TextEditingController();
+
+  @override
+  void initState(){
+    super.initState();
+    _address.addListener(() {
+      final String text = _address.text;
+      _address.value = _address.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _country.addListener(() {
+      final String text = _country.text;
+      _country.value = _country.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _postalCode.addListener(() {
+      final String text = _postalCode.text;
+      _postalCode.value = _postalCode.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+  }
+
+  goBack(BuildContext context)=> Navigator.pop(context);
+
+  @override
+  void dispose(){
+    _address.dispose();
+    _country.dispose();
+    _postalCode.dispose();
+    super.dispose();
+  }
+
+    getItemAndNavigate (BuildContext context){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LivingAbroadDataContinuePage(
+          name: widget.name,
+          passport: widget.passport,
+          idNumber: widget.idNumber,
+          dob: widget.dob, 
+          addressAbroad: _address.toString(),
+          country: _country.toString(),
+          postalCode: _postalCode.toString(),      
+        )
+      )
+    );
+  }
 
   String? provinceDropdownValue;
   String? cityDropdownValue;
@@ -73,7 +149,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         isDataRequired: true,
                         hintContents: '',
                         buttonContent: '',
-                        valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                        valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'), 
+                        controller: _address,                   
                         ),
                         SizedBox(height: 30,),
                         FormContainer(
@@ -82,7 +159,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           isDataRequired: true,
                           hintContents: 'Kanada',
                           buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),                    
+                          valueConstraints: RegExp(r'^[a-z A-Z]+$'),  
+                          controller: _country,                  
                         ),
                         SizedBox(height: 30,),
                         Text(
@@ -125,29 +203,24 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           isDataRequired: true,
                           hintContents: '',
                           buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),                    
+                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),
+                          controller: _postalCode,                    
                         ),
                         //TODO: Adjust button position
                         Row(
                           children: [
                             ElevatedButton(
                               child: const Text('Back'),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const IdentityPage()),
-                                );
-                              },
+                              onPressed: () => goBack(context),
                             ),
                             // TODO: Adjust button position
                             ElevatedButton(
                               child: const Text('Next'),
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
-                                );
-                              },
+                                if(livingAbroadDataKey.currentState!.validate()){
+                                  getItemAndNavigate(context);
+                                }
+                              }
                             ),
                           ],
                         )                  
