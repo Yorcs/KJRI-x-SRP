@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:self_report_application/emergency_contact_abroad.dart';
 import 'package:self_report_application/form_container.dart';
+import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
 
@@ -53,20 +53,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _visaStartDate = TextEditingController();
   final TextEditingController _visaEndDate = TextEditingController();
 
-  String? provinceDropdownValue;
-  String? cityDropdownValue;
-
-  var provinces = [
-    'Alberta',
-    'British Columbia',
-  ];
-
-  var cities = [
-    'Burnaby',
-    'Coquitlam',
-    'Surrey',
-  ];
-
   @override
   void initState(){
     super.initState();
@@ -112,7 +98,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => EmergencyContactAbroadPage(
+        builder: (context) => GoalOfStayingPage(
           name: widget.name,
           passport: widget.passport,
           idNumber: widget.idNumber,

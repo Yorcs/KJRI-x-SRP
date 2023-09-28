@@ -132,7 +132,9 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
           visaEndDate: widget.visaEndDate,
           emergencyContactAbroadName: _emergencyContactAbroadName.toString(),
           emergencyContactAbroadEmail: _emergencyContactAbroadEmail.toString(),
-          emergencyContactAbroadPhone: _emergencyContactAbroadPhone.toString(),     
+          emergencyContactAbroadPhone: _emergencyContactAbroadPhone.toString(),  
+          emergencyContactAbroadRelationship: relationshipDropdownValue.toString(),
+          emergencyContactAbroadCity: cityDropdownValue.toString(),   
         )
       )
     );

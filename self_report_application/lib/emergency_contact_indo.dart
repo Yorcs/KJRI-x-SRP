@@ -5,7 +5,7 @@ import 'package:self_report_application/styling.dart';
 
 //Emergency Contact in Indonesia Page
 class EmergencyContactIndoPage extends StatelessWidget {
-  const EmergencyContactIndoPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.emergencyContactAbroadName, required this.emergencyContactAbroadEmail, required this.emergencyContactAbroadPhone, required this.gender});
+  const EmergencyContactIndoPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.emergencyContactAbroadName, required this.emergencyContactAbroadEmail, required this.emergencyContactAbroadPhone, required this.gender, required this.emergencyContactAbroadRelationship, required this.emergencyContactAbroadCity});
   final String name;
   final String idNumber;
   final String dob;
@@ -20,6 +20,8 @@ class EmergencyContactIndoPage extends StatelessWidget {
   final String emergencyContactAbroadName;
   final String emergencyContactAbroadEmail;
   final String emergencyContactAbroadPhone;
+  final String emergencyContactAbroadRelationship;
+  final String emergencyContactAbroadCity;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +40,14 @@ class EmergencyContactIndoPage extends StatelessWidget {
       emergencyContactAbroadName: emergencyContactAbroadName,
       emergencyContactAbroadEmail: emergencyContactAbroadEmail,
       emergencyContactAbroadPhone: emergencyContactAbroadPhone,
+      emergencyContactAbroadRelationship: emergencyContactAbroadRelationship,
+      emergencyContactAbroadCity: emergencyContactAbroadCity,
     );
   }
 }
 
 class EmergencyContactIndoForm extends StatefulWidget {
-  const EmergencyContactIndoForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.emergencyContactAbroadName, required this.emergencyContactAbroadEmail, required this.emergencyContactAbroadPhone, required this.gender});
+  const EmergencyContactIndoForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.emergencyContactAbroadName, required this.emergencyContactAbroadEmail, required this.emergencyContactAbroadPhone, required this.gender, required this.emergencyContactAbroadRelationship, required this.emergencyContactAbroadCity});
 
   final String name;
   final String idNumber;
@@ -59,6 +63,9 @@ class EmergencyContactIndoForm extends StatefulWidget {
   final String emergencyContactAbroadName;
   final String emergencyContactAbroadEmail;
   final String emergencyContactAbroadPhone;
+  final String emergencyContactAbroadRelationship;
+  final String emergencyContactAbroadCity;
+  
   @override
   _EmergencyContactIndoFormState createState() => _EmergencyContactIndoFormState();
 }
@@ -139,7 +146,9 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
           visaEndDate: widget.visaEndDate,
           emergencyContactAbroadName: widget.emergencyContactAbroadName,
           emergencyContactAbroadEmail: widget.emergencyContactAbroadEmail,
-          emergencyContactAbroadPhone: widget.emergencyContactAbroadPhone,    
+          emergencyContactAbroadPhone: widget.emergencyContactAbroadPhone, 
+          emergencyContactAbroadRelationship: widget.emergencyContactAbroadRelationship,
+          emergencyContactAbroadCity: widget.emergencyContactAbroadCity,    
         )
       )
     );
