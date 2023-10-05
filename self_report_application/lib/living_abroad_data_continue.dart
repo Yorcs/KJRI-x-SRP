@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
-import 'package:self_report_application/styling.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
@@ -44,14 +44,16 @@ class LivingAbroadDataContinueForm extends StatefulWidget {
   final String postalCode;
 
   @override
-  _LivingAbroadDataContinueFormState createState() => _LivingAbroadDataContinueFormState();
+  State<LivingAbroadDataContinueForm> createState() => _LivingAbroadDataContinueFormState();
 }
 
 class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueForm> {
-  final livingAbroadDataContinueKey = GlobalKey<FormState>();
+  final _livingAbroadDataContinueKey = GlobalKey<FormState>();
   final TextEditingController _visaNumber = TextEditingController();
   final TextEditingController _visaStartDate = TextEditingController();
   final TextEditingController _visaEndDate = TextEditingController();
+  final TextEditingController _proofOfStayingDoc = TextEditingController();
+  final TextEditingController _permitToStayDoc = TextEditingController();
 
   @override
   void initState(){
@@ -82,6 +84,24 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
         composing:  TextRange.empty,
       );
     });
+
+    _proofOfStayingDoc.addListener(() {
+      final String text = _proofOfStayingDoc.text;
+      _proofOfStayingDoc.value = _proofOfStayingDoc.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _permitToStayDoc.addListener(() {
+      final String text = _permitToStayDoc.text;
+      _permitToStayDoc.value = _permitToStayDoc.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
   }
 
   @override
@@ -89,14 +109,15 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     _visaNumber.dispose();
     _visaStartDate.dispose();
     _visaEndDate.dispose();
+    _proofOfStayingDoc.dispose();
+    _permitToStayDoc.dispose();
     super.dispose();
   }
 
-  goBack(BuildContext context)=> Navigator.pop(context);
+  goBack(BuildContext context)=> Navigator.pop(context, widget.addressAbroad);
 
-  getItemAndNavigate (BuildContext context){
-    Navigator.push(
-      context,
+  getItemAndNavigate (BuildContext context) async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => GoalOfStayingPage(
           name: widget.name,
@@ -110,6 +131,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
           visaNumber: _visaNumber.toString(),
           visaStartDate: _visaStartDate.toString(),
           visaEndDate: _visaEndDate.toString(),
+          proofOfStayingDoc: _proofOfStayingDoc.toString(),
         )
       )
     );
@@ -126,7 +148,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
-                key: livingAbroadDataContinueKey,
+                key: _livingAbroadDataContinueKey,
                 child: ListView(
                   children: [
                     Column(
@@ -154,7 +176,16 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                         valueConstraints: RegExp(r'^[a-z A-Z]+$'),   
                         controller: _visaNumber,                 
                         ),
-                        //TODO: Create file picker
+                        FilePickerContainer(
+                          labels: 'Dokumen Bukti Tinggal',
+                          buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022ID Card\n\u2022Driver License\n\u2022Rekening Bank\n\u2022Kontrak Rumah\n\u2022Tagihan Telepon\n\u2022Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
+                          controller: _proofOfStayingDoc,
+                        ),
+                        FilePickerContainer(
+                          labels: 'Dokumen Visa = Ijin Tinggal',
+                          buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggan halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
+                          controller: _permitToStayDoc,
+                        ),
                         FormContainerWithTwoInputs(
                         labels: 'Masa Berlaku Visa',
                         needsInfoButton: false,
@@ -176,9 +207,9 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                             ElevatedButton(
                               child: const Text('Next'),
                               onPressed: () {
-                                // if(livingAbroadDataContinueKey.currentState!.validate()){
+                                if(_livingAbroadDataContinueKey.currentState!.validate()){
                                   getItemAndNavigate(context);
-                                // }
+                                }
                               }
                             ),
                           ],

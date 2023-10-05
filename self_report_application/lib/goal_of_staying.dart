@@ -5,7 +5,7 @@ import 'package:self_report_application/styling.dart';
 
 // Goal of staying page
 class GoalOfStayingPage extends StatelessWidget { 
-  const GoalOfStayingPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.gender, required this.visaNumber, required this.visaStartDate, required this.visaEndDate});
+  const GoalOfStayingPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.gender, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.proofOfStayingDoc});
   final String name;
   final String idNumber;
   final String dob;
@@ -17,6 +17,7 @@ class GoalOfStayingPage extends StatelessWidget {
   final String visaNumber;
   final String visaStartDate;
   final String visaEndDate;
+  final String proofOfStayingDoc;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,13 @@ class GoalOfStayingPage extends StatelessWidget {
       visaNumber: visaNumber,
       visaEndDate: visaEndDate,
       visaStartDate: visaStartDate,
+      proofOfStayingDoc: proofOfStayingDoc,
     );
   }
 }
 
 class GoalOfStayingForm extends StatefulWidget {
-  const GoalOfStayingForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.gender, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate});
+  const GoalOfStayingForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.gender, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.proofOfStayingDoc});
 
   final String name;
   final String idNumber;
@@ -50,6 +52,7 @@ class GoalOfStayingForm extends StatefulWidget {
   final String visaNumber;
   final String visaStartDate;
   final String visaEndDate;
+  final String proofOfStayingDoc;
 
 
   @override
@@ -109,6 +112,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
           visaNumber: widget.visaNumber,
           visaStartDate: widget.visaStartDate,
           visaEndDate:widget.visaEndDate,
+          proofOfStayingDoc: widget.proofOfStayingDoc,
         )
       )
     );

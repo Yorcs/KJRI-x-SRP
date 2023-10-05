@@ -16,11 +16,11 @@ class IdentityPage extends StatelessWidget {
 
 class IdentityForm extends StatefulWidget {
   @override
-  _IdentityFormState createState() => _IdentityFormState();
+  State<IdentityForm> createState() => _IdentityFormState();
 }
 
 class _IdentityFormState extends State<IdentityForm> {
-  final identityKey = GlobalKey<FormState>();
+  final _identityKey = GlobalKey<FormState>();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _dOB = TextEditingController();
   final TextEditingController _passport = TextEditingController();
@@ -65,7 +65,6 @@ class _IdentityFormState extends State<IdentityForm> {
       );
     });
   }
-
   @override
   void dispose(){
     _name.dispose();
@@ -81,9 +80,8 @@ class _IdentityFormState extends State<IdentityForm> {
     'Perempuan',
   ];
 
-  getItemAndNavigate (BuildContext context){
-    Navigator.push(
-      context,
+  getItemAndNavigate (BuildContext context) async {
+    await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataPage(
           name: _name.toString(),
@@ -106,7 +104,7 @@ class _IdentityFormState extends State<IdentityForm> {
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
-                key: identityKey,
+                key: _identityKey,
                 child:ListView(
                   children: [
                     Column(
@@ -131,7 +129,7 @@ class _IdentityFormState extends State<IdentityForm> {
                         isDataRequired: true,
                         hintContents: '',
                         buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
-                        valueConstraints: RegExp(r'[a-z A-Z]+$'),   
+                        valueConstraints: RegExp(r'^[a-zA-Z]+$'),   
                         controller: _name,                 
                         ),
                         SizedBox(height: 30,),
@@ -187,9 +185,9 @@ class _IdentityFormState extends State<IdentityForm> {
                         ElevatedButton(
                           child: const Text('Next'),
                           onPressed: () {
-                            // if(identityKey.currentState!.validate()){
+                            if(_identityKey.currentState!.validate()){
                               getItemAndNavigate(context);
-                            // }
+                            }
                           }
                         ),
                       ],

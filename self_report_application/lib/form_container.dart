@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/styling.dart';
 
+// Forms
+class LabelingWidget extends StatelessWidget {
+  const LabelingWidget({
+    super.key, 
+    required this.labelName,
+    required this.buttonInfo,
+    required this.needsInfo,
+  });
+
+  final String labelName;
+  final bool needsInfo;
+  final String buttonInfo;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Text(
+          labelName,
+          style: TextStyling.regularTextStyle,
+        ),
+        if(!needsInfo) ... [
+        ] else ... [
+          InfoButton(contents: buttonInfo)
+        ]
+        
+      ],
+    );
+  }
+}
+
+
 class FormContainerWithDisabledText extends StatelessWidget {
   const FormContainerWithDisabledText({
     super.key,
@@ -178,7 +210,7 @@ class FormContainer extends StatelessWidget {
   }
 }
 
-//Form
+// Base Form
 //TODO: Needs refactoring to reduce redundancy
 //TODO: change RegExp String according to what we need
 // ignore: must_be_immutable
@@ -221,43 +253,17 @@ class TextsForm extends StatelessWidget {
       onSaved: (value){
       },
       validator:(value){
-        if(requiredData || valueConstraints.hasMatch(value!)){
-          return "Invalid input on $labels" ; //TODO: Please change prompt
-        } else{
-          return null;
+        if(!requiredData){
+          return null; 
+        } else {
+          if(value!.isEmpty || !valueConstraints.hasMatch(value)){
+            return "Invalid input on $labels"; //TODO: Change Prompt Later.
+          }else{
+              return null;
+          }
         }
       },
     );
   }
 }
 
-
-class LabelingWidget extends StatelessWidget {
-  const LabelingWidget({
-    super.key, 
-    required this.labelName,
-    required this.buttonInfo,
-    required this.needsInfo,
-  });
-
-  final String labelName;
-  final bool needsInfo;
-  final String buttonInfo;
-  
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text(
-          labelName,
-          style: TextStyling.regularTextStyle,
-        ),
-        if(!needsInfo) ... [
-        ] else ... [
-          InfoButton(contents: buttonInfo)
-        ]
-        
-      ],
-    );
-  }
-}

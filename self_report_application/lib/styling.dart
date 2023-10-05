@@ -64,24 +64,74 @@ class InfoButton extends StatelessWidget {
 
 //File Picker
 //TODO: Work on it more
-class FilePickerButton extends StatelessWidget {
-  const FilePickerButton({
-    super.key,
-  });
+class FilePickerButton extends StatefulWidget {
+  const FilePickerButton({super.key, required this.controller});
+
+  final TextEditingController controller;
+    @override
+  _FilePickerState createState() => _FilePickerState();
+}
+
+class _FilePickerState extends State<FilePickerButton> {
+
+  String _fileName ='';
 
   void pickFiles() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
-    if (result == null) return;
+    if (result!= null){
+      _fileName = result.files.first.name;
+      setState(() {
+        
+      });
+    } else {
+      return;
+    }
+
+// TODO: DEBUG PURPOSES DELETE LATER
+    print(result.files.first.name);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: const Text('Unggah File'),
-      onPressed: () {
-        pickFiles();
-      },
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        SizedBox(
+          width: 150,
+          child: ElevatedButton(
+            child: const Text('Unggah File'),
+            onPressed: () {
+              pickFiles();
+            },
+          ),
+        ),
+        SizedBox(
+          width: 30,
+        ),
+        if(_fileName != '')...[
+          SizedBox(
+            width: 200,
+            child: Text(_fileName),
+          ),
+          // Extracting file name
+          SizedBox(
+            width: 0,
+            child: Visibility(
+              visible: false,
+              child: TextField(
+                controller: widget.controller,
+                enabled: false,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  labelText: _fileName,
+                ),
+              ),
+            ),
+          )
+        ] else ...[
+        ]
+      ],
     );
   }
 }

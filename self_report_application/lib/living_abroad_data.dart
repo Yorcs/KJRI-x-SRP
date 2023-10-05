@@ -35,11 +35,11 @@ class LivingAbroadDataForm extends StatefulWidget {
   final String gender;
 
   @override
-  _LivingAbroadDataFormState createState() => _LivingAbroadDataFormState();
+  State<LivingAbroadDataForm> createState() => _LivingAbroadDataFormState();
 }
 
 class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
-  final livingAbroadDataKey = GlobalKey<FormState>();
+  final _livingAbroadDataKey = GlobalKey<FormState>();
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
@@ -75,8 +75,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     });
   }
 
-  goBack(BuildContext context)=> Navigator.pop(context);
-
   @override
   void dispose(){
     _address.dispose();
@@ -85,9 +83,16 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     super.dispose();
   }
 
-    getItemAndNavigate (BuildContext context){
-    Navigator.push(
-      context,
+
+  goBack(BuildContext context)=> Navigator.pop(context);
+
+  void updateInformation (String information){
+    setState(() {
+      information = _address.toString();
+    });
+  }
+    getItemAndNavigate (BuildContext context) async {
+    final information = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataContinuePage(
           name: widget.name,
@@ -101,6 +106,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
         )
       )
     );
+    updateInformation(information);
   }
 
   String? provinceDropdownValue;
@@ -128,7 +134,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
-                key: livingAbroadDataKey,
+                key: _livingAbroadDataKey,
                 child:ListView(
                   children: [
                     Column(
@@ -221,9 +227,9 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                             ElevatedButton(
                               child: const Text('Next'),
                               onPressed: () {
-                                // if(livingAbroadDataKey.currentState!.validate()){
+                                if(_livingAbroadDataKey.currentState!.validate()){
                                   getItemAndNavigate(context);
-                                // }
+                                }
                               }
                             ),
                           ],
