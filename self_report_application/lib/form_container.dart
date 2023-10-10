@@ -54,7 +54,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
   final String hintContents;
   final String buttonContent;
   final String areaCode;
-  final RegExp valueConstraints;
+  final String valueConstraints;
   final bool requiredDataChecker;
   final AutovalidateMode isDataRequired;
   final bool needsInfoButton;
@@ -121,7 +121,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
   final String labels;
   final String hintContents;
   final String buttonContent;
-  final RegExp valueConstraints;
+  final String valueConstraints;
   final AutovalidateMode isDataRequired;
   final bool requiredDataChecker;
   final bool needsInfoButton;
@@ -194,7 +194,7 @@ class FormContainer extends StatelessWidget {
   final String labels;
   final String hintContents;
   final String buttonContent;
-  final RegExp valueConstraints;
+  final String valueConstraints;
   final AutovalidateMode isDataRequired;
   final bool requiredDataChecker;
   final bool needsInfoButton;
@@ -240,10 +240,11 @@ class TextsForm extends StatelessWidget {
   //Constraints and Arguments
   final String labels;
   final String hintContent;
-  final RegExp valueConstraints;
+  final String valueConstraints;
   final bool requiredDataChecker;
   final AutovalidateMode requiredData;
   final TextEditingController controller;
+  // final Key keys;
 
   late String labelName;
   late String valueContent;
@@ -268,18 +269,18 @@ class TextsForm extends StatelessWidget {
             ),
         ),
         validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(), 
+          FormBuilderValidators.match(valueConstraints, errorText: 'Invalid input on $labels'),
           (value){
             if(!requiredDataChecker){
-          return null; 
-        } else {
-          if(value!.isEmpty || !valueConstraints.hasMatch(value)){
-            return "Invalid input on $labels"; //TODO: Change Prompt Later.
-          }else{
               return null;
-          }
-        }
+            } else {
+            if(value == '' || value == null || value.isEmpty){
+              return 'Invalid input on $labels'; //TODO: Change Prompt Later.
+            }
+            return null;
+            }
           },
-          FormBuilderValidators.required(), 
         ]),
       ),
     );

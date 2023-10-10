@@ -82,8 +82,12 @@ class _IdentityFormState extends State<IdentityForm> {
     'Perempuan',
   ];
 
-  getItemAndNavigate (BuildContext context) async {
-    await Navigator.of(context).push(
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    final isValid = _identityKey.currentState!.validate();
+    if(!isValid){
+      return;
+    } else {
+      await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataPage(
           name: _name.toString(),
@@ -94,6 +98,7 @@ class _IdentityFormState extends State<IdentityForm> {
         )
       )
     );
+    }
   }
 
   @override
@@ -101,109 +106,103 @@ class _IdentityFormState extends State<IdentityForm> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          body: Center(
+          body: SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: FormBuilder(
                 key: _identityKey,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                child:ListView(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children:[
-                        BuildHeader(
-                        pageName: 'Identitas',
-                        opacity1: 1,
-                        opacity2: 0.5,
-                        opacity3: 0.5,
-                        opacity4: 0.5,
-                        changeColor1: Colors.white,
-                        changeColor2: Colors.blue,
-                        changeColor3: Colors.blue,
-                        changeColor4: Colors.blue,
-                        ),
-                        SizedBox(height: 20,),
-                        FormContainer(
-                        labels: 'Nama Lengkap',
-                        needsInfoButton: true,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        requiredDataChecker: true,
-                        buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
-                        valueConstraints: RegExp(r'^[a-zA-Z]+$'),   
-                        controller: _name,                 
-                        ),
-                        SizedBox(height: 30,),
-                        FormContainer(
-                          labels: 'Tanggal Lahir',
-                          needsInfoButton: false,
-                          isDataRequired: AutovalidateMode.onUserInteraction,
-                          hintContents: 'DD/MM/YYYY',
-                          buttonContent: '',
-                          requiredDataChecker: true,
-                          valueConstraints: RegExp(r'[a-z A-Z]+$'),   
-                          controller: _dOB,                 
-                        ),
-                        SizedBox(height: 20,),
-                        FormContainer(
-                          labels: 'Nomor Paspor',
-                          needsInfoButton: true,
-                          isDataRequired: AutovalidateMode.onUserInteraction,
-                          hintContents: '',
-                          requiredDataChecker: true,
-                          buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
-                          valueConstraints: RegExp(r'[a-z A-Z 0-9]+$'),  
-                          controller: _passport,                  
-                        ),
-                        SizedBox(height: 20,),
-                        FormContainer(
-                          labels: 'NIK',
-                          needsInfoButton: true,
-                          isDataRequired: AutovalidateMode.disabled,
-                          hintContents: '',
-                          requiredDataChecker: false,
-                          buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
-                          valueConstraints: RegExp(r'[0-9]+$'),   
-                          controller: _iDNumber,                 
-                        ),
-                        SizedBox(height: 20,),
-                        Text(
-                          'Jenis kelamin',
-                          textAlign: TextAlign.left,
-                          style: TextStyling.regularTextStyle,
-                        ),
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    BuildHeader(
+                    pageName: 'Identitas',
+                    opacity1: 1,
+                    opacity2: 0.5,
+                    opacity3: 0.5,
+                    opacity4: 0.5,
+                    changeColor1: Colors.white,
+                    changeColor2: Colors.blue,
+                    changeColor3: Colors.blue,
+                    changeColor4: Colors.blue,
+                    ),
+                    SizedBox(height: 20,),
+                    FormContainer(
+                    labels: 'Nama Lengkap',
+                    needsInfoButton: true,
+                    isDataRequired: AutovalidateMode.onUserInteraction,
+                    hintContents: '',
+                    requiredDataChecker: true,
+                    buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
+                    valueConstraints: r'^[a-zA-Z]+$',   
+                    controller: _name,                 
+                    ),
+                    SizedBox(height: 30,),
+                    FormContainer(
+                      labels: 'Tanggal Lahir',
+                      needsInfoButton: false,
+                      isDataRequired: AutovalidateMode.onUserInteraction,
+                      hintContents: 'DD/MM/YYYY',
+                      buttonContent: '',
+                      requiredDataChecker: true,
+                      valueConstraints: r'[a-zA-Z]+$',   
+                      controller: _dOB,                 
+                    ),
+                    SizedBox(height: 20,),
+                    FormContainer(
+                      labels: 'Nomor Paspor',
+                      needsInfoButton: true,
+                      isDataRequired: AutovalidateMode.onUserInteraction,
+                      hintContents: '',
+                      requiredDataChecker: true,
+                      buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
+                      valueConstraints: r'[a-z A-Z 0-9]+$',  
+                      controller: _passport,                  
+                    ),
+                    SizedBox(height: 20,),
+                    FormContainer(
+                      labels: 'NIK',
+                      needsInfoButton: true,
+                      isDataRequired: AutovalidateMode.disabled,
+                      hintContents: '',
+                      requiredDataChecker: false,
+                      buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
+                      valueConstraints: r'[0-9]+$',   
+                      controller: _iDNumber,                 
+                    ),
+                    SizedBox(height: 20,),
+                    Text(
+                      'Jenis kelamin',
+                      textAlign: TextAlign.left,
+                      style: TextStyling.regularTextStyle,
+                    ),
 
-                        FormBuilderDropdown<String>(
-                          name: "gender",
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          onChanged: (String? newValue){
-                            setState((){
-                              dropdownValue = newValue!;
-                              }
-                            );
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Kelamin'
-                          ),
-                          items: genderOptions
-                          .map((gender) => DropdownMenuItem(
-                            value: gender,
-                            child: Text(gender),
-                            )).toList()
-                        ),
-                        //TODO: Adjust button position
-                        ElevatedButton(
-                          child: const Text('Next'),
-                          onPressed: () {
-                            if(_identityKey.currentState!.validate()){
-                              getItemAndNavigate(context);
-                            }
+                    FormBuilderDropdown<String>(
+                      name: "gender",
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      onChanged: (String? newValue){
+                        setState((){
+                          dropdownValue = newValue!;
                           }
-                        ),
-                      ],
+                        );
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Pilih Jenis Kelamin'
+                      ),
+                      items: genderOptions
+                      .map((gender) => DropdownMenuItem(
+                        value: gender,
+                        child: Text(gender),
+                        )).toList()
+                    ),
+                    //TODO: Adjust button position
+                    ElevatedButton(
+                      child: const Text('Next'),
+                      onPressed: () {
+                        getItemAndNavigate(context);
+                      }
                     ),
                   ],
                 ),
