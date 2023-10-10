@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/styling.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 // Forms
 class LabelingWidget extends StatelessWidget {
@@ -44,6 +46,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
     required this.buttonContent,
     required this.areaCode,
     required this.controller,
+    required this.requiredDataChecker,
   });
 
   //Constraints and Arguments
@@ -52,7 +55,8 @@ class FormContainerWithDisabledText extends StatelessWidget {
   final String buttonContent;
   final String areaCode;
   final RegExp valueConstraints;
-  final bool isDataRequired;
+  final bool requiredDataChecker;
+  final AutovalidateMode isDataRequired;
   final bool needsInfoButton;
   final TextEditingController controller;
 
@@ -86,6 +90,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
               child: TextsForm(
                 controller: controller,
                 labels: labels,
+                requiredDataChecker: requiredDataChecker,
                 requiredData: isDataRequired,
                 valueConstraints: valueConstraints, 
                 hintContent: hintContents,
@@ -109,6 +114,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
     required this.buttonContent,
     required this.controller,
     required this.controller2,
+    required this.requiredDataChecker,
   });
 
   //Constraints and Arguments
@@ -116,7 +122,8 @@ class FormContainerWithTwoInputs extends StatelessWidget {
   final String hintContents;
   final String buttonContent;
   final RegExp valueConstraints;
-  final bool isDataRequired;
+  final AutovalidateMode isDataRequired;
+  final bool requiredDataChecker;
   final bool needsInfoButton;
   final TextEditingController controller;
   final TextEditingController controller2;
@@ -140,6 +147,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
                 controller: controller,
                 labels: labels,
                 requiredData: isDataRequired,
+                requiredDataChecker: requiredDataChecker,
                 valueConstraints: valueConstraints, 
                 hintContent: hintContents,
                 ),
@@ -157,6 +165,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
                 controller: controller2,
                 labels: labels,
                 requiredData: isDataRequired,
+                requiredDataChecker: requiredDataChecker,
                 valueConstraints: valueConstraints, 
                 hintContent: hintContents,
               ),
@@ -178,6 +187,7 @@ class FormContainer extends StatelessWidget {
     required this.needsInfoButton, 
     required this.buttonContent,
     required this.controller,
+    required this.requiredDataChecker,
   });
 
   //Constraints and Arguments
@@ -185,7 +195,8 @@ class FormContainer extends StatelessWidget {
   final String hintContents;
   final String buttonContent;
   final RegExp valueConstraints;
-  final bool isDataRequired;
+  final AutovalidateMode isDataRequired;
+  final bool requiredDataChecker;
   final bool needsInfoButton;
   final TextEditingController controller;
 
@@ -202,6 +213,7 @@ class FormContainer extends StatelessWidget {
           controller: controller,
           labels: labels,
           requiredData: isDataRequired,
+          requiredDataChecker: requiredDataChecker,
           valueConstraints: valueConstraints, 
           hintContent: hintContents,
         ), 
@@ -222,13 +234,15 @@ class TextsForm extends StatelessWidget {
     required this.requiredData,
     required this.hintContent,
     required this.controller,
+    required this.requiredDataChecker,
   });
 
   //Constraints and Arguments
   final String labels;
   final String hintContent;
   final RegExp valueConstraints;
-  final bool requiredData;
+  final bool requiredDataChecker;
+  final AutovalidateMode requiredData;
   final TextEditingController controller;
 
   late String labelName;
@@ -237,23 +251,26 @@ class TextsForm extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        hintText: hintContent,
-        isDense: true,
-        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 1,
-            color: Colors.black
-            )
-          ),
-      ),
-      onSaved: (value){
-      },
-      validator:(value){
-        if(!requiredData){
+    return FormBuilder(
+      child: FormBuilderTextField(
+        name: labels,
+        autovalidateMode: requiredData,
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: hintContent,
+          isDense: true,
+          contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              width: 1,
+              color: Colors.black
+              )
+            ),
+        ),
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(),
+          (value){
+            if(!requiredDataChecker){
           return null; 
         } else {
           if(value!.isEmpty || !valueConstraints.hasMatch(value)){
@@ -262,7 +279,9 @@ class TextsForm extends StatelessWidget {
               return null;
           }
         }
-      },
+          } 
+        ]),
+      ),
     );
   }
 }

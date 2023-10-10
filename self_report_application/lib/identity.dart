@@ -3,6 +3,7 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
+import 'package:self_report_application/main.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 //Identity Page
@@ -76,7 +77,7 @@ class _IdentityFormState extends State<IdentityForm> {
   }
 
   String? dropdownValue;
-  var items = [
+  List<String> genderOptions = [
     'Laki-laki',
     'Perempuan',
   ];
@@ -84,12 +85,12 @@ class _IdentityFormState extends State<IdentityForm> {
   getItemAndNavigate (BuildContext context) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => LivingAbroadDataPage(
-          name: _name.toString(),
-          passport: _passport.toString(),
-          idNumber: _iDNumber.toString(),
-          dob: _dOB.toString(), 
-          gender: dropdownValue.toString(),      
+        builder: (context) => WelcomePage(
+          // name: _name.toString(),
+          // passport: _passport.toString(),
+          // idNumber: _iDNumber.toString(),
+          // dob: _dOB.toString(), 
+          // gender: dropdownValue.toString(),      
         )
       )
     );
@@ -104,8 +105,9 @@ class _IdentityFormState extends State<IdentityForm> {
             child: Container(
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Form(
+              child: FormBuilder(
                 key: _identityKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child:ListView(
                   children: [
                     Column(
@@ -127,8 +129,9 @@ class _IdentityFormState extends State<IdentityForm> {
                         FormContainer(
                         labels: 'Nama Lengkap',
                         needsInfoButton: true,
-                        isDataRequired: true,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
                         hintContents: '',
+                        requiredDataChecker: true,
                         buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
                         valueConstraints: RegExp(r'^[a-zA-Z]+$'),   
                         controller: _name,                 
@@ -137,9 +140,10 @@ class _IdentityFormState extends State<IdentityForm> {
                         FormContainer(
                           labels: 'Tanggal Lahir',
                           needsInfoButton: false,
-                          isDataRequired: true,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
                           hintContents: 'DD/MM/YYYY',
                           buttonContent: '',
+                          requiredDataChecker: true,
                           valueConstraints: RegExp(r'[a-z A-Z]+$'),   
                           controller: _dOB,                 
                         ),
@@ -147,8 +151,9 @@ class _IdentityFormState extends State<IdentityForm> {
                         FormContainer(
                           labels: 'Nomor Paspor',
                           needsInfoButton: true,
-                          isDataRequired: true,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
                           hintContents: '',
+                          requiredDataChecker: true,
                           buttonContent: 'Sesuai yang tertulis di paspor. \nTidak ada spasi.',
                           valueConstraints: RegExp(r'[a-z A-Z 0-9]+$'),  
                           controller: _passport,                  
@@ -157,8 +162,9 @@ class _IdentityFormState extends State<IdentityForm> {
                         FormContainer(
                           labels: 'NIK',
                           needsInfoButton: true,
-                          isDataRequired: false,
+                          isDataRequired: AutovalidateMode.disabled,
                           hintContents: '',
+                          requiredDataChecker: false,
                           buttonContent: 'Jika ada, NIK bisa dilihat di KTP atau Kartu Keluarga',
                           valueConstraints: RegExp(r'[0-9]+$'),   
                           controller: _iDNumber,                 
@@ -169,24 +175,31 @@ class _IdentityFormState extends State<IdentityForm> {
                           textAlign: TextAlign.left,
                           style: TextStyling.regularTextStyle,
                         ),
-                        DropdownButton(
-                          alignment: Alignment.centerLeft,
-                          value: dropdownValue,
-                          hint: Text('Pilih Jenis Kelamin'),
-                          items: items.map((String items) {
-                            return DropdownMenuItem(value: items, child: Text(items));
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
+
+                        FormBuilderDropdown<String>(
+                          name: "gender",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (String? newValue){
+                            setState((){
                               dropdownValue = newValue!;
-                            });
+                              }
+                            );
                           },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Kelamin'
+                          ),
+                          items: genderOptions
+                          .map((gender) => DropdownMenuItem(
+                            value: gender,
+                            child: Text(gender),
+                            )).toList()
                         ),
                         //TODO: Adjust button position
                         ElevatedButton(
                           child: const Text('Next'),
                           onPressed: () {
                             if(_identityKey.currentState!.validate()){
+                            } else{
                               getItemAndNavigate(context);
                             }
                           }
