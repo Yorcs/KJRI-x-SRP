@@ -268,7 +268,6 @@ class TextsForm extends StatelessWidget {
             ),
         ),
         validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
           (value){
             if(!requiredDataChecker){
           return null; 
@@ -279,7 +278,8 @@ class TextsForm extends StatelessWidget {
               return null;
           }
         }
-          } 
+          },
+          FormBuilderValidators.required(), 
         ]),
       ),
     );

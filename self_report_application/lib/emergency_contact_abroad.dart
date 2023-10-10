@@ -53,7 +53,7 @@ class EmergencyContactAbroadForm extends StatefulWidget {
   final String visaEndDate;
   
   @override
-  _EmergencyContactAbroadFormState createState() => _EmergencyContactAbroadFormState();
+  State<EmergencyContactAbroadForm> createState() => _EmergencyContactAbroadFormState();
 }
 
 class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm> {

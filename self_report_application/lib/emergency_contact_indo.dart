@@ -67,7 +67,7 @@ class EmergencyContactIndoForm extends StatefulWidget {
   final String emergencyContactAbroadCity;
   
   @override
-  _EmergencyContactIndoFormState createState() => _EmergencyContactIndoFormState();
+  State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
 }
 
 class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {

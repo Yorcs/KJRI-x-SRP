@@ -22,7 +22,7 @@ class IdentityForm extends StatefulWidget {
 }
 
 class _IdentityFormState extends State<IdentityForm> {
-  final _identityKey = GlobalKey<FormState>();
+  final _identityKey = GlobalKey<FormBuilderState>();
   final TextEditingController _name = TextEditingController();
   final TextEditingController _dOB = TextEditingController();
   final TextEditingController _passport = TextEditingController();
@@ -85,12 +85,12 @@ class _IdentityFormState extends State<IdentityForm> {
   getItemAndNavigate (BuildContext context) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => WelcomePage(
-          // name: _name.toString(),
-          // passport: _passport.toString(),
-          // idNumber: _iDNumber.toString(),
-          // dob: _dOB.toString(), 
-          // gender: dropdownValue.toString(),      
+        builder: (context) => LivingAbroadDataPage(
+          name: _name.toString(),
+          passport: _passport.toString(),
+          idNumber: _iDNumber.toString(),
+          dob: _dOB.toString(), 
+          gender: dropdownValue.toString(),      
         )
       )
     );
@@ -199,7 +199,6 @@ class _IdentityFormState extends State<IdentityForm> {
                           child: const Text('Next'),
                           onPressed: () {
                             if(_identityKey.currentState!.validate()){
-                            } else{
                               getItemAndNavigate(context);
                             }
                           }
