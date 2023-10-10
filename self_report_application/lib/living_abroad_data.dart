@@ -86,8 +86,13 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
 
   goBack(BuildContext context)=> Navigator.pop(context);
 
+  void updateInformation (String information){
+    setState(() {
+      information = _address.toString();
+    });
+  }
     getItemAndNavigate (BuildContext context) async {
-    await Navigator.of(context).push(
+    final information = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataContinuePage(
           name: widget.name,
@@ -101,6 +106,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
         )
       )
     );
+    updateInformation(information);
   }
 
   String? provinceDropdownValue;

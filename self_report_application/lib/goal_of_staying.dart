@@ -56,7 +56,7 @@ class GoalOfStayingForm extends StatefulWidget {
 
 
   @override
-  State<GoalOfStayingForm> createState() => _GoalOfStayingFormState();
+  _GoalOfStayingFormState createState() => _GoalOfStayingFormState();
 }
 
 class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
@@ -226,7 +226,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             controller: _descriptionOrAddress,                 
                           ),
                           FormContainer(
-                            labels: 'Alamat pekerjaan di Luar negeri',
+                            labels: 'Alamat pekerjaan di Luar neegri',
                             needsInfoButton: false,
                             isDataRequired: true,
                             hintContents: '',
