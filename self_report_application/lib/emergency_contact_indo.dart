@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/styling.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
 //Emergency Contact in Indonesia Page
 class EmergencyContactIndoPage extends StatelessWidget {
@@ -67,11 +69,11 @@ class EmergencyContactIndoForm extends StatefulWidget {
   final String emergencyContactAbroadCity;
   
   @override
-  _EmergencyContactIndoFormState createState() => _EmergencyContactIndoFormState();
+  State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
 }
 
 class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
-  final emergencyContactIndoKey = GlobalKey<FormState>();
+  final _emergencyContactIndoKey = GlobalKey<FormBuilderState>();
   final TextEditingController _emergencyContactIndoName = TextEditingController();
   final TextEditingController _emergencyContactIndoEmail = TextEditingController();
   final TextEditingController _emergencyContactIndoPhone = TextEditingController();
@@ -79,7 +81,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
   String? relationshipDropdownValue;
   String? cityDropdownValue;
 
-  var relationship = [
+ List<String> relationship = [
     'Keluarga',
     'Rekan Kerja',
     'Istri/Suami',
@@ -128,9 +130,11 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
 
   goBack(BuildContext context)=> Navigator.pop(context);
 
-  getItemAndNavigate (BuildContext context){
-    Navigator.push(
-      context,
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    final isValid = _emergencyContactIndoKey.currentState!.validate();
+    if(!isValid){
+    } else {
+      await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => EmergencyContactIndoPage(
           name: widget.name,
@@ -153,6 +157,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       )
     );
   }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,109 +165,124 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       builder: (context, constraints) {
         return Scaffold(
           //TODO: Readjust margin and padding
-          body: Center(
+          body: SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Form(
-                key: emergencyContactIndoKey,
-                child:ListView(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: FormBuilder(
+                key: _emergencyContactIndoKey,
+                child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    BuildHeader(
+                    pageName: 'Kontak Darurat',
+                    opacity1: 0.5,
+                    opacity2: 0.5,
+                    opacity3: 0.5,
+                    opacity4: 1,
+                    changeColor1: Colors.blue,
+                    changeColor2: Colors.blue,
+                    changeColor3: Colors.blue,
+                    changeColor4: Colors.white,
+                    ),
+                    SizedBox(height: 20,),
+                    Row(
                       children: [
-                        BuildHeader(
-                        pageName: 'Kontak Darurat',
-                        opacity1: 0.5,
-                        opacity2: 0.5,
-                        opacity3: 0.5,
-                        opacity4: 1,
-                        changeColor1: Colors.blue,
-                        changeColor2: Colors.blue,
-                        changeColor3: Colors.blue,
-                        changeColor4: Colors.white,
+                        Text(
+                          'Di Indonesia',
+                          style: TextStyling.regularBoldTextStyle,
                         ),
-                        SizedBox(height: 20,),
-                        Row(
-                          children: [
-                            Text(
-                              'Di Indonesia',
-                              style: TextStyling.regularBoldTextStyle,
-                            ),
-                            InfoButton(
-                              contents: 'Informasi kontak sesuai surat-surat pemerintah'
-                            ),
-                          ],
+                        InfoButton(
+                          contents: 'Informasi kontak sesuai surat-surat pemerintah'
                         ),
-                        SizedBox(height: 30,),
-                        FormContainer(
-                        labels: 'Nama',
-                        needsInfoButton: false,
-                        isDataRequired: true,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: RegExp(r'^[a-z A-Z]+$'),  
-                        controller: _emergencyContactIndoName,                  
-                        ),
-                        SizedBox(height: 30,),
-                        Text('Hubungan'),
-                        DropdownButton(
-                          value: relationshipDropdownValue,
-                          hint: Text('Pilih Hubungan'),
-                          items: relationship.map((String items) {
-                            return DropdownMenuItem(value: items, child: Text(items));
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              relationshipDropdownValue = newValue!;
-                            });
-                          },
-                        ),
-                        SizedBox(height: 30,),
-                        //TODO: Change RegExp
-                        FormContainer(
-                          labels: 'Email',
-                          needsInfoButton: false,
-                          isDataRequired: true,
-                          hintContents: '',
-                          buttonContent: '',
-                          valueConstraints: RegExp(r'^[a-z A-Z 0-9]+$'),  
-                          controller: _emergencyContactIndoEmail,                  
-                        ),
-                        SizedBox(height: 30,),
-                        //TODO: Change RegExp
-                        FormContainerWithDisabledText(
-                          labels: 'Telepon',
-                          needsInfoButton: false,
-                          isDataRequired: true,
-                          hintContents: '',
-                          buttonContent: '',
-                          valueConstraints: RegExp(r'^[0-9]+$'),
-                          areaCode: '+62',     
-                          controller: _emergencyContactIndoPhone,             
-                        ),
-                        //TODO: Adjust button position
-                        Row(
-                          children: [
-                            ElevatedButton(
-                              child: const Text('Back'),
-                              onPressed: () => goBack(context)
-                            ),
-                            // TODO: Adjust button position
-                            // ElevatedButton(
-                            //   child: const Text('Next'),
-                            //   onPressed: () {
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
-                            //     );
-                            //   },
-                            // ),
-                          ],
-                        )                  
                       ],
                     ),
+                    SizedBox(height: 30,),
+                    FormContainer(
+                    labels: 'Nama',
+                    needsInfoButton: false,
+                    isDataRequired: AutovalidateMode.onUserInteraction,
+                    hintContents: '',
+                    buttonContent: '',
+                    valueConstraints: r'^[a-z A-Z]+$',  
+                    requiredDataChecker: true,
+                    controller: _emergencyContactIndoName,                  
+                    ),
+                    SizedBox(height: 30,),
+                    Text('Hubungan'),
+
+                    FormBuilderDropdown<String>(
+                      name: "relationship",
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: FormBuilderValidators.compose([
+                        (value){
+                          if(value ==null || value =='' || value.isEmpty){
+                            return 'Please select relationship'; //TODO: Change prompt
+                          }
+                          return null;
+                        }
+                      ]),
+                      onChanged: (String? newValue){
+                        setState((){
+                          relationshipDropdownValue = newValue!;
+                          }
+                        );
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Pilih Hubungan',
+                      ),
+                      items: relationship
+                      .map((relationship) => DropdownMenuItem(
+                        value: relationship,
+                        child: Text(relationship),
+                        )).toList()
+                    ),
+                    
+                    SizedBox(height: 30,),
+                    //TODO: Change RegExp
+                    FormContainer(
+                      labels: 'Email',
+                      needsInfoButton: false,
+                      isDataRequired: AutovalidateMode.onUserInteraction,
+                      hintContents: '',
+                      buttonContent: '',
+                      valueConstraints: r'^[a-z A-Z 0-9]+$', 
+                      requiredDataChecker: true, 
+                      controller: _emergencyContactIndoEmail,                  
+                    ),
+                    SizedBox(height: 30,),
+                    //TODO: Change RegExp
+                    FormContainerWithDisabledText(
+                      labels: 'Telepon',
+                      needsInfoButton: false,
+                      isDataRequired: AutovalidateMode.onUserInteraction,
+                      hintContents: '',
+                      buttonContent: '',
+                      valueConstraints: r'^[0-9]+$',
+                      requiredDataChecker: true,
+                      areaCode: '+62',     
+                      controller: _emergencyContactIndoPhone,             
+                    ),
+                    //TODO: Adjust button position
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          child: const Text('Back'),
+                          onPressed: () => goBack(context)
+                        ),
+                        // TODO: Adjust button position
+                        // ElevatedButton(
+                        //   child: const Text('Next'),
+                        //   onPressed: () {
+                        //     Navigator.push(
+                        //       context,
+                        //       MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
+                        //     );
+                        //   },
+                        // ),
+                      ],
+                    )                  
                   ],
                 ),
               ),
