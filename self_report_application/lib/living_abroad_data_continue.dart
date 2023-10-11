@@ -173,7 +173,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                     FormContainer(
                     labels: 'Nomor Visa',
                     needsInfoButton: true,
-                    isDataRequired: AutovalidateMode.always,
+                    isDataRequired: AutovalidateMode.onUserInteraction,
                     hintContents: '',
                     buttonContent: 'Diisi dengan nomor yang ada di:\n\u2022Study Permit\n\u2022Work Permit\n\u2022Kartu PR',
                     valueConstraints: r'^[a-z A-Z]+$', 
@@ -193,7 +193,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                     FormContainerWithTwoInputs(
                     labels: 'Masa Berlaku Visa',
                     needsInfoButton: false,
-                    isDataRequired: AutovalidateMode.always,
+                    isDataRequired: AutovalidateMode.onUserInteraction,
                     hintContents: '',
                     buttonContent: '',
                     valueConstraints: r'^[a-z A-Z]+$',  
