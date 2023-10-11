@@ -4,6 +4,7 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:self_report_application/main.dart';
 import 'package:self_report_application/styling.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
@@ -40,7 +41,7 @@ class LivingAbroadDataForm extends StatefulWidget {
 }
 
 class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
-  final _livingAbroadDataKey = GlobalKey<FormState>();
+  final _livingAbroadDataKey = GlobalKey<FormBuilderState>();
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();

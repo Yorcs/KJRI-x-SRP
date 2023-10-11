@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
@@ -85,7 +86,6 @@ class _IdentityFormState extends State<IdentityForm> {
   Future <void> getItemAndNavigate (BuildContext context) async {
     final isValid = _identityKey.currentState!.validate();
     if(!isValid){
-      return;
     } else {
       await Navigator.of(context).push(
       MaterialPageRoute(
@@ -182,6 +182,14 @@ class _IdentityFormState extends State<IdentityForm> {
                     FormBuilderDropdown<String>(
                       name: "gender",
                       autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: FormBuilderValidators.compose([
+                        (value){
+                          if(value ==null || value =='' || value!.isEmpty){
+                            return 'Please select gender'; //TODO: Change prompt
+                          }
+                          return null;
+                        }
+                      ]),
                       onChanged: (String? newValue){
                         setState((){
                           dropdownValue = newValue!;
@@ -189,7 +197,7 @@ class _IdentityFormState extends State<IdentityForm> {
                         );
                       },
                       decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Kelamin'
+                        hintText: 'Pilih Jenis Kelamin',
                       ),
                       items: genderOptions
                       .map((gender) => DropdownMenuItem(
