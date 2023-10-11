@@ -4,6 +4,7 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:self_report_application/main.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
@@ -123,19 +124,19 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     } else {
       await Navigator.of(context).push(
       MaterialPageRoute(
-      builder: (context) => GoalOfStayingPage(
-        name: widget.name,
-        passport: widget.passport,
-        idNumber: widget.idNumber,
-        dob: widget.dob, 
-        gender: widget.gender,
-        addressAbroad: widget.addressAbroad,
-        country: widget.country,
-        postalCode: widget.postalCode,
-        visaNumber: _visaNumber.toString(),
-        visaStartDate: _visaStartDate.toString(),
-        visaEndDate: _visaEndDate.toString(),
-        proofOfStayingDoc: _proofOfStayingDoc.toString(),
+      builder: (context) => WelcomePage(
+        // name: widget.name,
+        // passport: widget.passport,
+        // idNumber: widget.idNumber,
+        // dob: widget.dob, 
+        // gender: widget.gender,
+        // addressAbroad: widget.addressAbroad,
+        // country: widget.country,
+        // postalCode: widget.postalCode,
+        // visaNumber: _visaNumber.toString(),
+        // visaStartDate: _visaStartDate.toString(),
+        // visaEndDate: _visaEndDate.toString(),
+        // proofOfStayingDoc: _proofOfStayingDoc.toString(),
         )
       ) 
       );
