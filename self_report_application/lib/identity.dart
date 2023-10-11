@@ -4,7 +4,6 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
-import 'package:self_report_application/main.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 //Identity Page
@@ -184,7 +183,7 @@ class _IdentityFormState extends State<IdentityForm> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: FormBuilderValidators.compose([
                         (value){
-                          if(value ==null || value =='' || value!.isEmpty){
+                          if(value ==null || value =='' || value.isEmpty){
                             return 'Please select gender'; //TODO: Change prompt
                           }
                           return null;
