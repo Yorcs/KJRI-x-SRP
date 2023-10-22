@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Forms
 class LabelingWidget extends StatelessWidget {
@@ -209,7 +210,7 @@ class FormContainer extends StatelessWidget {
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
         ),
-        TextsForm(
+        TextsFormField(
           controller: controller,
           labels: labels,
           requiredData: isDataRequired,
@@ -226,8 +227,8 @@ class FormContainer extends StatelessWidget {
 //TODO: Needs refactoring to reduce redundancy
 //TODO: change RegExp String according to what we need
 // ignore: must_be_immutable
-class TextsForm extends StatelessWidget {
-  TextsForm({
+class TextsFormField extends StatefulWidget {
+  TextsFormField({
     super.key,
     required this.labels,
     required this.valueConstraints,
@@ -243,20 +244,28 @@ class TextsForm extends StatelessWidget {
   final String valueConstraints;
   final bool requiredDataChecker;
   final AutovalidateMode requiredData;
-  final TextEditingController controller;
+  TextEditingController controller;
 
-  late String labelName;
-  late String valueContent;
+  @override
+  State<TextsFormField> createState() => _TextsForm();
+}
+class _TextsForm extends State<TextsFormField>{
 
+  Future<void> saveData(String data) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString(widget.labels, data);
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
-      name: labels,
-      autovalidateMode: requiredData,
-      controller: controller,
+      name: widget.labels,
+      autovalidateMode: widget.requiredData,
+      controller: widget.controller,
       decoration: InputDecoration(
-        hintText: hintContent,
+        hintText: widget.hintContent,
         isDense: true,
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
         enabledBorder: OutlineInputBorder(
@@ -268,13 +277,13 @@ class TextsForm extends StatelessWidget {
       ),
       validator: FormBuilderValidators.compose([
         (value){
-          if(!requiredDataChecker){
+          if(!widget.requiredDataChecker){
             return null;
           } else {
           if(value == '' || value!.isEmpty){
-            return 'Invalid input on $labels'; //TODO: Change Prompt Later.
+            return 'Invalid input'; //TODO: Change Prompt Later.
           } else {
-            FormBuilderValidators.match(valueConstraints, errorText: 'Invalid input on $labels');
+            FormBuilderValidators.match(widget.valueConstraints, errorText: 'Invalid input');
           }
           return null;
           }

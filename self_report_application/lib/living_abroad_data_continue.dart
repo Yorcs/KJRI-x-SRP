@@ -137,6 +137,7 @@
 //     );
 //   }
 
+<<<<<<< Updated upstream
 //   @override
 //   Widget build(BuildContext context) {
 //     return LayoutBuilder(
@@ -225,3 +226,89 @@
 //     );
 //   }
 // }
+=======
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          //TODO: Readjust margin and padding
+          body: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: FormBuilder(
+                key: _livingAbroadDataContinueKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[ 
+                    BuildHeader(
+                    pageName: 'Data di Luar negeri',
+                    opacity1: 0.5,
+                    opacity2: 1,
+                    opacity3: 0.5,
+                    opacity4: 0.5,
+                    changeColor1: Colors.blue,
+                    changeColor2: Colors.white,
+                    changeColor3: Colors.blue,
+                    changeColor4: Colors.blue,
+                    ),
+                    SizedBox(height: 30,),
+                    FormContainer(
+                    labels: 'Nomor Visa',
+                    needsInfoButton: true,
+                    isDataRequired: AutovalidateMode.onUserInteraction,
+                    hintContents: '',
+                    buttonContent: 'Diisi dengan nomor yang ada di:\n\u2022Study Permit\n\u2022Work Permit\n\u2022Kartu PR',
+                    valueConstraints: r'^[a-z A-Z]+$', 
+                    requiredDataChecker: true,  
+                    controller: _visaNumber,                 
+                    ),
+                    FilePickerContainer(
+                      labels: 'Dokumen Bukti Tinggal',
+                      buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022ID Card\n\u2022Driver License\n\u2022Rekening Bank\n\u2022Kontrak Rumah\n\u2022Tagihan Telepon\n\u2022Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
+                      controller: _proofOfStayingDoc,
+                    ),
+                    FilePickerContainer(
+                      labels: 'Dokumen Visa = Ijin Tinggal',
+                      buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggan halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
+                      controller: _permitToStayDoc,
+                    ),
+                    // FormContainerWithTwoInputs(
+                    // labels: 'Masa Berlaku Visa',
+                    // needsInfoButton: false,
+                    // isDataRequired: AutovalidateMode.onUserInteraction,
+                    // hintContents: '',
+                    // buttonContent: '',
+                    // valueConstraints: r'^[a-z A-Z]+$',  
+                    // requiredDataChecker: true, 
+                    // controller: _visaStartDate,
+                    // controller2: _visaEndDate,                 
+                    // ),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          child: const Text('Back'),
+                          onPressed: () => goBack(context),
+                        ),
+                        // TODO: Adjust button position
+                        ElevatedButton(
+                          child: const Text('Next'),
+                          onPressed: () {
+                            getItemAndNavigate(context);
+                          }
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        );
+      },
+    );
+  }
+}
+>>>>>>> Stashed changes

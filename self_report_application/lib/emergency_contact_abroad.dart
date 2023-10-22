@@ -3,6 +3,11 @@
 // import 'package:self_report_application/form_container.dart';
 // import 'package:self_report_application/header.dart';
 // import 'package:self_report_application/styling.dart';
+<<<<<<< Updated upstream
+=======
+// import 'package:flutter_form_builder/flutter_form_builder.dart';
+// import 'package:form_builder_validators/form_builder_validators.dart';
+>>>>>>> Stashed changes
 
 // //Emergency Contact Abroad Page
 // class EmergencyContactAbroadPage extends StatelessWidget {
@@ -57,7 +62,11 @@
 // }
 
 // class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm> {
+<<<<<<< Updated upstream
 //   final emergencyContactAbroadKey = GlobalKey<FormState>();
+=======
+//   final _emergencyContactAbroadKey = GlobalKey<FormBuilderState>();
+>>>>>>> Stashed changes
 //   final TextEditingController _emergencyContactAbroadName = TextEditingController();
 //   final TextEditingController _emergencyContactAbroadEmail = TextEditingController();
 //   final TextEditingController _emergencyContactAbroadPhone = TextEditingController();
@@ -65,7 +74,11 @@
 //   String? relationshipDropdownValue;
 //   String? cityDropdownValue;
 
+<<<<<<< Updated upstream
 //   var relationship = [
+=======
+//   List<String> relationship = [
+>>>>>>> Stashed changes
 //     'Keluarga',
 //     'Rekan Kerja',
 //     'Istri/Suami',
@@ -114,9 +127,17 @@
 
 //   goBack(BuildContext context)=> Navigator.pop(context);
 
+<<<<<<< Updated upstream
 //   getItemAndNavigate (BuildContext context){
 //     Navigator.push(
 //       context,
+=======
+//   Future <void> getItemAndNavigate (BuildContext context) async {
+//     final isValid = _emergencyContactAbroadKey.currentState!.validate();
+//     if(!isValid){
+//     } else {
+//       await Navigator.of(context).push(
+>>>>>>> Stashed changes
 //       MaterialPageRoute(
 //         builder: (context) => EmergencyContactIndoPage(
 //           name: widget.name,
@@ -139,6 +160,10 @@
 //       )
 //     );
 //   }
+<<<<<<< Updated upstream
+=======
+//   }
+>>>>>>> Stashed changes
   
 //   @override
 //   Widget build(BuildContext context) {
@@ -146,6 +171,7 @@
 //       builder: (context, constraints) {
 //         return Scaffold(
 //           //TODO: Readjust margin and padding
+<<<<<<< Updated upstream
 //           body: Center(
 //             child: Container(
 //               margin: const EdgeInsets.all(10.0),
@@ -244,6 +270,118 @@
 //                         )                  
 //                       ],
 //                     ),
+=======
+//           body: SingleChildScrollView(
+//             child: Container(
+//               margin: const EdgeInsets.all(10.0),
+//               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+//               child: FormBuilder(
+//                 key: _emergencyContactAbroadKey,
+//                 child:Column(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: <Widget>[
+//                     BuildHeader(
+//                     pageName: 'Kontak Darurat',
+//                     opacity1: 0.5,
+//                     opacity2: 0.5,
+//                     opacity3: 0.5,
+//                     opacity4: 1,
+//                     changeColor1: Colors.blue,
+//                     changeColor2: Colors.blue,
+//                     changeColor3: Colors.blue,
+//                     changeColor4: Colors.white,
+//                     ),
+//                     SizedBox(height: 30,),
+//                     Text(
+//                       'Di Luar Negeri',
+//                       style: TextStyling.regularBoldTextStyle,
+//                     ),
+//                     SizedBox(height: 30,),
+//                     FormContainer(
+//                     labels: 'Nama',
+//                     needsInfoButton: false,
+//                     isDataRequired: AutovalidateMode.onUserInteraction,
+//                     hintContents: '',
+//                     buttonContent: '',
+//                     valueConstraints: r'^[a-z A-Z]+$',
+//                     requiredDataChecker: true,
+//                     controller: _emergencyContactAbroadName,                    
+//                     ),
+//                     SizedBox(height: 30,),
+//                     Text(
+//                       'Hubungan',
+//                       style: TextStyling.regularTextStyle,
+//                     ),
+//                     FormBuilderDropdown<String>(
+//                       name: "relationship",
+//                       autovalidateMode: AutovalidateMode.onUserInteraction,
+//                       validator: FormBuilderValidators.compose([
+//                         (value){
+//                           if(value ==null || value =='' || value.isEmpty){
+//                             return 'Please select relationship'; //TODO: Change prompt
+//                           }
+//                           return null;
+//                         }
+//                       ]),
+//                       onChanged: (String? newValue){
+//                         setState((){
+//                           relationshipDropdownValue = newValue!;
+//                           }
+//                         );
+//                       },
+//                       decoration: InputDecoration(
+//                         hintText: 'Pilih Hubungan',
+//                       ),
+//                       items: relationship
+//                       .map((relationship) => DropdownMenuItem(
+//                         value: relationship,
+//                         child: Text(relationship),
+//                         )).toList()
+//                     ),
+                    
+//                     SizedBox(height: 30,),
+//                     //TODO: Change RegExp
+//                     FormContainer(
+//                       labels: 'Email',
+//                       needsInfoButton: false,
+//                       isDataRequired: AutovalidateMode.onUserInteraction,
+//                       hintContents: '',
+//                       buttonContent: '',
+//                       valueConstraints: r'^[a-z A-Z 0-9]+$',
+//                       requiredDataChecker: true,
+//                       controller: _emergencyContactAbroadEmail,                  
+//                     ),
+//                     SizedBox(height: 30,),
+//                     //TODO: Change RegExp
+//                     FormContainerWithDisabledText(
+//                       labels: 'Telepon',
+//                       needsInfoButton: false,
+//                       isDataRequired: AutovalidateMode.onUserInteraction,
+//                       hintContents: '',
+//                       buttonContent: '',
+//                       valueConstraints: r'^[0-9]+$',
+//                       areaCode: '+1',
+//                       controller: _emergencyContactAbroadPhone, 
+//                       requiredDataChecker: true,                 
+//                     ),
+//                     //TODO: Adjust button position
+//                     Row(
+//                       children: [
+//                         ElevatedButton(
+//                           child: const Text('Back'),
+//                           onPressed: () => goBack(context)
+//                         ),
+//                         // TODO: Adjust button position
+//                         ElevatedButton(
+//                           child: const Text('Next'),
+//                           onPressed: () {
+//                             getItemAndNavigate(context);
+//                           }
+//                         ),
+//                       ],
+//                     )                  
+>>>>>>> Stashed changes
 //                   ],
 //                 ),
 //               ),

@@ -6,6 +6,7 @@ import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/main.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Identity Page
 class IdentityPage extends StatelessWidget {
@@ -24,14 +25,37 @@ class IdentityForm extends StatefulWidget {
 
 class _IdentityFormState extends State<IdentityForm> {
   final _identityKey = GlobalKey<FormBuilderState>();
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _dOB = TextEditingController();
-  final TextEditingController _passport = TextEditingController();
-  final TextEditingController _iDNumber = TextEditingController();
+  TextEditingController _name = TextEditingController();
+  TextEditingController _dOB = TextEditingController();
+  TextEditingController _passport = TextEditingController();
+  TextEditingController _iDNumber = TextEditingController();
+  String? dropdownValue;
+  List<String> genderOptions = [
+    'Laki-laki',
+    'Perempuan',
+  ];
+
+
+  Future<void> getSharedPrefs() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _name.text = prefs.getString("Nama Lengkap") ?? '';
+  //   _dOB.text = prefs.getString("Tanggal Lahir") ?? '';
+  //   _passport.text = prefs.getString("Nomor Paspor") ?? '';
+  //   _iDNumber.text = prefs.getString("NIK") ?? '';
+  //   dropdownValue = prefs.getString("Gender") ?? '';
+    setState(() {
+      _name = TextEditingController(text: _name.text);
+  //     _dOB = TextEditingController(text: _dOB.text);
+  //     _passport = TextEditingController(text: _passport.text);
+  //     _iDNumber = TextEditingController(text: _iDNumber.text);
+  //     dropdownValue = dropdownValue;
+    });
+  }
 
   @override
   void initState(){
     super.initState();
+    // getSharedPrefs();
     _name.addListener(() {
       final String text = _name.text.toString();
       _name.value = _name.value.copyWith(
@@ -76,13 +100,6 @@ class _IdentityFormState extends State<IdentityForm> {
     _iDNumber.dispose();
     super.dispose();
   }
-
-  String? dropdownValue;
-  List<String> genderOptions = [
-    'Laki-laki',
-    'Perempuan',
-  ];
-
   Future <void> getItemAndNavigate (BuildContext context) async {
     final isValid = _identityKey.currentState!.validate();
     if(!isValid){
@@ -180,7 +197,7 @@ class _IdentityFormState extends State<IdentityForm> {
                     ),
 
                     FormBuilderDropdown<String>(
-                      name: "gender",
+                      name: "Gender",
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: FormBuilderValidators.compose([
                         (value){
