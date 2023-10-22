@@ -5,11 +5,8 @@ import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:self_report_application/main.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-<<<<<<< Updated upstream
-=======
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
->>>>>>> Stashed changes
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
@@ -139,23 +136,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     );
   }
 
-<<<<<<< Updated upstream
-  String? provinceDropdownValue;
-  String? cityDropdownValue;
-
-  var provinces = [
-    'Alberta',
-    'British Columbia',
-  ];
-
-  var cities = [
-    'Burnaby',
-    'Coquitlam',
-    'Surrey',
-  ];
-
-=======
->>>>>>> Stashed changes
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -168,13 +148,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Form(
                 key: _livingAbroadDataKey,
-<<<<<<< Updated upstream
-                child:ListView(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-=======
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 child:Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -288,7 +261,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                     ),
                     //TODO: Adjust button position
                     Row(
->>>>>>> Stashed changes
                       children: [
                         BuildHeader(
                         pageName: 'Data di Luar negeri',
