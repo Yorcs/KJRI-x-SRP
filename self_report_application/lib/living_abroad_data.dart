@@ -5,36 +5,37 @@ import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
-  const LivingAbroadDataPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.gender});
-  final String name;
-  final String idNumber;
-  final String dob;
-  final String passport;
-  final String gender;
+  const LivingAbroadDataPage({super.key});
+  // final String name;
+  // final String idNumber;
+  // final String dob;
+  // final String passport;
+  // final String gender;
   
   @override
   Widget build(BuildContext context) {
     return LivingAbroadDataForm(
-      name: name,
-      idNumber: idNumber,
-      dob: dob,
-      passport: passport,
-      gender: gender,
+      // name: name,
+      // idNumber: idNumber,
+      // dob: dob,
+      // passport: passport,
+      // gender: gender,
     );
   }
 }
 
 class LivingAbroadDataForm extends StatefulWidget {
-  const LivingAbroadDataForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.gender});
+  const LivingAbroadDataForm({super.key});
 
-  final String name;
-  final String idNumber;
-  final String dob;
-  final String passport;
-  final String gender;
+  // final String name;
+  // final String idNumber;
+  // final String dob;
+  // final String passport;
+  // final String gender;
 
   @override
   State<LivingAbroadDataForm> createState() => _LivingAbroadDataFormState();
@@ -45,10 +46,59 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
+  String? provinceDropdownValue;
+  String? cityDropdownValue;
+
+  List<String> provinces = [
+    'Alberta',
+    'British Columbia',
+  ];
+
+  List<String>  cities = [
+    'Burnaby',
+    'Coquitlam',
+    'Surrey',
+  ];
+
+  late String addressString;
+  late String countryString;
+  late String postalCodeString;
+  late String provinceDropdownValueString;
+  late String cityDropdownValueString;
+
+  Future<(String, String, String, String, String)> getSharedPrefs() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
+    countryString = prefs.getString('Negara') ??'';
+    postalCodeString = prefs.getString('Kode Pos') ?? '';
+    provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
+    cityDropdownValueString = prefs.getString('Kota') ?? '';
+
+    setState(() {
+      _address.text = addressString;
+      _country.text = countryString;
+      _postalCode.text = postalCodeString;
+      provinceDropdownValue = provinceDropdownValueString;
+      cityDropdownValue = cityDropdownValueString;
+    });
+
+    return (addressString, countryString, postalCodeString, provinceDropdownValueString, cityDropdownValueString);
+  }
+
+  Future<void> saveData() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('Alamat Lengkap di Luar Negeri', _address.text);
+    await prefs.setString('Negara', _country.text);
+    await prefs.setString('Kode Pos', _postalCode.text);
+    await prefs.setString('Provinsi', provinceDropdownValue ?? '');
+    await prefs.setString('Kota', cityDropdownValue ?? '');
+  }
 
   @override
   void initState(){
     super.initState();
+    getSharedPrefs();
     _address.addListener(() {
       final String text = _address.text;
       _address.value = _address.value.copyWith(
@@ -87,47 +137,27 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
 
 
   goBack(BuildContext context)=> Navigator.pop(context);
-
-  // void updateInformation (String information){
-  //   setState(() {
-  //     information = _address.toString();
-  //   });
-  // }
     Future <void> getItemAndNavigate (BuildContext context) async {
       final isValid = _livingAbroadDataKey.currentState!.validate();
       if(!isValid){
       } else {
+        saveData();
         await Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => LivingAbroadDataContinuePage(
-            name: widget.name,
-            passport: widget.passport,
-            idNumber: widget.idNumber,
-            dob: widget.dob, 
-            gender: widget.gender,
-            addressAbroad: _address.toString(),
-            country: _country.toString(),
-            postalCode: _postalCode.toString(),      
+            // name: widget.name,
+            // passport: widget.passport,
+            // idNumber: widget.idNumber,
+            // dob: widget.dob, 
+            // gender: widget.gender,
+            // addressAbroad: _address.toString(),
+            // country: _country.toString(),
+            // postalCode: _postalCode.toString(),      
           )
         )
       );
-      // updateInformation(information);
       }
     }
-
-  String? provinceDropdownValue;
-  String? cityDropdownValue;
-
-  List<String> provinces = [
-    'Alberta',
-    'British Columbia',
-  ];
-
-  List<String>  cities = [
-    'Burnaby',
-    'Coquitlam',
-    'Surrey',
-  ];
 
   @override
   Widget build(BuildContext context) {

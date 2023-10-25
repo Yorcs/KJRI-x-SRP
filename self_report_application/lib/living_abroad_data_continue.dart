@@ -8,42 +8,42 @@ import 'package:self_report_application/main.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
-  const LivingAbroadDataContinuePage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.gender});
-  final String name;
-  final String idNumber;
-  final String dob;
-  final String passport;
-  final String gender;
-  final String addressAbroad;
-  final String country;
-  final String postalCode;
+  const LivingAbroadDataContinuePage({super.key});
+  // final String name;
+  // final String idNumber;
+  // final String dob;
+  // final String passport;
+  // final String gender;
+  // final String addressAbroad;
+  // final String country;
+  // final String postalCode;
 
   @override
   Widget build(BuildContext context) {
     return LivingAbroadDataContinueForm(
-      name: name,
-      idNumber: idNumber,
-      dob: dob,
-      passport: passport,
-      gender: gender,
-      addressAbroad: addressAbroad,
-      country: country,
-      postalCode: postalCode,
+      // name: name,
+      // idNumber: idNumber,
+      // dob: dob,
+      // passport: passport,
+      // gender: gender,
+      // addressAbroad: addressAbroad,
+      // country: country,
+      // postalCode: postalCode,
     );
   }
 }
 
 class LivingAbroadDataContinueForm extends StatefulWidget {
-  const LivingAbroadDataContinueForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.gender});
+  const LivingAbroadDataContinueForm({super.key});
 
-  final String name;
-  final String idNumber;
-  final String dob;
-  final String passport;
-  final String gender;
-  final String addressAbroad;
-  final String country;
-  final String postalCode;
+  // final String name;
+  // final String idNumber;
+  // final String dob;
+  // final String passport;
+  // final String gender;
+  // final String addressAbroad;
+  // final String country;
+  // final String postalCode;
 
   @override
   State<LivingAbroadDataContinueForm> createState() => _LivingAbroadDataContinueFormState();
@@ -116,7 +116,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     super.dispose();
   }
 
-  goBack(BuildContext context)=> Navigator.pop(context, widget.addressAbroad);
+  goBack(BuildContext context)=> Navigator.pop(context);
 
   Future <void> getItemAndNavigate (BuildContext context) async {
     final isValid = _livingAbroadDataContinueKey.currentState!.validate();

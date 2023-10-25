@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -13,8 +14,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  Future <void> clearData() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
+    clearData();
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(

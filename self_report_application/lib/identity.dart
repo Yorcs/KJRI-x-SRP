@@ -5,6 +5,7 @@ import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Identity Page
 class IdentityPage extends StatelessWidget {
@@ -28,9 +29,45 @@ class _IdentityFormState extends State<IdentityForm> {
   final TextEditingController _passport = TextEditingController();
   final TextEditingController _iDNumber = TextEditingController();
 
+  late String nameString;
+  late String dobString;
+  late String passportString;
+  late String idNumberString;
+  late String dropdownValueString;
+
+  Future<(String, String, String, String, String)> getSharedPrefs() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    nameString = prefs.getString('Nama Lengkap') ?? '';
+    dobString = prefs.getString('Tanggal Lahir') ??'';
+    passportString = prefs.getString('Nomor Paspor') ?? '';
+    idNumberString = prefs.getString('NIK') ?? '';
+    dropdownValueString = prefs.getString('Jenis Kelamin') ?? '';
+
+    setState(() {
+      _name.text = nameString;
+      _dOB.text = dobString;
+      _passport.text = passportString;
+      _iDNumber.text = idNumberString;
+      dropdownValue = dropdownValueString;
+    });
+
+    return (nameString, dobString, passportString, idNumberString, dropdownValueString);
+  }
+
+  Future<void> saveData() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('Nama Lengkap', _name.text);
+    await prefs.setString('Tanggal Lahir', _dOB.text);
+    await prefs.setString('Nomor Paspor', _passport.text);
+    await prefs.setString('NIK', _iDNumber.text);
+    await prefs.setString('Jenis Kelamin', dropdownValue ?? '');
+  }
+
   @override
   void initState(){
     super.initState();
+    getSharedPrefs();
     _name.addListener(() {
       final String text = _name.text.toString();
       _name.value = _name.value.copyWith(
@@ -86,14 +123,15 @@ class _IdentityFormState extends State<IdentityForm> {
     final isValid = _identityKey.currentState!.validate();
     if(!isValid){
     } else {
+      saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataPage(
-          name: _name.toString(),
-          passport: _passport.toString(),
-          idNumber: _iDNumber.toString(),
-          dob: _dOB.toString(), 
-          gender: dropdownValue.toString(),      
+          // name: _name.toString(),
+          // passport: _passport.toString(),
+          // idNumber: _iDNumber.toString(),
+          // dob: _dOB.toString(), 
+          // gender: dropdownValue.toString(),      
         )
       )
     );
