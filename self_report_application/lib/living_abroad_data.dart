@@ -10,32 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
   const LivingAbroadDataPage({super.key});
-  // final String name;
-  // final String idNumber;
-  // final String dob;
-  // final String passport;
-  // final String gender;
   
   @override
   Widget build(BuildContext context) {
-    return LivingAbroadDataForm(
-      // name: name,
-      // idNumber: idNumber,
-      // dob: dob,
-      // passport: passport,
-      // gender: gender,
-    );
+    return LivingAbroadDataForm();
   }
 }
 
 class LivingAbroadDataForm extends StatefulWidget {
   const LivingAbroadDataForm({super.key});
-
-  // final String name;
-  // final String idNumber;
-  // final String dob;
-  // final String passport;
-  // final String gender;
 
   @override
   State<LivingAbroadDataForm> createState() => _LivingAbroadDataFormState();
@@ -46,8 +29,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
-  String? provinceDropdownValue;
-  String? cityDropdownValue;
+  late String provinceDropdownValue;
+  late String cityDropdownValue;
 
   List<String> provinces = [
     'Alberta',
@@ -91,8 +74,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     await prefs.setString('Alamat Lengkap di Luar Negeri', _address.text);
     await prefs.setString('Negara', _country.text);
     await prefs.setString('Kode Pos', _postalCode.text);
-    await prefs.setString('Provinsi', provinceDropdownValue ?? '');
-    await prefs.setString('Kota', cityDropdownValue ?? '');
+    await prefs.setString('Provinsi', provinceDropdownValue.toString());
+    await prefs.setString('Kota', cityDropdownValue.toString());
   }
 
   @override
@@ -144,16 +127,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
         saveData();
         await Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => LivingAbroadDataContinuePage(
-            // name: widget.name,
-            // passport: widget.passport,
-            // idNumber: widget.idNumber,
-            // dob: widget.dob, 
-            // gender: widget.gender,
-            // addressAbroad: _address.toString(),
-            // country: _country.toString(),
-            // postalCode: _postalCode.toString(),      
-          )
+          builder: (context) => LivingAbroadDataContinuePage()
         )
       );
       }

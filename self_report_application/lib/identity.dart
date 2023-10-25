@@ -61,7 +61,7 @@ class _IdentityFormState extends State<IdentityForm> {
     await prefs.setString('Tanggal Lahir', _dOB.text);
     await prefs.setString('Nomor Paspor', _passport.text);
     await prefs.setString('NIK', _iDNumber.text);
-    await prefs.setString('Jenis Kelamin', dropdownValue ?? '');
+    await prefs.setString('Jenis Kelamin', dropdownValue.toString());
   }
 
   @override
@@ -113,7 +113,7 @@ class _IdentityFormState extends State<IdentityForm> {
     super.dispose();
   }
 
-  String? dropdownValue;
+  late String dropdownValue;
   List<String> genderOptions = [
     'Laki-laki',
     'Perempuan',
@@ -126,13 +126,7 @@ class _IdentityFormState extends State<IdentityForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => LivingAbroadDataPage(
-          // name: _name.toString(),
-          // passport: _passport.toString(),
-          // idNumber: _iDNumber.toString(),
-          // dob: _dOB.toString(), 
-          // gender: dropdownValue.toString(),      
-        )
+        builder: (context) => LivingAbroadDataPage()
       )
     );
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intl/intl.dart';
 
 // Forms
 class LabelingWidget extends StatelessWidget {
@@ -107,24 +108,25 @@ class FormContainerWithTwoInputs extends StatelessWidget {
   const FormContainerWithTwoInputs({
     super.key,
     required this.labels,
-    required this.valueConstraints,
     required this.isDataRequired,
     required this.hintContents,
     required this.needsInfoButton, 
     required this.buttonContent,
     required this.controller,
-    required this.controller2,
-    required this.requiredDataChecker,
+    required this.controller2,required this.firstDates, required this.lastDates, required this.firstDates2, required this.lastDates2,
   });
 
   //Constraints and Arguments
   final String labels;
   final String hintContents;
   final String buttonContent;
-  final String valueConstraints;
   final AutovalidateMode isDataRequired;
-  final bool requiredDataChecker;
   final bool needsInfoButton;
+  final DateTime firstDates;
+  final DateTime lastDates;
+
+  final DateTime firstDates2;
+  final DateTime lastDates2;  
   final TextEditingController controller;
   final TextEditingController controller2;
 
@@ -143,13 +145,12 @@ class FormContainerWithTwoInputs extends StatelessWidget {
           children:[
             SizedBox(
               width: 100,
-              child: TextsForm(
+              child: DatePicker(
                 controller: controller,
                 labels: labels,
                 requiredData: isDataRequired,
-                requiredDataChecker: requiredDataChecker,
-                valueConstraints: valueConstraints, 
-                hintContent: hintContents,
+                firstDates: firstDates,
+                lastDates: lastDates,
                 ),
             ),
             SizedBox(
@@ -161,13 +162,12 @@ class FormContainerWithTwoInputs extends StatelessWidget {
               ),
             SizedBox(
               width: 100,
-              child: TextsForm(
+              child: DatePicker(
                 controller: controller2,
-                labels: labels,
+                labels: 'Masa Berakhir Visa',
                 requiredData: isDataRequired,
-                requiredDataChecker: requiredDataChecker,
-                valueConstraints: valueConstraints, 
-                hintContent: hintContents,
+                firstDates: firstDates2,
+                lastDates: lastDates2,
               ),
             ),
           ]
@@ -222,6 +222,55 @@ class FormContainer extends StatelessWidget {
   }
 }
 
+
+// Date Picker with Labels
+// TODO: Create it.
+
+// Date Picker
+
+class DatePicker extends StatelessWidget {
+  const DatePicker({
+    super.key, required this.labels, required this.controller, required this.firstDates, required this.lastDates, required this.requiredData,
+  });
+
+  // Constraints 
+  final String labels;
+  final TextEditingController controller;
+  final AutovalidateMode requiredData;
+  final DateTime firstDates;
+  final DateTime lastDates;
+
+  @override
+  Widget build(BuildContext context) {
+    return FormBuilderDateTimePicker(
+      name: labels,
+      autovalidateMode: requiredData,
+      controller: controller,
+      inputType: InputType.date,
+      initialDate: DateTime.now(),
+      firstDate: firstDates,
+      lastDate: lastDates,
+      format: DateFormat('yyyy-MM-dd'),
+      decoration: const InputDecoration(
+        isDense: true,
+        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1,
+            color: Colors.black
+            )
+          ),
+      ),
+      validator: (value){
+        if (value == null){
+          return 'Please select a date';
+        }
+        return null;
+      }
+    );
+  }
+}
+
 //Dropdown Container
 //TODO: Change into a reusable.
 
@@ -240,7 +289,7 @@ class TextsForm extends StatelessWidget {
     required this.requiredDataChecker,
     });
 
-  //Constraints and Arguments
+  //Constraints
   final String labels;
   final String hintContent;
   final String valueConstraints;

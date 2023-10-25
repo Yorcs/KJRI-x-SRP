@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'dart:convert';
 
 
 
@@ -75,12 +78,24 @@ class FilePickerButton extends StatefulWidget {
 class _FilePickerState extends State<FilePickerButton> {
 
   String _fileName ='';
+  String _filePath ='';
+  late ByteData trueBytes;
 
-  void pickFiles() async {
+  // String getStringFromBytes(ByteData data){
+  //   final buffer = data.buffer;
+  //   var list = buffer.asUint8List(data.offsetInBytes,data.lengthInBytes);
+  //   return utf8.decode(list);
+  // }
+
+  Future<void> pickFiles() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
-    if (result!= null){
+    if (result!= null && result.files.isNotEmpty){
       _fileName = result.files.first.name;
+      _filePath = result.files.first.path ?? '';
+      // Uint8List? fileBytes = result.files.first.bytes;
+      // trueBytes = fileBytes!.buffer.asByteData();
+      
       setState(() {
         
       });
@@ -124,7 +139,7 @@ class _FilePickerState extends State<FilePickerButton> {
                 enabled: false,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  labelText: _fileName,
+                  labelText: _filePath,
                 ),
               ),
             ),
