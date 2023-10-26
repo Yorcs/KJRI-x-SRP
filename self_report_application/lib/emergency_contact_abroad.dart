@@ -5,54 +5,20 @@ import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact Abroad Page
 class EmergencyContactAbroadPage extends StatelessWidget {
-  const EmergencyContactAbroadPage({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.gender});
-  final String name;
-  final String idNumber;
-  final String dob;
-  final String passport;
-  final String gender;
-  final String addressAbroad;
-  final String country;
-  final String postalCode;
-  final String visaNumber;
-  final String visaStartDate;
-  final String visaEndDate;
+  const EmergencyContactAbroadPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return EmergencyContactAbroadForm(
-      name: name,
-      idNumber: idNumber,
-      dob: dob,
-      passport: passport,
-      gender: gender,
-      addressAbroad: addressAbroad,
-      country: country,
-      postalCode: postalCode,
-      visaNumber: visaNumber,
-      visaStartDate: visaStartDate,
-      visaEndDate: visaEndDate,
-    );
+    return EmergencyContactAbroadForm();
   }
 }
 
 class EmergencyContactAbroadForm extends StatefulWidget {
-  const EmergencyContactAbroadForm({super.key, required this.name, required this.idNumber, required this.dob, required this.passport, required this.addressAbroad, required this.country, required this.postalCode, required this.visaNumber, required this.visaStartDate, required this.visaEndDate, required this.gender});
-
-  final String name;
-  final String idNumber;
-  final String dob;
-  final String passport;
-  final String gender;
-  final String addressAbroad;
-  final String country;
-  final String postalCode;
-  final String visaNumber;
-  final String visaStartDate;
-  final String visaEndDate;
+  const EmergencyContactAbroadForm({super.key});
   
   @override
   State<EmergencyContactAbroadForm> createState() => _EmergencyContactAbroadFormState();
@@ -65,7 +31,6 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
   final TextEditingController _emergencyContactAbroadPhone = TextEditingController();
 
   String? relationshipDropdownValue;
-  String? cityDropdownValue;
 
   List<String> relationship = [
     'Keluarga',
@@ -75,9 +40,42 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
     'Teman',
   ];
 
+  late String emergencyContactAbroadNameString;
+  late String emergencyContactAbroadEmailString;
+  late String emergencyContactAbroadPhoneString;
+  late String relationshipDropdownValueString;
+
+  Future<(String, String, String, String)> getSharedPrefs() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    emergencyContactAbroadNameString = prefs.getString('Nama Kontak Darurat di Luar Negeri') ?? '';
+    emergencyContactAbroadEmailString = prefs.getString('Email Kontak Darurat di Luar Negeri') ??'';
+    emergencyContactAbroadPhoneString = prefs.getString('Telepon Kontak Darurat di Luar Negeri') ?? '';
+    relationshipDropdownValueString = prefs.getString('Hubungan Kontak Darurat di Luar Negeri') ?? '';
+
+    setState(() {
+      _emergencyContactAbroadName.text = emergencyContactAbroadNameString;
+      _emergencyContactAbroadEmail.text = emergencyContactAbroadEmailString;
+      _emergencyContactAbroadPhone.text = emergencyContactAbroadPhoneString;
+      relationshipDropdownValue = relationshipDropdownValueString;
+    });
+
+    return (emergencyContactAbroadNameString, emergencyContactAbroadEmailString, emergencyContactAbroadPhoneString, relationshipDropdownValueString);
+  }
+
+  Future<void> saveData() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('Nama Kontak Darurat di Luar Negeri', _emergencyContactAbroadName.text);
+    await prefs.setString('Email Kontak Darurat di Luar Negeri', _emergencyContactAbroadEmail.text);
+    await prefs.setString('Telepon Kontak Darurat di Luar Negeri', _emergencyContactAbroadPhone.text);
+    await prefs.setString('Hubungan Kontak Darurat di Luar Negeri', relationshipDropdownValue.toString()); 
+  }
+  
+
   @override
   void initState(){
     super.initState();
+    getSharedPrefs();
     _emergencyContactAbroadName.addListener(() {
       final String text = _emergencyContactAbroadName.text;
       _emergencyContactAbroadName.value = _emergencyContactAbroadName.value.copyWith(
@@ -120,26 +118,10 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
     final isValid = _emergencyContactAbroadKey.currentState!.validate();
     if(!isValid){
     } else {
+      saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EmergencyContactIndoPage(
-          name: widget.name,
-          passport: widget.passport,
-          idNumber: widget.idNumber,
-          dob: widget.dob, 
-          gender: widget.gender,
-          addressAbroad: widget.addressAbroad,
-          country: widget.country,
-          postalCode: widget.postalCode,
-          visaNumber: widget.visaNumber,
-          visaStartDate: widget.visaStartDate,
-          visaEndDate: widget.visaEndDate,
-          emergencyContactAbroadName: _emergencyContactAbroadName.toString(),
-          emergencyContactAbroadEmail: _emergencyContactAbroadEmail.toString(),
-          emergencyContactAbroadPhone: _emergencyContactAbroadPhone.toString(),  
-          emergencyContactAbroadRelationship: relationshipDropdownValue.toString(),
-          emergencyContactAbroadCity: cityDropdownValue.toString(),   
-        )
+        builder: (context) => EmergencyContactIndoPage()
       )
     );
   }
