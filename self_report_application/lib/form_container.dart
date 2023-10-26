@@ -4,7 +4,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
-// Forms
+// Labels
 class LabelingWidget extends StatelessWidget {
   const LabelingWidget({
     super.key, 
@@ -35,7 +35,7 @@ class LabelingWidget extends StatelessWidget {
   }
 }
 
-
+// Disabled text form
 class FormContainerWithDisabledText extends StatelessWidget {
   const FormContainerWithDisabledText({
     super.key,
@@ -104,6 +104,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
   }
 }
 
+// Two inputs with date time
 class FormContainerWithTwoInputs extends StatelessWidget {
   const FormContainerWithTwoInputs({
     super.key,
@@ -151,6 +152,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
                 requiredData: isDataRequired,
                 firstDates: firstDates,
                 lastDates: lastDates,
+                hintContent: hintContents,
                 ),
             ),
             SizedBox(
@@ -168,6 +170,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
                 requiredData: isDataRequired,
                 firstDates: firstDates2,
                 lastDates: lastDates2,
+                hintContent: hintContents,
               ),
             ),
           ]
@@ -177,6 +180,8 @@ class FormContainerWithTwoInputs extends StatelessWidget {
   }
 }
 
+
+// Base form container
 class FormContainer extends StatelessWidget {
   const FormContainer({
     super.key,
@@ -216,7 +221,7 @@ class FormContainer extends StatelessWidget {
           requiredDataChecker: requiredDataChecker,
           valueConstraints: valueConstraints, 
           hintContent: hintContents,
-        ), 
+        ),
       ]
     );
   }
@@ -224,13 +229,55 @@ class FormContainer extends StatelessWidget {
 
 
 // Date Picker with Labels
-// TODO: Create it.
+class DateFormContainer extends StatelessWidget {
+  const DateFormContainer({
+    super.key,
+    required this.labels,
+    required this.isDataRequired,
+    required this.hintContents,
+    required this.needsInfoButton, 
+    required this.buttonContent,
+    required this.controller, required this.firstDates, required this.lastDates,
+  });
+
+  //Constraints and Arguments
+  final String labels;
+  final String hintContents;
+  final String buttonContent;
+  final AutovalidateMode isDataRequired;
+  final bool needsInfoButton;
+  final TextEditingController controller;
+  final DateTime firstDates;
+  final DateTime lastDates;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget> [
+        LabelingWidget(
+          labelName: labels,
+          needsInfo: needsInfoButton,
+          buttonInfo: buttonContent,
+        ),
+        DatePicker(
+          controller: controller,
+          labels: labels,
+          requiredData: isDataRequired,
+          firstDates: firstDates,
+          lastDates: lastDates,
+          hintContent: hintContents,
+        ),
+      ]
+    );
+  }
+}
+
+
 
 // Date Picker
-
 class DatePicker extends StatelessWidget {
   const DatePicker({
-    super.key, required this.labels, required this.controller, required this.firstDates, required this.lastDates, required this.requiredData,
+    super.key, required this.labels, required this.controller, required this.firstDates, required this.lastDates, required this.requiredData, required this.hintContent,
   });
 
   // Constraints 
@@ -239,6 +286,7 @@ class DatePicker extends StatelessWidget {
   final AutovalidateMode requiredData;
   final DateTime firstDates;
   final DateTime lastDates;
+  final String hintContent;
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +299,8 @@ class DatePicker extends StatelessWidget {
       firstDate: firstDates,
       lastDate: lastDates,
       format: DateFormat('yyyy-MM-dd'),
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
+        hintText: hintContent,
         isDense: true,
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
         enabledBorder: OutlineInputBorder(

@@ -4,7 +4,6 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:self_report_application/main.dart';
 import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -138,20 +137,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-      builder: (context) => RequirementsPage(
-        // name: widget.name,
-        // passport: widget.passport,
-        // idNumber: widget.idNumber,
-        // dob: widget.dob, 
-        // gender: widget.gender,
-        // addressAbroad: widget.addressAbroad,
-        // country: widget.country,
-        // postalCode: widget.postalCode,
-        // visaNumber: _visaNumber.toString(),
-        // visaStartDate: _visaStartDate.toString(),
-        // visaEndDate: _visaEndDate.toString(),
-        // proofOfStayingDoc: _proofOfStayingDoc.toString(),
-        )
+      builder: (context) => RequirementsPage()
       ) 
       );
     }
@@ -205,7 +191,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                       buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggan halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
                       controller: _permitToStayDoc,
                     ),
-                    // TODO:Fix the dates selection
                     FormContainerWithTwoInputs(
                     labels: 'Masa Berlaku Visa',
                     needsInfoButton: false,
@@ -215,7 +200,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                     firstDates: DateTime(1900-01-01),
                     lastDates: DateTime.now(),
                     firstDates2: DateTime.now(), 
-                    lastDates2: DateTime(31-12-2099),
+                    lastDates2: DateTime(2099-01-01),
                     controller: _visaStartDate,
                     controller2: _visaEndDate,                 
                     ),

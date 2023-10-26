@@ -171,15 +171,15 @@ class _IdentityFormState extends State<IdentityForm> {
                     controller: _name,                 
                     ),
                     SizedBox(height: 30,),
-                    FormContainer(
+                    DateFormContainer(
                       labels: 'Tanggal Lahir',
                       needsInfoButton: false,
                       isDataRequired: AutovalidateMode.onUserInteraction,
                       hintContents: 'DD/MM/YYYY',
                       buttonContent: '',
-                      requiredDataChecker: true,
-                      valueConstraints: r'[a-zA-Z]+$',   
-                      controller: _dOB,                 
+                      controller: _dOB,
+                      firstDates: DateTime(1900-01-01),
+                      lastDates: DateTime.now(),                 
                     ),
                     SizedBox(height: 20,),
                     FormContainer(
