@@ -2,7 +2,7 @@ import 'dart:typed_data';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'dart:convert';
+import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -48,6 +48,7 @@ class InfoButton extends StatelessWidget {
   });
 
   final String contents;
+  final String assetName = 'images/info-button.svg';
 
 //TODO: Replace placeholders
   @override
@@ -58,8 +59,10 @@ class InfoButton extends StatelessWidget {
         builder: (BuildContext context) => AlertDialog(
           content: Text(contents),
         )),
-      icon: const ImageIcon(
-        AssetImage('images/info-button.png'),
+      icon: SvgPicture.asset(
+        assetName,
+        height: 30,
+        width: 30,
       ),
       );
   }

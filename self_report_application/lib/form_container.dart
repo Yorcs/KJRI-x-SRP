@@ -35,7 +35,7 @@ class LabelingWidget extends StatelessWidget {
   }
 }
 
-// Disabled text form
+// Disabled text form for phone number
 class FormContainerWithDisabledText extends StatelessWidget {
   const FormContainerWithDisabledText({
     super.key,
@@ -179,6 +179,52 @@ class FormContainerWithTwoInputs extends StatelessWidget {
     );
   }
 }
+
+// Disabled Base form container
+class DisabledFormContainer extends StatelessWidget {
+  const DisabledFormContainer({
+    super.key,
+    required this.labels,
+    required this.needsInfoButton, 
+    required this.buttonContent,
+    required this.controller,
+  });
+
+  //Constraints and Arguments
+  final String labels;
+  final String buttonContent;
+  final bool needsInfoButton;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget> [
+        LabelingWidget(
+          labelName: labels,
+          needsInfo: needsInfoButton,
+          buttonInfo: buttonContent,
+        ),
+        TextField(
+          enabled: false,
+          controller: controller,
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+                color: Colors.black
+              )
+            ),
+          )
+        ),
+      ]
+    );
+  }
+}
+
 
 
 // Base form container
