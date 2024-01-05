@@ -113,7 +113,7 @@ class _IdentityFormState extends State<IdentityForm> {
     super.dispose();
   }
 
-  late String dropdownValue;
+  String? dropdownValue;
   List<String> genderOptions = [
     'Laki-laki',
     'Perempuan',
@@ -204,38 +204,48 @@ class _IdentityFormState extends State<IdentityForm> {
                       controller: _iDNumber,                 
                     ),
                     SizedBox(height: 20,),
-                    Text(
-                      'Jenis kelamin',
-                      textAlign: TextAlign.left,
-                      style: TextStyling.regularTextStyle,
+                    DropdownContainer(
+                      labels: 'Jenis Kelamin',
+                      needsInfoButton: false,
+                      buttonContent: '',
+                      dropdownName: 'gender',
+                      validatorWarning: 'Please select gender',
+                      hintContents: 'Pilih Jenis Kelamin',
+                      dropdownValue: dropdownValue,
+                      dropdownContents: genderOptions,
                     ),
+                    // Text(
+                    //   'Jenis kelamin',
+                    //   textAlign: TextAlign.left,
+                    //   style: TextStyling.regularTextStyle,
+                    // ),
 
-                    FormBuilderDropdown<String>(
-                      name: "gender",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select gender'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          dropdownValue = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Kelamin',
-                      ),
-                      items: genderOptions
-                      .map((gender) => DropdownMenuItem(
-                        value: gender,
-                        child: Text(gender),
-                        )).toList()
-                    ),
+                    // FormBuilderDropdown<String>(
+                    //   name: "gender",
+                    //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                    //   validator: FormBuilderValidators.compose([
+                    //     (value){
+                    //       if(value ==null || value =='' || value.isEmpty){
+                    //         return 'Please select gender'; //TODO: Change prompt
+                    //       }
+                    //       return null;
+                    //     }
+                    //   ]),
+                    //   onChanged: (String? newValue){
+                    //     setState((){
+                    //       dropdownValue = newValue!;
+                    //       }
+                    //     );
+                    //   },
+                    //   decoration: InputDecoration(
+                    //     hintText: 'Pilih Jenis Kelamin',
+                    //   ),
+                    //   items: genderOptions
+                    //   .map((gender) => DropdownMenuItem(
+                    //     value: gender,
+                    //     child: Text(gender),
+                    //     )).toList()
+                    // ),
                     //TODO: Adjust button position
                     ElevatedButton(
                       child: const Text('Next'),

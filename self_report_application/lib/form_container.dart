@@ -276,10 +276,16 @@ class FormContainer extends StatelessWidget {
 class DropdownContainer extends StatelessWidget {
   DropdownContainer({
     super.key,
+    //Labels
     required this.labels,
-    required this.dropdownValue,
     required this.needsInfoButton, 
     required this.buttonContent,
+
+    //Dropdown
+    required this.dropdownName,
+    required this.validatorWarning,
+    required this.hintContents,
+    required this.dropdownValue,
     required this.dropdownContents,
   });
 
@@ -287,8 +293,11 @@ class DropdownContainer extends StatelessWidget {
   final String labels;
   final String buttonContent;
   final bool needsInfoButton;
+  final String hintContents;
+  final String dropdownName;
+  final String validatorWarning;
   String? dropdownValue;
-  var dropdownContents;
+  List<String> dropdownContents;
 
   @override
   Widget build(BuildContext context) {
@@ -302,6 +311,9 @@ class DropdownContainer extends StatelessWidget {
         DropdownForm(
           dropdownContents: dropdownContents,
           dropdownValue: dropdownValue,
+          dropdownName: dropdownName,
+          validatorWarning: validatorWarning,
+          hintContents: hintContents,
         ),
       ]
     );
@@ -402,19 +414,25 @@ class DatePicker extends StatelessWidget {
 }
 
 //Dropdown Container
-//TODO: Change into a reusable.
+//TODO: CHANGE IT TO FORM BUILDER DROPDOWN ASAP!.
 // ignore: must_be_immutable
 class DropdownForm extends StatefulWidget {
   DropdownForm({
     super.key,
     required this.dropdownContents,
     required this.dropdownValue,
+    required this.dropdownName,
+    required this.validatorWarning,
+    required this.hintContents,
     }
   );
 
   String? dropdownValue;
+  final String dropdownName;
+  final String validatorWarning;
+  final String hintContents;
   // ignore: prefer_typing_uninitialized_variables
-  var dropdownContents;
+  List<String> dropdownContents;
 
 
   @override
@@ -425,16 +443,31 @@ class DropdownFormState extends State<DropdownForm> {
   
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      value: widget.dropdownValue,
-      items: widget.dropdownContents.map((String items) {
-        return DropdownMenuItem(value: items, child: Text(items));
-      }).toList(),
-      onChanged: (String? newValue) {
-        setState(() {
+    return FormBuilderDropdown<String>(
+      name: widget.dropdownName,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: FormBuilderValidators.compose([
+        (value){
+          if(value ==null || value =='' || value.isEmpty){
+            return widget.validatorWarning; //TODO: Change prompt
+          }
+          return null;
+        }
+      ]),
+      onChanged: (String? newValue){
+        setState((){
           widget.dropdownValue = newValue!;
-        });
+          }
+        );
       },
+      decoration: InputDecoration(
+        hintText: widget.hintContents,
+      ),
+      items: widget.dropdownContents
+      .map((items) => DropdownMenuItem(
+        value: items,
+        child: Text(items),
+        )).toList()
     );
   }
 }
