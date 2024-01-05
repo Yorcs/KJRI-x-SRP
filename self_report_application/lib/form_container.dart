@@ -225,9 +225,7 @@ class DisabledFormContainer extends StatelessWidget {
   }
 }
 
-
-
-// Base form container
+//Base form container
 class FormContainer extends StatelessWidget {
   const FormContainer({
     super.key,
@@ -267,6 +265,43 @@ class FormContainer extends StatelessWidget {
           requiredDataChecker: requiredDataChecker,
           valueConstraints: valueConstraints, 
           hintContent: hintContents,
+        ),
+      ]
+    );
+  }
+}
+
+// Dropdown container
+// ignore: must_be_immutable
+class DropdownContainer extends StatelessWidget {
+  DropdownContainer({
+    super.key,
+    required this.labels,
+    required this.dropdownValue,
+    required this.needsInfoButton, 
+    required this.buttonContent,
+    required this.dropdownContents,
+  });
+
+  //Constraints and Arguments
+  final String labels;
+  final String buttonContent;
+  final bool needsInfoButton;
+  String? dropdownValue;
+  var dropdownContents;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget> [
+        LabelingWidget(
+          labelName: labels,
+          needsInfo: needsInfoButton,
+          buttonInfo: buttonContent,
+        ),
+        DropdownForm(
+          dropdownContents: dropdownContents,
+          dropdownValue: dropdownValue,
         ),
       ]
     );
@@ -368,6 +403,42 @@ class DatePicker extends StatelessWidget {
 
 //Dropdown Container
 //TODO: Change into a reusable.
+// ignore: must_be_immutable
+class DropdownForm extends StatefulWidget {
+  DropdownForm({
+    super.key,
+    required this.dropdownContents,
+    required this.dropdownValue,
+    }
+  );
+
+  String? dropdownValue;
+  // ignore: prefer_typing_uninitialized_variables
+  var dropdownContents;
+
+
+  @override
+  State<DropdownForm> createState() => DropdownFormState();
+}
+
+class DropdownFormState extends State<DropdownForm> {
+  
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(
+      value: widget.dropdownValue,
+      items: widget.dropdownContents.map((String items) {
+        return DropdownMenuItem(value: items, child: Text(items));
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          widget.dropdownValue = newValue!;
+        });
+      },
+    );
+  }
+}
+
 
 // Base Form
 //TODO: Needs refactoring to reduce redundancy
