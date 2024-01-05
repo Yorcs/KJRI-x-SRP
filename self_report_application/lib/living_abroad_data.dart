@@ -29,8 +29,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
-  late String provinceDropdownValue;
-  late String cityDropdownValue;
+  String? provinceDropdownValue;
+  String? cityDropdownValue;
 
   List<String> provinces = [
     'Alberta',
@@ -183,66 +183,26 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                       requiredDataChecker: true,             
                     ),
                     SizedBox(height: 30,),
-                    Text(
-                      'Propinsi',
-                      style: TextStyling.regularTextStyle,
-                    ),
-                    FormBuilderDropdown<String>(
-                      name: "province",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select province'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          provinceDropdownValue = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Propinsi',
-                      ),
-                      items: provinces
-                      .map((provinces) => DropdownMenuItem(
-                        value: provinces,
-                        child: Text(provinces),
-                        )).toList()
+                    DropdownContainer(
+                      labels: 'Propinsi',
+                      needsInfoButton: false,
+                      buttonContent: '',
+                      dropdownName: 'province',
+                      validatorWarning: 'Please select a province',
+                      hintContents: 'Pilih Propinsi',
+                      dropdownValue: provinceDropdownValue,
+                      dropdownContents: provinces
                     ),
                     SizedBox(height: 30,),
-                    Text(
-                      'Kota',
-                      style: TextStyling.regularTextStyle,
-                    ),
-                    FormBuilderDropdown<String>(
-                      name: "cities",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select city'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          cityDropdownValue = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Kota',
-                      ),
-                      items: cities
-                      .map((cities) => DropdownMenuItem(
-                        value: cities,
-                        child: Text(cities),
-                        )).toList()
+                    DropdownContainer(
+                      labels: 'Kota',
+                      needsInfoButton: false,
+                      buttonContent: '',
+                      dropdownName: 'cities',
+                      validatorWarning: 'Please select a city',
+                      hintContents: 'Pilih Kota',
+                      dropdownValue: cityDropdownValue,
+                      dropdownContents: cities
                     ),
                     SizedBox(height: 30,),
                     FormContainer(

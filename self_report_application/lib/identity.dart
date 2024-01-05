@@ -214,38 +214,6 @@ class _IdentityFormState extends State<IdentityForm> {
                       dropdownValue: dropdownValue,
                       dropdownContents: genderOptions,
                     ),
-                    // Text(
-                    //   'Jenis kelamin',
-                    //   textAlign: TextAlign.left,
-                    //   style: TextStyling.regularTextStyle,
-                    // ),
-
-                    // FormBuilderDropdown<String>(
-                    //   name: "gender",
-                    //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                    //   validator: FormBuilderValidators.compose([
-                    //     (value){
-                    //       if(value ==null || value =='' || value.isEmpty){
-                    //         return 'Please select gender'; //TODO: Change prompt
-                    //       }
-                    //       return null;
-                    //     }
-                    //   ]),
-                    //   onChanged: (String? newValue){
-                    //     setState((){
-                    //       dropdownValue = newValue!;
-                    //       }
-                    //     );
-                    //   },
-                    //   decoration: InputDecoration(
-                    //     hintText: 'Pilih Jenis Kelamin',
-                    //   ),
-                    //   items: genderOptions
-                    //   .map((gender) => DropdownMenuItem(
-                    //     value: gender,
-                    //     child: Text(gender),
-                    //     )).toList()
-                    // ),
                     //TODO: Adjust button position
                     ElevatedButton(
                       child: const Text('Next'),
