@@ -4,7 +4,6 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact Abroad Page
@@ -171,35 +170,15 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                     controller: _emergencyContactAbroadName,                    
                     ),
                     SizedBox(height: 30,),
-                    Text(
-                      'Hubungan',
-                      style: TextStyling.regularTextStyle,
-                    ),
-                    FormBuilderDropdown<String>(
-                      name: "relationship",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select relationship'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          relationshipDropdownValue = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Hubungan',
-                      ),
-                      items: relationship
-                      .map((relationship) => DropdownMenuItem(
-                        value: relationship,
-                        child: Text(relationship),
-                        )).toList()
+                    DropdownContainer(
+                      labels: 'Hubungan',
+                      needsInfoButton: false,
+                      buttonContent: '',
+                      dropdownName: 'relationshipAbroad',
+                      validatorWarning: 'Please select a relationship',
+                      hintContents: 'Pilih Hubungan',
+                      dropdownValue: relationshipDropdownValue,
+                      dropdownContents: relationship
                     ),
                     
                     SizedBox(height: 30,),
