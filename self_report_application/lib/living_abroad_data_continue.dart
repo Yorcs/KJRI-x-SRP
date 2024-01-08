@@ -137,7 +137,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-      builder: (context) => RequirementsPage()
+      builder: (context) => GoalOfStayingPage()
       ) 
       );
     }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/styling.dart';
 
@@ -95,7 +96,7 @@ class RequirementsPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const IdentityPage()),
+                        MaterialPageRoute(builder: (context) => const GoalOfStayingPage()),
                       );
                     },
                   ),

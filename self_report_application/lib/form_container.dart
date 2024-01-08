@@ -464,9 +464,9 @@ class DropdownFormState extends State<DropdownForm> {
         hintText: widget.hintContents,
       ),
       items: widget.dropdownContents
-      .map((items) => DropdownMenuItem(
-        value: items,
-        child: Text(items),
+      .map((obj) => DropdownMenuItem<String>(
+        value: obj,
+        child: Text(obj),
         )).toList()
     );
   }
