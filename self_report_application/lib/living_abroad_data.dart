@@ -118,18 +118,18 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
 
 
   goBack(BuildContext context)=> Navigator.pop(context);
-    Future <void> getItemAndNavigate (BuildContext context) async {
-      final isValid = _livingAbroadDataKey.currentState!.validate();
-      if(!isValid){
-      } else {
-        saveData();
-        await Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => LivingAbroadDataContinuePage()
-        )
-      );
-      }
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    final isValid = _livingAbroadDataKey.currentState!.validate();
+    if(!isValid){
+    } else {
+      saveData();
+      await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => LivingAbroadDataContinuePage()
+      )
+    );
     }
+  }
 
   @override
   Widget build(BuildContext context) {

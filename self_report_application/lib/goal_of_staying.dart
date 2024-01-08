@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/emergency_contact_abroad.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Goal of staying page
 class GoalOfStayingPage extends StatelessWidget { 
@@ -26,6 +27,56 @@ class GoalOfStayingForm extends StatefulWidget {
 class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   final _goalOfStayingKey = GlobalKey<FormBuilderState>();
   final TextEditingController _descriptionOrAddress = TextEditingController();
+  final TextEditingController _perusahaanPenyalur = TextEditingController();
+  final TextEditingController _agenPenyalur = TextEditingController();
+  final TextEditingController _employerName = TextEditingController();
+  final TextEditingController _employerAddress = TextEditingController();
+
+  late String descriptionOrAddressString;
+  late String employerNameString;
+  late String employerAddressString;
+  late String goalOfStayingDropdownValueString;
+  late String employmentIndustryString;
+  late String employmentNameString;
+  late String perusahaanPenyalurString;
+  late String agenPenyalurString;
+
+  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    descriptionOrAddressString = prefs.getString('Keterangan') ?? '';
+    employerNameString = prefs.getString('Nama Perusahaan / Pengguna Jasa') ??'';
+    employerAddressString = prefs.getString('Alamat Pekerjaan di Luar Negeri') ?? '';
+    goalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap') ?? '';
+    employmentIndustryString = prefs.getString('Bidang Kerja') ?? '';
+    employmentNameString = prefs.getString('Pekerjaan') ?? '';
+    perusahaanPenyalurString = prefs.getString('Perusahaan Penyalur / Penempatan') ?? '';
+    agenPenyalurString = prefs.getString('Agen Penyalur di Luar Negeri') ?? '';
+
+    setState(() {
+      _descriptionOrAddress.text = descriptionOrAddressString;
+      _employerName.text = employerNameString;
+      _employerAddress.text = employerAddressString;
+      _perusahaanPenyalur.text = perusahaanPenyalurString;
+      _agenPenyalur.text = agenPenyalurString;
+      goalOfStayingDropdownValue = goalOfStayingDropdownValueString;
+      employmentIndustry = employmentIndustryString;
+      employmentName = employmentNameString;
+    });
+
+    return (employerNameString, employerAddressString, descriptionOrAddressString, perusahaanPenyalurString, agenPenyalurString, goalOfStayingDropdownValueString, employmentIndustryString, employerNameString);
+  }
+
+  Future<void> saveData() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('Keterangan', _descriptionOrAddress.text);
+    await prefs.setString('Nama Perusahaan / Pengguna Jasa', _employerName.text);
+    await prefs.setString('Alamat Pekerjaan di Luar Negeri', _employerAddress.text);
+    await prefs.setString('Perusahaan Penyalur / Penempatan', _perusahaanPenyalur.text);
+    await prefs.setString('Agen Penyalur di Luar Negeri', _agenPenyalur.text);
+    await prefs.setString('Bidang Kerja', employmentIndustry.toString());
+    await prefs.setString('Pekerjaan', employmentName.toString());
+  }
 
   @override
   void initState(){
@@ -38,11 +89,31 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
         composing:  TextRange.empty,
       );
     });
+
+    _employerName.addListener(() {
+      final String text = _employerName.text;
+      _employerName.value = _employerName.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _employerAddress.addListener(() {
+      final String text = _employerAddress.text;
+      _employerAddress.value = _employerAddress.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
   }
 
   @override
   void dispose(){
     _descriptionOrAddress.dispose();
+    _employerName.dispose();
+    _employerAddress.dispose();
     super.dispose();
   }
   
@@ -51,7 +122,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   String? employmentIndustry;
   String? employmentName;
 
-  var goals =[
+  List<String> goals =[
     'Anggota Keluarga / Pengikut',
     'Bekerja',
     'Belajar',
@@ -61,7 +132,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   ];
 
 //Work Industries Variables
-  var industries =[
+  List<String> industries =[
     'Pertambangan',
     'Pemerintahan',
     'Kesehatan',
@@ -86,7 +157,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Jasa (Service)',
   ];
 
-  var pertambanganName =[
+  List<String> pertambanganName =[
     'Konsultan',
     'Direktur',
     'Manajer',
@@ -95,14 +166,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var pemerintahanName =[
+  List<String> pemerintahanName =[
     'Home Staff / Diplomat',
     'Lokal Staff pada Perwakilan RI',
     'Staf pada Instansi Lainnya',
     'Staf Instansi Pemerintah Asing',
   ];
 
-  var kesehatanName = [
+  List<String> kesehatanName = [
     'Apoteker',
     'Dokter',
     'Paramedis',
@@ -110,7 +181,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var konstruksiName =[
+  List<String> konstruksiName =[
     'Arsitek',
     'Konsultan',
     'Supervisor',
@@ -118,7 +189,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var industriManufakturName =[
+  List<String> industriManufakturName =[
     'Direktur',
     'Manajer',
     'Pekerja',
@@ -127,14 +198,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var orgInterName =[
+  List<String> orgInterName =[
     'Konsultan',
     'Manajer',
     'Staf',
     'Lainnya',
   ];
 
-  var parwisName =[
+  List<String> parwisName =[
     'Manajer Biro Perjalanan',
     'Manajer Hotel',
     'Manajer Spa',
@@ -153,7 +224,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var pendidikanName =[
+  List<String> pendidikanName =[
     'Dosen',
     'Guru',
     'Peneliti',
@@ -161,7 +232,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var penerbanganName =[
+  List<String> penerbanganName =[
     'Ground Staff',
     'Pilot',
     'Pramugari',
@@ -169,7 +240,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var keuanganName =[
+  List<String> keuanganName =[
     'Konsultan Keuangan',
     'Manajer Asuransi / Perbankan',
     'Marketing',
@@ -182,14 +253,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var pertanianOrPerkebunanName =[
+  List<String> pertanianOrPerkebunanName =[
     'Pekerja',
     'Manajer',
     'Supervisor',
     'Lainnya'
   ];
 
-  var hukumName =[
+  List<String> hukumName =[
     'Pengacara',
     'Konsultan Hukum',
     'Notaris',
@@ -198,7 +269,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var domestikName =[
+  List<String> domestikName =[
     'PLRT',
     'Supir',
     'Tukang Kebun',
@@ -208,7 +279,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya'
   ];
 
-  var techName =[
+  List<String> techName =[
     'Programmer',
     'Teknisi',
     'System Analyst',
@@ -218,7 +289,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Software Developer'
   ];
 
-  var mediaElektronikName =[
+  List<String> mediaElektronikName =[
     'Script Writer',
     'Kameraman',
     'Reporter / Wartawan / Jurnalis',
@@ -226,7 +297,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var senbudName =[
+  List<String> senbudName =[
     'Pemain Film / Aktor / Aktris',
     'Penyanyi',
     'Sutradara',
@@ -239,14 +310,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var wirausahaName =[
+  List<String> wirausahaName =[
     'Investor',
     'Distributor',
     'Importir',
     'Lainnya',
   ];
 
-  var kelautanName =[
+  List<String> kelautanName =[
     'ABK Kargo',
     'ABK Pesiar',
     'ABK Tanker',
@@ -254,14 +325,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Kapten',
   ];
 
-  var industriModeName =[
+  List<String> industriModeName =[
     'Desainer',
     'Penjait',
     'Model',
     'Lainnya',
   ];
 
-  var perikananName = [
+  List<String> perikananName = [
     'Kapten Kapal',
     'ABK Kapal Penangkap Ikan',
     'Nelayan'
@@ -269,7 +340,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
 
 
 //Studies Variables
-  var jenjang =[
+  List<String> jenjang =[
     'Sekolah Dasar',
     'Sekolah Menengah Pertama',
     'Sekolah Menengah Atas',
@@ -280,7 +351,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Lainnya',
   ];
 
-  var bulanJenjang =[
+  List<String> bulanJenjang =[
     '1',
     '2',
     '3',
@@ -294,7 +365,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     '11',
   ];
 
-  var tahunJenjang =[
+  List<String> tahunJenjang =[
     '1',
     '2',
     '3',
@@ -319,14 +390,17 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
 
   goBack(BuildContext context)=> Navigator.pop(context);
 
-  getItemAndNavigate (BuildContext context){
-    Navigator.push(
-      context,
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    final isValid = _goalOfStayingKey.currentState!.validate();
+    if(!isValid){
+    } else {
+      saveData();
+      await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => GoalOfStayingPage(
-        )
+        builder: (context) => EmergencyContactAbroadPage()
       )
     );
+    }
   }
   
   @override
@@ -357,22 +431,16 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                       changeColor4: Colors.blue,
                     ),
                     SizedBox(height: 30,),
-                    Text(
-                      'Tujuan Menetap',
-                      style: TextStyling.regularTextStyle,
+                    DropdownContainer(
+                      labels: 'Tujuan Menetap',
+                      needsInfoButton: false,
+                      buttonContent: '',
+                      dropdownName: 'goals',
+                      validatorWarning: 'Please select a goal of staying',
+                      hintContents: 'Pilih Tujuan',
+                      dropdownValue: goalOfStayingDropdownValue,
+                      dropdownContents: goals
                     ),
-                    DropdownButton(
-                      value: goalOfStayingDropdownValue,
-                      items: goals.map((String items) {
-                        return DropdownMenuItem(value: items, child: Text(items));
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          goalOfStayingDropdownValue = newValue!;
-                        });
-                      },
-                    ),
-
                     //Mendampingi Suami / Istri, Anggota Keluarga / Pengikut
                     if (goalOfStayingDropdownValue.toString() =='Mendampingi Suami / Istri' || goalOfStayingDropdownValue == 'Anggota Keluarga / Pengikut') ... [
                       FormContainer(
@@ -401,267 +469,238 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                     ] 
                     //Bekerja
                     else if(goalOfStayingDropdownValue.toString() == 'Bekerja') ...[
-                      Text(
-                        'Bidang Kerja',
-                        style: TextStyling.regularTextStyle,
+                    // TODO: Change hint contents
+                      DropdownContainer(
+                        labels: 'Bidang Kerja',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentIndustry',
+                        validatorWarning: 'Please select your industry',
+                        hintContents: 'Pilih Pekerjaan',
+                        dropdownValue: employmentIndustry,
+                        dropdownContents: industries,
                       ),
-                    // TODO: Change placeholder
-                      DropdownButton(
-                        value: employmentIndustry,
-                        items: industries.map((String items) {
-                          return DropdownMenuItem(value: items, child: Text(items));
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            employmentIndustry = newValue!;
-                          });
-                        },
-                      ),
-                    Text(
-                      'Pekerjaan',
-                      style: TextStyling.regularTextStyle,
-                    ),
                     // TODO: Change placeholder
                     if(employmentIndustry.toString() == 'Pertambangan') ... [
-                        DropdownButton(
-                          value: employmentName,
-                          items: pertambanganName.map((String items) {
-                            return DropdownMenuItem(value: items, child: Text(items));
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              employmentName = newValue!;
-                          });
-                        },
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pertambanganName,
                       ),
                     ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: pemerintahanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pemerintahanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: kesehatanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: kesehatanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: konstruksiName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: konstruksiName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: industriManufakturName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: industriManufakturName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: orgInterName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: orgInterName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: parwisName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: parwisName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: pendidikanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pendidikanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: penerbanganName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: penerbanganName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: keuanganName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: keuanganName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: pertanianOrPerkebunanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pertanianOrPerkebunanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Hukum') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: hukumName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: hukumName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Domestik') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: domestikName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: domestikName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: techName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: techName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: mediaElektronikName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: mediaElektronikName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: senbudName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: senbudName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: wirausahaName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: wirausahaName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: kelautanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: kelautanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: industriModeName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: industriModeName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Perikanan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: perikananName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: perikananName,
+                      ),
                     ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
                         FormContainer(
                           labels: 'Keterangan',
@@ -722,267 +761,237 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                     ]
                     //Magang
                      else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
-                        Text(
-                        'Bidang Kerja',
-                        style: TextStyling.regularTextStyle,
+                        DropdownContainer(
+                        labels: 'Bidang Kerja',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentIndustry',
+                        validatorWarning: 'Please select your industry',
+                        hintContents: 'Pilih Pekerjaan',
+                        dropdownValue: employmentIndustry,
+                        dropdownContents: industries,
                       ),
-                    // TODO: Change placeholder
-                      DropdownButton(
-                        value: employmentIndustry,
-                        items: industries.map((String items) {
-                          return DropdownMenuItem(value: items, child: Text(items));
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            employmentIndustry = newValue!;
-                          });
-                        },
-                      ),
-                    Text(
-                      'Pekerjaan',
-                      style: TextStyling.regularTextStyle,
-                    ),
                     // TODO: Change placeholder
                     if(employmentIndustry.toString() == 'Pertambangan') ... [
-                        DropdownButton(
-                          value: employmentName,
-                          items: pertambanganName.map((String items) {
-                            return DropdownMenuItem(value: items, child: Text(items));
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              employmentName = newValue!;
-                          });
-                        },
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pertambanganName,
                       ),
                     ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: pemerintahanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pemerintahanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: kesehatanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: kesehatanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: konstruksiName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: konstruksiName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: industriManufakturName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: industriManufakturName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: orgInterName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: orgInterName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: parwisName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: parwisName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: pendidikanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pendidikanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: penerbanganName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: penerbanganName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: keuanganName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: keuanganName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: pertanianOrPerkebunanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: pertanianOrPerkebunanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Hukum') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: hukumName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: hukumName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Domestik') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: domestikName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: domestikName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: techName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: techName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: mediaElektronikName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: mediaElektronikName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: senbudName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: senbudName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: wirausahaName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: wirausahaName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: kelautanName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: kelautanName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: industriModeName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: industriModeName,
+                      ),
                     ] else if (employmentIndustry.toString() == 'Perikanan') ... [
-                        DropdownButton(
-                            value: employmentName,
-                            items: perikananName.map((String items) {
-                              return DropdownMenuItem(value: items, child: Text(items));
-                            }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                employmentName = newValue!;
-                            });
-                          },
-                        ),
+                      DropdownContainer(
+                        labels: 'Pekerjaan',
+                        needsInfoButton: false,
+                        buttonContent: '',
+                        dropdownName: 'employmentName',
+                        validatorWarning: 'Please select your job',
+                        hintContents: 'Pilih Jenis Jabatan',
+                        dropdownValue: employmentName,
+                        dropdownContents: perikananName,
+                      ),
                     ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
                         FormContainer(
                           labels: 'Keterangan',
