@@ -308,6 +308,7 @@ class DropdownContainer extends StatelessWidget {
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
         ),
+        SizedBox(height: 10,),
         DropdownForm(
           dropdownContents: dropdownContents,
           dropdownValue: dropdownValue,
@@ -398,7 +399,7 @@ class DatePicker extends StatelessWidget {
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            width: 1,
+            width: 0.5,
             color: Colors.black
             )
           ),
@@ -414,7 +415,6 @@ class DatePicker extends StatelessWidget {
 }
 
 //Dropdown Container
-//TODO: CHANGE IT TO FORM BUILDER DROPDOWN ASAP!.
 // ignore: must_be_immutable
 class DropdownForm extends StatefulWidget {
   DropdownForm({
@@ -462,6 +462,14 @@ class DropdownFormState extends State<DropdownForm> {
       },
       decoration: InputDecoration(
         hintText: widget.hintContents,
+        isDense: true,
+        contentPadding: EdgeInsets.fromLTRB(15, 20, 15, 0),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 0.5,
+            color: Colors.black,
+          )
+        )
       ),
       items: widget.dropdownContents
       .map((obj) => DropdownMenuItem<String>(
@@ -512,7 +520,7 @@ class TextsForm extends StatelessWidget {
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            width: 1,
+            width: 0.5,
             color: Colors.black
             )
           ),

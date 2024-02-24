@@ -205,7 +205,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           valueConstraints: r'[0-9]+$',   
                           controller: _iDNumber,                 
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 30,),
                         DropdownContainer(
                           labels: 'Jenis Kelamin',
                           needsInfoButton: false,
