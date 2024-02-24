@@ -67,7 +67,7 @@ class WelcomePage extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
                     child: Text(
                       'Selamat Datang ke Lapor Diri', 
-                      style: TextStyling.headerTextStyle,
+                      style: TextStyling.firstHeaderTextStyle,
                       textAlign: TextAlign.center,),
                   ),
                   //Freepik Illustration

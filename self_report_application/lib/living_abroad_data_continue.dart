@@ -4,7 +4,6 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Living Abroad cont. Page

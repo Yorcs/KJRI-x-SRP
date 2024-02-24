@@ -33,14 +33,14 @@ class RequirementsPage extends StatelessWidget {
                   //Title
                   Text(
                     'Persyaratan Pengisian Lapor Diri', 
-                    style: TextStyling.headerTextStyle,
+                    style: TextStyling.firstHeaderTextStyle,
                     textAlign: TextAlign.center,
                   ),
             
                   //Sub header Text
                   Text(
                     'Pengisian ini sesuai dengan peraturan/kebiasaan yang berlaku di Indonesia',
-                    style: TextStyling.subHeaderTextStyle,
+                    style: TextStyling.secondHeaderTextStyle,
                     textAlign: TextAlign.center,
                   ),
                 
@@ -96,7 +96,7 @@ class RequirementsPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const GoalOfStayingPage()),
+                        MaterialPageRoute(builder: (context) => const IdentityPage()),
                       );
                     },
                   ),

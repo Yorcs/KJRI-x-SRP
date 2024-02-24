@@ -36,12 +36,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-    - images/ListImage.png
-    - images/logo.png
-    - images/ThumbsUp.jpg
-    - images/info-button.png
-    - images/info-button.svg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -73,3 +67,21 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  assets:
+    - images/ListImage.png
+    - images/logo.png
+    - images/ThumbsUp.jpg
+    - images/info-button.png
+    - images/info-button.svg
+
+  fonts:
+  - family: Source Sans Pro
+    fonts:
+      - asset: fonts/SourceSansPro-Regular.ttf
+      - asset: fonts/SourceSansPro-Italic.ttf
+        style: italic
+      - asset: fonts/SourceSansPro-Bold.ttf
+        weight: 700
+      - asset: fonts/SourceSansPro-Semibold.ttf
+        weight: 600

@@ -1,42 +1,59 @@
-import 'dart:typed_data';
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+//This class is strictly for styling purposes only. Created for reusability.
 
-
-//creating custom text style
+//Text styles (Including headers)
 class TextStyling {
-  //needs readjust
-  static const TextStyle headerTextStyle = TextStyle(
+  //Main Header
+  static const TextStyle firstHeaderTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
     fontSize: 32,
     fontWeight: FontWeight.bold,
   );
 
-  //needs readjust
-  static const TextStyle subHeaderTextStyle = TextStyle(
+  //Sub Header
+  static const TextStyle secondHeaderTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
+    fontSize: 23,
+    fontWeight: FontWeight.bold
+  );
+
+  //Third Header
+  static const TextStyle thirdHeaderTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
     fontSize: 20,
     fontWeight: FontWeight.bold
   );
 
-  //needs readjust
-  static const TextStyle blueregularBoldTextStyle = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.bold,
-    color: Colors.blue,
-  );
-
-  //needs readjust
+  //Regular Text
   static const TextStyle regularTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
     fontSize: 16,
   );
 
-  //needs readjust
+  //Regular Bold Text
   static const TextStyle regularBoldTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
     fontSize: 16,
     fontWeight: FontWeight.bold
   );
+
+  //Page Title Text/ Caption Text
+  static const TextStyle captionTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
+    fontSize: 23,
+    fontWeight: FontWeight.bold,
+    color: Color.fromRGBO(118, 144, 235, 1),
+  );
+  
 }
 
 //Pop up dialog button
@@ -80,31 +97,22 @@ class FilePickerButton extends StatefulWidget {
 
 class _FilePickerState extends State<FilePickerButton> {
 
-  String _fileName ='';
-  String _filePath ='';
-  late ByteData trueBytes;
+  PlatformFile? pickedFile;
 
-  // String getStringFromBytes(ByteData data){
-  //   final buffer = data.buffer;
-  //   var list = buffer.asUint8List(data.offsetInBytes,data.lengthInBytes);
-  //   return utf8.decode(list);
-  // }
+// Future<String> saveFiles() async{
+//   if(pickedFile!.path != null && pickedFile!.path!.isNotEmpty)
+//   FileImage(File(pickedFile!.path));
+// }
+
 
   Future<void> pickFiles() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
-    if (result!= null && result.files.isNotEmpty){
-      _fileName = result.files.first.name;
-      _filePath = result.files.first.path ?? '';
-      // Uint8List? fileBytes = result.files.first.bytes;
-      // trueBytes = fileBytes!.buffer.asByteData();
-      
-      setState(() {
-        
-      });
-    } else {
-      return;
-    }
+    if (result== null) return;
+
+    setState(() {
+      pickedFile = result.files.first;    
+    });
 
 // TODO: DEBUG PURPOSES DELETE LATER
     print(result.files.first.name);
@@ -127,10 +135,10 @@ class _FilePickerState extends State<FilePickerButton> {
         SizedBox(
           width: 30,
         ),
-        if(_fileName != '')...[
+        if(pickedFile!.name != '')...[
           SizedBox(
             width: 200,
-            child: Text(_fileName),
+            child: Text(pickedFile!.name),
           ),
           // Extracting file name
           SizedBox(
@@ -142,7 +150,7 @@ class _FilePickerState extends State<FilePickerButton> {
                 enabled: false,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
-                  labelText: _filePath,
+                  labelText: pickedFile!.path,
                 ),
               ),
             ),

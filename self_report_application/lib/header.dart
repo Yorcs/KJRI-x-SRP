@@ -31,19 +31,27 @@ class BuildHeader extends StatelessWidget{
     return Column(
       children: [
         SizedBox(height: 10,),
-        TextHeader(
-          pageName: pageName
+        Container(
+          margin: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+          padding: const EdgeInsets.fromLTRB(10, 35, 0, 0),
+          child: TextHeader(
+            pageName: pageName
+          ),
         ),
         SizedBox(height: 30,),
-        LinePath(
-          opacity1: opacity1,
-          opacity2: opacity2,
-          opacity3: opacity3,
-          opacity4: opacity4,
-          changeColor1: changeColor1,
-          changeColor2: changeColor2,
-          changeColor3: changeColor3,
-          changeColor4: changeColor4,
+        Container(
+          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
+          child: LinePath(
+            opacity1: opacity1,
+            opacity2: opacity2,
+            opacity3: opacity3,
+            opacity4: opacity4,
+            changeColor1: changeColor1,
+            changeColor2: changeColor2,
+            changeColor3: changeColor3,
+            changeColor4: changeColor4,
+          ),
         ),
       ],
     );
@@ -76,17 +84,23 @@ class TextHeader extends StatelessWidget {
         Text(
           'Lapor Diri',
           textAlign: TextAlign.left,
-          style: TextStyling.subHeaderTextStyle,
+          style: TextStyling.secondHeaderTextStyle,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 15.0)
         ),
         Flexible(
           child: Align(
             alignment: Alignment.centerRight,
             child: Container(
-              constraints: BoxConstraints(maxWidth: 95),
+              height: 37.0,
+              width: 214.0,
+              color: Color.fromRGBO(227, 238, 248, 1),
+              padding: EdgeInsets.only(left: 10.0),
               child: Text(
                 pageName,
-                textAlign: TextAlign.right,
-                style: TextStyling.blueregularBoldTextStyle,
+                textAlign: TextAlign.left,
+                style: TextStyling.captionTextStyle,
               ),
             ),
           ),
@@ -131,7 +145,7 @@ class LinePath extends StatelessWidget {
           pageNumber: '1',
           opacity: opacity1,
           changeColor: changeColor1,),
-        SizedBox(width: 25,),
+        SizedBox(width: 45,),
         CircleAndLabel(
           labelName: "Luar Negeri",
           pageNumber: '2',
@@ -145,7 +159,7 @@ class LinePath extends StatelessWidget {
             opacity: opacity3,
             changeColor: changeColor3,),
         ),
-        SizedBox(width: 30,),
+        SizedBox(width: 5,),
         Expanded(
           child: CircleAndLabel(
             labelName: "Kontak",
@@ -180,11 +194,14 @@ class CircleAndLabel extends StatelessWidget {
         Circles(
           pageNumber: pageNumber,
           opacity: opacity,
-          changeColor: changeColor,),
+          changeColor: changeColor,
+        ),
         Text(
           labelName,
           style: TextStyle(
-            color: Colors.blue.withOpacity(opacity)
+            fontFamily: 'Source Sans Pro',
+            fontSize: 10,
+            color: Color.fromRGBO(19, 63, 218, opacity),
           ),
         )
       ],
@@ -211,13 +228,15 @@ class Circles extends StatelessWidget {
       width: 25.0,
       height: 25.0,
       decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(opacity),
+        color: Color.fromRGBO(19, 63, 218, opacity),
         shape: BoxShape.circle,
       ),
       child: Center(
         child: Text(
           pageNumber,
           style: TextStyle(
+            fontFamily: 'Source Sans Pro',
+            fontSize: 12,
             color: changeColor.withOpacity(opacity)
           )
         )
