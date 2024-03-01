@@ -70,7 +70,7 @@ class WelcomePage extends StatelessWidget {
                       style: TextStyling.firstHeaderTextStyle,
                       textAlign: TextAlign.center,),
                   ),
-                  //Freepik Illustration
+                  //TODO: Change Illustration
                   Image(
                     image: AssetImage('images/ListImage.png'),
                     width: 330,
