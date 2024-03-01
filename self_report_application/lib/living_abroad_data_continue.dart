@@ -181,11 +181,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                     controller: _visaNumber,                 
                     ),
                     FilePickerContainer(
-                      labels: 'Dokumen Bukti Tinggal',
-                      buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022ID Card\n\u2022Driver License\n\u2022Rekening Bank\n\u2022Kontrak Rumah\n\u2022Tagihan Telepon\n\u2022Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
-                      controller: _proofOfStayingDoc,
-                    ),
-                    FilePickerContainer(
                       labels: 'Dokumen Visa = Ijin Tinggal',
                       buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggan halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
                       controller: _permitToStayDoc,

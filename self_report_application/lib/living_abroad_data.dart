@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/header.dart';
+import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -27,44 +28,46 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
+  final TextEditingController _canadianAreaCode = TextEditingController();
+  final TextEditingController _canadianPhoneNumber = TextEditingController();
+  final TextEditingController _proofOfStayingDoc = TextEditingController();
   String? provinceDropdownValue;
-  String? cityDropdownValue;
 
   List<String> provinces = [
     'Alberta',
     'British Columbia',
   ];
 
-  List<String>  cities = [
-    'Burnaby',
-    'Coquitlam',
-    'Surrey',
-  ];
-
   late String addressString;
   late String countryString;
   late String postalCodeString;
   late String provinceDropdownValueString;
-  late String cityDropdownValueString;
+  late String proofOfStayingDocString;
+  late String canadianAreaCodeString;
+  late String canadianPhoneNumberString;
 
-  Future<(String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
     countryString = prefs.getString('Negara') ??'';
     postalCodeString = prefs.getString('Kode Pos') ?? '';
     provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
-    cityDropdownValueString = prefs.getString('Kota') ?? '';
+    proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
+    canadianAreaCodeString = prefs.getString('Nomor Area Canada') ??'';
+    canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
 
     setState(() {
       _address.text = addressString;
       _country.text = countryString;
       _postalCode.text = postalCodeString;
       provinceDropdownValue = provinceDropdownValueString;
-      cityDropdownValue = cityDropdownValueString;
+      _proofOfStayingDoc.text = proofOfStayingDocString;
+      _canadianAreaCode.text = canadianAreaCodeString;
+      _canadianPhoneNumber.text = canadianPhoneNumberString;
     });
 
-    return (addressString, countryString, postalCodeString, provinceDropdownValueString, cityDropdownValueString);
+    return (addressString, countryString, postalCodeString, provinceDropdownValueString, proofOfStayingDocString, canadianAreaCodeString, canadianPhoneNumberString);
   }
 
   Future<void> saveData() async{
@@ -73,7 +76,9 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     await prefs.setString('Negara', _country.text);
     await prefs.setString('Kode Pos', _postalCode.text);
     await prefs.setString('Provinsi', provinceDropdownValue.toString());
-    await prefs.setString('Kota', cityDropdownValue.toString());
+    await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
+    await prefs.setString('Nomor Area Canada', _canadianAreaCode.text);
+    await prefs.setString('Nomor Telepon Canada', _canadianPhoneNumber.text);
   }
 
   @override
@@ -106,6 +111,33 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
         composing:  TextRange.empty,
       );
     });
+
+    _canadianAreaCode.addListener(() {
+      final String text = _canadianAreaCode.text;
+      _canadianAreaCode.value = _canadianAreaCode.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _canadianPhoneNumber.addListener(() {
+      final String text = _canadianPhoneNumber.text;
+      _canadianPhoneNumber.value = _canadianPhoneNumber.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _proofOfStayingDoc.addListener(() {
+      final String text = _proofOfStayingDoc.text;
+      _proofOfStayingDoc.value = _proofOfStayingDoc.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
   }
 
   @override
@@ -113,6 +145,9 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     _address.dispose();
     _country.dispose();
     _postalCode.dispose();
+    _proofOfStayingDoc.dispose();
+    _canadianPhoneNumber.dispose();
+    _canadianAreaCode.dispose();
     super.dispose();
   }
 
@@ -137,100 +172,111 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       builder: (context, constraints) {
         return Scaffold(
           body: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: FormBuilder(
-                key: _livingAbroadDataKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    BuildHeader(
-                    pageName: 'Data di Luar negeri',
-                    opacity1: 0.5,
-                    opacity2: 1,
-                    opacity3: 0.5,
-                    opacity4: 0.5,
-                    changeColor1: Colors.blue,
-                    changeColor2: Colors.white,
-                    changeColor3: Colors.blue,
-                    changeColor4: Colors.blue,
-                    ),
-                    SizedBox(height: 30,),
-                    FormContainer(
-                    labels: 'Alamat Lengkap di Luar Negeri',
-                    needsInfoButton: false,
-                    isDataRequired: AutovalidateMode.onUserInteraction,
-                    hintContents: '',
-                    buttonContent: '',
-                    valueConstraints: r'^[a-z A-Z 0-9]+$', 
-                    controller: _address, 
-                    requiredDataChecker: true,                   
-                    ),
-                    SizedBox(height: 30,),
-                    FormContainer(
-                      labels: 'Negara',
-                      needsInfoButton: false,
-                      isDataRequired: AutovalidateMode.onUserInteraction,
-                      hintContents: 'Kanada',
-                      buttonContent: '',
-                      valueConstraints: r'^[a-z A-Z]+$',  
-                      controller: _country,     
-                      requiredDataChecker: true,             
-                    ),
-                    SizedBox(height: 30,),
-                    DropdownContainer(
-                      labels: 'Propinsi',
-                      needsInfoButton: false,
-                      buttonContent: '',
-                      dropdownName: 'province',
-                      validatorWarning: 'Please select a province',
-                      hintContents: 'Pilih Propinsi',
-                      dropdownValue: provinceDropdownValue,
-                      dropdownContents: provinces
-                    ),
-                    SizedBox(height: 30,),
-                    DropdownContainer(
-                      labels: 'Kota',
-                      needsInfoButton: false,
-                      buttonContent: '',
-                      dropdownName: 'cities',
-                      validatorWarning: 'Please select a city',
-                      hintContents: 'Pilih Kota',
-                      dropdownValue: cityDropdownValue,
-                      dropdownContents: cities
-                    ),
-                    SizedBox(height: 30,),
-                    FormContainer(
-                      labels: 'Kode Pos',
-                      needsInfoButton: false,
-                      isDataRequired: AutovalidateMode.onUserInteraction,
-                      hintContents: '',
-                      buttonContent: '',
-                      valueConstraints: r'^[a-z A-Z 0-9]+$',
-                      controller: _postalCode,   
-                      requiredDataChecker: true,                 
-                    ),
-                    //TODO: Adjust button position
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Back'),
-                          onPressed: () => goBack(context),
+            child: FormBuilder(
+              key: _livingAbroadDataKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  BuildHeader(
+                  pageName: 'Data Luar negeri',
+                  opacity1: 0.5,
+                  opacity2: 1,
+                  opacity3: 0.5,
+                  opacity4: 0.5,
+                  changeColor1: Color.fromRGBO(19, 63, 218, 1),
+                  changeColor2: Colors.white,
+                  changeColor3: Color.fromRGBO(19, 63, 218, 1),
+                  changeColor4: Color.fromRGBO(19, 63, 218, 1),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 30,),
+                        FilePickerContainer(
+                          labels: 'Dokumen Bukti Tinggal',
+                          buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022ID Card\n\u2022Driver License\n\u2022Rekening Bank\n\u2022Kontrak Rumah\n\u2022Tagihan Telepon\n\u2022Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
+                          controller: _proofOfStayingDoc,
                         ),
-                        // TODO: Adjust button position
-                        ElevatedButton(
-                          child: const Text('Next'),
-                          onPressed: () {
-                            getItemAndNavigate(context);
-                          }
+                        FormContainer(
+                        labels: 'Alamat Lengkap di Luar Negeri',
+                        needsInfoButton: false,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
+                        hintContents: '',
+                        buttonContent: '',
+                        valueConstraints: r'^[a-z A-Z 0-9]+$', 
+                        controller: _address, 
+                        requiredDataChecker: true,                   
+                        ),
+                        SizedBox(height: 30,),
+                        FormContainer(
+                          labels: 'Negara',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: 'Kanada',
+                          buttonContent: '',
+                          valueConstraints: r'^[a-z A-Z]+$',  
+                          controller: _country,     
+                          requiredDataChecker: true,             
+                        ),
+                        SizedBox(height: 30,),
+                        DropdownContainer(
+                          labels: 'Propinsi',
+                          needsInfoButton: false,
+                          buttonContent: '',
+                          dropdownName: 'province',
+                          validatorWarning: 'Please select a province',
+                          hintContents: 'Pilih Propinsi',
+                          dropdownValue: provinceDropdownValue,
+                          dropdownContents: provinces
+                        ),
+                        SizedBox(height: 30,),
+                        FormContainer(
+                          labels: 'Kode Pos',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[a-z A-Z 0-9]+$',
+                          controller: _postalCode,   
+                          requiredDataChecker: true,                 
+                        ),
+                        FormContainerWithTwoEnabledText(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[0-9]+$',
+                          requiredDataChecker: true,
+                          controller: _canadianAreaCode, 
+                          controller2: _canadianPhoneNumber,             
+                        ),
+                        //TODO: Adjust button position
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              child: const Text('Back'),
+                              onPressed: () => goBack(context),
+                            ),
+                            // TODO: Adjust button position
+                            ElevatedButton(
+                              child: const Text('Next'),
+                              onPressed: () {
+                                getItemAndNavigate(context);
+                              }
+                            ),
+                          ],
                         ),
                       ],
-                    )                  
-                  ],
-                ),
+                    ),
+                  )                  
+                ],
               ),
             ),
           )

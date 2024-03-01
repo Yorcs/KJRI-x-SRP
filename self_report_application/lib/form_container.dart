@@ -104,6 +104,76 @@ class FormContainerWithDisabledText extends StatelessWidget {
   }
 }
 
+//Phone number container for enabled area code
+class FormContainerWithTwoEnabledText extends StatelessWidget {
+  const FormContainerWithTwoEnabledText({
+    super.key,
+    required this.labels,
+    required this.valueConstraints,
+    required this.isDataRequired,
+    required this.hintContents,
+    required this.needsInfoButton, 
+    required this.buttonContent,
+    required this.controller,
+    required this.controller2,
+    required this.requiredDataChecker,
+  });
+
+  //Constraints and Arguments
+  final String labels;
+  final String hintContents;
+  final String buttonContent;
+  final String valueConstraints;
+  final bool requiredDataChecker;
+  final AutovalidateMode isDataRequired;
+  final bool needsInfoButton;
+  final TextEditingController controller;
+  final TextEditingController controller2;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        LabelingWidget(
+          labelName: labels,
+          needsInfo: needsInfoButton,
+          buttonInfo: buttonContent,
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: 80,
+              child: TextsForm(
+                controller: controller,
+                labels: labels,
+                requiredDataChecker: requiredDataChecker,
+                requiredData: isDataRequired,
+                valueConstraints: valueConstraints, 
+                hintContent: hintContents,
+                ),
+            ),
+            SizedBox(
+              width: 30,
+            ),
+            SizedBox(
+              width: 200,
+              child: TextsForm(
+                controller: controller2,
+                labels: labels,
+                requiredDataChecker: requiredDataChecker,
+                requiredData: isDataRequired,
+                valueConstraints: valueConstraints, 
+                hintContent: hintContents,
+                ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
 // Two inputs with date time
 class FormContainerWithTwoInputs extends StatelessWidget {
   const FormContainerWithTwoInputs({
