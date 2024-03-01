@@ -64,22 +64,22 @@ class WelcomePage extends StatelessWidget {
                     ),
                   //Title
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Text(
-                      'Selamat Datang ke Lapor Diri', 
+                      'Selamat Datang ke Tutorial Lapor Diri', 
                       style: TextStyling.firstHeaderTextStyle,
                       textAlign: TextAlign.center,),
                   ),
                   //TODO: Change Illustration
                   Image(
                     image: AssetImage('images/ListImage.png'),
-                    width: 330,
-                    height: 326,
+                    width: 310,
+                    height: 306,
                     fit: BoxFit.contain
                     ),
                   //Text
                   Container(
-                    margin: const EdgeInsets.all(20.0),
+                    margin: const EdgeInsets.fromLTRB(50, 10, 50, 10),
                     alignment: Alignment.center,
                     child: Text(
                       'Kemudahan Pelayanan & Perlindungan Bagi WNI di Luar Negeri',
@@ -89,7 +89,7 @@ class WelcomePage extends StatelessWidget {
                   ),
                   //Text
                   Container(
-                    margin: const EdgeInsets.all(20.0),
+                    margin: const EdgeInsets.fromLTRB(40, 0, 40, 20),
                     alignment: Alignment.center,
                     child: Text(
                       'Easy Service an Protection for Indonesians in Canada',
