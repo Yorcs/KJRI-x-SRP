@@ -83,7 +83,17 @@ class WelcomePage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'Kemudahan Pelayanan & Perlindungan Bagi WNI di Luar Negeri',
-                      style: TextStyling.regularBoldTextStyle,
+                      style: TextStyling.thirdHeaderTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  //Text
+                  Container(
+                    margin: const EdgeInsets.all(20.0),
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Easy Service an Protection for Indonesians in Canada',
+                      style: TextStyling.regularTextStyle,
                       textAlign: TextAlign.center,
                     ),
                   ),
