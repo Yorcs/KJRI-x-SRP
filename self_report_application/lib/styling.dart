@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
+import 'dart:convert' show utf8;
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
@@ -97,25 +97,31 @@ class FilePickerButton extends StatefulWidget {
 
 class _FilePickerState extends State<FilePickerButton> {
 
-  PlatformFile? pickedFile;
-
-// Future<String> saveFiles() async{
-//   if(pickedFile!.path != null && pickedFile!.path!.isNotEmpty)
-//   FileImage(File(pickedFile!.path));
-// }
+  String? fileName;
+  String? fileBytesDecoded;
+  Uint8List? fileBytes;
 
 
   Future<void> pickFiles() async {
-    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
-    if (result== null) return;
+    if (result!= null && result.files.isNotEmpty){
+      fileBytes = result.files.first.bytes;
+      fileName = result.files.first.name;
+
+    } else {
+      return;
+    }
 
     setState(() {
-      pickedFile = result.files.first;    
+      fileName = result.files.first.name;
+      fileBytesDecoded = fileBytes.toString();
+      widget.controller.text = fileBytesDecoded!;
     });
 
 // TODO: DEBUG PURPOSES DELETE LATER
     print(result.files.first.name);
+    print(fileBytesDecoded);
   }
 
   @override
@@ -135,12 +141,12 @@ class _FilePickerState extends State<FilePickerButton> {
         SizedBox(
           width: 30,
         ),
-        if(pickedFile!.name != '')...[
+        if(fileName != null)...[
           SizedBox(
             width: 200,
-            child: Text(pickedFile!.name),
+            child: Text(fileName!),
           ),
-          // Extracting file name
+        //Extracting file name
           SizedBox(
             width: 0,
             child: Visibility(
@@ -149,9 +155,6 @@ class _FilePickerState extends State<FilePickerButton> {
                 controller: widget.controller,
                 enabled: false,
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  labelText: pickedFile!.path,
-                ),
               ),
             ),
           )

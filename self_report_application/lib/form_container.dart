@@ -266,6 +266,7 @@ class DisabledFormContainer extends StatelessWidget {
   final bool needsInfoButton;
   final TextEditingController controller;
 
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -288,7 +289,7 @@ class DisabledFormContainer extends StatelessWidget {
                 color: Colors.black
               )
             ),
-          )
+          ),
         ),
       ]
     );

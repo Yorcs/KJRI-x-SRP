@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:self_report_application/living_abroad_data_continue.dart';
+import 'package:self_report_application/living_abroad_data.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         ),
-        home: WelcomePage(),
+        home: LivingAbroadDataPage(),
       ),
     );
   }

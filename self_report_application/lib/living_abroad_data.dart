@@ -50,7 +50,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
-    countryString = prefs.getString('Negara') ??'';
+    countryString = prefs.getString('Negara') ?? 'Kanada';
     postalCodeString = prefs.getString('Kode Pos') ?? '';
     provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
     proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
@@ -95,7 +95,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     });
 
     _country.addListener(() {
-      final String text = _country.text;
+      const String text = 'Kanada';
       _country.value = _country.value.copyWith(
         text: text,
         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
@@ -214,15 +214,11 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         requiredDataChecker: true,                   
                         ),
                         SizedBox(height: 30,),
-                        FormContainer(
+                        DisabledFormContainer(
                           labels: 'Negara',
                           needsInfoButton: false,
-                          isDataRequired: AutovalidateMode.onUserInteraction,
-                          hintContents: 'Kanada',
-                          buttonContent: '',
-                          valueConstraints: r'^[a-z A-Z]+$',  
-                          controller: _country,     
-                          requiredDataChecker: true,             
+                          buttonContent: '', 
+                          controller: _country,              
                         ),
                         SizedBox(height: 30,),
                         DropdownContainer(
