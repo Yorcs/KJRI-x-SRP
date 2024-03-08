@@ -144,15 +144,8 @@ class _IdentityFormState extends State<IdentityForm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   BuildHeader(
-                  pageName: 'Identitas',
-                  opacity1: 1,
-                  opacity2: 0.5,
-                  opacity3: 0.5,
-                  opacity4: 0.5,
-                  changeColor1: Colors.white,
-                  changeColor2: Color.fromRGBO(19, 63, 218, 1),
-                  changeColor3: Color.fromRGBO(19, 63, 218, 1),
-                  changeColor4: Color.fromRGBO(19, 63, 218, 1),
+                  pageName: 'IDENTITAS',
+                  assetName: 'images/identitas-active.svg',
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
@@ -161,6 +154,10 @@ class _IdentityFormState extends State<IdentityForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        // Image(
+                        //   image: AssetImage('images/identitas-active.png'),
+                        //   fit: BoxFit.contain
+                        // ),
                         SizedBox(height: 20,),
                         FormContainer(
                         labels: 'Nama Lengkap',

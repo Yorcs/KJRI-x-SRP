@@ -72,8 +72,11 @@ flutter:
     - images/ListImage.png
     - images/logo.png
     - images/ThumbsUp.jpg
-    - images/info-button.png
     - images/info-button.svg
+    - images/data-active.svg
+    - images/identitas-active.svg
+    - images/kontak-active.svg
+    - images/tujuan-active.svg
 
   fonts:
   - family: Source Sans Pro

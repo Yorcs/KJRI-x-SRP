@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:convert' show utf8;
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 //This class is strictly for styling purposes only. Created for reusability.
 
@@ -56,6 +55,53 @@ class TextStyling {
   
 }
 
+
+// Back Button Style
+class BackButtons extends StatelessWidget{
+  const BackButtons({
+    super.key,
+    required this.onPressed,
+  });
+
+  final VoidCallback? onPressed;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+      ),
+      onPressed: onPressed,
+      child: const Text('< Kembali'),
+    );
+  } 
+}
+
+// Back Button Style
+class ForwardButtons extends StatelessWidget{
+  const ForwardButtons({
+    super.key,
+    required this.onPressed,
+  });
+
+  final VoidCallback? onPressed;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
+      ),
+      onPressed: onPressed,
+      child: const Text('Next'),
+    );
+  } 
+}
+
+
 //Pop up dialog button
 //TODO: Change icon
 class InfoButton extends StatelessWidget {
@@ -78,8 +124,8 @@ class InfoButton extends StatelessWidget {
         )),
       icon: SvgPicture.asset(
         assetName,
-        height: 30,
-        width: 30,
+        height: 20,
+        width: 20,
       ),
       );
   }
@@ -91,6 +137,7 @@ class FilePickerButton extends StatefulWidget {
   const FilePickerButton({super.key, required this.controller});
 
   final TextEditingController controller;
+
     @override
   State<FilePickerButton> createState() => _FilePickerState();
 }
@@ -100,7 +147,6 @@ class _FilePickerState extends State<FilePickerButton> {
   String? fileName;
   String? fileBytesDecoded;
   Uint8List? fileBytes;
-
 
   Future<void> pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false);
@@ -115,13 +161,14 @@ class _FilePickerState extends State<FilePickerButton> {
 
     setState(() {
       fileName = result.files.first.name;
-      fileBytesDecoded = fileBytes.toString();
+      // fileBytesDecoded = fileBytes.toString();
+      fileBytesDecoded = base64Encode(fileBytes!);
       widget.controller.text = fileBytesDecoded!;
     });
 
 // TODO: DEBUG PURPOSES DELETE LATER
     print(result.files.first.name);
-    print(fileBytesDecoded);
+    print(widget.controller.text);
   }
 
   @override
@@ -151,7 +198,7 @@ class _FilePickerState extends State<FilePickerButton> {
             width: 0,
             child: Visibility(
               visible: false,
-              child: TextField(
+              child: TextFormField(
                 controller: widget.controller,
                 enabled: false,
                 textAlign: TextAlign.center,

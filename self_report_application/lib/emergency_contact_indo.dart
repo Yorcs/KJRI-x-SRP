@@ -143,14 +143,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
                   children: <Widget>[
                     BuildHeader(
                     pageName: 'Kontak Darurat',
-                    opacity1: 0.5,
-                    opacity2: 0.5,
-                    opacity3: 0.5,
-                    opacity4: 1,
-                    changeColor1: Colors.blue,
-                    changeColor2: Colors.blue,
-                    changeColor3: Colors.blue,
-                    changeColor4: Colors.white,
+                    assetName: 'images/kontak-active.svg',
                     ),
                     SizedBox(height: 20,),
                     Row(

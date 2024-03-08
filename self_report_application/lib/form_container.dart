@@ -251,7 +251,7 @@ class FormContainerWithTwoInputs extends StatelessWidget {
 }
 
 // Disabled Base form container
-class DisabledFormContainer extends StatelessWidget {
+class DisabledFormContainer extends StatefulWidget {
   const DisabledFormContainer({
     super.key,
     required this.labels,
@@ -266,20 +266,27 @@ class DisabledFormContainer extends StatelessWidget {
   final bool needsInfoButton;
   final TextEditingController controller;
 
+  @override
+  State<DisabledFormContainer> createState() => _DisabledFormContainerState();
+}
+
+class _DisabledFormContainerState extends State<DisabledFormContainer> {
+
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget> [
         LabelingWidget(
-          labelName: labels,
-          needsInfo: needsInfoButton,
-          buttonInfo: buttonContent,
+          labelName: widget.labels,
+          needsInfo: widget.needsInfoButton,
+          buttonInfo: widget.buttonContent,
         ),
-        TextField(
+        TextFormField(
           enabled: false,
-          controller: controller,
-          textAlign: TextAlign.center,
+          controller: widget.controller,
+          textAlign: TextAlign.left,
           decoration: InputDecoration(
             isDense: true,
             contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
@@ -379,14 +386,24 @@ class DropdownContainer extends StatelessWidget {
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
         ),
-        SizedBox(height: 10,),
-        DropdownForm(
-          dropdownContents: dropdownContents,
-          dropdownValue: dropdownValue,
-          dropdownName: dropdownName,
-          validatorWarning: validatorWarning,
-          hintContents: hintContents,
-        ),
+        if(needsInfoButton == false)...[
+          SizedBox(height: 10,),
+          DropdownForm(
+            dropdownContents: dropdownContents,
+            dropdownValue: dropdownValue,
+            dropdownName: dropdownName,
+            validatorWarning: validatorWarning,
+            hintContents: hintContents,
+          ),
+        ] else...[
+          DropdownForm(
+            dropdownContents: dropdownContents,
+            dropdownValue: dropdownValue,
+            dropdownName: dropdownName,
+            validatorWarning: validatorWarning,
+            hintContents: hintContents,
+          ),
+        ],
       ]
     );
   }
@@ -424,14 +441,26 @@ class DateFormContainer extends StatelessWidget {
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
         ),
-        DatePicker(
-          controller: controller,
-          labels: labels,
-          requiredData: isDataRequired,
-          firstDates: firstDates,
-          lastDates: lastDates,
-          hintContent: hintContents,
-        ),
+        if(needsInfoButton == false)...[
+          SizedBox(height: 10,),
+          DatePicker(
+            controller: controller,
+            labels: labels,
+            requiredData: isDataRequired,
+            firstDates: firstDates,
+            lastDates: lastDates,
+            hintContent: hintContents,
+          ),
+        ] else...[
+          DatePicker(
+            controller: controller,
+            labels: labels,
+            requiredData: isDataRequired,
+            firstDates: firstDates,
+            lastDates: lastDates,
+            hintContent: hintContents,
+          ),
+        ],
       ]
     );
   }
@@ -467,11 +496,11 @@ class DatePicker extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintContent,
         isDense: true,
-        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 0.5,
-            color: Colors.black
+            color: Color.fromRGBO(179, 179, 179, 1),
             )
           ),
       ),
@@ -534,11 +563,11 @@ class DropdownFormState extends State<DropdownForm> {
       decoration: InputDecoration(
         hintText: widget.hintContents,
         isDense: true,
-        contentPadding: EdgeInsets.fromLTRB(15, 20, 15, 0),
+        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 0.5,
-            color: Colors.black,
+            color: Color.fromRGBO(179, 179, 179, 1),
           )
         )
       ),
@@ -588,11 +617,11 @@ class TextsForm extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintContent,
         isDense: true,
-        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             width: 0.5,
-            color: Colors.black
+            color: Color.fromRGBO(179, 179, 179, 1),
             )
           ),
       ),

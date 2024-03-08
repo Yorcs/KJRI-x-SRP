@@ -424,14 +424,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                   children: <Widget>[ 
                     BuildHeader(
                       pageName: 'Tujuan Menetap',
-                      opacity1: 0.5,
-                      opacity2: 0.5,
-                      opacity3: 1,
-                      opacity4: 0.5,
-                      changeColor1: Colors.blue,
-                      changeColor2: Colors.blue,
-                      changeColor3: Colors.white,
-                      changeColor4: Colors.blue,
+                      assetName: 'images/tujuan-active.svg',
                     ),
                     SizedBox(height: 30,),
                     Text(

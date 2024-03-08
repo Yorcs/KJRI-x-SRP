@@ -95,7 +95,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     });
 
     _country.addListener(() {
-      const String text = 'Kanada';
+      final String text = _country.text;
       _country.value = _country.value.copyWith(
         text: text,
         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
@@ -180,15 +180,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   BuildHeader(
-                  pageName: 'Data Luar negeri',
-                  opacity1: 0.5,
-                  opacity2: 1,
-                  opacity3: 0.5,
-                  opacity4: 0.5,
-                  changeColor1: Color.fromRGBO(19, 63, 218, 1),
-                  changeColor2: Colors.white,
-                  changeColor3: Color.fromRGBO(19, 63, 218, 1),
-                  changeColor4: Color.fromRGBO(19, 63, 218, 1),
+                  pageName: 'DATA LUAR NEGERI',
+                  assetName: 'images/data-active.svg',
                   ),
                   Container(
                     margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),

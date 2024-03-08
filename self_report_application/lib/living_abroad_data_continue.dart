@@ -3,6 +3,7 @@ import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
+import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -160,14 +161,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                   children: <Widget>[ 
                     BuildHeader(
                     pageName: 'Data di Luar negeri',
-                    opacity1: 0.5,
-                    opacity2: 1,
-                    opacity3: 0.5,
-                    opacity4: 0.5,
-                    changeColor1: Colors.blue,
-                    changeColor2: Colors.white,
-                    changeColor3: Colors.blue,
-                    changeColor4: Colors.blue,
+                    assetName: 'images/data-active.svg',
                     ),
                     SizedBox(height: 30,),
                     FormContainer(
@@ -200,13 +194,11 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                     ),
                     Row(
                       children: [
-                        ElevatedButton(
-                          child: const Text('Back'),
+                        BackButtons(
                           onPressed: () => goBack(context),
                         ),
                         // TODO: Adjust button position
-                        ElevatedButton(
-                          child: const Text('Next'),
+                        ForwardButtons(
                           onPressed: () {
                             getItemAndNavigate(context);
                           }

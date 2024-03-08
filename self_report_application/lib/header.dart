@@ -1,30 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:self_report_application/styling.dart';
 
 class BuildHeader extends StatelessWidget{
   const BuildHeader({
     super.key,
     required this.pageName,
-    required this.opacity1,
-    required this.opacity2,
-    required this.opacity3,
-    required this.opacity4,
-    required this.changeColor1,
-    required this.changeColor2,
-    required this.changeColor3,
-    required this.changeColor4,
+    required this.assetName,
   });
 
-  final double opacity1;
-  final double opacity2;
-  final double opacity3;
-  final double opacity4;
-
-  final Color changeColor1;
-  final Color changeColor2;
-  final Color changeColor3;
-  final Color changeColor4;
   final String pageName;
+  final String assetName;
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +27,11 @@ class BuildHeader extends StatelessWidget{
         SizedBox(height: 30,),
         Container(
           margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-          padding: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-          child: LinePath(
-            opacity1: opacity1,
-            opacity2: opacity2,
-            opacity3: opacity3,
-            opacity4: opacity4,
-            changeColor1: changeColor1,
-            changeColor2: changeColor2,
-            changeColor3: changeColor3,
-            changeColor4: changeColor4,
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          child: 
+          SvgPicture.asset(
+            assetName,
+            fit: BoxFit.contain
           ),
         ),
       ],
