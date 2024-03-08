@@ -99,7 +99,7 @@ class ForwardButtons extends StatelessWidget{
           shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
           overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(73, 105, 221, 1)),
           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
-          padding:MaterialStateProperty.all(EdgeInsets.all(16)),
+          padding:MaterialStateProperty.all(EdgeInsets.all(18)),
         ),
         onPressed: onPressed,
         child: const Text('Lanjut'),
