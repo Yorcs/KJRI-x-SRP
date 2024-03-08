@@ -131,92 +131,96 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          //TODO: Readjust margin and padding
           body: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: FormBuilder(
-                key: _emergencyContactAbroadKey,
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    BuildHeader(
-                    pageName: 'Kontak Darurat',
-                    assetName: 'images/kontak-active.svg',
-                    ),
-                    SizedBox(height: 30,),
-                    Text(
-                      'Di Luar Negeri',
-                      style: TextStyling.regularBoldTextStyle,
-                    ),
-                    SizedBox(height: 30,),
-                    FormContainer(
-                    labels: 'Nama',
-                    needsInfoButton: false,
-                    isDataRequired: AutovalidateMode.onUserInteraction,
-                    hintContents: '',
-                    buttonContent: '',
-                    valueConstraints: r'^[a-z A-Z]+$',
-                    requiredDataChecker: true,
-                    controller: _emergencyContactAbroadName,                    
-                    ),
-                    SizedBox(height: 30,),
-                    DropdownContainer(
-                      labels: 'Hubungan',
-                      needsInfoButton: false,
-                      buttonContent: '',
-                      dropdownName: 'relationshipAbroad',
-                      validatorWarning: 'Please select a relationship',
-                      hintContents: 'Pilih Hubungan',
-                      dropdownValue: relationshipDropdownValue,
-                      dropdownContents: relationship
-                    ),
-                    
-                    SizedBox(height: 30,),
-                    //TODO: Change RegExp
-                    FormContainer(
-                      labels: 'Email',
-                      needsInfoButton: false,
-                      isDataRequired: AutovalidateMode.onUserInteraction,
-                      hintContents: '',
-                      buttonContent: '',
-                      valueConstraints: r'^[a-z A-Z 0-9]+$',
-                      requiredDataChecker: true,
-                      controller: _emergencyContactAbroadEmail,                  
-                    ),
-                    SizedBox(height: 30,),
-                    //TODO: Change RegExp
-                    FormContainerWithDisabledText(
-                      labels: 'Telepon',
-                      needsInfoButton: false,
-                      isDataRequired: AutovalidateMode.onUserInteraction,
-                      hintContents: '',
-                      buttonContent: '',
-                      valueConstraints: r'^[0-9]+$',
-                      areaCode: '+1',
-                      controller: _emergencyContactAbroadPhone, 
-                      requiredDataChecker: true,                 
-                    ),
-                    //TODO: Adjust button position
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Back'),
-                          onPressed: () => goBack(context)
+            child: FormBuilder(
+              key: _emergencyContactAbroadKey,
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  BuildHeader(
+                  pageName: 'KONTAK DARURAT',
+                  assetName: 'images/kontak-active.svg',
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 30,),
+                        Text(
+                          'Di Luar Negeri',
+                          style: TextStyling.regularBoldTextStyle,
                         ),
-                        // TODO: Adjust button position
-                        ElevatedButton(
-                          child: const Text('Next'),
-                          onPressed: () {
-                            getItemAndNavigate(context);
-                          }
+                        SizedBox(height: 30,),
+                        FormContainer(
+                        labels: 'Nama',
+                        needsInfoButton: false,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
+                        hintContents: '',
+                        buttonContent: '',
+                        valueConstraints: r'^[a-z A-Z]+$',
+                        requiredDataChecker: true,
+                        controller: _emergencyContactAbroadName,                    
                         ),
+                        SizedBox(height: 30,),
+                        DropdownContainer(
+                          labels: 'Hubungan',
+                          needsInfoButton: false,
+                          buttonContent: '',
+                          dropdownName: 'relationshipAbroad',
+                          validatorWarning: 'Please select a relationship',
+                          hintContents: 'Pilih Hubungan',
+                          dropdownValue: relationshipDropdownValue,
+                          dropdownContents: relationship
+                        ),       
+                        SizedBox(height: 30,),
+                        //TODO: Change RegExp
+                        FormContainer(
+                          labels: 'Email',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[a-z A-Z 0-9]+$',
+                          requiredDataChecker: true,
+                          controller: _emergencyContactAbroadEmail,                  
+                        ),
+                        SizedBox(height: 30,),
+                        //TODO: Change RegExp
+                        FormContainerWithDisabledText(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[0-9]+$',
+                          areaCode: '+1',
+                          controller: _emergencyContactAbroadPhone, 
+                          requiredDataChecker: true,                 
+                        ),
+                        //TODO: Adjust button position
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              child: const Text('Back'),
+                              onPressed: () => goBack(context)
+                            ),
+                            // TODO: Adjust button position
+                            ElevatedButton(
+                              child: const Text('Next'),
+                              onPressed: () {
+                                getItemAndNavigate(context);
+                              }
+                            ),
+                          ],
+                        )  
                       ],
-                    )                  
-                  ],
-                ),
+                    ),
+                  ),                
+                ],
               ),
             ),
           )

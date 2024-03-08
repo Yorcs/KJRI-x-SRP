@@ -174,7 +174,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
           body: SingleChildScrollView(
             child: FormBuilder(
               key: _livingAbroadDataKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

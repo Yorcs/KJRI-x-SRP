@@ -415,13 +415,12 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
           body: SingleChildScrollView(
             child: FormBuilder(
               key: _goalOfStayingKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[ 
                   BuildHeader(
-                    pageName: 'Tujuan Menetap',
+                    pageName: 'TUJUAN MENETAP',
                     assetName: 'images/tujuan-active.svg',
                   ),
                   Container(

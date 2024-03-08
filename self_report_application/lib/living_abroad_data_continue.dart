@@ -151,13 +151,12 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
           body: SingleChildScrollView(
             child: FormBuilder(
               key: _livingAbroadDataContinueKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[ 
                   BuildHeader(
-                  pageName: 'Data di Luar negeri',
+                  pageName: 'DATA LUAR NEGERI',
                   assetName: 'images/data-active.svg',
                   ),
                   Container(

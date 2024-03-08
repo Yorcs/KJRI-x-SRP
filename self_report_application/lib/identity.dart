@@ -3,6 +3,7 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/living_abroad_data.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:self_report_application/styling.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //Identity Page
@@ -138,7 +139,7 @@ class _IdentityFormState extends State<IdentityForm> {
           body: SingleChildScrollView(
             child: FormBuilder(
               key: _identityKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
+              // autovalidateMode: AutovalidateMode.onUserInteraction,
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,10 +155,6 @@ class _IdentityFormState extends State<IdentityForm> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // Image(
-                        //   image: AssetImage('images/identitas-active.png'),
-                        //   fit: BoxFit.contain
-                        // ),
                         SizedBox(height: 20,),
                         FormContainer(
                         labels: 'Nama Lengkap',
@@ -215,14 +212,10 @@ class _IdentityFormState extends State<IdentityForm> {
                         ),
                         SizedBox(height: 20,),
                         //TODO: Adjust button position
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: ElevatedButton(
-                            child: const Text('Next'),
-                            onPressed: () {
-                              getItemAndNavigate(context);
-                            }
-                          ),
+                        ForwardButtons(
+                          onPressed: () {
+                            getItemAndNavigate(context);
+                          }
                         ),
                       ],
                     ),

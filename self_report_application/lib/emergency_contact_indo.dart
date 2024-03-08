@@ -130,101 +130,106 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          //TODO: Readjust margin and padding
           body: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: FormBuilder(
-                key: _emergencyContactIndoKey,
-                child:Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    BuildHeader(
-                    pageName: 'Kontak Darurat',
-                    assetName: 'images/kontak-active.svg',
-                    ),
-                    SizedBox(height: 20,),
-                    Row(
-                      children: [
-                        Text(
-                          'Di Indonesia',
-                          style: TextStyling.regularBoldTextStyle,
+            child: FormBuilder(
+              key: _emergencyContactIndoKey,
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  BuildHeader(
+                  pageName: 'KONTAK DARURAT',
+                  assetName: 'images/kontak-active.svg',
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 30,),
+                        Row(
+                          children: [
+                            Text(
+                              'Di Indonesia',
+                              style: TextStyling.regularBoldTextStyle,
+                            ),
+                            InfoButton(
+                              contents: 'Informasi kontak sesuai surat-surat pemerintah'
+                            ),
+                          ],
                         ),
-                        InfoButton(
-                          contents: 'Informasi kontak sesuai surat-surat pemerintah'
+                        SizedBox(height: 30,),
+                        FormContainer(
+                        labels: 'Nama',
+                        needsInfoButton: false,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
+                        hintContents: '',
+                        buttonContent: '',
+                        valueConstraints: r'^[a-z A-Z]+$',  
+                        requiredDataChecker: true,
+                        controller: _emergencyContactIndoName,                  
                         ),
+                        SizedBox(height: 30,),
+                        DropdownContainer(
+                          labels: 'Hubungan',
+                          needsInfoButton: false,
+                          buttonContent: '',
+                          dropdownName: 'relationshipIndo',
+                          validatorWarning: 'Please select a relationship',
+                          hintContents: 'Pilih Hubungan',
+                          dropdownValue: relationshipDropdownValue,
+                          dropdownContents: relationship
+                        ),
+                        SizedBox(height: 30,),
+                        //TODO: Change RegExp
+                        FormContainer(
+                          labels: 'Email',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[a-z A-Z 0-9]+$', 
+                          requiredDataChecker: true, 
+                          controller: _emergencyContactIndoEmail,                  
+                        ),
+                        SizedBox(height: 30,),
+                        //TODO: Change RegExp
+                        FormContainerWithDisabledText(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[0-9]+$',
+                          requiredDataChecker: true,
+                          areaCode: '+62',     
+                          controller: _emergencyContactIndoPhone,             
+                        ),
+                        //TODO: Adjust button position
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              child: const Text('Back'),
+                              onPressed: () => goBack(context)
+                            ),
+                            // TODO: Adjust button position
+                            // ElevatedButton(
+                            //   child: const Text('Next'),
+                            //   onPressed: () {
+                            //     Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
+                            //     );
+                            //   },
+                            // ),
+                          ],
+                        ) 
                       ],
                     ),
-                    SizedBox(height: 30,),
-                    FormContainer(
-                    labels: 'Nama',
-                    needsInfoButton: false,
-                    isDataRequired: AutovalidateMode.onUserInteraction,
-                    hintContents: '',
-                    buttonContent: '',
-                    valueConstraints: r'^[a-z A-Z]+$',  
-                    requiredDataChecker: true,
-                    controller: _emergencyContactIndoName,                  
-                    ),
-                    SizedBox(height: 30,),
-                    DropdownContainer(
-                      labels: 'Hubungan',
-                      needsInfoButton: false,
-                      buttonContent: '',
-                      dropdownName: 'relationshipIndo',
-                      validatorWarning: 'Please select a relationship',
-                      hintContents: 'Pilih Hubungan',
-                      dropdownValue: relationshipDropdownValue,
-                      dropdownContents: relationship
-                    ),
-                    SizedBox(height: 30,),
-                    //TODO: Change RegExp
-                    FormContainer(
-                      labels: 'Email',
-                      needsInfoButton: false,
-                      isDataRequired: AutovalidateMode.onUserInteraction,
-                      hintContents: '',
-                      buttonContent: '',
-                      valueConstraints: r'^[a-z A-Z 0-9]+$', 
-                      requiredDataChecker: true, 
-                      controller: _emergencyContactIndoEmail,                  
-                    ),
-                    SizedBox(height: 30,),
-                    //TODO: Change RegExp
-                    FormContainerWithDisabledText(
-                      labels: 'Telepon',
-                      needsInfoButton: false,
-                      isDataRequired: AutovalidateMode.onUserInteraction,
-                      hintContents: '',
-                      buttonContent: '',
-                      valueConstraints: r'^[0-9]+$',
-                      requiredDataChecker: true,
-                      areaCode: '+62',     
-                      controller: _emergencyContactIndoPhone,             
-                    ),
-                    //TODO: Adjust button position
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          child: const Text('Back'),
-                          onPressed: () => goBack(context)
-                        ),
-                        // TODO: Adjust button position
-                        // ElevatedButton(
-                        //   child: const Text('Next'),
-                        //   onPressed: () {
-                        //     Navigator.push(
-                        //       context,
-                        //       MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
-                        //     );
-                        //   },
-                        // ),
-                      ],
-                    )                  
-                  ],
-                ),
+                  ),                 
+                ],
               ),
             ),
           )

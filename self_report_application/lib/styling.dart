@@ -78,7 +78,7 @@ class BackButtons extends StatelessWidget{
   } 
 }
 
-// Back Button Style
+// Forward Button Style
 class ForwardButtons extends StatelessWidget{
   const ForwardButtons({
     super.key,
@@ -90,13 +90,16 @@ class ForwardButtons extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
+    return Align(
+      alignment: Alignment.centerRight,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
+        ),
+        onPressed: onPressed,
+        child: const Text('Lanjut'),
       ),
-      onPressed: onPressed,
-      child: const Text('Next'),
     );
   } 
 }
