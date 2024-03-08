@@ -96,9 +96,43 @@ class ForwardButtons extends StatelessWidget{
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
           backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
+          shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
+          overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(73, 105, 221, 1)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
+          padding:MaterialStateProperty.all(EdgeInsets.all(16)),
         ),
         onPressed: onPressed,
         child: const Text('Lanjut'),
+      ),
+    );
+  } 
+}
+
+// File Button Style
+class FileButtonsStyle extends StatelessWidget{
+  const FileButtonsStyle({
+    super.key,
+    required this.onPressed,
+  });
+
+  final VoidCallback? onPressed;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(136, 205, 255, 1)),
+          shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
+          overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(117, 185, 234, 1)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
+          padding:MaterialStateProperty.all(EdgeInsets.all(16)),
+        ),
+        onPressed: onPressed,
+        child: const Text('Unggah File'),
       ),
     );
   } 
@@ -181,8 +215,7 @@ class _FilePickerState extends State<FilePickerButton> {
       children: <Widget>[
         SizedBox(
           width: 150,
-          child: ElevatedButton(
-            child: const Text('Unggah File'),
+          child: FileButtonsStyle(
             onPressed: () {
               pickFiles();
             },

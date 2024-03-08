@@ -54,11 +54,14 @@ class FilePickerContainer extends StatelessWidget {
           labelName: labels,
           buttonInfo: buttonContent,
         ),
-        FilePickerButton(
-          controller: controller,
-          // controllerName: controllerName,
-          // sharedPrefValue: sharedPrefValue,
-          // fileName: fileName,
+        Align(
+          alignment: Alignment.centerLeft,
+          child: FilePickerButton(
+            controller: controller,
+            // controllerName: controllerName,
+            // sharedPrefValue: sharedPrefValue,
+            // fileName: fileName,
+          ),
         ), 
       ]
     );
