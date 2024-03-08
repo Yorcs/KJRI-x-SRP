@@ -148,65 +148,71 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          //TODO: Readjust margin and padding
           body: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: FormBuilder(
-                key: _livingAbroadDataContinueKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[ 
-                    BuildHeader(
-                    pageName: 'Data di Luar negeri',
-                    assetName: 'images/data-active.svg',
-                    ),
-                    SizedBox(height: 30,),
-                    FormContainer(
-                    labels: 'Nomor Visa',
-                    needsInfoButton: true,
-                    isDataRequired: AutovalidateMode.onUserInteraction,
-                    hintContents: '',
-                    buttonContent: 'Diisi dengan nomor yang ada di:\n\u2022Study Permit\n\u2022Work Permit\n\u2022Kartu PR',
-                    valueConstraints: r'^[a-z A-Z]+$', 
-                    requiredDataChecker: true,  
-                    controller: _visaNumber,                 
-                    ),
-                    FilePickerContainer(
-                      labels: 'Dokumen Visa = Ijin Tinggal',
-                      buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggan halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
-                      controller: _permitToStayDoc,
-                    ),
-                    FormContainerWithTwoInputs(
-                    labels: 'Masa Berlaku Visa',
-                    needsInfoButton: false,
-                    isDataRequired: AutovalidateMode.onUserInteraction,
-                    hintContents: '',
-                    buttonContent: '',
-                    firstDates: DateTime(1900-01-01),
-                    lastDates: DateTime.now(),
-                    firstDates2: DateTime.now(), 
-                    lastDates2: DateTime(2099-01-01),
-                    controller: _visaStartDate,
-                    controller2: _visaEndDate,                 
-                    ),
-                    Row(
-                      children: [
-                        BackButtons(
-                          onPressed: () => goBack(context),
+            child: FormBuilder(
+              key: _livingAbroadDataContinueKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[ 
+                  BuildHeader(
+                  pageName: 'Data di Luar negeri',
+                  assetName: 'images/data-active.svg',
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 30,),
+                        FormContainer(
+                        labels: 'Nomor Visa',
+                        needsInfoButton: true,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
+                        hintContents: '',
+                        buttonContent: 'Diisi dengan nomor yang ada di:\n\u2022Study Permit\n\u2022Work Permit\n\u2022Kartu PR',
+                        valueConstraints: r'^[a-z A-Z]+$', 
+                        requiredDataChecker: true,  
+                        controller: _visaNumber,                 
                         ),
-                        // TODO: Adjust button position
-                        ForwardButtons(
-                          onPressed: () {
-                            getItemAndNavigate(context);
-                          }
+                        FilePickerContainer(
+                          labels: 'Dokumen Visa = Ijin Tinggal',
+                          buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggan halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
+                          controller: _permitToStayDoc,
+                        ),
+                        FormContainerWithTwoInputs(
+                        labels: 'Masa Berlaku Visa',
+                        needsInfoButton: false,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
+                        hintContents: '',
+                        buttonContent: '',
+                        firstDates: DateTime(1900-01-01),
+                        lastDates: DateTime.now(),
+                        firstDates2: DateTime.now(), 
+                        lastDates2: DateTime(2099-01-01),
+                        controller: _visaStartDate,
+                        controller2: _visaEndDate,                 
+                        ),
+                        Row(
+                          children: [
+                            BackButtons(
+                              onPressed: () => goBack(context),
+                            ),
+                            // TODO: Adjust button position
+                            ForwardButtons(
+                              onPressed: () {
+                                getItemAndNavigate(context);
+                              }
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           )
