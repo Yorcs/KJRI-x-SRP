@@ -413,1324 +413,1331 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
         return Scaffold(
           //TODO: Readjust margin and padding
           body: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: FormBuilder(
-                key: _goalOfStayingKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[ 
-                    BuildHeader(
-                      pageName: 'Tujuan Menetap',
-                      assetName: 'images/tujuan-active.svg',
-                    ),
-                    SizedBox(height: 30,),
-                    Text(
-                        'Tujuan Menetap',
-                        style: TextStyling.regularTextStyle,
-                      ),
-                    FormBuilderDropdown<String>(
-                      name: "goals",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select a goal of staying'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          goalOfStayingDropdownValue = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Tujuan',
-                      ),
-                      items: goals
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    //Mendampingi Suami / Istri, Anggota Keluarga / Pengikut
-                    if (goalOfStayingDropdownValue.toString() =='Mendampingi Suami / Istri' || goalOfStayingDropdownValue.toString() == 'Anggota Keluarga / Pengikut') ... [
-                      FormContainer(
-                        labels: 'Keterangan',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,
-                        requiredDataChecker: true,                 
-                      ),
-                    ] 
-                    //Lain-lain
-                    else if (goalOfStayingDropdownValue.toString() == 'Lain-lain') ... [
-                      FormContainer(
-                        labels: 'Sebutkan: Kunjungan Keluarga, Au pair, dll',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,
-                        requiredDataChecker: true,               
-                      ),
-                    ] 
-                    //Bekerja
-                    else if(goalOfStayingDropdownValue.toString() == 'Bekerja') ...[
-                    // TODO: Change hint contents
-                    Text(
-                        'Bidang Kerja',
-                        style: TextStyling.regularTextStyle,
-                      ),
-                    FormBuilderDropdown<String>(
-                      name: "employmentIndustry",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your industry'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentIndustry = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Pekerjaan',
-                      ),
-                      items: industries
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    Text(
-                        'Pekerjaan',
-                        style: TextStyling.regularTextStyle,
-                      ),
-                    // TODO: Change placeholder
-                    if(employmentIndustry.toString() == 'Pertambangan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pertambanganName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pemerintahanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: kesehatanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: konstruksiName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: industriManufakturName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: orgInterName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: parwisName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pendidikanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: penerbanganName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: keuanganName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pertanianOrPerkebunanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Hukum') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: hukumName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Domestik') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: domestikName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: techName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: mediaElektronikName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: senbudName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: wirausahaName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: kelautanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: industriModeName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Perikanan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: perikananName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
-                        FormContainer(
-                          labels: 'Keterangan',
-                          needsInfoButton: false,
-                          isDataRequired: AutovalidateMode.onUserInteraction,
-                          hintContents: '',
-                          buttonContent: '',
-                          valueConstraints: r'^[a-z A-Z]+$',   
-                          controller: _descriptionOrAddress,
-                          requiredDataChecker: true,                 
-                        ),
-                    ],
-                      FormContainer(
-                        labels: 'Nama Perusahaan / Pengguna Jasa',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,
-                        requiredDataChecker: true,                 
-                      ),
-                      FormContainer(
-                        labels: 'Alamat pekerjaan di Luar negeri',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,
-                        requiredDataChecker: true,               
-                      ),
-                      FormContainer(
-                        labels: 'Perusahaan Penyalur / Penempatan',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,  
-                        requiredDataChecker: true,               
-                      ),
-                      FormContainer(
-                        labels: 'Agen Penyalur di Luar Negeri',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress, 
-                        requiredDataChecker: true,                
-                      ),
-
-                    ]
-                    //Belajar 
-                    else if(goalOfStayingDropdownValue.toString() == 'Belajar') ... [
-
-                    ]
-                    //Magang
-                     else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
+            child: FormBuilder(
+              key: _goalOfStayingKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[ 
+                  BuildHeader(
+                    pageName: 'Tujuan Menetap',
+                    assetName: 'images/tujuan-active.svg',
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 30,),
                         Text(
-                        'Bidang Kerja',
-                        style: TextStyling.regularTextStyle,
-                      ),
-                    FormBuilderDropdown<String>(
-                      name: "employmentIndustry",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your industry'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentIndustry = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Pekerjaan',
-                      ),
-                      items: industries
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    Text(
-                        'Pekerjaan',
-                        style: TextStyling.regularTextStyle,
-                      ),
-                    // TODO: Change placeholder
-                    if(employmentIndustry.toString() == 'Pertambangan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pertambanganName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pemerintahanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: kesehatanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: konstruksiName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: industriManufakturName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: orgInterName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: parwisName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pendidikanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: penerbanganName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: keuanganName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: pertanianOrPerkebunanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Hukum') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: hukumName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Domestik') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: domestikName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: techName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: mediaElektronikName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: senbudName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: wirausahaName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: kelautanName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: industriModeName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if (employmentIndustry.toString() == 'Perikanan') ... [
-                      FormBuilderDropdown<String>(
-                      name: "employmentName",
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: FormBuilderValidators.compose([
-                        (value){
-                          if(value ==null || value =='' || value.isEmpty){
-                            return 'Please select your job'; //TODO: Change prompt
-                          }
-                          return null;
-                        }
-                      ]),
-                      onChanged: (String? newValue){
-                        setState((){
-                          employmentName = newValue!;
-                          }
-                        );
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Pilih Jenis Jabatan',
-                      ),
-                      items: perikananName
-                      .map((items) => DropdownMenuItem<String>(
-                        value: items,
-                        child: Text(items),
-                        )).toList()
-                    ),
-                    ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
-                        FormContainer(
-                          labels: 'Keterangan',
-                          needsInfoButton: false,
-                          isDataRequired: AutovalidateMode.onUserInteraction,
-                          hintContents: '',
-                          buttonContent: '',
-                          valueConstraints: r'^[a-z A-Z]+$',   
-                          controller: _descriptionOrAddress,
-                          requiredDataChecker: true,                 
+                            'Tujuan Menetap',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                        FormBuilderDropdown<String>(
+                          name: "goals",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select a goal of staying'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              goalOfStayingDropdownValue = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Tujuan',
+                          ),
+                          items: goals
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
                         ),
-                    ],
-                      FormContainer(
-                        labels: 'Nama Perusahaan / Pengguna Jasa',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,
-                        requiredDataChecker: true,                 
-                      ),
-                      FormContainer(
-                        labels: 'Alamat pekerjaan di Luar negeri',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        valueConstraints: r'^[a-z A-Z]+$',   
-                        controller: _descriptionOrAddress,
-                        requiredDataChecker: true,               
-                      ),
-                    ]
-                  ]
-                )
+                        //Mendampingi Suami / Istri, Anggota Keluarga / Pengikut
+                        if (goalOfStayingDropdownValue.toString() =='Mendampingi Suami / Istri' || goalOfStayingDropdownValue.toString() == 'Anggota Keluarga / Pengikut') ... [
+                          FormContainer(
+                            labels: 'Keterangan',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,                 
+                          ),
+                        ] 
+                        //Lain-lain
+                        else if (goalOfStayingDropdownValue.toString() == 'Lain-lain') ... [
+                          FormContainer(
+                            labels: 'Sebutkan: Kunjungan Keluarga, Au pair, dll',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,               
+                          ),
+                        ] 
+                        //Bekerja
+                        else if(goalOfStayingDropdownValue.toString() == 'Bekerja') ...[
+                        // TODO: Change hint contents
+                        Text(
+                            'Bidang Kerja',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                        FormBuilderDropdown<String>(
+                          name: "employmentIndustry",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your industry'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentIndustry = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Pekerjaan',
+                          ),
+                          items: industries
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                        // TODO: Change placeholder
+                        if(employmentIndustry.toString() == 'Pertambangan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pertambanganName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pemerintahanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: kesehatanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: konstruksiName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: industriManufakturName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: orgInterName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: parwisName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pendidikanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: penerbanganName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: keuanganName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pertanianOrPerkebunanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Hukum') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: hukumName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Domestik') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: domestikName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: techName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: mediaElektronikName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: senbudName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: wirausahaName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: kelautanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: industriModeName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Perikanan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: perikananName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
+                            FormContainer(
+                              labels: 'Keterangan',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r'^[a-z A-Z]+$',   
+                              controller: _descriptionOrAddress,
+                              requiredDataChecker: true,                 
+                            ),
+                        ],
+                          FormContainer(
+                            labels: 'Nama Perusahaan / Pengguna Jasa',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,                 
+                          ),
+                          FormContainer(
+                            labels: 'Alamat pekerjaan di Luar negeri',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,               
+                          ),
+                          FormContainer(
+                            labels: 'Perusahaan Penyalur / Penempatan',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,  
+                            requiredDataChecker: true,               
+                          ),
+                          FormContainer(
+                            labels: 'Agen Penyalur di Luar Negeri',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress, 
+                            requiredDataChecker: true,                
+                          ),
+
+                        ]
+                        //Belajar 
+                        else if(goalOfStayingDropdownValue.toString() == 'Belajar') ... [
+
+                        ]
+                        //Magang
+                        else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
+                            Text(
+                            'Bidang Kerja',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                        FormBuilderDropdown<String>(
+                          name: "employmentIndustry",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your industry'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentIndustry = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Pekerjaan',
+                          ),
+                          items: industries
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                        // TODO: Change placeholder
+                        if(employmentIndustry.toString() == 'Pertambangan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pertambanganName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pemerintahanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: kesehatanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: konstruksiName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: industriManufakturName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: orgInterName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: parwisName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pendidikanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: penerbanganName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: keuanganName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: pertanianOrPerkebunanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Hukum') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: hukumName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Domestik') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: domestikName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: techName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: mediaElektronikName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: senbudName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: wirausahaName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: kelautanName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: industriModeName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if (employmentIndustry.toString() == 'Perikanan') ... [
+                          FormBuilderDropdown<String>(
+                          name: "employmentName",
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: FormBuilderValidators.compose([
+                            (value){
+                              if(value ==null || value =='' || value.isEmpty){
+                                return 'Please select your job'; //TODO: Change prompt
+                              }
+                              return null;
+                            }
+                          ]),
+                          onChanged: (String? newValue){
+                            setState((){
+                              employmentName = newValue!;
+                              }
+                            );
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Pilih Jenis Jabatan',
+                          ),
+                          items: perikananName
+                          .map((items) => DropdownMenuItem<String>(
+                            value: items,
+                            child: Text(items),
+                            )).toList()
+                        ),
+                        ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
+                            FormContainer(
+                              labels: 'Keterangan',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r'^[a-z A-Z]+$',   
+                              controller: _descriptionOrAddress,
+                              requiredDataChecker: true,                 
+                            ),
+                        ],
+                          FormContainer(
+                            labels: 'Nama Perusahaan / Pengguna Jasa',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,                 
+                          ),
+                          FormContainer(
+                            labels: 'Alamat pekerjaan di Luar negeri',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,               
+                          ),
+                        ]
+                      ],
+                    ),
+                  ),
+                ]
               )
             )
           )
