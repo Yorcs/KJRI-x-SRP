@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         ),
-        home: IdentityPage(),
+        home: LivingAbroadDataContinuePage(),
       ),
     );
   }

@@ -208,24 +208,17 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
                           controller: _emergencyContactIndoPhone,             
                         ),
                         //TODO: Adjust button position
-                        Row(
+                         Row(
                           children: [
-                            ElevatedButton(
-                              child: const Text('Back'),
-                              onPressed: () => goBack(context)
+                            BackButtons(
+                              onPressed: () => goBack(context),
                             ),
                             // TODO: Adjust button position
-                            // ElevatedButton(
-                            //   child: const Text('Next'),
-                            //   onPressed: () {
-                            //     Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(builder: (context) => const LivingAbroadDataContinuePage()),
-                            //     );
-                            //   },
-                            // ),
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
+                            ),
                           ],
-                        ) 
+                        ),
                       ],
                     ),
                   ),                 

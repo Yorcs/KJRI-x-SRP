@@ -31,14 +31,20 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _visaEndDate = TextEditingController();
   final TextEditingController _proofOfStayingDoc = TextEditingController();
   final TextEditingController _permitToStayDoc = TextEditingController();
+  final TextEditingController _dateOfArrival = TextEditingController();
+  final TextEditingController _lengthOfStayYear = TextEditingController();
+  final TextEditingController _lengthOfStayMonth = TextEditingController();
 
   late String visaNumberString;
   late String visaStartDateString;
   late String visaEndDateString;
   late String proofOfStayingDocString;
   late String permitToStayString;
+  late String dateOfArrivalString;
+  late String lengthOfStayYearString;
+  late String lengthOfStayMonthString;
   
-  Future<(String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     visaNumberString = prefs.getString('Nomor Visa') ?? '';
@@ -46,6 +52,9 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     visaStartDateString = prefs.getString('Start Visa') ?? '';
     proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
     permitToStayString = prefs.getString('Ijin Tinggal') ?? '';
+    dateOfArrivalString = prefs.getString('Waktu Kedatangan') ?? '';
+    lengthOfStayYearString = prefs.getString('Perkiraan Lama Menetap (Tahun)') ?? '';
+    lengthOfStayMonthString = prefs.getString('Perkiraan Lama Menetap (Bulan)') ?? '';
 
     setState(() {
       _visaNumber.text = visaNumberString;
@@ -53,9 +62,12 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       _visaEndDate.text = visaEndDateString;
       _proofOfStayingDoc.text = proofOfStayingDocString;
       _permitToStayDoc.text = permitToStayString;
+      _dateOfArrival.text = dateOfArrivalString;
+      _lengthOfStayYear.text = lengthOfStayYearString;
+      _lengthOfStayMonth.text = lengthOfStayMonthString;
     });
 
-    return (visaNumberString, visaStartDateString, visaEndDateString, proofOfStayingDocString, permitToStayString);
+    return (visaNumberString, visaStartDateString, visaEndDateString, proofOfStayingDocString, permitToStayString, dateOfArrivalString, lengthOfStayYearString, lengthOfStayMonthString);
   }
 
   Future<void> saveData() async{
@@ -65,6 +77,9 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     await prefs.setString('Start Visa', _visaEndDate.text);
     await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
     await prefs.setString('Ijin Tinggal', _permitToStayDoc.text);
+    await prefs.setString('Waktu Kedatangan', _dateOfArrival.text);
+    await prefs.setString('Perkiraan Lama Menetap (Tahun)', _lengthOfStayYear.text);
+    await prefs.setString('Perkiraan Lama Menetap (Bulan)', _lengthOfStayMonth.text);
   }
 
 
@@ -116,6 +131,33 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
         composing:  TextRange.empty,
       );
     });
+
+    _dateOfArrival.addListener(() {
+      final String text = _dateOfArrival.text;
+      _dateOfArrival.value = _dateOfArrival.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _lengthOfStayYear.addListener(() {
+      final String text = _lengthOfStayYear.text;
+      _lengthOfStayYear.value = _lengthOfStayYear.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _lengthOfStayMonth.addListener(() {
+      final String text = _lengthOfStayMonth.text;
+      _lengthOfStayMonth.value = _lengthOfStayMonth.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
   }
 
   @override
@@ -125,6 +167,9 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     _visaEndDate.dispose();
     _proofOfStayingDoc.dispose();
     _permitToStayDoc.dispose();
+    _dateOfArrival.dispose();
+    _lengthOfStayYear.dispose();
+    _lengthOfStayMonth.dispose();
     super.dispose();
   }
 
@@ -168,14 +213,14 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                       children: <Widget>[
                         SizedBox(height: 30,),
                         FormContainer(
-                        labels: 'Nomor Visa',
-                        needsInfoButton: true,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: 'Diisi dengan nomor yang ada di:\n\u2022Study Permit\n\u2022Work Permit\n\u2022Kartu PR',
-                        valueConstraints: r'^[a-z A-Z]+$', 
-                        requiredDataChecker: true,  
-                        controller: _visaNumber,                 
+                          labels: 'Nomor Visa',
+                          needsInfoButton: true,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: 'Diisi dengan nomor yang ada di:\n\u2022Study Permit\n\u2022Work Permit\n\u2022Kartu PR',
+                          valueConstraints: r'^[a-z A-Z]+$', 
+                          requiredDataChecker: true,  
+                          controller: _visaNumber,                 
                         ),
                         FilePickerContainer(
                           labels: 'Dokumen Visa = Ijin Tinggal',
@@ -183,17 +228,44 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           controller: _permitToStayDoc,
                         ),
                         FormContainerWithTwoInputs(
-                        labels: 'Masa Berlaku Visa',
-                        needsInfoButton: false,
-                        isDataRequired: AutovalidateMode.onUserInteraction,
-                        hintContents: '',
-                        buttonContent: '',
-                        firstDates: DateTime(1900-01-01),
-                        lastDates: DateTime.now(),
-                        firstDates2: DateTime.now(), 
-                        lastDates2: DateTime(2099-01-01),
-                        controller: _visaStartDate,
-                        controller2: _visaEndDate,                 
+                          labels: 'Masa Berlaku Visa',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          firstDates: DateTime(1900-01-01),
+                          lastDates: DateTime.now(),
+                          firstDates2: DateTime.now(), 
+                          lastDates2: DateTime(2099-01-01),
+                          controller: _visaStartDate,
+                          controller2: _visaEndDate,  
+                          text1: "Dari",   
+                          text2: "Sampai",            
+                        ),
+                        DateFormContainer(
+                          labels: "Waktu Kedatangan", 
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: "",
+                          needsInfoButton: false,
+                          buttonContent: "",
+                          controller: _dateOfArrival,
+                          firstDates: DateTime(1900-01-01),
+                          lastDates: DateTime.now(),
+                        ),
+                        FormContainerWithTwoInputs(
+                          labels: 'Masa Berlaku Visa',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          firstDates: DateTime(1900-01-01),
+                          lastDates: DateTime.now(),
+                          firstDates2: DateTime.now(), 
+                          lastDates2: DateTime(2099-01-01),
+                          controller: _lengthOfStayYear,
+                          controller2: _lengthOfStayMonth,  
+                          text1: "Tahun",   
+                          text2: "Bulan",            
                         ),
                         Row(
                           children: [
@@ -202,9 +274,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                             ),
                             // TODO: Adjust button position
                             ForwardButtons(
-                              onPressed: () {
-                                getItemAndNavigate(context);
-                              }
+                              onPressed: () => getItemAndNavigate(context)
                             ),
                           ],
                         ),

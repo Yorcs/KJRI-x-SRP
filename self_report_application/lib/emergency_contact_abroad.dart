@@ -202,21 +202,17 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                           requiredDataChecker: true,                 
                         ),
                         //TODO: Adjust button position
-                        Row(
+                         Row(
                           children: [
-                            ElevatedButton(
-                              child: const Text('Back'),
-                              onPressed: () => goBack(context)
+                            BackButtons(
+                              onPressed: () => goBack(context),
                             ),
                             // TODO: Adjust button position
-                            ElevatedButton(
-                              child: const Text('Next'),
-                              onPressed: () {
-                                getItemAndNavigate(context);
-                              }
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
                             ),
                           ],
-                        )  
+                        ), 
                       ],
                     ),
                   ),                

@@ -70,34 +70,37 @@ class FormContainerWithDisabledText extends StatelessWidget {
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: 80,
-              child: TextField(
-                enabled: false,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  labelText: areaCode
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(
+                width: 80,
+                child: TextField(
+                  enabled: false,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    labelText: areaCode
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            SizedBox(
-              width: 200,
-              child: TextsForm(
-                controller: controller,
-                labels: labels,
-                requiredDataChecker: requiredDataChecker,
-                requiredData: isDataRequired,
-                valueConstraints: valueConstraints, 
-                hintContent: hintContents,
-                ),
-            ),
-          ],
+              SizedBox(
+                width: 30,
+              ),
+              SizedBox(
+                width: 200,
+                child: TextsForm(
+                  controller: controller,
+                  labels: labels,
+                  requiredDataChecker: requiredDataChecker,
+                  requiredData: isDataRequired,
+                  valueConstraints: valueConstraints, 
+                  hintContent: hintContents,
+                  ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -139,35 +142,38 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
           needsInfo: needsInfoButton,
           buttonInfo: buttonContent,
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: 80,
-              child: TextsForm(
-                controller: controller,
-                labels: labels,
-                requiredDataChecker: requiredDataChecker,
-                requiredData: isDataRequired,
-                valueConstraints: valueConstraints, 
-                hintContent: hintContents,
-                ),
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            SizedBox(
-              width: 200,
-              child: TextsForm(
-                controller: controller2,
-                labels: labels,
-                requiredDataChecker: requiredDataChecker,
-                requiredData: isDataRequired,
-                valueConstraints: valueConstraints, 
-                hintContent: hintContents,
-                ),
-            ),
-          ],
+        Align(
+          alignment: Alignment.topLeft,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 80,
+                child: TextsForm(
+                  controller: controller,
+                  labels: labels,
+                  requiredDataChecker: requiredDataChecker,
+                  requiredData: isDataRequired,
+                  valueConstraints: valueConstraints, 
+                  hintContent: hintContents,
+                  ),
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              SizedBox(
+                width: 200,
+                child: TextsForm(
+                  controller: controller2,
+                  labels: labels,
+                  requiredDataChecker: requiredDataChecker,
+                  requiredData: isDataRequired,
+                  valueConstraints: valueConstraints, 
+                  hintContent: hintContents,
+                  ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -184,13 +190,21 @@ class FormContainerWithTwoInputs extends StatelessWidget {
     required this.needsInfoButton, 
     required this.buttonContent,
     required this.controller,
-    required this.controller2,required this.firstDates, required this.lastDates, required this.firstDates2, required this.lastDates2,
+    required this.controller2,
+    required this.firstDates,
+    required this.lastDates,
+    required this.firstDates2,
+    required this.lastDates2,
+    required this.text1,
+    required this.text2,
   });
 
   //Constraints and Arguments
   final String labels;
   final String hintContents;
   final String buttonContent;
+  final String text1;
+  final String text2;
   final AutovalidateMode isDataRequired;
   final bool needsInfoButton;
   final DateTime firstDates;
@@ -211,39 +225,49 @@ class FormContainerWithTwoInputs extends StatelessWidget {
             buttonInfo: buttonContent,
           ),
         SizedBox(height: 10,),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children:[
-            SizedBox(
-              width: 100,
-              child: DatePicker(
-                controller: controller,
-                labels: labels,
-                requiredData: isDataRequired,
-                firstDates: firstDates,
-                lastDates: lastDates,
-                hintContent: hintContents,
+        Align(
+          alignment: Alignment.topLeft,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children:<Widget>[
+              SizedBox(
+                width: 45,
+                child: Text(
+                  text1,
+                  textAlign: TextAlign.left,
+                  ),
                 ),
-            ),
-            SizedBox(
-              width: 80,
-              child: Text(
-                'Sampai',
-                textAlign: TextAlign.center,
+              SizedBox(
+                width: 100,
+                child: DatePicker(
+                  controller: controller,
+                  labels: labels,
+                  requiredData: isDataRequired,
+                  firstDates: firstDates,
+                  lastDates: lastDates,
+                  hintContent: hintContents,
+                  ),
+              ),
+              SizedBox(
+                width: 80,
+                child: Text(
+                  text2,
+                  textAlign: TextAlign.center,
+                  ),
+                ),
+              SizedBox(
+                width: 100,
+                child: DatePicker(
+                  controller: controller2,
+                  labels: 'Masa Berakhir Visa',
+                  requiredData: isDataRequired,
+                  firstDates: firstDates2,
+                  lastDates: lastDates2,
+                  hintContent: hintContents,
                 ),
               ),
-            SizedBox(
-              width: 100,
-              child: DatePicker(
-                controller: controller2,
-                labels: 'Masa Berakhir Visa',
-                requiredData: isDataRequired,
-                firstDates: firstDates2,
-                lastDates: lastDates2,
-                hintContent: hintContents,
-              ),
-            ),
-          ]
+            ]
+          ),
         ),
       ],
     );

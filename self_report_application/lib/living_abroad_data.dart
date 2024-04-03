@@ -5,6 +5,7 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:self_report_application/styling.dart';
 
 //Living Abroad First Page
 class LivingAbroadDataPage extends StatelessWidget {
@@ -248,16 +249,12 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         //TODO: Adjust button position
                         Row(
                           children: [
-                            ElevatedButton(
-                              child: const Text('Back'),
+                            BackButtons(
                               onPressed: () => goBack(context),
                             ),
                             // TODO: Adjust button position
-                            ElevatedButton(
-                              child: const Text('Next'),
-                              onPressed: () {
-                                getItemAndNavigate(context);
-                              }
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
                             ),
                           ],
                         ),

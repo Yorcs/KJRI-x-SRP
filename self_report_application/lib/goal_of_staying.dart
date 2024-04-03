@@ -25,6 +25,7 @@ class GoalOfStayingForm extends StatefulWidget {
   State<GoalOfStayingForm> createState() => _GoalOfStayingFormState();
 }
 
+// TODO: Make text editing controller and string for the dropdown
 class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   final _goalOfStayingKey = GlobalKey<FormBuilderState>();
   final TextEditingController _descriptionOrAddress = TextEditingController();
@@ -1121,7 +1122,56 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                         ]
                         //Belajar 
                         else if(goalOfStayingDropdownValue.toString() == 'Belajar') ... [
-
+                          FormContainer(
+                            labels: 'Sekolah',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,                 
+                          ),
+                          Text(
+                            'Jenjang',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                          FormBuilderDropdown<String>(
+                            name: "employmentIndustry",
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: FormBuilderValidators.compose([
+                              (value){
+                                if(value ==null || value =='' || value.isEmpty){
+                                  return 'Please select your degree'; //TODO: Change prompt
+                                }
+                                return null;
+                              }
+                            ]),
+                            onChanged: (String? newValue){
+                              setState((){
+                                employmentIndustry = newValue!;
+                                }
+                              );
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'Pilih Pekerjaan',
+                            ),
+                            items: industries
+                            .map((items) => DropdownMenuItem<String>(
+                              value: items,
+                              child: Text(items),
+                              )).toList()
+                          ),
+                          FormContainer(
+                            labels: 'Program / Bidang Studi',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z]+$',   
+                            controller: _descriptionOrAddress,
+                            requiredDataChecker: true,                 
+                          ),
                         ]
                         //Magang
                         else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
