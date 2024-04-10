@@ -184,7 +184,9 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
 class FormContainerWithTwoInputs extends StatelessWidget {
   const FormContainerWithTwoInputs({
     super.key,
-    required this.labels,
+    required this.mainLabel,
+    required this.labels1,
+    required this.labels2,
     required this.isDataRequired,
     required this.hintContents,
     required this.needsInfoButton, 
@@ -200,7 +202,9 @@ class FormContainerWithTwoInputs extends StatelessWidget {
   });
 
   //Constraints and Arguments
-  final String labels;
+  final String mainLabel;
+  final String labels1;
+  final String labels2;
   final String hintContents;
   final String buttonContent;
   final String text1;
@@ -218,56 +222,32 @@ class FormContainerWithTwoInputs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget> [
-          LabelingWidget(
-            labelName: labels,
-            needsInfo: needsInfoButton,
-            buttonInfo: buttonContent,
-          ),
+        LabelingWidget(
+          labelName: mainLabel,
+          needsInfo: needsInfoButton,
+          buttonInfo: buttonContent,
+        ),
         SizedBox(height: 10,),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children:<Widget>[
-              SizedBox(
-                width: 45,
-                child: Text(
-                  text1,
-                  textAlign: TextAlign.left,
-                  ),
-                ),
-              SizedBox(
-                width: 100,
-                child: DatePicker(
-                  controller: controller,
-                  labels: labels,
-                  requiredData: isDataRequired,
-                  firstDates: firstDates,
-                  lastDates: lastDates,
-                  hintContent: hintContents,
-                  ),
-              ),
-              SizedBox(
-                width: 80,
-                child: Text(
-                  text2,
-                  textAlign: TextAlign.center,
-                  ),
-                ),
-              SizedBox(
-                width: 100,
-                child: DatePicker(
-                  controller: controller2,
-                  labels: 'Masa Berakhir Visa',
-                  requiredData: isDataRequired,
-                  firstDates: firstDates2,
-                  lastDates: lastDates2,
-                  hintContent: hintContents,
-                ),
-              ),
-            ]
-          ),
+        Text(text1),
+        DatePicker(
+          controller: controller,
+          labels: labels1,
+          requiredData: isDataRequired,
+          firstDates: firstDates,
+          lastDates: lastDates,
+          hintContent: hintContents,
+        ),
+        Text(text2),
+        DatePicker(
+          controller: controller2,
+          labels: labels2,
+          requiredData: isDataRequired,
+          firstDates: firstDates2,
+          lastDates: lastDates2,
+          hintContent: hintContents,
         ),
       ],
     );

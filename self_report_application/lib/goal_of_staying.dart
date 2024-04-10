@@ -28,65 +28,103 @@ class GoalOfStayingForm extends StatefulWidget {
 // TODO: Make text editing controller and string for the dropdown
 class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   final _goalOfStayingKey = GlobalKey<FormBuilderState>();
-  final TextEditingController _descriptionOrAddress = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+
   final TextEditingController _perusahaanPenyalur = TextEditingController();
   final TextEditingController _agenPenyalur = TextEditingController();
   final TextEditingController _employerName = TextEditingController();
   final TextEditingController _employerAddress = TextEditingController();
 
-  late String descriptionOrAddressString;
+  final TextEditingController _schoolName = TextEditingController();
+  final TextEditingController _schoolProgram = TextEditingController();
+
+  //Form Container String
+  late String descriptionString;
   late String employerNameString;
   late String employerAddressString;
+  late String perusahaanPenyalurString;
+  late String agenPenyalurString;
+  late String schoolNameString;
+  late String schoolProgramString;
+
+  //Dropdown string
   late String goalOfStayingDropdownValueString;
   late String employmentIndustryString;
   late String employmentNameString;
-  late String perusahaanPenyalurString;
-  late String agenPenyalurString;
+  late String schoolDegreeString;
+  late String lengthOfSchoolYearString;
+  late String lengthOfSchoolMonthString;
 
-  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    descriptionOrAddressString = prefs.getString('Keterangan') ?? '';
+    goalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap') ?? '';
+
+    descriptionString = prefs.getString('Keterangan') ?? '';
+
     employerNameString = prefs.getString('Nama Perusahaan / Pengguna Jasa') ??'';
     employerAddressString = prefs.getString('Alamat Pekerjaan di Luar Negeri') ?? '';
-    goalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap') ?? '';
     employmentIndustryString = prefs.getString('Bidang Kerja') ?? '';
     employmentNameString = prefs.getString('Pekerjaan') ?? '';
     perusahaanPenyalurString = prefs.getString('Perusahaan Penyalur / Penempatan') ?? '';
     agenPenyalurString = prefs.getString('Agen Penyalur di Luar Negeri') ?? '';
 
+    schoolNameString = prefs.getString('Sekolah') ?? '';
+    schoolDegreeString = prefs.getString('Jenjang') ?? '';
+    schoolProgramString = prefs.getString('Program / Bidang Studi') ?? '';
+    lengthOfSchoolYearString = prefs.getString('Lama Pendidikan (Tahun)') ?? '';
+    lengthOfSchoolMonthString = prefs.getString('Lama Pendidikan (Bulan)') ?? '';
+
+
     setState(() {
-      _descriptionOrAddress.text = descriptionOrAddressString;
+      goalOfStayingDropdownValue = goalOfStayingDropdownValueString;
+
+      _description.text = descriptionString;
+
+      employmentIndustry = employmentIndustryString;
+      employmentName = employmentNameString;
       _employerName.text = employerNameString;
       _employerAddress.text = employerAddressString;
       _perusahaanPenyalur.text = perusahaanPenyalurString;
       _agenPenyalur.text = agenPenyalurString;
-      goalOfStayingDropdownValue = goalOfStayingDropdownValueString;
-      employmentIndustry = employmentIndustryString;
-      employmentName = employmentNameString;
+
+      _schoolName.text = schoolNameString;
+      schoolDegree = schoolDegreeString;
+      _schoolProgram.text = schoolProgramString;
+      lengthOfSchoolYear = lengthOfSchoolYearString;
+      lengthOfSchoolMonth = lengthOfSchoolMonthString;
     });
 
-    return (employerNameString, employerAddressString, descriptionOrAddressString, perusahaanPenyalurString, agenPenyalurString, goalOfStayingDropdownValueString, employmentIndustryString, employerNameString);
+    return (employerNameString, employerAddressString, descriptionString, perusahaanPenyalurString, agenPenyalurString, goalOfStayingDropdownValueString, employmentIndustryString, employerNameString, schoolNameString, schoolDegreeString, schoolProgramString, lengthOfSchoolYearString, lengthOfSchoolMonthString);
   }
 
   Future<void> saveData() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('Keterangan', _descriptionOrAddress.text);
+    await prefs.setString('Tujuan Menetap', goalOfStayingDropdownValue.toString());
+
+    await prefs.setString('Keterangan', _description.text);
+
     await prefs.setString('Nama Perusahaan / Pengguna Jasa', _employerName.text);
     await prefs.setString('Alamat Pekerjaan di Luar Negeri', _employerAddress.text);
     await prefs.setString('Perusahaan Penyalur / Penempatan', _perusahaanPenyalur.text);
     await prefs.setString('Agen Penyalur di Luar Negeri', _agenPenyalur.text);
     await prefs.setString('Bidang Kerja', employmentIndustry.toString());
     await prefs.setString('Pekerjaan', employmentName.toString());
+
+    await prefs.setString('Sekolah', _schoolName.text);
+    await prefs.setString('Jenjang', schoolDegree.toString());
+    await prefs.setString('Program / Bidang Studi', _schoolProgram.text);
+    await prefs.setString('Lama Pendidikan (Tahun)', lengthOfSchoolYear.toString());
+    await prefs.setString('Lama Pendidikan (Bulan)', lengthOfSchoolMonth.toString());
   }
 
   @override
   void initState(){
     super.initState();
     getSharedPrefs();
-    _descriptionOrAddress.addListener(() {
-      final String text = _descriptionOrAddress.text;
-      _descriptionOrAddress.value = _descriptionOrAddress.value.copyWith(
+    _description.addListener(() {
+      final String text = _description.text;
+      _description.value = _description.value.copyWith(
         text: text,
         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
         composing:  TextRange.empty,
@@ -110,13 +148,53 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
         composing:  TextRange.empty,
       );
     });
+
+    _perusahaanPenyalur.addListener(() {
+      final String text = _perusahaanPenyalur.text;
+      _perusahaanPenyalur.value = _perusahaanPenyalur.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _agenPenyalur.addListener(() {
+      final String text = _agenPenyalur.text;
+      _agenPenyalur.value = _agenPenyalur.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _schoolName.addListener(() {
+      final String text = _schoolName.text;
+      _schoolName.value = _schoolName.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _schoolProgram.addListener(() {
+      final String text = _schoolProgram.text;
+      _schoolProgram.value = _schoolProgram.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
   }
 
   @override
   void dispose(){
-    _descriptionOrAddress.dispose();
+    _description.dispose();
     _employerName.dispose();
     _employerAddress.dispose();
+    _perusahaanPenyalur.dispose();
+    _agenPenyalur.dispose();
+    _schoolName.dispose();
+    _schoolProgram.dispose();
     super.dispose();
   }
   
@@ -124,6 +202,9 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   String? goalOfStayingDropdownValue;
   String? employmentIndustry;
   String? employmentName;
+  String? schoolDegree;
+  String? lengthOfSchoolYear;
+  String? lengthOfSchoolMonth;
 
   List<String> goals =[
     'Anggota Keluarga / Pengikut',
@@ -471,7 +552,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _description,
                             requiredDataChecker: true,                 
                           ),
                         ] 
@@ -484,7 +565,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _description,
                             requiredDataChecker: true,               
                           ),
                         ] 
@@ -1074,7 +1155,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               hintContents: '',
                               buttonContent: '',
                               valueConstraints: r'^[a-z A-Z]+$',   
-                              controller: _descriptionOrAddress,
+                              controller: _description,
                               requiredDataChecker: true,                 
                             ),
                         ],
@@ -1085,7 +1166,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _employerName,
                             requiredDataChecker: true,                 
                           ),
                           FormContainer(
@@ -1095,7 +1176,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _employerAddress,
                             requiredDataChecker: true,               
                           ),
                           FormContainer(
@@ -1105,7 +1186,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,  
+                            controller: _perusahaanPenyalur,  
                             requiredDataChecker: true,               
                           ),
                           FormContainer(
@@ -1115,11 +1196,12 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress, 
+                            controller: _agenPenyalur, 
                             requiredDataChecker: true,                
                           ),
 
                         ]
+                        //TODO: FIX CONTROLLER
                         //Belajar 
                         else if(goalOfStayingDropdownValue.toString() == 'Belajar') ... [
                           FormContainer(
@@ -1129,7 +1211,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _schoolName,
                             requiredDataChecker: true,                 
                           ),
                           Text(
@@ -1137,7 +1219,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             style: TextStyling.regularTextStyle,
                           ),
                           FormBuilderDropdown<String>(
-                            name: "employmentIndustry",
+                            name: "Jenjang",
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: FormBuilderValidators.compose([
                               (value){
@@ -1149,14 +1231,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             ]),
                             onChanged: (String? newValue){
                               setState((){
-                                employmentIndustry = newValue!;
+                                schoolDegree = newValue!;
                                 }
                               );
                             },
                             decoration: InputDecoration(
-                              hintText: 'Pilih Pekerjaan',
+                              hintText: 'Pilih Jenjang',
                             ),
-                            items: industries
+                            items: jenjang
                             .map((items) => DropdownMenuItem<String>(
                               value: items,
                               child: Text(items),
@@ -1169,9 +1251,11 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _schoolProgram,
                             requiredDataChecker: true,                 
                           ),
+
+                          //TODO: ADD TWO INPUT CONTAINER
                         ]
                         //Magang
                         else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
@@ -1758,7 +1842,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               hintContents: '',
                               buttonContent: '',
                               valueConstraints: r'^[a-z A-Z]+$',   
-                              controller: _descriptionOrAddress,
+                              controller: _description,
                               requiredDataChecker: true,                 
                             ),
                         ],
@@ -1769,7 +1853,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _employerName,
                             requiredDataChecker: true,                 
                           ),
                           FormContainer(
@@ -1779,10 +1863,21 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             hintContents: '',
                             buttonContent: '',
                             valueConstraints: r'^[a-z A-Z]+$',   
-                            controller: _descriptionOrAddress,
+                            controller: _employerAddress,
                             requiredDataChecker: true,               
                           ),
-                        ]
+                        ],
+                        Row(
+                          children: [
+                            BackButtons(
+                              onPressed: () => goBack(context),
+                            ),
+                            // TODO: Adjust button position
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
