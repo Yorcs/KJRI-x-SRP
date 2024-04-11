@@ -29,14 +29,12 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _visaNumber = TextEditingController();
   final TextEditingController _visaStartDate = TextEditingController();
   final TextEditingController _visaEndDate = TextEditingController();
-  final TextEditingController _proofOfStayingDoc = TextEditingController();
   final TextEditingController _permitToStayDoc = TextEditingController();
   final TextEditingController _dateOfArrival = TextEditingController();
 
   late String visaNumberString;
   late String visaStartDateString;
   late String visaEndDateString;
-  late String proofOfStayingDocString;
   late String permitToStayString;
   late String dateOfArrivalString;
   late String lengthOfStayYearString;
@@ -82,13 +80,12 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   ];
   
   //TODO: FIX DROPDOWN LENGTH OF STAY
-  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     visaNumberString = prefs.getString('Nomor Visa') ?? '';
     visaEndDateString = prefs.getString('Expired Visa') ??'';
     visaStartDateString = prefs.getString('Start Visa') ?? '';
-    proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
     permitToStayString = prefs.getString('Ijin Tinggal') ?? '';
     dateOfArrivalString = prefs.getString('Waktu Kedatangan') ?? '';
     lengthOfStayYearString = prefs.getString('Perkiraan Lama Menetap (Tahun)') ?? '';
@@ -98,14 +95,13 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       _visaNumber.text = visaNumberString;
       _visaStartDate.text = visaStartDateString;
       _visaEndDate.text = visaEndDateString;
-      _proofOfStayingDoc.text = proofOfStayingDocString;
       _permitToStayDoc.text = permitToStayString;
       _dateOfArrival.text = dateOfArrivalString;
       lengthOfStayYear = lengthOfStayYearString;
       lengthOfStayMonth = lengthOfStayMonthString;
     });
 
-    return (visaNumberString, visaStartDateString, visaEndDateString, proofOfStayingDocString, permitToStayString, dateOfArrivalString, lengthOfStayYearString, lengthOfStayMonthString);
+    return (visaNumberString, visaStartDateString, visaEndDateString, permitToStayString, dateOfArrivalString, lengthOfStayYearString, lengthOfStayMonthString);
   }
 
   Future<void> saveData() async{
@@ -113,7 +109,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     await prefs.setString('Nomor Visa', _visaNumber.text);
     await prefs.setString('Expired Visa', _visaStartDate.text);
     await prefs.setString('Start Visa', _visaEndDate.text);
-    await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
     await prefs.setString('Ijin Tinggal', _permitToStayDoc.text);
     await prefs.setString('Waktu Kedatangan', _dateOfArrival.text);
     await prefs.setString('Perkiraan Lama Menetap (Tahun)', lengthOfStayYear.toString());
@@ -152,15 +147,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       );
     });
 
-    _proofOfStayingDoc.addListener(() {
-      final String text = _proofOfStayingDoc.text;
-      _proofOfStayingDoc.value = _proofOfStayingDoc.value.copyWith(
-        text: text,
-        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing:  TextRange.empty,
-      );
-    });
-
     _permitToStayDoc.addListener(() {
       final String text = _permitToStayDoc.text;
       _permitToStayDoc.value = _permitToStayDoc.value.copyWith(
@@ -185,7 +171,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     _visaNumber.dispose();
     _visaStartDate.dispose();
     _visaEndDate.dispose();
-    _proofOfStayingDoc.dispose();
     _permitToStayDoc.dispose();
     _dateOfArrival.dispose();
     super.dispose();
