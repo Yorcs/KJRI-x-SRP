@@ -209,7 +209,8 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
                         ),
                         //TODO: Adjust button position
                          Row(
-                          children: [
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),

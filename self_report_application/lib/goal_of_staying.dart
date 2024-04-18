@@ -1868,7 +1868,8 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           ),
                         ],
                         Row(
-                          children: [
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),

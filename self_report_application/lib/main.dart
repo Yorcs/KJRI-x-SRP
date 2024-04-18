@@ -42,6 +42,14 @@ class MyApp extends StatelessWidget {
 class MyAppState extends ChangeNotifier {
 }
 
+Future <void> getItemAndNavigate (BuildContext context) async {
+    await Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => RequirementsPage()
+    )
+  );
+}
+
 //Welcome Page
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -95,20 +103,19 @@ class WelcomePage extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(40, 0, 40, 20),
                     alignment: Alignment.center,
                     child: Text(
-                      'Easy Service an Protection for Indonesians in Canada',
+                      'Easy Service and Protection for Indonesians in Canada',
                       style: TextStyling.regularTextStyle,
                       textAlign: TextAlign.center,
                     ),
                   ),
                   //TODO: Adjust button position
-                  ElevatedButton(
-                    child: const Text('Next'),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RequirementsPage()),
-                      );
-                    },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      ForwardButtons(
+                        onPressed: () => getItemAndNavigate(context)
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/styling.dart';
 
+Future <void> getItemAndNavigate (BuildContext context) async {
+    await Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => IdentityPage()
+    )
+  );
+}
+
 //Requirements Page
 class RequirementsPage extends StatelessWidget {
   const RequirementsPage({super.key});
@@ -90,14 +98,13 @@ class RequirementsPage extends StatelessWidget {
                     ),
                   ),
                   //TODO: Readjust position for button
-                  ElevatedButton(
-                    child: const Text('Next'),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const IdentityPage()),
-                      );
-                    },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      ForwardButtons(
+                        onPressed: () => getItemAndNavigate(context)
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -45,6 +45,11 @@ class TextStyling {
     fontWeight: FontWeight.bold
   );
 
+  static const TextStyle errorTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
+    color: Color.fromRGBO(249, 89, 89, 0)
+  );
+
   //Page Title Text/ Caption Text
   static const TextStyle captionTextStyle = TextStyle(
     fontFamily: 'Source Sans Pro',

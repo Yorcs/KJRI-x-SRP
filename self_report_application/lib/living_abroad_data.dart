@@ -248,7 +248,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         ),
                         //TODO: Adjust button position
                         Row(
-                          children: [
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),

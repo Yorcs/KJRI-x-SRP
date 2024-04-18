@@ -231,7 +231,10 @@ class FormContainerWithTwoInputs extends StatelessWidget {
           buttonInfo: buttonContent,
         ),
         SizedBox(height: 10,),
-        Text(text1),
+        Text(
+          text1,
+          style: TextStyling.regularBoldTextStyle,
+        ),
         DatePicker(
           controller: controller,
           labels: labels1,
@@ -498,6 +501,22 @@ class DatePicker extends StatelessWidget {
       lastDate: lastDates,
       format: DateFormat('yyyy-MM-dd'),
       decoration: InputDecoration(
+        errorStyle: TextStyle(
+          fontFamily: 'Source Sans Pro',
+          color: Color.fromRGBO(255, 5, 5, 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: Color.fromRGBO(255, 5, 5, 1),
+          )
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: Color.fromRGBO(255, 5, 5, 1),
+          )
+        ),
         hintText: hintContent,
         isDense: true,
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
@@ -565,6 +584,22 @@ class DropdownFormState extends State<DropdownForm> {
         );
       },
       decoration: InputDecoration(
+        errorStyle: TextStyle(
+          fontFamily: 'Source Sans Pro',
+          color: Color.fromRGBO(255, 5, 5, 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: Color.fromRGBO(255, 5, 5, 1),
+          )
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: Color.fromRGBO(255, 5, 5, 1),
+          )
+        ),
         hintText: widget.hintContents,
         isDense: true,
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
@@ -619,9 +654,28 @@ class TextsForm extends StatelessWidget {
       autovalidateMode: requiredData,
       controller: controller,
       decoration: InputDecoration(
+        errorStyle: TextStyle(
+          fontFamily: 'Source Sans Pro',
+          color: Color.fromRGBO(255, 5, 5, 1),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: Color.fromRGBO(255, 5, 5, 1),
+          )
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: Color.fromRGBO(255, 5, 5, 1),
+          )
+        ),
         hintText: hintContent,
         isDense: true,
-        contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
+        contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+        prefix: const Padding(
+          padding: EdgeInsets.only(left: 15),
+        ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             width: 0.5,

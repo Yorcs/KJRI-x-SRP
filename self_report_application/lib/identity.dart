@@ -212,8 +212,13 @@ class _IdentityFormState extends State<IdentityForm> {
                         ),
                         SizedBox(height: 20,),
                         //TODO: Adjust button position
-                        ForwardButtons(
-                          onPressed: () => getItemAndNavigate(context)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
+                            ),
+                          ],
                         ),
                       ],
                     ),

@@ -203,7 +203,8 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                         ),
                         //TODO: Adjust button position
                          Row(
-                          children: [
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),
@@ -212,7 +213,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],
-                        ), 
+                        ),
                       ],
                     ),
                   ),                

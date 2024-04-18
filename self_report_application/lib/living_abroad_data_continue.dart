@@ -260,7 +260,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                         //TODO: ADD PROVINCE DROPDOWN
                         Text(
                             'Perkiraan Lama Menetap',
-                            style: TextStyling.regularTextStyle,
+                            style: TextStyling.regularBoldTextStyle,
                           ),
                         DropdownContainer(
                           labels: 'Tahun',
@@ -283,7 +283,8 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           dropdownContents: bulanTinggal,
                         ),                        
                         Row(
-                          children: [
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),
