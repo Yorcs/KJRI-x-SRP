@@ -536,6 +536,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Tujuan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: goals
                           .map((items) => DropdownMenuItem<String>(
@@ -595,6 +611,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Pekerjaan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: industries
                           .map((items) => DropdownMenuItem<String>(
@@ -627,6 +659,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pertambanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -654,6 +702,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pemerintahanName
                           .map((items) => DropdownMenuItem<String>(
@@ -681,6 +745,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: kesehatanName
                           .map((items) => DropdownMenuItem<String>(
@@ -708,6 +788,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: konstruksiName
                           .map((items) => DropdownMenuItem<String>(
@@ -735,6 +831,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: industriManufakturName
                           .map((items) => DropdownMenuItem<String>(
@@ -762,6 +874,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: orgInterName
                           .map((items) => DropdownMenuItem<String>(
@@ -789,6 +917,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: parwisName
                           .map((items) => DropdownMenuItem<String>(
@@ -816,6 +960,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pendidikanName
                           .map((items) => DropdownMenuItem<String>(
@@ -843,6 +1003,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: penerbanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -870,6 +1046,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: keuanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -897,6 +1089,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pertanianOrPerkebunanName
                           .map((items) => DropdownMenuItem<String>(
@@ -924,6 +1132,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: hukumName
                           .map((items) => DropdownMenuItem<String>(
@@ -951,6 +1175,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: domestikName
                           .map((items) => DropdownMenuItem<String>(
@@ -978,6 +1218,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: techName
                           .map((items) => DropdownMenuItem<String>(
@@ -1005,6 +1261,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: mediaElektronikName
                           .map((items) => DropdownMenuItem<String>(
@@ -1032,6 +1304,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: senbudName
                           .map((items) => DropdownMenuItem<String>(
@@ -1059,6 +1347,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: wirausahaName
                           .map((items) => DropdownMenuItem<String>(
@@ -1086,6 +1390,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: kelautanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1113,6 +1433,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: industriModeName
                           .map((items) => DropdownMenuItem<String>(
@@ -1140,6 +1476,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: perikananName
                           .map((items) => DropdownMenuItem<String>(
@@ -1237,6 +1589,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             },
                             decoration: InputDecoration(
                               hintText: 'Pilih Jenjang',
+                              errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                             ),
                             items: jenjang
                             .map((items) => DropdownMenuItem<String>(
@@ -1282,6 +1650,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Pekerjaan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: industries
                           .map((items) => DropdownMenuItem<String>(
@@ -1314,6 +1698,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pertambanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -1341,6 +1741,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pemerintahanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1368,6 +1784,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: kesehatanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1395,6 +1827,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: konstruksiName
                           .map((items) => DropdownMenuItem<String>(
@@ -1422,6 +1870,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: industriManufakturName
                           .map((items) => DropdownMenuItem<String>(
@@ -1449,6 +1913,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: orgInterName
                           .map((items) => DropdownMenuItem<String>(
@@ -1476,6 +1956,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: parwisName
                           .map((items) => DropdownMenuItem<String>(
@@ -1503,6 +1999,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pendidikanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1530,6 +2042,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: penerbanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -1557,6 +2085,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: keuanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -1584,6 +2128,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: pertanianOrPerkebunanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1611,6 +2171,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: hukumName
                           .map((items) => DropdownMenuItem<String>(
@@ -1638,6 +2214,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: domestikName
                           .map((items) => DropdownMenuItem<String>(
@@ -1665,6 +2257,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: techName
                           .map((items) => DropdownMenuItem<String>(
@@ -1692,6 +2300,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: mediaElektronikName
                           .map((items) => DropdownMenuItem<String>(
@@ -1719,6 +2343,23 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
+
                           ),
                           items: senbudName
                           .map((items) => DropdownMenuItem<String>(
@@ -1746,6 +2387,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: wirausahaName
                           .map((items) => DropdownMenuItem<String>(
@@ -1773,6 +2430,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: kelautanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1800,6 +2473,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: industriModeName
                           .map((items) => DropdownMenuItem<String>(
@@ -1827,6 +2516,22 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           },
                           decoration: InputDecoration(
                             hintText: 'Pilih Jenis Jabatan',
+                            errorStyle: TextStyle(
+                              fontFamily: 'Source Sans Pro',
+                              color: Color.fromRGBO(255, 5, 5, 1),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              )
+                            )
                           ),
                           items: perikananName
                           .map((items) => DropdownMenuItem<String>(
