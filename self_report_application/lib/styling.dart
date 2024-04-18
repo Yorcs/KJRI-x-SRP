@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
@@ -189,14 +190,23 @@ class _FilePickerState extends State<FilePickerButton> {
   String? fileName;
   String? fileBytesDecoded;
   Uint8List? fileBytes;
+  double _sizekbs = 0;
+  final int maxSizeKbs = 1024 * 10; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['pdf', 'png', 'jpeg', 'jpg']);
 
+    
     if (result!= null && result.files.isNotEmpty){
-      fileBytes = result.files.first.bytes;
-      fileName = result.files.first.name;
-
+      final size = result.files.first.size;
+      _sizekbs = size / 1024;
+      if(_sizekbs < maxSizeKbs){
+        fileBytes = result.files.first.bytes;
+        fileName = result.files.first.name;
+      }
+      else{
+        return; //TODO: CHANGE FUNCTIONALITY
+      }
     } else {
       return;
     }
@@ -247,6 +257,10 @@ class _FilePickerState extends State<FilePickerButton> {
             ),
           )
         ] else ...[
+          SizedBox(
+            width: 200,
+            child: Text("File must be less than 10 mb"),
+          ),
         ]
       ],
     );
