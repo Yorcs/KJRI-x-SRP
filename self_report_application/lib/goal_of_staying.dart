@@ -559,6 +559,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             child: Text(items),
                             )).toList()
                         ),
+                        SizedBox(height: 30,),
                         //Mendampingi Suami / Istri, Anggota Keluarga / Pengikut
                         if (goalOfStayingDropdownValue.toString() =='Mendampingi Suami / Istri' || goalOfStayingDropdownValue.toString() == 'Anggota Keluarga / Pengikut') ... [
                           FormContainer(
@@ -575,11 +576,11 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                         //Lain-lain
                         else if (goalOfStayingDropdownValue.toString() == 'Lain-lain') ... [
                           FormContainer(
-                            labels: 'Sebutkan: Kunjungan Keluarga, Au pair, dll',
-                            needsInfoButton: false,
+                            labels: 'Keterangan',
+                            needsInfoButton: true,
                             isDataRequired: AutovalidateMode.onUserInteraction,
                             hintContents: '',
-                            buttonContent: '',
+                            buttonContent: 'Sebutkan: \nKunjungan Keluarga, Au pair, dll',
                             valueConstraints: r'^[a-z A-Z]+$',   
                             controller: _description,
                             requiredDataChecker: true,               
@@ -634,12 +635,15 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             child: Text(items),
                             )).toList()
                         ),
-                        Text(
+                        SizedBox(height: 30),
+                        //TODO: COPY PASTE TO IF STATEMENT
+                        
+                        // TODO: Change placeholder
+                        if(employmentIndustry.toString() == 'Pertambangan') ... [
+                          Text(
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
-                        // TODO: Change placeholder
-                        if(employmentIndustry.toString() == 'Pertambangan') ... [
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1511,6 +1515,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               requiredDataChecker: true,                 
                             ),
                         ],
+                        SizedBox(height: 30),
                           FormContainer(
                             labels: 'Nama Perusahaan / Pengguna Jasa',
                             needsInfoButton: false,
@@ -1521,8 +1526,9 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             controller: _employerName,
                             requiredDataChecker: true,                 
                           ),
+                          SizedBox(height: 30),
                           FormContainer(
-                            labels: 'Alamat pekerjaan di Luar negeri',
+                            labels: 'Alamat Pekerjaan di Luar Negeri',
                             needsInfoButton: false,
                             isDataRequired: AutovalidateMode.onUserInteraction,
                             hintContents: '',
@@ -1531,6 +1537,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             controller: _employerAddress,
                             requiredDataChecker: true,               
                           ),
+                          SizedBox(height: 30),
                           FormContainer(
                             labels: 'Perusahaan Penyalur / Penempatan',
                             needsInfoButton: false,
@@ -1541,6 +1548,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             controller: _perusahaanPenyalur,  
                             requiredDataChecker: true,               
                           ),
+                          SizedBox(height: 30),
                           FormContainer(
                             labels: 'Agen Penyalur di Luar Negeri',
                             needsInfoButton: false,
@@ -2562,7 +2570,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             requiredDataChecker: true,                 
                           ),
                           FormContainer(
-                            labels: 'Alamat pekerjaan di Luar negeri',
+                            labels: 'Alamat Pekerjaan di Luar Negeri',
                             needsInfoButton: false,
                             isDataRequired: AutovalidateMode.onUserInteraction,
                             hintContents: '',
@@ -2572,6 +2580,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             requiredDataChecker: true,               
                           ),
                         ],
+                        SizedBox(height: 40,), 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -2584,6 +2593,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 50,), 
                       ],
                     ),
                   ),

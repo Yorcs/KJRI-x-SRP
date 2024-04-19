@@ -37,6 +37,14 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   List<String> provinces = [
     'Alberta',
     'British Columbia',
+    'Manitoba',
+    'New Brunswick',
+    'Newfoundland and Labrador',
+    'Nova Scotia',
+    'Ontario',
+    'Prince Edward Island',
+    'Quebec',
+    'Saskatchewan',
   ];
 
   late String addressString;
@@ -193,9 +201,10 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         SizedBox(height: 30,),
                         FilePickerContainer(
                           labels: 'Dokumen Bukti Tinggal',
-                          buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022ID Card\n\u2022Driver License\n\u2022Rekening Bank\n\u2022Kontrak Rumah\n\u2022Tagihan Telepon\n\u2022Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
+                          buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022 ID Card\n\u2022 Driver License\n\u2022 Rekening Bank\n\u2022 Kontrak Rumah\n\u2022 Tagihan Telepon\n\u2022 Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
                           controller: _proofOfStayingDoc,
                         ),
+                        SizedBox(height: 30,),
                         FormContainer(
                         labels: 'Alamat Lengkap di Luar Negeri',
                         needsInfoButton: false,
@@ -235,6 +244,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           controller: _postalCode,   
                           requiredDataChecker: true,                 
                         ),
+                        SizedBox(height: 30,),
                         FormContainerWithTwoEnabledText(
                           labels: 'Telepon',
                           needsInfoButton: false,
@@ -246,6 +256,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           controller: _canadianAreaCode, 
                           controller2: _canadianPhoneNumber,             
                         ),
+                        SizedBox(height: 40,), 
                         //TODO: Adjust button position
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,6 +270,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 50,), 
                       ],
                     ),
                   )                  

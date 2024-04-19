@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
 import 'package:self_report_application/living_abroad_data.dart';
+import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         ),
-        home: LivingAbroadDataContinuePage(),
+        home: IdentityPage(),
       ),
     );
   }
@@ -98,25 +99,17 @@ class WelcomePage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  //Text
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(40, 0, 40, 20),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Easy Service and Protection for Indonesians in Canada',
-                      style: TextStyling.regularTextStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  SizedBox(height: 20,), 
                   //TODO: Adjust button position
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ForwardButtons(
                         onPressed: () => getItemAndNavigate(context)
                       ),
                     ],
                   ),
+                  SizedBox(height: 20,), 
                 ],
               ),
             ),

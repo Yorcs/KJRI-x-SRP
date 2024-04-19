@@ -97,15 +97,17 @@ class RequirementsPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 135,), 
                   //TODO: Readjust position for button
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ForwardButtons(
                         onPressed: () => getItemAndNavigate(context)
                       ),
                     ],
                   ),
+                  SizedBox(height: 20,), 
                 ],
               ),
             ),

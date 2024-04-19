@@ -79,7 +79,7 @@ class BackButtons extends StatelessWidget{
         foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
       ),
       onPressed: onPressed,
-      child: const Text('< Kembali'),
+      child: const Text('Kembali'),
     );
   } 
 }

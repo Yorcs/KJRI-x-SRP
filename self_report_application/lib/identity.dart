@@ -210,7 +210,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           dropdownValue: dropdownValue,
                           dropdownContents: genderOptions,
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 40,), 
                         //TODO: Adjust button position
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -220,6 +220,7 @@ class _IdentityFormState extends State<IdentityForm> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 50,), 
                       ],
                     ),
                   ),
