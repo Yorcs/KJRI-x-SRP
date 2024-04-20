@@ -79,7 +79,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               SizedBox(
-                width: 80,
+                width: 50,
                 child: TextField(
                   enabled: false,
                   textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
                 width: 30,
               ),
               SizedBox(
-                width: 200,
+                width: 220,
                 child: TextsForm(
                   controller: controller,
                   labels: labels,
@@ -628,14 +628,15 @@ class DropdownFormState extends State<DropdownForm> {
             color: Color.fromRGBO(255, 5, 5, 1),
           )
         ),
+        hintStyle: TextStyling.hintTextStyle,
         hintText: widget.hintContents,
         isDense: true,
         contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 10),
-        focusColor: Colors.black,
+        focusColor: Color.fromRGBO(74, 74, 74, 1),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 0.5,
-            color: Colors.black
+            color: Color.fromRGBO(74, 74, 74, 1),
           ),
         ),
         enabledBorder: OutlineInputBorder(
@@ -706,13 +707,13 @@ class TextsForm extends StatelessWidget {
             color: Color.fromRGBO(255, 5, 5, 1),
           )
         ),
+        focusColor: Color.fromRGBO(74, 74, 74, 1),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             width: 0.5,
-            color: Colors.black
+            color: Color.fromRGBO(74, 74, 74, 1),
           ),
         ),
-        focusColor: Colors.black,
         hintText: hintContent,
         isDense: true,
         contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),

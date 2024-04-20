@@ -26,7 +26,7 @@ class BuildHeader extends StatelessWidget{
         ),
         SizedBox(height: 30,),
         Container(
-          margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: 
           SvgPicture.asset(

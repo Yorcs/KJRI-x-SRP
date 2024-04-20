@@ -51,6 +51,12 @@ class TextStyling {
     color: Color.fromRGBO(249, 89, 89, 0)
   );
 
+  static const TextStyle hintTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
+    color: Color.fromRGBO(179, 179, 179, 1),
+    fontSize: 16,
+  );
+
   //Page Title Text/ Caption Text
   static const TextStyle captionTextStyle = TextStyle(
     fontFamily: 'Source Sans Pro',

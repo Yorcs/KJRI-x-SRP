@@ -69,7 +69,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     perusahaanPenyalurString = prefs.getString('Perusahaan Penyalur / Penempatan') ?? '';
     agenPenyalurString = prefs.getString('Agen Penyalur di Luar Negeri') ?? '';
 
-    schoolNameString = prefs.getString('Sekolah') ?? '';
+    schoolNameString = prefs.getString('Nama Sekolah') ?? '';
     schoolDegreeString = prefs.getString('Jenjang') ?? '';
     schoolProgramString = prefs.getString('Program / Bidang Studi') ?? '';
     lengthOfSchoolYearString = prefs.getString('Lama Pendidikan (Tahun)') ?? '';
@@ -111,7 +111,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     await prefs.setString('Bidang Kerja', employmentIndustry.toString());
     await prefs.setString('Pekerjaan', employmentName.toString());
 
-    await prefs.setString('Sekolah', _schoolName.text);
+    await prefs.setString('Nama Sekolah', _schoolName.text);
     await prefs.setString('Jenjang', schoolDegree.toString());
     await prefs.setString('Program / Bidang Studi', _schoolProgram.text);
     await prefs.setString('Lama Pendidikan (Tahun)', lengthOfSchoolYear.toString());
@@ -1565,7 +1565,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                         //Belajar 
                         else if(goalOfStayingDropdownValue.toString() == 'Belajar') ... [
                           FormContainer(
-                            labels: 'Sekolah',
+                            labels: 'Nama Sekolah',
                             needsInfoButton: false,
                             isDataRequired: AutovalidateMode.onUserInteraction,
                             hintContents: '',
@@ -1574,6 +1574,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             controller: _schoolName,
                             requiredDataChecker: true,                 
                           ),
+                          SizedBox(height: 30),
                           Text(
                             'Jenjang',
                             style: TextStyling.regularTextStyle,
@@ -1620,6 +1621,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               child: Text(items),
                               )).toList()
                           ),
+                          SizedBox(height: 30),
                           FormContainer(
                             labels: 'Program / Bidang Studi',
                             needsInfoButton: false,
