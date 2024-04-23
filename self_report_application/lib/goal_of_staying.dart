@@ -535,7 +535,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Tujuan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -551,7 +550,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: goals
                           .map((items) => DropdownMenuItem<String>(
@@ -611,7 +628,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Pekerjaan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -627,7 +643,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: industries
                           .map((items) => DropdownMenuItem<String>(
@@ -662,7 +696,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -678,7 +711,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pertambanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -687,6 +738,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -705,7 +760,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -721,7 +775,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pemerintahanName
                           .map((items) => DropdownMenuItem<String>(
@@ -730,6 +802,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -748,7 +824,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -764,7 +839,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: kesehatanName
                           .map((items) => DropdownMenuItem<String>(
@@ -773,6 +866,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -791,7 +888,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -807,7 +903,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: konstruksiName
                           .map((items) => DropdownMenuItem<String>(
@@ -816,6 +930,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -834,7 +952,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -850,7 +967,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: industriManufakturName
                           .map((items) => DropdownMenuItem<String>(
@@ -859,6 +994,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -877,7 +1016,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -893,7 +1031,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: orgInterName
                           .map((items) => DropdownMenuItem<String>(
@@ -902,6 +1058,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -920,7 +1080,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -936,7 +1095,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: parwisName
                           .map((items) => DropdownMenuItem<String>(
@@ -945,6 +1122,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -963,7 +1144,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -979,7 +1159,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pendidikanName
                           .map((items) => DropdownMenuItem<String>(
@@ -988,6 +1186,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1006,7 +1208,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1022,7 +1223,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: penerbanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -1031,6 +1250,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1049,7 +1272,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1065,7 +1287,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: keuanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -1074,6 +1314,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1092,7 +1336,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1108,7 +1351,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pertanianOrPerkebunanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1117,6 +1378,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Hukum') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1135,7 +1400,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1151,7 +1415,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: hukumName
                           .map((items) => DropdownMenuItem<String>(
@@ -1160,6 +1442,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Domestik') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1178,7 +1464,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1194,7 +1479,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: domestikName
                           .map((items) => DropdownMenuItem<String>(
@@ -1203,6 +1506,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1221,7 +1528,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1237,7 +1543,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: techName
                           .map((items) => DropdownMenuItem<String>(
@@ -1246,6 +1570,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1264,7 +1592,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1280,7 +1607,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: mediaElektronikName
                           .map((items) => DropdownMenuItem<String>(
@@ -1289,6 +1634,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1307,7 +1656,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1323,7 +1671,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: senbudName
                           .map((items) => DropdownMenuItem<String>(
@@ -1332,6 +1698,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1350,7 +1720,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1366,7 +1735,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: wirausahaName
                           .map((items) => DropdownMenuItem<String>(
@@ -1375,6 +1762,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1393,7 +1784,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1409,7 +1799,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: kelautanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1418,6 +1826,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1436,7 +1848,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1452,7 +1863,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: industriModeName
                           .map((items) => DropdownMenuItem<String>(
@@ -1461,6 +1890,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Perikanan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1479,7 +1912,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1495,7 +1927,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: perikananName
                           .map((items) => DropdownMenuItem<String>(
@@ -1597,23 +2047,40 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               );
                             },
                             decoration: InputDecoration(
-                              hintText: 'Pilih Jenjang',
                               errorStyle: TextStyle(
-                              fontFamily: 'Source Sans Pro',
-                              color: Color.fromRGBO(255, 5, 5, 1),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 0.5,
+                                fontFamily: 'Source Sans Pro',
                                 color: Color.fromRGBO(255, 5, 5, 1),
-                              )
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                width: 0.5,
-                                color: Color.fromRGBO(255, 5, 5, 1),
-                              )
-                            )
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                )
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                )
+                              ),
+                              focusColor: Color.fromRGBO(74, 74, 74, 1),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(74, 74, 74, 1),
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                              prefix: const Padding(
+                                padding: EdgeInsets.only(left: 15),
+                              ),
+                              isDense: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(179, 179, 179, 1),
+                                  )
+                                ),
                             ),
                             items: jenjang
                             .map((items) => DropdownMenuItem<String>(
@@ -1659,7 +2126,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Pekerjaan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1675,7 +2141,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: industries
                           .map((items) => DropdownMenuItem<String>(
@@ -1689,6 +2173,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           ),
                         // TODO: Change placeholder
                         if(employmentIndustry.toString() == 'Pertambangan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1707,7 +2195,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1723,7 +2210,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pertambanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -1732,6 +2237,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1750,7 +2259,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1766,7 +2274,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pemerintahanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1775,6 +2301,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1793,7 +2323,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1809,7 +2338,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: kesehatanName
                           .map((items) => DropdownMenuItem<String>(
@@ -1818,6 +2365,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1836,7 +2387,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1852,7 +2402,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: konstruksiName
                           .map((items) => DropdownMenuItem<String>(
@@ -1861,6 +2429,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1879,7 +2451,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1895,7 +2466,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: industriManufakturName
                           .map((items) => DropdownMenuItem<String>(
@@ -1904,6 +2493,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1922,7 +2515,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1938,7 +2530,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: orgInterName
                           .map((items) => DropdownMenuItem<String>(
@@ -1947,6 +2557,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1965,7 +2579,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -1981,7 +2594,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: parwisName
                           .map((items) => DropdownMenuItem<String>(
@@ -1990,6 +2621,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2008,7 +2643,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2024,7 +2658,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pendidikanName
                           .map((items) => DropdownMenuItem<String>(
@@ -2033,6 +2685,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2051,7 +2707,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2067,7 +2722,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: penerbanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -2076,6 +2749,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2094,7 +2771,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2110,7 +2786,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: keuanganName
                           .map((items) => DropdownMenuItem<String>(
@@ -2119,6 +2813,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2137,7 +2835,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2153,7 +2850,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: pertanianOrPerkebunanName
                           .map((items) => DropdownMenuItem<String>(
@@ -2162,6 +2877,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Hukum') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2180,7 +2899,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2196,7 +2914,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: hukumName
                           .map((items) => DropdownMenuItem<String>(
@@ -2205,6 +2941,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Domestik') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2223,7 +2963,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2239,7 +2978,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: domestikName
                           .map((items) => DropdownMenuItem<String>(
@@ -2248,6 +3005,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2266,7 +3027,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2282,7 +3042,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: techName
                           .map((items) => DropdownMenuItem<String>(
@@ -2291,6 +3069,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2309,7 +3091,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2325,7 +3106,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: mediaElektronikName
                           .map((items) => DropdownMenuItem<String>(
@@ -2334,6 +3133,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2352,7 +3155,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2368,8 +3170,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
-
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: senbudName
                           .map((items) => DropdownMenuItem<String>(
@@ -2378,6 +3197,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2396,7 +3219,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2412,7 +3234,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: wirausahaName
                           .map((items) => DropdownMenuItem<String>(
@@ -2421,6 +3261,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2439,7 +3283,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2455,7 +3298,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: kelautanName
                           .map((items) => DropdownMenuItem<String>(
@@ -2464,6 +3325,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2482,7 +3347,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2498,7 +3362,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: industriModeName
                           .map((items) => DropdownMenuItem<String>(
@@ -2507,6 +3389,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         ] else if (employmentIndustry.toString() == 'Perikanan') ... [
+                          Text(
+                            'Pekerjaan',
+                            style: TextStyling.regularTextStyle,
+                          ),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2525,7 +3411,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             );
                           },
                           decoration: InputDecoration(
-                            hintText: 'Pilih Jenis Jabatan',
                             errorStyle: TextStyle(
                               fontFamily: 'Source Sans Pro',
                               color: Color.fromRGBO(255, 5, 5, 1),
@@ -2541,7 +3426,25 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 width: 0.5,
                                 color: Color.fromRGBO(255, 5, 5, 1),
                               )
-                            )
+                            ),
+                            focusColor: Color.fromRGBO(74, 74, 74, 1),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                            prefix: const Padding(
+                              padding: EdgeInsets.only(left: 15),
+                            ),
+                            isDense: true,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 0.5,
+                                color: Color.fromRGBO(179, 179, 179, 1),
+                                )
+                              ),
                           ),
                           items: perikananName
                           .map((items) => DropdownMenuItem<String>(
