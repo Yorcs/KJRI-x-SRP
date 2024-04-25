@@ -227,7 +227,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                         ),
                         SizedBox(height: 20,),
                         FilePickerContainer(
-                          labels: 'Dokumen Visa = Ijin Tinggal',
+                          labels: 'Ijin Tinggal',
                           buttonContent: 'Diunggah dengan file format\nPDF/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggah halaman utama,\nmenghadap kedepan\n\nContoh:\n(INSERT IMAGE)\n\nDiterima: Study Permit, Work Permit,\natau PR Card',
                           controller: _permitToStayDoc,
                         ),

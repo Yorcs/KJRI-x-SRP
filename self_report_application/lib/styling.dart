@@ -48,7 +48,8 @@ class TextStyling {
 
   static const TextStyle errorTextStyle = TextStyle(
     fontFamily: 'Source Sans Pro',
-    color: Color.fromRGBO(249, 89, 89, 0)
+    fontSize: 12,
+    color: Color.fromRGBO(255, 5, 5, 1),
   );
 
   static const TextStyle hintTextStyle = TextStyle(
@@ -197,7 +198,7 @@ class _FilePickerState extends State<FilePickerButton> {
   String? fileBytesDecoded;
   Uint8List? fileBytes;
   double _sizekbs = 0;
-  final int maxSizeKbs = 1024 * 10; //1024 kb = 1 mb
+  final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['pdf', 'png', 'jpeg', 'jpg']);
@@ -231,43 +232,55 @@ class _FilePickerState extends State<FilePickerButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        SizedBox(
-          width: 150,
-          child: FileButtonsStyle(
-            onPressed: () {
-              pickFiles();
-            },
-          ),
-        ),
-        SizedBox(
-          width: 30,
-        ),
-        if(fileName != null)...[
-          SizedBox(
-            width: 200,
-            child: Text(fileName!),
-          ),
-        //Extracting file name
-          SizedBox(
-            width: 0,
-            child: Visibility(
-              visible: false,
-              child: TextFormField(
-                controller: widget.controller,
-                enabled: false,
-                textAlign: TextAlign.center,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(
+              width: 150,
+              child: FileButtonsStyle(
+                onPressed: () {
+                  pickFiles();
+                },
               ),
             ),
-          )
-        ] else ...[
-          SizedBox(
-            width: 200,
-            child: Text("File must be less than 10 mb"),
+            SizedBox(
+              width: 30,
+            ),
+            if(fileName != null)...[
+              SizedBox(
+                width: 200,
+                child: Text(fileName!),
+              ),
+            //Extracting file name
+              SizedBox(
+                width: 0,
+                child: Visibility(
+                  visible: false,
+                  child: TextFormField(
+                    controller: widget.controller,
+                    enabled: false,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
+            ] else ...[
+            ]
+          ],
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          width: 200,
+          child: Text(
+            "File dibawah 5 mb",
+            style: TextStyling.errorTextStyle,
           ),
-        ]
+        ),
       ],
     );
   }
