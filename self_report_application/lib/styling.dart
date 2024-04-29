@@ -69,6 +69,20 @@ class TextStyling {
 }
 
 
+// class TextOverview extends StatelessWidget{
+//   const TextOverview({
+//     super.key,
+//     required this.labelName,
+//     required this.content,
+//   })
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     throw UnimplementedError();
+//   }
+  
+// }
+
 // Back Button Style
 class BackButtons extends StatelessWidget{
   const BackButtons({
@@ -201,7 +215,7 @@ class _FilePickerState extends State<FilePickerButton> {
   final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['pdf', 'png', 'jpeg', 'jpg']);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpeg', 'jpg']);
 
     
     if (result!= null && result.files.isNotEmpty){
@@ -268,6 +282,7 @@ class _FilePickerState extends State<FilePickerButton> {
                 ),
               )
             ] else ...[
+              
             ]
           ],
         ),
@@ -275,9 +290,9 @@ class _FilePickerState extends State<FilePickerButton> {
           height: 10,
         ),
         SizedBox(
-          width: 200,
+          width: 400,
           child: Text(
-            "File dibawah 5 mb",
+            "File harus dibawah 5MB atau file harus di dalam format JPG, JPEG, atau PNG",
             style: TextStyling.errorTextStyle,
           ),
         ),

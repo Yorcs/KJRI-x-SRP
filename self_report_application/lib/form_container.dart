@@ -50,6 +50,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
     required this.areaCode,
     required this.controller,
     required this.requiredDataChecker,
+    required this.manualErrorText,
   });
 
   //Constraints and Arguments
@@ -62,6 +63,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
   final AutovalidateMode isDataRequired;
   final bool needsInfoButton;
   final TextEditingController controller;
+  final String manualErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +102,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
                   requiredData: isDataRequired,
                   valueConstraints: valueConstraints, 
                   hintContent: hintContents,
+                  manualErrorText: manualErrorText,
                   ),
               ),
             ],
@@ -123,6 +126,7 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
     required this.controller,
     required this.controller2,
     required this.requiredDataChecker,
+    required this.manualErrorText,
   });
 
   //Constraints and Arguments
@@ -135,6 +139,7 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
   final bool needsInfoButton;
   final TextEditingController controller;
   final TextEditingController controller2;
+  final String manualErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +166,7 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
                   requiredData: isDataRequired,
                   valueConstraints: valueConstraints, 
                   hintContent: hintContents,
+                  manualErrorText: manualErrorText,
                   ),
               ),
               SizedBox(
@@ -175,6 +181,7 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
                   requiredData: isDataRequired,
                   valueConstraints: valueConstraints, 
                   hintContent: hintContents,
+                  manualErrorText: manualErrorText,
                   ),
               ),
             ],
@@ -345,6 +352,7 @@ class FormContainer extends StatelessWidget {
     required this.buttonContent,
     required this.controller,
     required this.requiredDataChecker,
+    required this.manualErrorText,
   });
 
   //Constraints and Arguments
@@ -356,6 +364,7 @@ class FormContainer extends StatelessWidget {
   final bool requiredDataChecker;
   final bool needsInfoButton;
   final TextEditingController controller;
+  final String manualErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -375,6 +384,7 @@ class FormContainer extends StatelessWidget {
           requiredDataChecker: requiredDataChecker,
           valueConstraints: valueConstraints, 
           hintContent: hintContents,
+          manualErrorText: manualErrorText,
         ),
       ]
     );
@@ -682,6 +692,7 @@ class TextsForm extends StatelessWidget {
     required this.hintContent,
     required this.controller,
     required this.requiredDataChecker,
+    required this.manualErrorText,
     });
 
   //Constraints
@@ -691,6 +702,7 @@ class TextsForm extends StatelessWidget {
   final bool requiredDataChecker;
   final AutovalidateMode requiredData;
   final TextEditingController controller;
+  final String manualErrorText;
 
   late String labelName;
   late String valueContent;
@@ -745,12 +757,14 @@ class TextsForm extends StatelessWidget {
           if(!requiredDataChecker){
             return null;
           } else {
-          if(value == '' || value!.isEmpty){
-            return 'Invalid input on $labels'; //TODO: Change Prompt Later.
-          } else {
-            FormBuilderValidators.match(valueConstraints, errorText: 'Invalid input on $labels');
-          }
-          return null;
+            RegExp regExp = RegExp(valueConstraints, caseSensitive: false);
+            if(value == '' || value!.isEmpty || !regExp.hasMatch(value)){
+              return manualErrorText; //TODO: Change Prompt Later.
+              
+            } else {
+              // FormBuilderValidators.match(valueConstraints, errorText: 'Invalid input on $labels');
+            }
+            return null;
           }
         },
       ]),
