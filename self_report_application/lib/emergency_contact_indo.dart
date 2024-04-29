@@ -1,234 +1,237 @@
-// import 'package:flutter/material.dart';
-// import 'package:self_report_application/header.dart';
-// import 'package:self_report_application/form_container.dart';
-// import 'package:self_report_application/styling.dart';
-// import 'package:flutter_form_builder/flutter_form_builder.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/material.dart';
+import 'package:self_report_application/header.dart';
+import 'package:self_report_application/form_container.dart';
+import 'package:self_report_application/styling.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// //Emergency Contact in Indonesia Page
-// class EmergencyContactIndoPage extends StatelessWidget {
-//   const EmergencyContactIndoPage({super.key});
+//Emergency Contact in Indonesia Page
+class EmergencyContactIndoPage extends StatelessWidget {
+  const EmergencyContactIndoPage({super.key});
 
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return EmergencyContactIndoForm();
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return EmergencyContactIndoForm();
+  }
+}
 
-// class EmergencyContactIndoForm extends StatefulWidget {
-//   const EmergencyContactIndoForm({super.key});
+class EmergencyContactIndoForm extends StatefulWidget {
+  const EmergencyContactIndoForm({super.key});
   
-//   @override
-//   State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
-// }
+  @override
+  State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
+}
 
-// class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
-//   final _emergencyContactIndoKey = GlobalKey<FormBuilderState>();
-//   final TextEditingController _emergencyContactIndoName = TextEditingController();
-//   final TextEditingController _emergencyContactIndoEmail = TextEditingController();
-//   final TextEditingController _emergencyContactIndoPhone = TextEditingController();
+class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
+  final _emergencyContactIndoKey = GlobalKey<FormBuilderState>();
+  final TextEditingController _emergencyContactIndoName = TextEditingController();
+  final TextEditingController _emergencyContactIndoEmail = TextEditingController();
+  final TextEditingController _emergencyContactIndoPhone = TextEditingController();
 
-//   String? relationshipDropdownValue;
+  String? relationshipDropdownValue;
 
-//  List<String> relationship = [
-//     'Keluarga',
-//     'Rekan Kerja',
-//     'Istri/Suami',
-//     'Orang Tua',
-//     'Teman',
-//   ];
+ List<String> relationship = [
+    'Keluarga',
+    'Rekan Kerja',
+    'Istri/Suami',
+    'Orang Tua',
+    'Teman',
+  ];
 
-//   late String emergencyContactIndoNameString;
-//   late String emergencyContactIndoEmailString;
-//   late String emergencyContactIndoPhoneString;
-//   late String relationshipDropdownValueString;
+  late String emergencyContactIndoNameString;
+  late String emergencyContactIndoEmailString;
+  late String emergencyContactIndoPhoneString;
+  late String relationshipDropdownValueString;
 
-//   Future<(String, String, String, String)> getSharedPrefs() async{
-//     final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<(String, String, String, String)> getSharedPrefs() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-//     emergencyContactIndoNameString = prefs.getString('Nama Kontak Darurat di Indonesia') ?? '';
-//     emergencyContactIndoEmailString = prefs.getString('Email Kontak Darurat di Indonesia') ??'';
-//     emergencyContactIndoPhoneString = prefs.getString('Telepon Kontak Darurat di Indonesia') ?? '';
-//     relationshipDropdownValueString = prefs.getString('Hubungan Kontak Darurat di Indonesia') ?? '';
+    emergencyContactIndoNameString = prefs.getString('Nama Kontak Darurat di Indonesia') ?? '';
+    emergencyContactIndoEmailString = prefs.getString('Email Kontak Darurat di Indonesia') ??'';
+    emergencyContactIndoPhoneString = prefs.getString('Telepon Kontak Darurat di Indonesia') ?? '';
+    relationshipDropdownValueString = prefs.getString('Hubungan Kontak Darurat di Indonesia') ?? '';
 
-//     setState(() {
-//       _emergencyContactIndoName.text = emergencyContactIndoNameString;
-//       _emergencyContactIndoEmail.text = emergencyContactIndoEmailString;
-//       _emergencyContactIndoPhone.text = emergencyContactIndoPhoneString;
-//       relationshipDropdownValue = relationshipDropdownValueString;
-//     });
+    setState(() {
+      _emergencyContactIndoName.text = emergencyContactIndoNameString;
+      _emergencyContactIndoEmail.text = emergencyContactIndoEmailString;
+      _emergencyContactIndoPhone.text = emergencyContactIndoPhoneString;
+      relationshipDropdownValue = relationshipDropdownValueString;
+    });
 
-//     return (emergencyContactIndoNameString, emergencyContactIndoEmailString, emergencyContactIndoPhoneString, relationshipDropdownValueString);
-//   }
+    return (emergencyContactIndoNameString, emergencyContactIndoEmailString, emergencyContactIndoPhoneString, relationshipDropdownValueString);
+  }
 
-//   Future<void> saveData() async{
-//     final SharedPreferences prefs = await SharedPreferences.getInstance();
-//     await prefs.setString('Nama Kontak Darurat di Indonesia', _emergencyContactIndoName.text);
-//     await prefs.setString('Email Kontak Darurat di Indonesia', _emergencyContactIndoEmail.text);
-//     await prefs.setString('Telepon Kontak Darurat di Indonesia', _emergencyContactIndoPhone.text);
-//     await prefs.setString('Hubungan Kontak Darurat di Indonesia', relationshipDropdownValue.toString()); 
-//   }
+  Future<void> saveData() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('Nama Kontak Darurat di Indonesia', _emergencyContactIndoName.text);
+    await prefs.setString('Email Kontak Darurat di Indonesia', _emergencyContactIndoEmail.text);
+    await prefs.setString('Telepon Kontak Darurat di Indonesia', _emergencyContactIndoPhone.text);
+    await prefs.setString('Hubungan Kontak Darurat di Indonesia', relationshipDropdownValue.toString()); 
+  }
 
-//   @override
-//   void initState(){
-//     super.initState();
-//     getSharedPrefs();
-//     _emergencyContactIndoName.addListener(() {
-//       final String text = _emergencyContactIndoName.text;
-//       _emergencyContactIndoName.value = _emergencyContactIndoName.value.copyWith(
-//         text: text,
-//         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-//         composing:  TextRange.empty,
-//       );
-//     });
+  @override
+  void initState(){
+    super.initState();
+    getSharedPrefs();
+    _emergencyContactIndoName.addListener(() {
+      final String text = _emergencyContactIndoName.text;
+      _emergencyContactIndoName.value = _emergencyContactIndoName.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
 
-//     _emergencyContactIndoEmail.addListener(() {
-//       final String text = _emergencyContactIndoEmail.text;
-//       _emergencyContactIndoEmail.value = _emergencyContactIndoEmail.value.copyWith(
-//         text: text,
-//         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-//         composing:  TextRange.empty,
-//       );
-//     });
+    _emergencyContactIndoEmail.addListener(() {
+      final String text = _emergencyContactIndoEmail.text;
+      _emergencyContactIndoEmail.value = _emergencyContactIndoEmail.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
 
-//     _emergencyContactIndoPhone.addListener(() {
-//       final String text = _emergencyContactIndoPhone.text;
-//       _emergencyContactIndoPhone.value = _emergencyContactIndoPhone.value.copyWith(
-//         text: text,
-//         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-//         composing:  TextRange.empty,
-//       );
-//     });
-//   }
+    _emergencyContactIndoPhone.addListener(() {
+      final String text = _emergencyContactIndoPhone.text;
+      _emergencyContactIndoPhone.value = _emergencyContactIndoPhone.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+  }
 
-//   @override
-//   void dispose(){
-//     _emergencyContactIndoEmail.dispose();
-//     _emergencyContactIndoName.dispose();
-//     _emergencyContactIndoPhone.dispose();
-//     super.dispose();
-//   }
+  @override
+  void dispose(){
+    _emergencyContactIndoEmail.dispose();
+    _emergencyContactIndoName.dispose();
+    _emergencyContactIndoPhone.dispose();
+    super.dispose();
+  }
 
-//   goBack(BuildContext context)=> Navigator.pop(context);
+  goBack(BuildContext context)=> Navigator.pop(context);
 
-//   Future <void> getItemAndNavigate (BuildContext context) async {
-//     final isValid = _emergencyContactIndoKey.currentState!.validate();
-//     if(!isValid){
-//     } else {
-//       saveData();
-//       await Navigator.of(context).push(
-//       MaterialPageRoute(
-//         builder: (context) => EmergencyContactIndoPage()
-//       )
-//     );
-//   }
-//   }
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    final isValid = _emergencyContactIndoKey.currentState!.validate();
+    if(!isValid){
+    } else {
+      saveData();
+      await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EmergencyContactIndoPage()
+      )
+    );
+  }
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return LayoutBuilder(
-//       builder: (context, constraints) {
-//         return Scaffold(
-//           body: SingleChildScrollView(
-//             child: FormBuilder(
-//               key: _emergencyContactIndoKey,
-//               child:Column(
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   BuildHeader(
-//                   pageName: 'KONTAK DARURAT',
-//                   assetName: 'images/kontak-active.svg',
-//                   ),
-//                   Container(
-//                     margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-//                     padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-//                     child: Column(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: <Widget>[
-//                         SizedBox(height: 30,),
-//                         Row(
-//                           children: [
-//                             Text(
-//                               'Di Indonesia',
-//                               style: TextStyling.regularBoldTextStyle,
-//                             ),
-//                             InfoButton(
-//                               contents: 'Informasi kontak sesuai surat-surat pemerintah'
-//                             ),
-//                           ],
-//                         ),
-//                         SizedBox(height: 30,),
-//                         FormContainer(
-//                         labels: 'Nama',
-//                         needsInfoButton: false,
-//                         isDataRequired: AutovalidateMode.onUserInteraction,
-//                         hintContents: '',
-//                         buttonContent: '',
-//                         valueConstraints: r'^[a-z A-Z]+$',  
-//                         requiredDataChecker: true,
-//                         controller: _emergencyContactIndoName,                  
-//                         ),
-//                         SizedBox(height: 30,),
-//                         DropdownContainer(
-//                           labels: 'Hubungan',
-//                           needsInfoButton: false,
-//                           buttonContent: '',
-//                           dropdownName: 'relationshipIndo',
-//                           validatorWarning: 'Please select a relationship',
-//                           hintContents: 'Pilih Hubungan',
-//                           dropdownValue: relationshipDropdownValue,
-//                           dropdownContents: relationship
-//                         ),
-//                         SizedBox(height: 30,),
-//                         //TODO: Change RegExp
-//                         FormContainer(
-//                           labels: 'Email',
-//                           needsInfoButton: false,
-//                           isDataRequired: AutovalidateMode.onUserInteraction,
-//                           hintContents: '',
-//                           buttonContent: '',
-//                           valueConstraints: r'^[a-z A-Z 0-9]+$', 
-//                           requiredDataChecker: true, 
-//                           controller: _emergencyContactIndoEmail,                  
-//                         ),
-//                         SizedBox(height: 30,),
-//                         //TODO: Change RegExp
-//                         FormContainerWithDisabledText(
-//                           labels: 'Telepon',
-//                           needsInfoButton: false,
-//                           isDataRequired: AutovalidateMode.onUserInteraction,
-//                           hintContents: '',
-//                           buttonContent: '',
-//                           valueConstraints: r'^[0-9]+$',
-//                           requiredDataChecker: true,
-//                           areaCode: '+62',     
-//                           controller: _emergencyContactIndoPhone,             
-//                         ),
-//                         //TODO: Adjust button position
-//                          Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: <Widget>[
-//                             BackButtons(
-//                               onPressed: () => goBack(context),
-//                             ),
-//                             // TODO: Adjust button position
-//                             ForwardButtons(
-//                               onPressed: () => getItemAndNavigate(context)
-//                             ),
-//                           ],
-//                         ),
-//                       ],
-//                     ),
-//                   ),                 
-//                 ],
-//               ),
-//             ),
-//           )
-//         );
-//       },
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: FormBuilder(
+              key: _emergencyContactIndoKey,
+              child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  BuildHeader(
+                  pageName: 'KONTAK DARURAT',
+                  assetName: 'images/kontak-active.svg',
+                  ),
+                  Container(
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(height: 30,),
+                        Row(
+                          children: [
+                            Text(
+                              'Di Indonesia',
+                              style: TextStyling.regularBoldTextStyle,
+                            ),
+                            InfoButton(
+                              contents: 'Informasi kontak sesuai surat-surat pemerintah'
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 30,),
+                        FormContainer(
+                        labels: 'Nama',
+                        needsInfoButton: false,
+                        isDataRequired: AutovalidateMode.onUserInteraction,
+                        hintContents: '',
+                        buttonContent: '',
+                        valueConstraints: r"^[a-z A-Z',.\-]+$",
+                        requiredDataChecker: true,
+                        controller: _emergencyContactIndoName, 
+                        manualErrorText: 'Harap mengisi nama kontak darurat anda di Indonesia',                 
+                        ),
+                        SizedBox(height: 30,),
+                        DropdownContainer(
+                          labels: 'Hubungan',
+                          needsInfoButton: false,
+                          buttonContent: '',
+                          dropdownName: 'relationshipIndo',
+                          validatorWarning: 'Harap mengisi hubungan anda dengan kontak darurat',
+                          hintContents: 'Pilih Hubungan',
+                          dropdownValue: relationshipDropdownValue,
+                          dropdownContents: relationship
+                        ),
+                        SizedBox(height: 30,),
+                        //TODO: Change RegExp
+                        FormContainer(
+                          labels: 'Email',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r"^[a-zA-Z0-9'@,.\-]+$", 
+                          requiredDataChecker: true, 
+                          controller: _emergencyContactIndoEmail,  
+                          manualErrorText: 'Harap mengisi email kontak darurat di Indonesia',                  
+                        ),
+                        SizedBox(height: 30,),
+                        //TODO: Change RegExp
+                        FormContainerWithDisabledText(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r"^[0-9]+$",
+                          requiredDataChecker: true,
+                          areaCode: '+62',     
+                          controller: _emergencyContactIndoPhone,   
+                          manualErrorText: 'Harap mengisi nomor telepon kontak darurat di Indonesia',           
+                        ),
+                        //TODO: Adjust button position
+                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            BackButtons(
+                              onPressed: () => goBack(context),
+                            ),
+                            // TODO: Adjust button position
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),                 
+                ],
+              ),
+            ),
+          )
+        );
+      },
+    );
+  }
+}

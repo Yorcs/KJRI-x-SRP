@@ -164,7 +164,7 @@ class _IdentityFormState extends State<IdentityForm> {
                         hintContents: '',
                         requiredDataChecker: true,
                         buttonContent: 'Diisi dengan nama depan, nama tengah, dan nama belakang (jika ada).\n\nContoh: \nArena Sri Viktoria',
-                        valueConstraints: r'^[a-z A-Z,.\-]+$', 
+                        valueConstraints: r"^[a-z A-Z,.\-']+$", 
                         manualErrorText: 'Tolong periksa ulang format pengisian nama',  
                         controller: _name,                 
                         ),
