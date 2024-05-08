@@ -49,16 +49,18 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
 
   //Dropdown string
   late String goalOfStayingDropdownValueString;
+  late String secondaryGoalOfStayingDropdownValueString;
   late String employmentIndustryString;
   late String employmentNameString;
   late String schoolDegreeString;
   late String lengthOfSchoolYearString;
   late String lengthOfSchoolMonthString;
 
-  Future<(String, String, String, String, String, String, String, String, String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String, String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     goalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap') ?? '';
+    secondaryGoalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap Lainnya') ?? '';
 
     descriptionString = prefs.getString('Keterangan') ?? '';
 
@@ -78,6 +80,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
 
     setState(() {
       goalOfStayingDropdownValue = goalOfStayingDropdownValueString;
+      secondaryGoalOfStayingDropdownValue = secondaryGoalOfStayingDropdownValueString;
 
       _description.text = descriptionString;
 
@@ -95,12 +98,13 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
       lengthOfSchoolMonth = lengthOfSchoolMonthString;
     });
 
-    return (employerNameString, employerAddressString, descriptionString, perusahaanPenyalurString, agenPenyalurString, goalOfStayingDropdownValueString, employmentIndustryString, employerNameString, schoolNameString, schoolDegreeString, schoolProgramString, lengthOfSchoolYearString, lengthOfSchoolMonthString);
+    return (employerNameString, employerAddressString, descriptionString, perusahaanPenyalurString, agenPenyalurString, goalOfStayingDropdownValueString, secondaryGoalOfStayingDropdownValueString, employmentIndustryString, employerNameString, schoolNameString, schoolDegreeString, schoolProgramString, lengthOfSchoolYearString, lengthOfSchoolMonthString);
   }
 
   Future<void> saveData() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('Tujuan Menetap', goalOfStayingDropdownValue.toString());
+    await prefs.setString('Tujuan Menetap Lainnya', secondaryGoalOfStayingDropdownValue.toString());
 
     await prefs.setString('Keterangan', _description.text);
 
@@ -200,6 +204,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
   
 
   String? goalOfStayingDropdownValue;
+  String? secondaryGoalOfStayingDropdownValue;
   String? employmentIndustry;
   String? employmentName;
   String? schoolDegree;
@@ -212,6 +217,12 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     'Belajar',
     'Magang',
     'Mendampingi Suami / Istri',
+    'Lain-lain',
+  ];
+
+  List<String> secondaryGoals = [
+    'Bekerja',
+    'Belajar',
     'Lain-lain',
   ];
 
@@ -517,6 +528,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Tujuan Menetap',
                             style: TextStyling.regularTextStyle,
                           ),
+                        SizedBox(height: 10,),
                         FormBuilderDropdown<String>(
                           name: "goals",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -577,8 +589,8 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         SizedBox(height: 30,),
-                        //Mendampingi Suami / Istri, Anggota Keluarga / Pengikut
-                        if (goalOfStayingDropdownValue.toString() =='Mendampingi Suami / Istri' || goalOfStayingDropdownValue.toString() == 'Anggota Keluarga / Pengikut') ... [
+                        //Mendampingi Suami / Istri
+                        if (goalOfStayingDropdownValue.toString() =='Mendampingi Suami / Istri') ... [
                           FormContainer(
                             labels: 'Keterangan',
                             needsInfoButton: false,
@@ -591,6 +603,1605 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             manualErrorText: 'Harap mengisi kolom keterangan',             
                           ),
                         ] 
+                        else if(goalOfStayingDropdownValue.toString() == 'Anggota Keluarga / Pengikut') ...[
+                          Text(
+                            'Tujuan Menetap Lainnya',
+                            style: TextStyling.regularTextStyle,
+                          ),
+                          FormBuilderDropdown<String>(
+                            name: "secondaryGoals",
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: FormBuilderValidators.compose([
+                              (value){
+                                if(value ==null || value =='' || value.isEmpty){
+                                  return 'Please select a goal of staying'; //TODO: Change prompt
+                                }
+                                return null;
+                              }
+                            ]),
+                            onChanged: (String? newValue){
+                              setState((){
+                                secondaryGoalOfStayingDropdownValue = newValue!;
+                                }
+                              );
+                            },
+                            decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                fontFamily: 'Source Sans Pro',
+                                color: Color.fromRGBO(255, 5, 5, 1),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                )
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                )
+                              ),
+                              focusColor: Color.fromRGBO(74, 74, 74, 1),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(74, 74, 74, 1),
+                                ),
+                              ),
+                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                              prefix: const Padding(
+                                padding: EdgeInsets.only(left: 15),
+                              ),
+                              isDense: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0.5,
+                                  color: Color.fromRGBO(179, 179, 179, 1),
+                                  )
+                                ),
+                            ),
+                            items: secondaryGoals
+                            .map((items) => DropdownMenuItem<String>(
+                              value: items,
+                              child: Text(items),
+                              )).toList()
+                          ),
+                          SizedBox(height: 30,),
+                          if(secondaryGoalOfStayingDropdownValue.toString() == 'Lain-lain') ... [
+                            FormContainer(
+                              labels: 'Keterangan',
+                              needsInfoButton: true,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: 'Sebutkan: \nKunjungan Keluarga, Au pair, dll',
+                              valueConstraints: r'^[a-z A-Z 0-9,.\-]+$',     
+                              controller: _description,
+                              requiredDataChecker: true,  
+                              manualErrorText: 'Harap mengisi kolom keterangan',              
+                            ),
+                          ]
+                          else if(secondaryGoalOfStayingDropdownValue.toString() == 'Bekerja') ... [
+                            // TODO: Change hint contents
+                            Text(
+                                'Bidang Kerja',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                            SizedBox(height: 10,),
+                            FormBuilderDropdown<String>(
+                              name: "employmentIndustry",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your industry'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentIndustry = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: industries
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            SizedBox(height: 30),
+                            
+                            // TODO: Change placeholder
+                            if(employmentIndustry.toString() == 'Pertambangan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: pertambanganName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Pemerintahan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: pemerintahanName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Kesehatan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: kesehatanName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Konstruksi') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: konstruksiName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Industri Manufaktur') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: industriManufakturName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Organisasi Internasional') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: orgInterName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Industri Perhotelan dan Pariwisata') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: parwisName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Pendidikan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: pendidikanName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Penerbangan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: penerbanganName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Perbankan dan Keuangan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: keuanganName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Pertanian' || employmentIndustry.toString() == 'Perkebunan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: pertanianOrPerkebunanName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Hukum') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: hukumName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Domestik') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: domestikName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Teknologi Informasi') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: techName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Media Elektronik') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: mediaElektronikName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Seni dan Budaya') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: senbudName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Wirausaha') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: wirausahaName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Pelayaran dan Kelautan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: kelautanName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Industri Mode') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: industriModeName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if (employmentIndustry.toString() == 'Perikanan') ... [
+                              Text(
+                                'Pekerjaan',
+                                style: TextStyling.regularTextStyle,
+                              ),
+                              SizedBox(height: 10,),
+                              FormBuilderDropdown<String>(
+                              name: "employmentName",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your job'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  employmentName = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: perikananName
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            ] else if(employmentIndustry.toString() =='Jasa (Service)') ... [
+                                FormContainer(
+                                  labels: 'Keterangan',
+                                  needsInfoButton: false,
+                                  isDataRequired: AutovalidateMode.onUserInteraction,
+                                  hintContents: '',
+                                  buttonContent: '',
+                                  valueConstraints: r'^[a-z A-Z 0-9,.\-]+$',   
+                                  controller: _description,
+                                  requiredDataChecker: true,    
+                                  manualErrorText: "Harap mengisi kolom keterangan",             
+                                ),
+                            ],
+                            SizedBox(height: 30),
+                            FormContainer(
+                              labels: 'Nama Perusahaan / Pengguna Jasa',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",   
+                              controller: _employerName,
+                              requiredDataChecker: true,    
+                              manualErrorText: "Harap memeriksa ulang nama perusahaan",             
+                            ),
+                            SizedBox(height: 30),
+                            FormContainer(
+                              labels: 'Alamat Pekerjaan di Luar Negeri',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",   
+                              controller: _employerAddress,
+                              requiredDataChecker: true,   
+                              manualErrorText: "Harap memeriksa ulang alamat pekerjaan",             
+                            ),
+                            SizedBox(height: 30),
+                            FormContainer(
+                              labels: 'Perusahaan Penyalur / Penempatan',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",    
+                              controller: _perusahaanPenyalur,  
+                              requiredDataChecker: true,   
+                              manualErrorText: "Harap memeriksa ulang perusahaan penyalur",              
+                            ),
+                            SizedBox(height: 30),
+                            FormContainer(
+                              labels: 'Agen Penyalur di Luar Negeri',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",  
+                              controller: _agenPenyalur, 
+                              requiredDataChecker: true,
+                              manualErrorText: "Harap memeriksa ulang perusahaan penyalur",                  
+                            ),
+                          ]
+                          else if(secondaryGoalOfStayingDropdownValue.toString() == 'Belajar') ...[
+                            FormContainer(
+                            labels: 'Nama Sekolah',
+                            needsInfoButton: false,
+                            isDataRequired: AutovalidateMode.onUserInteraction,
+                            hintContents: '',
+                            buttonContent: '',
+                            valueConstraints: r'^[a-z A-Z 0-9,.\-]+$',   
+                            controller: _schoolName,
+                            requiredDataChecker: true, 
+                            manualErrorText: 'Harap mengisi nama sekolah',                
+                            ),
+                            SizedBox(height: 30),
+                            Text(
+                              'Jenjang',
+                              style: TextStyling.regularTextStyle,
+                            ),
+                            FormBuilderDropdown<String>(
+                              name: "Jenjang",
+                              autovalidateMode: AutovalidateMode.onUserInteraction,
+                              validator: FormBuilderValidators.compose([
+                                (value){
+                                  if(value ==null || value =='' || value.isEmpty){
+                                    return 'Please select your degree'; //TODO: Change prompt
+                                  }
+                                  return null;
+                                }
+                              ]),
+                              onChanged: (String? newValue){
+                                setState((){
+                                  schoolDegree = newValue!;
+                                  }
+                                );
+                              },
+                              decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                  fontFamily: 'Source Sans Pro',
+                                  color: Color.fromRGBO(255, 5, 5, 1),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(255, 5, 5, 1),
+                                  )
+                                ),
+                                focusColor: Color.fromRGBO(74, 74, 74, 1),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(74, 74, 74, 1),
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+                                prefix: const Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    width: 0.5,
+                                    color: Color.fromRGBO(179, 179, 179, 1),
+                                    )
+                                  ),
+                              ),
+                              items: jenjang
+                              .map((items) => DropdownMenuItem<String>(
+                                value: items,
+                                child: Text(items),
+                                )).toList()
+                            ),
+                            SizedBox(height: 30),
+                            FormContainer(
+                              labels: 'Program / Bidang Studi',
+                              needsInfoButton: false,
+                              isDataRequired: AutovalidateMode.onUserInteraction,
+                              hintContents: '',
+                              buttonContent: '',
+                              valueConstraints: r'^[a-z A-Z 0-9,.\-]+$',   
+                              controller: _schoolProgram,
+                              requiredDataChecker: true,   
+                              manualErrorText: 'Harap mengisi program / bidag studi',              
+                            ),
+                          ]
+                        ]
                         //Lain-lain
                         else if (goalOfStayingDropdownValue.toString() == 'Lain-lain') ... [
                           FormContainer(
@@ -612,6 +2223,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Bidang Kerja',
                             style: TextStyling.regularTextStyle,
                           ),
+                        SizedBox(height: 10,),
                         FormBuilderDropdown<String>(
                           name: "employmentIndustry",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -672,7 +2284,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         SizedBox(height: 30),
-                        //TODO: COPY PASTE TO IF STATEMENT
                         
                         // TODO: Change placeholder
                         if(employmentIndustry.toString() == 'Pertambangan') ... [
@@ -680,6 +2291,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -744,6 +2356,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -808,6 +2421,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -872,6 +2486,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -936,6 +2551,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1000,6 +2616,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1064,6 +2681,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1128,6 +2746,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1192,6 +2811,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1256,6 +2876,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1320,6 +2941,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1384,6 +3006,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1448,6 +3071,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1512,6 +3136,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1576,6 +3201,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1640,6 +3266,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1704,6 +3331,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1768,6 +3396,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1832,6 +3461,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -1896,6 +3526,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2106,7 +3737,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             valueConstraints: r'^[a-z A-Z 0-9,.\-]+$',   
                             controller: _schoolProgram,
                             requiredDataChecker: true,   
-                            manualErrorText: 'Harap mengisi program / bidag studi',              
+                            manualErrorText: 'Harap mengisi program / bidang studi',              
                           ),
 
                           //TODO: ADD TWO INPUT CONTAINER
@@ -2117,6 +3748,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Bidang Kerja',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                         FormBuilderDropdown<String>(
                           name: "employmentIndustry",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2176,16 +3808,14 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             child: Text(items),
                             )).toList()
                         ),
-                        Text(
-                            'Pekerjaan',
-                            style: TextStyling.regularTextStyle,
-                          ),
+                          SizedBox(height: 30,),
                         // TODO: Change placeholder
                         if(employmentIndustry.toString() == 'Pertambangan') ... [
                           Text(
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2250,6 +3880,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2314,6 +3945,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2378,6 +4010,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2442,6 +4075,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2506,6 +4140,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2570,6 +4205,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2634,6 +4270,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2698,6 +4335,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2762,6 +4400,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2826,6 +4465,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2890,6 +4530,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -2954,6 +4595,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3018,6 +4660,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3082,6 +4725,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3146,6 +4790,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3210,6 +4855,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3274,6 +4920,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3338,6 +4985,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -3402,6 +5050,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             'Pekerjaan',
                             style: TextStyling.regularTextStyle,
                           ),
+                          SizedBox(height: 10,),
                           FormBuilderDropdown<String>(
                           name: "employmentName",
                           autovalidateMode: AutovalidateMode.onUserInteraction,
