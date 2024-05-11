@@ -52,23 +52,33 @@ class _OverviewFormState extends State<OverviewState> {
   //Goal of Staying
 
   //Emergency Contact Abroad
+  late String emergencyContactAbroadName;
+  late String emergencyContactAbroadEmail;
+  late String emergencyContactAbroadPhone;
+  late String emergencyContactAbroadRelationship;
 
   //Emergency Contact Indonesia
+  late String emergencyContactIndoName;
+  late String emergencyContactIndoEmail;
+  late String emergencyContactIndoPhone;
+  late String emergencyContactIndoRelationship;
 
   Future<(String, String, String, String, String,
    String, String, String, String, String, String, String, String,
-   String, String, String, String, String, String, String, String)> getSharedPrefs() async{
+   String, String, String, String, String, String, String, String,
+   String, String, String, String,
+   String, String, String, String)> getSharedPrefs() async{
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    //Personal data
+    //Personal Data
     String nameString = prefs.getString('Nama Lengkap') ?? '';
     String dobString = prefs.getString('Tanggal Lahir') ??'';
     String passportString = prefs.getString('Nomor Paspor') ?? '';
     String idNumberString = prefs.getString('NIK') ?? '';
     String genderString = prefs.getString('Jenis Kelamin') ?? '';
 
-    //Living abroad data
+    //Living Abroad Data
     String addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
     String countryString = prefs.getString('Negara') ?? 'Kanada';
     String postalCodeString = prefs.getString('Kode Pos') ?? '';
@@ -78,7 +88,7 @@ class _OverviewFormState extends State<OverviewState> {
     String canadianAreaCodeString = prefs.getString('Nomor Area Canada') ??'';
     String canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
 
-    //Living abroad data continued
+    //Living Abroad Data Continued
     String visaNumberString = prefs.getString('Nomor Visa') ?? '';
     String visaEndDateString = prefs.getString('Expired Visa') ??'';
     String visaStartDateString = prefs.getString('Start Visa') ?? '';
@@ -88,15 +98,29 @@ class _OverviewFormState extends State<OverviewState> {
     String lengthOfStayYearString = prefs.getString('Perkiraan Lama Menetap (Tahun)') ?? '';
     String lengthOfStayMonthString = prefs.getString('Perkiraan Lama Menetap (Bulan)') ?? '';
 
+    //Goal Of Staying
+
+    //Emergency Contact Abroad
+    String emergencyContactAbroadNameString = prefs.getString('Nama Kontak Darurat di Luar Negeri') ?? '';
+    String emergencyContactAbroadEmailString = prefs.getString('Email Kontak Darurat di Luar Negeri') ??'';
+    String emergencyContactAbroadPhoneString = prefs.getString('Telepon Kontak Darurat di Luar Negeri') ?? '';
+    String emergencyContactAbroadRelationshipString = prefs.getString('Hubungan Kontak Darurat di Luar Negeri') ?? '';
+
+    //Emergency Contact Indonesia
+    String emergencyContactIndoNameString = prefs.getString('Nama Kontak Darurat di Indonesia') ?? '';
+    String emergencyContactIndoEmailString = prefs.getString('Email Kontak Darurat di Indonesia') ??'';
+    String emergencyContactIndoPhoneString = prefs.getString('Telepon Kontak Darurat di Indonesia') ?? '';
+    String emergencyContactIndoRelationshipString = prefs.getString('Hubungan Kontak Darurat di Indonesia') ?? '';
+
     setState(() {
-      //Personal data
+      //Personal Data
       name = nameString;
       dob = dobString;
       passport = passportString;
       idNumber = idNumberString;
       gender = genderString;
 
-      //Living abroad data
+      //Living Abroad Data
       address = addressString;
       country = countryString;
       postalCode = postalCodeString;
@@ -106,7 +130,7 @@ class _OverviewFormState extends State<OverviewState> {
       canadianAreaCode = canadianAreaCodeString;
       canadianPhoneNumber = canadianPhoneNumberString;
 
-      //Living abroad data continue
+      //Living Abroad Data Continue
       visaNumber = visaNumberString;
       visaStartDate = visaStartDateString;
       visaEndDate = visaEndDateString;
@@ -115,11 +139,28 @@ class _OverviewFormState extends State<OverviewState> {
       dateOfArrival = dateOfArrivalString;
       lengthOfStayYear = lengthOfStayYearString;
       lengthOfStayMonth = lengthOfStayMonthString;
+
+      //Goal Of Staying
+
+      //Emergency Contact Abroad
+      emergencyContactAbroadName = emergencyContactAbroadNameString;
+      emergencyContactAbroadEmail = emergencyContactAbroadEmailString;
+      emergencyContactAbroadPhone = emergencyContactAbroadPhoneString;
+      emergencyContactAbroadRelationship = emergencyContactAbroadRelationshipString;
+
+      //Emergency Contact Indo
+      emergencyContactIndoName = emergencyContactIndoNameString;
+      emergencyContactIndoEmail = emergencyContactIndoEmailString;
+      emergencyContactIndoPhone = emergencyContactIndoPhoneString;
+      emergencyContactIndoRelationship = emergencyContactIndoRelationshipString;
     });
 
     return(name, dob, passport, idNumber, gender,
      address, country, postalCode, province, proofOfStayingDoc, proofOfStayingDocName, canadianAreaCode, canadianPhoneNumber,
-     visaNumber, visaStartDate, visaEndDate, permitToStayDoc, permitToStayDocName, dateOfArrival,lengthOfStayMonth, lengthOfStayYear);
+     visaNumber, visaStartDate, visaEndDate, permitToStayDoc, permitToStayDocName, dateOfArrival,lengthOfStayMonth, lengthOfStayYear,
+     emergencyContactAbroadName, emergencyContactAbroadEmail, emergencyContactAbroadPhone, emergencyContactAbroadRelationship,
+     emergencyContactIndoName, emergencyContactIndoEmail, emergencyContactIndoPhone, emergencyContactIndoRelationship,
+     );
   }
 
   @override
@@ -182,12 +223,14 @@ class _OverviewFormState extends State<OverviewState> {
                       ),
                       SizedBox(height: 30,),
 
-                      //Living Abroad Data & Living Abroad Data Continue
+                      //Living Abroad Data & Living Abroad Data Continue section
                       Text(
                         'DATA LUAR NEGERI',
                         style: TextStyling.regularBoldTextStyle,
                       ),
                       SizedBox(height: 30,),
+
+                      //Living Abroad Data
                       OverviewLabelWidget(
                         labelName: 'Alamat Lengkap di Luar Negeri', 
                         content: address,
@@ -216,6 +259,8 @@ class _OverviewFormState extends State<OverviewState> {
                         content: proofOfStayingDocName,
                       ),
                       SizedBox(height: 30,),
+
+                      //Living Abroad Data Continued
                       OverviewLabelWidget(
                         labelName: 'Waktu Kedatangan', 
                         content: dateOfArrival,
@@ -248,25 +293,67 @@ class _OverviewFormState extends State<OverviewState> {
                       ),
                       SizedBox(height: 30,),
 
-                      //Goal of Staying
+                      //Goal of Staying Section
                       Text(
                         'TUJUAN MENETAP',
                         style: TextStyling.regularBoldTextStyle,
                       ),
                       SizedBox(height: 30,),
 
-                      //Emergency Contact
+                      //Emergency Contact Section
                       Text(
                         'KONTAK DARURAT',
                         style: TextStyling.regularBoldTextStyle,
                       ),
                       SizedBox(height: 30,),
+
+                      //Emergency Contact Abroad
                       OverviewHeaderWidget(
                         headerLabelName: 'Di Luar Negeri'
                       ),
                       OverviewLabelWidget(
                         labelName: 'Nama', 
-                        content: proofOfStayingDocName,
+                        content: emergencyContactAbroadName,
+                      ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Hubungan', 
+                        content: emergencyContactAbroadRelationship,
+                      ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Email', 
+                        content: emergencyContactAbroadEmail,
+                      ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Telepon', 
+                        content: emergencyContactAbroadPhone,
+                      ),
+                      SizedBox(height: 30,),
+
+                      //Emergency Contact Indonesia
+                      OverviewHeaderWidget(
+                        headerLabelName: 'Di Indonesia'
+                      ),
+                      OverviewLabelWidget(
+                        labelName: 'Nama', 
+                        content: emergencyContactIndoName,
+                      ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Hubungan', 
+                        content: emergencyContactIndoRelationship,
+                      ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Email', 
+                        content: emergencyContactIndoEmail,
+                      ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Telepon', 
+                        content: emergencyContactIndoPhone,
                       ),
                       SizedBox(height: 30,),
                     ]
