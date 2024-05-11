@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "52665304160",
+    "project_id": "kjri-self-report-app",
+    "storage_bucket": "kjri-self-report-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52665304160:android:68b807f3fe61e33fdaaf05",
+        "android_client_info": {
+          "package_name": "com.example.self_report_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBHskR-fM0O-REUXoNYIOkvb3-Lqcj3DM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
