@@ -3739,8 +3739,21 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             requiredDataChecker: true,   
                             manualErrorText: 'Harap mengisi program / bidang studi',              
                           ),
-
-                          //TODO: ADD TWO INPUT CONTAINER
+                          FormContainerWithTwoDropdownText(
+                            mainLabel: 'Lama Pendidikan',
+                            needsInfoButton: false,
+                            buttonContent: '',
+                            label1: 'Tahun',
+                            label2: 'Bulan',
+                            dropdownName1: 'Lama Pendidikan (Tahun)',
+                            dropdownName2: 'Lama Pendidikan (Bulan)',
+                            validatorWarning: '',
+                            hintContents: '',
+                            dropdownValue1: lengthOfSchoolYear,
+                            dropdownContents1: tahunJenjang,
+                            dropdownValue2: lengthOfSchoolMonth,
+                            dropdownContents2: bulanJenjang,
+                          )
                         ]
                         //Magang
                         else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
