@@ -21,8 +21,6 @@ class RequirementsPage extends StatelessWidget {
         return Scaffold(
           body: Center(
             child: Container(
-              //TODO: readjust margin
-              //TODO: readjust padding
               //TODO: Make the Image and the text scale depending on the size of the screen
               margin: const EdgeInsets.all(5.0),
               padding: const EdgeInsets.all(10.0),
@@ -59,7 +57,6 @@ class RequirementsPage extends StatelessWidget {
                   ),
             
                   //List
-                  //TODO: Readjust margin padding
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Column(
@@ -98,7 +95,6 @@ class RequirementsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 135,), 
-                  //TODO: Readjust position for button
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[

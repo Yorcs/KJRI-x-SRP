@@ -178,7 +178,6 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                           dropdownContents: relationship
                         ),       
                         SizedBox(height: 30,),
-                        //TODO: Change RegExp
                         FormContainer(
                           labels: 'Email',
                           needsInfoButton: false,
@@ -191,7 +190,6 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                           manualErrorText: 'Harap mengisi email kontak darurat luar negeri',                 
                         ),
                         SizedBox(height: 30,),
-                        //TODO: Change RegExp
                         FormContainerWithDisabledText(
                           labels: 'Telepon',
                           needsInfoButton: false,
@@ -204,19 +202,19 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                           requiredDataChecker: true,      
                           manualErrorText: 'Harap mengisi nomor telepon kontak darurat di luar negeri',           
                         ),
-                        //TODO: Adjust button position
+                        SizedBox(height: 40,), 
                          Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),
-                            // TODO: Adjust button position
                             ForwardButtons(
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],
                         ),
+                        SizedBox(height: 50,), 
                       ],
                     ),
                   ),                

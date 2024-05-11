@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,21 +75,6 @@ class TextStyling {
     fontSize: 12,
   );
 }
-
-
-// class TextOverview extends StatelessWidget{
-//   const TextOverview({
-//     super.key,
-//     required this.labelName,
-//     required this.content,
-//   })
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     throw UnimplementedError();
-//   }
-  
-// }
 
 // Back Button Style
 class BackButtons extends StatelessWidget{
@@ -178,7 +160,6 @@ class FileButtonsStyle extends StatelessWidget{
 
 
 //Pop up dialog button
-//TODO: Change icon
 class InfoButton extends StatelessWidget {
   const InfoButton({
     super.key,
@@ -188,7 +169,6 @@ class InfoButton extends StatelessWidget {
   final String contents;
   final String assetName = 'images/info-button.svg';
 
-//TODO: Replace placeholders
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -207,7 +187,6 @@ class InfoButton extends StatelessWidget {
 }
 
 //File Picker
-//TODO: Work on it more
 class FilePickerButton extends StatefulWidget {
   const FilePickerButton({super.key, required this.fileController, required this.fileName});
 
@@ -238,7 +217,7 @@ class _FilePickerState extends State<FilePickerButton> {
         fileName = result.files.first.name;
       }
       else{
-        return; //TODO: CHANGE FUNCTIONALITY
+        return;
       }
     } else {
       return;
@@ -250,10 +229,6 @@ class _FilePickerState extends State<FilePickerButton> {
       fileBytesDecoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesDecoded!;
     });
-
-// TODO: DEBUG PURPOSES DELETE LATER
-    print(result.files.first.name);
-    print(widget.fileController.text);
   }
 
   @override

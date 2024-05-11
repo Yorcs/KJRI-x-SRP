@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:self_report_application/emergency_contact_abroad.dart';
-import 'package:self_report_application/identity.dart';
-import 'package:self_report_application/living_abroad_data_continue.dart';
-import 'package:self_report_application/living_abroad_data.dart';
-import 'package:self_report_application/goal_of_staying.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         ),
-        home: GoalOfStayingPage(),
+        home: WelcomePage(),
       ),
     );
   }
@@ -101,7 +102,6 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20,), 
-                  //TODO: Adjust button position
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[

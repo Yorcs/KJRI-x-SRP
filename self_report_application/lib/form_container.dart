@@ -796,7 +796,7 @@ class DropdownFormState extends State<DropdownForm> {
       validator: FormBuilderValidators.compose([
         (value){
           if(value ==null || value =='' || value.isEmpty){
-            return widget.validatorWarning; //TODO: Change prompt
+            return widget.validatorWarning;
           }
           return null;
         }
@@ -856,8 +856,6 @@ class DropdownFormState extends State<DropdownForm> {
 
 
 // Base Form
-//TODO: Needs refactoring to reduce redundancy
-//TODO: change RegExp String according to what we need
 // ignore: must_be_immutable
 class TextsForm extends StatelessWidget {
   TextsForm({

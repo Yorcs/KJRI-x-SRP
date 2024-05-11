@@ -279,7 +279,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           textStyle: 'header',          
                         ),
                         SizedBox(height: 30,),
-                        //TODO: ADD PROVINCE DROPDOWN
                         Text(
                           'Perkiraan Lama Menetap',
                           style: TextStyling.regularBoldTextStyle,
@@ -312,7 +311,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),
-                            // TODO: Adjust button position
                             ForwardButtons(
                               onPressed: () => getItemAndNavigate(context)
                             ),

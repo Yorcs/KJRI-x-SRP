@@ -269,14 +269,12 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           manualErrorText: 'Tolong periksa ulang nomor telepon anda',            
                         ),
                         SizedBox(height: 40,), 
-                        //TODO: Adjust button position
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),
-                            // TODO: Adjust button position
                             ForwardButtons(
                               onPressed: () => getItemAndNavigate(context)
                             ),
