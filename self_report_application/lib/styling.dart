@@ -66,6 +66,17 @@ class TextStyling {
     color: Color.fromRGBO(118, 144, 235, 1),
   );
   
+  static const TextStyle overviewTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
+    color: Color.fromRGBO(163, 163, 163, 1),
+    fontSize: 12,
+  );
+
+  static const TextStyle overviewHeaderTextStyle = TextStyle(
+    fontFamily: 'Source Sans Pro',
+    color: Color.fromRGBO(110, 119, 129, 1),
+    fontSize: 12,
+  );
 }
 
 
@@ -198,9 +209,10 @@ class InfoButton extends StatelessWidget {
 //File Picker
 //TODO: Work on it more
 class FilePickerButton extends StatefulWidget {
-  const FilePickerButton({super.key, required this.controller});
+  const FilePickerButton({super.key, required this.fileController, required this.fileName});
 
-  final TextEditingController controller;
+  final TextEditingController fileController;
+  final TextEditingController fileName;
 
     @override
   State<FilePickerButton> createState() => _FilePickerState();
@@ -236,12 +248,12 @@ class _FilePickerState extends State<FilePickerButton> {
       fileName = result.files.first.name;
       // fileBytesDecoded = fileBytes.toString();
       fileBytesDecoded = base64Encode(fileBytes!);
-      widget.controller.text = fileBytesDecoded!;
+      widget.fileController.text = fileBytesDecoded!;
     });
 
 // TODO: DEBUG PURPOSES DELETE LATER
     print(result.files.first.name);
-    print(widget.controller.text);
+    print(widget.fileController.text);
   }
 
   @override
@@ -269,13 +281,24 @@ class _FilePickerState extends State<FilePickerButton> {
                 width: 200,
                 child: Text(fileName!),
               ),
+              SizedBox(
+                width: 0,
+                child: Visibility(
+                  visible: false,
+                  child: TextFormField(
+                    controller: widget.fileName,
+                    enabled: false,
+                    initialValue: fileName,
+                    textAlign: TextAlign.center,
+                  )),
+              ),
             //Extracting file name
               SizedBox(
                 width: 0,
                 child: Visibility(
                   visible: false,
                   child: TextFormField(
-                    controller: widget.controller,
+                    controller: widget.fileController,
                     enabled: false,
                     textAlign: TextAlign.center,
                   ),

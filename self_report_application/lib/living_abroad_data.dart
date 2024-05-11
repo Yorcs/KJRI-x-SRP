@@ -32,6 +32,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _canadianAreaCode = TextEditingController();
   final TextEditingController _canadianPhoneNumber = TextEditingController();
   final TextEditingController _proofOfStayingDoc = TextEditingController();
+  final TextEditingController _proofOfStayingDocName = TextEditingController();
   String? provinceDropdownValue;
 
   List<String> provinces = [
@@ -45,10 +46,11 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   late String postalCodeString;
   late String provinceDropdownValueString;
   late String proofOfStayingDocString;
+  late String proofOfStayingDocNameString;
   late String canadianAreaCodeString;
   late String canadianPhoneNumberString;
 
-  Future<(String, String, String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
@@ -56,6 +58,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     postalCodeString = prefs.getString('Kode Pos') ?? '';
     provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
     proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
+    proofOfStayingDocNameString = prefs.getString('Nama File Dokumen Bukti Tinggal') ?? '';
     canadianAreaCodeString = prefs.getString('Nomor Area Canada') ??'';
     canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
 
@@ -65,11 +68,12 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       _postalCode.text = postalCodeString;
       provinceDropdownValue = provinceDropdownValueString;
       _proofOfStayingDoc.text = proofOfStayingDocString;
+      _proofOfStayingDocName.text = proofOfStayingDocNameString;
       _canadianAreaCode.text = canadianAreaCodeString;
       _canadianPhoneNumber.text = canadianPhoneNumberString;
     });
 
-    return (addressString, countryString, postalCodeString, provinceDropdownValueString, proofOfStayingDocString, canadianAreaCodeString, canadianPhoneNumberString);
+    return (addressString, countryString, postalCodeString, provinceDropdownValueString, proofOfStayingDocString, proofOfStayingDocNameString, canadianAreaCodeString, canadianPhoneNumberString);
   }
 
   Future<void> saveData() async{
@@ -79,6 +83,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     await prefs.setString('Kode Pos', _postalCode.text);
     await prefs.setString('Provinsi', provinceDropdownValue.toString());
     await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
+    await prefs.setString('Nama File Dokumen Bukti Tinggal', _proofOfStayingDocName.text);
     await prefs.setString('Nomor Area Canada', _canadianAreaCode.text);
     await prefs.setString('Nomor Telepon Canada', _canadianPhoneNumber.text);
   }
@@ -140,6 +145,15 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
         composing:  TextRange.empty,
       );
     });
+
+    _proofOfStayingDocName.addListener(() {
+      final String text = _proofOfStayingDocName.text;
+      _proofOfStayingDocName.value = _proofOfStayingDocName.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
   }
 
   @override
@@ -148,6 +162,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     _country.dispose();
     _postalCode.dispose();
     _proofOfStayingDoc.dispose();
+    _proofOfStayingDocName.dispose();
     _canadianPhoneNumber.dispose();
     _canadianAreaCode.dispose();
     super.dispose();
@@ -195,7 +210,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         FilePickerContainer(
                           labels: 'Dokumen Bukti Domisili',
                           buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022 ID Card\n\u2022 Driver License\n\u2022 Rekening Bank\n\u2022 Kontrak Rumah\n\u2022 Tagihan Telepon\n\u2022 Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
-                          controller: _proofOfStayingDoc,
+                          fileController: _proofOfStayingDoc,
+                          fileName: _proofOfStayingDocName,
                         ),
                         SizedBox(height: 30,),
                         FormContainer(
@@ -246,7 +262,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           isDataRequired: AutovalidateMode.onUserInteraction,
                           hintContents: '',
                           buttonContent: '',
-                          valueConstraints: r'^[+0-9 -]+$',
+                          valueConstraints: r'^[+0-9 ]+$',
                           requiredDataChecker: true,
                           controller: _canadianAreaCode, 
                           controller2: _canadianPhoneNumber, 

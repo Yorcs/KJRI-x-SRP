@@ -30,12 +30,14 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _visaStartDate = TextEditingController();
   final TextEditingController _visaEndDate = TextEditingController();
   final TextEditingController _permitToStayDoc = TextEditingController();
+  final TextEditingController _permitToStayDocName = TextEditingController();
   final TextEditingController _dateOfArrival = TextEditingController();
 
   late String visaNumberString;
   late String visaStartDateString;
   late String visaEndDateString;
   late String permitToStayString;
+  late String permitToStayNameString;
   late String dateOfArrivalString;
   late String lengthOfStayYearString;
   late String lengthOfStayMonthString;
@@ -80,13 +82,14 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   ];
   
   //TODO: FIX DROPDOWN LENGTH OF STAY
-  Future<(String, String, String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     visaNumberString = prefs.getString('Nomor Visa') ?? '';
     visaEndDateString = prefs.getString('Expired Visa') ??'';
     visaStartDateString = prefs.getString('Start Visa') ?? '';
     permitToStayString = prefs.getString('Ijin Tinggal') ?? '';
+    permitToStayNameString = prefs.getString('Nama File Ijin Tinggal') ?? '';
     dateOfArrivalString = prefs.getString('Waktu Kedatangan') ?? '';
     lengthOfStayYearString = prefs.getString('Perkiraan Lama Menetap (Tahun)') ?? '';
     lengthOfStayMonthString = prefs.getString('Perkiraan Lama Menetap (Bulan)') ?? '';
@@ -96,12 +99,13 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       _visaStartDate.text = visaStartDateString;
       _visaEndDate.text = visaEndDateString;
       _permitToStayDoc.text = permitToStayString;
+      _permitToStayDocName.text = permitToStayNameString;
       _dateOfArrival.text = dateOfArrivalString;
       lengthOfStayYear = lengthOfStayYearString;
       lengthOfStayMonth = lengthOfStayMonthString;
     });
 
-    return (visaNumberString, visaStartDateString, visaEndDateString, permitToStayString, dateOfArrivalString, lengthOfStayYearString, lengthOfStayMonthString);
+    return (visaNumberString, visaStartDateString, visaEndDateString, permitToStayString, permitToStayNameString, dateOfArrivalString, lengthOfStayYearString, lengthOfStayMonthString);
   }
 
   Future<void> saveData() async{
@@ -110,6 +114,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     await prefs.setString('Expired Visa', _visaStartDate.text);
     await prefs.setString('Start Visa', _visaEndDate.text);
     await prefs.setString('Ijin Tinggal', _permitToStayDoc.text);
+    await prefs.setString('Nama File Ijin Tinggal', _permitToStayDocName.text);
     await prefs.setString('Waktu Kedatangan', _dateOfArrival.text);
     await prefs.setString('Perkiraan Lama Menetap (Tahun)', lengthOfStayYear.toString());
     await prefs.setString('Perkiraan Lama Menetap (Bulan)', lengthOfStayMonth.toString());
@@ -156,6 +161,15 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       );
     });
 
+    _permitToStayDocName.addListener(() {
+      final String text = _permitToStayDocName.text;
+      _permitToStayDocName.value = _permitToStayDocName.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
     _dateOfArrival.addListener(() {
       final String text = _dateOfArrival.text;
       _dateOfArrival.value = _dateOfArrival.value.copyWith(
@@ -172,6 +186,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     _visaStartDate.dispose();
     _visaEndDate.dispose();
     _permitToStayDoc.dispose();
+    _permitToStayDocName.dispose();
     _dateOfArrival.dispose();
     super.dispose();
   }
@@ -230,7 +245,8 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                         FilePickerContainer(
                           labels: 'Ijin Tinggal',
                           buttonContent: 'Diunggah dengan file format\nPNG/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggah halaman utama,\nmenghadap kedepan\n\nDiterima:\n\u2022 Study Permit\n\u2022 Work Permit\n\u2022 Kartu PR',
-                          controller: _permitToStayDoc,
+                          fileController: _permitToStayDoc,
+                          fileName: _permitToStayDocName,
                         ),
                         SizedBox(height: 30,),
                          DateFormContainer(
