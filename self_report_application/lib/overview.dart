@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
-import 'package:self_report_application/living_abroad_data.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,6 +48,23 @@ class _OverviewFormState extends State<OverviewState> {
   late String lengthOfStayYear;
 
   //Goal of Staying
+  late String goalOfStaying;
+  late String secondaryGoalOfStaying;
+
+  late String description;
+
+  late String employmentName;
+  late String employmentIndustry;
+  late String employerName;
+  late String employerAddress;
+  late String agenPenyalur;
+  late String perusahaanPenyalur;
+
+  late String schoolName;
+  late String schoolProgram;
+  late String schoolDegree;
+  late String lengthOfSchoolMonth;
+  late String lengthOfSchoolYear;
 
   //Emergency Contact Abroad
   late String emergencyContactAbroadName;
@@ -66,6 +81,8 @@ class _OverviewFormState extends State<OverviewState> {
   Future<(String, String, String, String, String,
    String, String, String, String, String, String, String, String,
    String, String, String, String, String, String, String, String,
+   String, String, String, String, String, String, String, String, String, 
+   String, String, String, String, String,
    String, String, String, String,
    String, String, String, String)> getSharedPrefs() async{
 
@@ -99,6 +116,23 @@ class _OverviewFormState extends State<OverviewState> {
     String lengthOfStayMonthString = prefs.getString('Perkiraan Lama Menetap (Bulan)') ?? '';
 
     //Goal Of Staying
+    String goalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap') ?? '';
+    String secondaryGoalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap Lainnya') ?? '';
+
+    String descriptionString = prefs.getString('Keterangan') ?? '';
+
+    String employerNameString = prefs.getString('Nama Perusahaan / Pengguna Jasa') ??'';
+    String employerAddressString = prefs.getString('Alamat Pekerjaan di Luar Negeri') ?? '';
+    String employmentIndustryString = prefs.getString('Bidang Kerja') ?? '';
+    String employmentNameString = prefs.getString('Pekerjaan') ?? '';
+    String perusahaanPenyalurString = prefs.getString('Perusahaan Penyalur / Penempatan') ?? '';
+    String agenPenyalurString = prefs.getString('Agen Penyalur di Luar Negeri') ?? '';
+
+    String schoolNameString = prefs.getString('Nama Sekolah') ?? '';
+    String schoolDegreeString = prefs.getString('Jenjang') ?? '';
+    String schoolProgramString = prefs.getString('Program / Bidang Studi') ?? '';
+    String lengthOfSchoolYearString = prefs.getString('Lama Pendidikan (Tahun)') ?? '';
+    String lengthOfSchoolMonthString = prefs.getString('Lama Pendidikan (Bulan)') ?? '';
 
     //Emergency Contact Abroad
     String emergencyContactAbroadNameString = prefs.getString('Nama Kontak Darurat di Luar Negeri') ?? '';
@@ -141,6 +175,23 @@ class _OverviewFormState extends State<OverviewState> {
       lengthOfStayMonth = lengthOfStayMonthString;
 
       //Goal Of Staying
+      goalOfStaying = goalOfStayingDropdownValueString;
+      secondaryGoalOfStaying = secondaryGoalOfStayingDropdownValueString;
+
+      description = descriptionString;
+
+      employmentIndustry = employmentIndustryString;
+      employmentName = employmentNameString;
+      employerName = employerNameString;
+      employerAddress = employerAddressString;
+      perusahaanPenyalur = perusahaanPenyalurString;
+      agenPenyalur = agenPenyalurString;
+
+      schoolName = schoolNameString;
+      schoolDegree = schoolDegreeString;
+      schoolProgram = schoolProgramString;
+      lengthOfSchoolYear = lengthOfSchoolYearString;
+      lengthOfSchoolMonth = lengthOfSchoolMonthString;
 
       //Emergency Contact Abroad
       emergencyContactAbroadName = emergencyContactAbroadNameString;
@@ -158,6 +209,8 @@ class _OverviewFormState extends State<OverviewState> {
     return(name, dob, passport, idNumber, gender,
      address, country, postalCode, province, proofOfStayingDoc, proofOfStayingDocName, canadianAreaCode, canadianPhoneNumber,
      visaNumber, visaStartDate, visaEndDate, permitToStayDoc, permitToStayDocName, dateOfArrival,lengthOfStayMonth, lengthOfStayYear,
+     goalOfStaying, secondaryGoalOfStaying, description, employmentIndustry, employmentName, employerName, employerAddress, perusahaanPenyalur, agenPenyalur,
+     schoolName, schoolDegree, schoolProgram, lengthOfSchoolMonth, lengthOfSchoolYear,
      emergencyContactAbroadName, emergencyContactAbroadEmail, emergencyContactAbroadPhone, emergencyContactAbroadRelationship,
      emergencyContactIndoName, emergencyContactIndoEmail, emergencyContactIndoPhone, emergencyContactIndoRelationship,
      );
@@ -298,6 +351,181 @@ class _OverviewFormState extends State<OverviewState> {
                         'TUJUAN MENETAP',
                         style: TextStyling.regularBoldTextStyle,
                       ),
+                      SizedBox(height: 30,),
+                      OverviewLabelWidget(
+                        labelName: 'Tujuan Menetap', 
+                        content: goalOfStaying,
+                      ),
+                      SizedBox(height: 30,),
+                      if(goalOfStaying == 'Lain-lain' || goalOfStaying == 'Mendampingi Suami / Istri')...[
+                        OverviewLabelWidget(
+                          labelName: 'Keterangan', 
+                          content: description,
+                        ),
+                      ]
+                      else if(goalOfStaying == 'Anggota Keluarga / Pengikut') ... [
+                        if(secondaryGoalOfStaying == 'Lain-lain')...[
+                          OverviewLabelWidget(
+                            labelName: 'Keterangan', 
+                            content: description,
+                          ),
+                        ]
+                        else if(secondaryGoalOfStaying == 'Bekerja')...[
+                          if(employmentIndustry == 'Jasa (Service)')...[
+                            OverviewLabelWidget(
+                              labelName: 'Keterangan', 
+                              content: description,
+                            ),
+                          ]
+                          else...[
+                            OverviewLabelWidget(
+                              labelName: 'Bidang Kerja', 
+                              content: employmentIndustry,
+                            ),
+                            SizedBox(height: 30,),
+                            OverviewLabelWidget(
+                              labelName: 'Pekerjaan', 
+                              content: employmentName,
+                            ),
+                          ],
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Nama Perusahaan / Pengguna Jasa', 
+                            content: employerName,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Alamat Pekerjaan di Luar Negeri', 
+                            content: employerName,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Perusahaan Penyalur / Penempatan', 
+                            content: perusahaanPenyalur,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Agen Penyalur di Luar Negeri', 
+                            content: agenPenyalur,
+                          ),
+                        ]
+                        else if(secondaryGoalOfStaying == 'Belajar')...[
+                          OverviewLabelWidget(
+                            labelName: 'Nama Sekolah', 
+                            content: schoolName,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Jenjang', 
+                            content: schoolDegree,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Program / Bidang Studi', 
+                            content: schoolProgram,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewHeaderLabelWidget(
+                            headerLabelName: 'Lama Pendidikan', 
+                            labelName1: 'Tahun',
+                            content1: lengthOfSchoolYear,
+                            labelName2: 'Bulan',
+                            content2: lengthOfSchoolMonth,
+                          ),
+                        ]
+                      ]
+                      else if(goalOfStaying == 'Bekerja')...[
+                        if(employmentIndustry == 'Jasa (Service)')...[
+                          OverviewLabelWidget(
+                            labelName: 'Keterangan', 
+                            content: description,
+                          ),
+                        ]
+                        else...[
+                          OverviewLabelWidget(
+                            labelName: 'Bidang Kerja', 
+                            content: employmentIndustry,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Pekerjaan', 
+                            content: employmentName,
+                          ),
+                        ],
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Nama Perusahaan / Pengguna Jasa', 
+                          content: employerName,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Alamat Pekerjaan di Luar Negeri', 
+                          content: employerName,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Perusahaan Penyalur / Penempatan', 
+                          content: perusahaanPenyalur,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Agen Penyalur di Luar Negeri', 
+                          content: agenPenyalur,
+                        ),
+                      ]
+                      else if(goalOfStaying =='Belajar')...[
+                        OverviewLabelWidget(
+                          labelName: 'Nama Sekolah', 
+                          content: schoolName,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Jenjang', 
+                          content: schoolDegree,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Program / Bidang Studi', 
+                          content: schoolProgram,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewHeaderLabelWidget(
+                          headerLabelName: 'Lama Pendidikan', 
+                          labelName1: 'Tahun',
+                          content1: lengthOfSchoolYear,
+                          labelName2: 'Bulan',
+                          content2: lengthOfSchoolMonth,
+                        ),
+                      ]
+                      else if(goalOfStaying == 'Magang')...[
+                        if(employmentIndustry == 'Jasa (Service)')...[
+                          OverviewLabelWidget(
+                            labelName: 'Keterangan', 
+                            content: description,
+                          ),
+                        ]
+                        else...[
+                          OverviewLabelWidget(
+                            labelName: 'Bidang Kerja', 
+                            content: employmentIndustry,
+                          ),
+                          SizedBox(height: 30,),
+                          OverviewLabelWidget(
+                            labelName: 'Pekerjaan', 
+                            content: employmentName,
+                          ),
+                        ],
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Nama Perusahaan / Pengguna Jasa', 
+                          content: employerName,
+                        ),
+                        SizedBox(height: 30,),
+                        OverviewLabelWidget(
+                          labelName: 'Alamat Pekerjaan di Luar Negeri', 
+                          content: employerName,
+                        ),
+                      ],
                       SizedBox(height: 30,),
 
                       //Emergency Contact Section
