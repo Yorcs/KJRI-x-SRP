@@ -66,8 +66,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('Nama Kontak Darurat di Luar Negeri', _emergencyContactAbroadName.text);
     await prefs.setString('Email Kontak Darurat di Luar Negeri', _emergencyContactAbroadEmail.text);
-    await prefs.setString('Telepon Kontak Darurat di Luar Negeri', _emergencyContactAbroadPhone.text);
-    await prefs.setString('Hubungan Kontak Darurat di Luar Negeri', relationshipDropdownValue.toString()); 
+    await prefs.setString('Telepon Kontak Darurat di Luar Negeri', _emergencyContactAbroadPhone.text); 
   }
   
 
@@ -175,7 +174,8 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                           validatorWarning: 'Harap mengisi hubungan anda dengan kontak darurat',
                           hintContents: 'Pilih Hubungan',
                           dropdownValue: relationshipDropdownValue,
-                          dropdownContents: relationship
+                          dropdownContents: relationship,
+                          dropdownKey: 'Hubungan Kontak Darurat di Luar Negeri',
                         ),       
                         SizedBox(height: 30,),
                         FormContainer(

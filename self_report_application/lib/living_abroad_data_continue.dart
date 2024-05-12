@@ -116,8 +116,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
     await prefs.setString('Ijin Tinggal', _permitToStayDoc.text);
     await prefs.setString('Nama File Ijin Tinggal', _permitToStayDocName.text);
     await prefs.setString('Waktu Kedatangan', _dateOfArrival.text);
-    await prefs.setString('Perkiraan Lama Menetap (Tahun)', lengthOfStayYear.toString());
-    await prefs.setString('Perkiraan Lama Menetap (Bulan)', lengthOfStayMonth.toString());
   }
 
 
@@ -293,6 +291,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           hintContents: '',
                           dropdownValue: lengthOfStayYear,
                           dropdownContents: tahunTinggal,
+                          dropdownKey: 'Perkiraan Lama Menetap (Tahun)',
                         ), 
                         DropdownContainer(
                           labels: 'Bulan',
@@ -303,6 +302,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           hintContents: '',
                           dropdownValue: lengthOfStayMonth,
                           dropdownContents: bulanTinggal,
+                          dropdownKey: 'Perkiraan Lama Menetap (Bulan)',
                         ),   
                         SizedBox(height: 40,),                     
                         Row(

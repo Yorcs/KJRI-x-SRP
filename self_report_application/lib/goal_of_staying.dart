@@ -100,12 +100,13 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
 
     return (employerNameString, employerAddressString, descriptionString, perusahaanPenyalurString, agenPenyalurString, goalOfStayingDropdownValueString, secondaryGoalOfStayingDropdownValueString, employmentIndustryString, employerNameString, schoolNameString, schoolDegreeString, schoolProgramString, lengthOfSchoolYearString, lengthOfSchoolMonthString);
   }
+  Future<void> saveDropdownData(String str, String value) async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(str, value);
+  }
 
   Future<void> saveData() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('Tujuan Menetap', goalOfStayingDropdownValue.toString());
-    await prefs.setString('Tujuan Menetap Lainnya', secondaryGoalOfStayingDropdownValue.toString());
-
     await prefs.setString('Keterangan', _description.text);
 
     await prefs.setString('Nama Perusahaan / Pengguna Jasa', _employerName.text);
@@ -118,8 +119,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     await prefs.setString('Nama Sekolah', _schoolName.text);
     await prefs.setString('Jenjang', schoolDegree.toString());
     await prefs.setString('Program / Bidang Studi', _schoolProgram.text);
-    await prefs.setString('Lama Pendidikan (Tahun)', lengthOfSchoolYear.toString());
-    await prefs.setString('Lama Pendidikan (Bulan)', lengthOfSchoolMonth.toString());
   }
 
   @override
@@ -537,7 +536,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select a goal of staying'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Tujuan Menetap', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -616,7 +615,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 if(value ==null || value =='' || value.isEmpty){
                                   return 'Please select a goal of staying'; //TODO: Change prompt
                                 }
-                                return null;
+                                saveDropdownData('Tujuan Menetap Lainnya', value);
                               }
                             ]),
                             onChanged: (String? newValue){
@@ -696,7 +695,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your industry'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Bidang Kerja', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -764,7 +763,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -829,7 +828,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -894,7 +893,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -959,7 +958,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1024,7 +1023,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1089,7 +1088,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1154,7 +1153,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1219,7 +1218,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1284,7 +1283,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1349,7 +1348,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1414,7 +1413,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1479,7 +1478,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1544,7 +1543,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1609,7 +1608,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1674,7 +1673,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1739,7 +1738,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1804,7 +1803,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1869,7 +1868,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1934,7 +1933,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -1999,7 +1998,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your job'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Pekerjaan', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -2108,7 +2107,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               buttonContent: '',
                               valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",  
                               controller: _agenPenyalur, 
-                              requiredDataChecker: true,
+                              requiredDataChecker: false,
                               manualErrorText: "Harap memeriksa ulang perusahaan penyalur",                  
                             ),
                           ]
@@ -2137,7 +2136,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   if(value ==null || value =='' || value.isEmpty){
                                     return 'Please select your degree'; //TODO: Change prompt
                                   }
-                                  return null;
+                                  saveDropdownData('Jenjang', value);
                                 }
                               ]),
                               onChanged: (String? newValue){
@@ -2200,6 +2199,34 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               requiredDataChecker: true,   
                               manualErrorText: 'Harap mengisi program / bidag studi',              
                             ),
+                            SizedBox(height: 30),
+                          Text(
+                            'Lama Pendidikan',
+                            style: TextStyling.regularBoldTextStyle,
+                          ),
+                            SizedBox(height: 5,),
+                          DropdownContainer(
+                            labels: 'Tahun',
+                            needsInfoButton: false,
+                            buttonContent: '',
+                            dropdownName: 'Lama Pendidikan (Tahun)',
+                            validatorWarning: '',
+                            hintContents: '',
+                            dropdownValue: lengthOfSchoolYear,
+                            dropdownContents: tahunJenjang,
+                            dropdownKey: 'Lama Pendidikan (Tahun)',
+                          ), 
+                          DropdownContainer(
+                            labels: 'Bulan',
+                            needsInfoButton: false,
+                            buttonContent: '',
+                            dropdownName: 'Lama Pendidikan (Bulan)',
+                            validatorWarning: '',
+                            hintContents: '',
+                            dropdownValue: lengthOfSchoolMonth,
+                            dropdownContents: bulanJenjang,
+                            dropdownKey: 'Lama Pendidikan (Bulan)',
+                          ),
                           ]
                         ]
                         //Lain-lain
@@ -2232,7 +2259,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your industry'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Bidang Kerja', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2300,7 +2327,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2365,7 +2392,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2430,7 +2457,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2495,7 +2522,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2560,7 +2587,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2625,7 +2652,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2690,7 +2717,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2755,7 +2782,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                             saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2820,7 +2847,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2885,7 +2912,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -2950,7 +2977,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3015,7 +3042,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3080,7 +3107,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3145,7 +3172,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3210,7 +3237,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3275,7 +3302,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3340,7 +3367,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3405,7 +3432,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3470,7 +3497,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3535,7 +3562,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               if(value ==null || value =='' || value.isEmpty){
                                 return 'Please select your job'; //TODO: Change prompt
                               }
-                              return null;
+                              saveDropdownData('Pekerjaan', value);
                             }
                           ]),
                           onChanged: (String? newValue){
@@ -3644,7 +3671,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             buttonContent: '',
                             valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",  
                             controller: _agenPenyalur, 
-                            requiredDataChecker: true,
+                            requiredDataChecker: false,
                             manualErrorText: "Harap memeriksa ulang perusahaan penyalur",                  
                           ),
 
@@ -3676,7 +3703,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 if(value ==null || value =='' || value.isEmpty){
                                   return 'Please select your degree'; //TODO: Change prompt
                                 }
-                                return null;
+                                saveDropdownData('Jenjang', value);
                               }
                             ]),
                             onChanged: (String? newValue){
@@ -3739,21 +3766,34 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             requiredDataChecker: true,   
                             manualErrorText: 'Harap mengisi program / bidang studi',              
                           ),
-                          FormContainerWithTwoDropdownText(
-                            mainLabel: 'Lama Pendidikan',
+                          SizedBox(height: 30),
+                          Text(
+                            'Lama Pendidikan',
+                            style: TextStyling.regularBoldTextStyle,
+                          ),
+                            SizedBox(height: 5,),
+                          DropdownContainer(
+                            labels: 'Tahun',
                             needsInfoButton: false,
                             buttonContent: '',
-                            label1: 'Tahun',
-                            label2: 'Bulan',
-                            dropdownName1: 'Lama Pendidikan (Tahun)',
-                            dropdownName2: 'Lama Pendidikan (Bulan)',
+                            dropdownName: 'Lama Pendidikan (Tahun)',
                             validatorWarning: '',
                             hintContents: '',
-                            dropdownValue1: lengthOfSchoolYear,
-                            dropdownContents1: tahunJenjang,
-                            dropdownValue2: lengthOfSchoolMonth,
-                            dropdownContents2: bulanJenjang,
-                          )
+                            dropdownValue: lengthOfSchoolYear,
+                            dropdownContents: tahunJenjang,
+                            dropdownKey: 'Lama Pendidikan (Tahun)',
+                          ), 
+                          DropdownContainer(
+                            labels: 'Bulan',
+                            needsInfoButton: false,
+                            buttonContent: '',
+                            dropdownName: 'Lama Pendidikan (Bulan)',
+                            validatorWarning: '',
+                            hintContents: '',
+                            dropdownValue: lengthOfSchoolMonth,
+                            dropdownContents: bulanJenjang,
+                            dropdownKey: 'Lama Pendidikan (Bulan)',
+                          ),  
                         ]
                         //Magang
                         else if (goalOfStayingDropdownValue.toString() == 'Magang') ... [
@@ -5136,6 +5176,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               manualErrorText: 'Harap mengisi kolom keterangan',                
                             ),
                         ],
+                        SizedBox(height: 30),
                           FormContainer(
                             labels: 'Nama Perusahaan / Pengguna Jasa',
                             needsInfoButton: false,
@@ -5147,6 +5188,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             requiredDataChecker: true, 
                             manualErrorText: 'Harap mengisi nama perusahaan',                
                           ),
+                          SizedBox(height: 30),
                           FormContainer(
                             labels: 'Alamat Pekerjaan di Luar Negeri',
                             needsInfoButton: false,

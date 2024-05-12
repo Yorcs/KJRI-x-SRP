@@ -3,6 +3,7 @@ import 'package:self_report_application/styling.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Main Labels
 class LabelingWidget extends StatelessWidget {
@@ -51,6 +52,8 @@ class OverviewLabelWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           labelName,
@@ -82,6 +85,8 @@ class OverviewLabelCombinedStringWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           labelName,
@@ -115,6 +120,8 @@ class OverviewCombinedLabelWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Align(
           alignment: Alignment.topLeft,
@@ -152,6 +159,8 @@ class OverviewHeaderWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           headerLabelName,
@@ -368,95 +377,6 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
   }
 }
 
-//Two Dropdown in one container
-// ignore: must_be_immutable
-class FormContainerWithTwoDropdownText extends StatelessWidget {
-  FormContainerWithTwoDropdownText({
-    super.key,
-    //Labels
-    required this.mainLabel,
-    required this.needsInfoButton, 
-    required this.buttonContent,
-    required this.label1,
-    required this.label2,
-
-    //Dropdown
-    required this.dropdownName1,
-    required this.dropdownName2,
-    required this.validatorWarning,
-    required this.hintContents,
-    required this.dropdownValue1,
-    required this.dropdownContents1,
-    required this.dropdownValue2,
-    required this.dropdownContents2,
-  });
-  //Constraints and Arguments
-  final String mainLabel;
-  final String buttonContent;
-  final bool needsInfoButton;
-  final String hintContents;
-  final String dropdownName1;
-  final String dropdownName2;
-  final String validatorWarning;
-  String? dropdownValue1;
-  String? dropdownValue2;
-  List<String> dropdownContents1;
-  List<String> dropdownContents2;
-  final String label1;
-  final String label2;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        LabelingWidget(
-          labelName: mainLabel,
-          needsInfo: needsInfoButton,
-          buttonInfo: buttonContent,
-          style: TextStyling.regularTextStyle,
-        ),
-        SizedBox(height: 10,),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                width: 50,
-                child: DropdownContainer(
-                  labels: label1,
-                  buttonContent: buttonContent,
-                  needsInfoButton: false,
-                  dropdownName: dropdownName1,
-                  validatorWarning: validatorWarning,
-                  hintContents: '',
-                  dropdownValue: dropdownValue1,
-                  dropdownContents: dropdownContents1,
-                )
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              SizedBox(
-                width: 50,
-                child: DropdownContainer(
-                  labels: label1,
-                  buttonContent: buttonContent,
-                  needsInfoButton: false,
-                  dropdownName: dropdownName1,
-                  validatorWarning: validatorWarning,
-                  hintContents: '',
-                  dropdownValue: dropdownValue1,
-                  dropdownContents: dropdownContents1,
-                )
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 // TODO: Two inputs with date time
 class FormContainerWithTwoInputs extends StatelessWidget {
@@ -673,6 +593,7 @@ class DropdownContainer extends StatelessWidget {
     required this.hintContents,
     required this.dropdownValue,
     required this.dropdownContents,
+    required this.dropdownKey,
     
   });
 
@@ -682,6 +603,7 @@ class DropdownContainer extends StatelessWidget {
   final bool needsInfoButton;
   final String hintContents;
   final String dropdownName;
+  final String dropdownKey;
   final String validatorWarning;
   String? dropdownValue;
   List<String> dropdownContents;
@@ -704,6 +626,7 @@ class DropdownContainer extends StatelessWidget {
             dropdownName: dropdownName,
             validatorWarning: validatorWarning,
             hintContents: hintContents,
+            dropdownKey: dropdownKey,
           ),
         ] else...[
           DropdownForm(
@@ -712,6 +635,7 @@ class DropdownContainer extends StatelessWidget {
             dropdownName: dropdownName,
             validatorWarning: validatorWarning,
             hintContents: hintContents,
+            dropdownKey: dropdownKey,
           ),
         ],
       ]
@@ -861,6 +785,7 @@ class DropdownForm extends StatefulWidget {
     required this.dropdownName,
     required this.validatorWarning,
     required this.hintContents,
+    required this.dropdownKey,
     }
   );
 
@@ -868,6 +793,7 @@ class DropdownForm extends StatefulWidget {
   final String dropdownName;
   final String validatorWarning;
   final String hintContents;
+  final String dropdownKey;
   // ignore: prefer_typing_uninitialized_variables
   List<String> dropdownContents;
 
@@ -877,6 +803,10 @@ class DropdownForm extends StatefulWidget {
 }
 
 class DropdownFormState extends State<DropdownForm> {
+  Future<void> saveData() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(widget.dropdownKey, widget.dropdownValue.toString());
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -888,7 +818,7 @@ class DropdownFormState extends State<DropdownForm> {
           if(value ==null || value =='' || value.isEmpty){
             return widget.validatorWarning;
           }
-          return null;
+          saveData();
         }
       ]),
       onChanged: (String? newValue){

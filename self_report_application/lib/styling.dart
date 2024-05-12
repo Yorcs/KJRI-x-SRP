@@ -228,6 +228,7 @@ class _FilePickerState extends State<FilePickerButton> {
       // fileBytesDecoded = fileBytes.toString();
       fileBytesDecoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesDecoded!;
+      widget.fileName.text = result.files.first.name;
     });
   }
 
@@ -263,7 +264,6 @@ class _FilePickerState extends State<FilePickerButton> {
                   child: TextFormField(
                     controller: widget.fileName,
                     enabled: false,
-                    initialValue: fileName,
                     textAlign: TextAlign.center,
                   )),
               ),

@@ -60,7 +60,6 @@ class _IdentityFormState extends State<IdentityForm> {
     await prefs.setString('Tanggal Lahir', _dOB.text);
     await prefs.setString('Nomor Paspor', _passport.text);
     await prefs.setString('NIK', _iDNumber.text);
-    await prefs.setString('Jenis Kelamin', dropdownValue.toString());
   }
 
   @override
@@ -212,6 +211,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           hintContents: 'Pilih Jenis Kelamin',
                           dropdownValue: dropdownValue,
                           dropdownContents: genderOptions,
+                          dropdownKey: 'Jenis Kelamin',
                         ),
                         SizedBox(height: 40,), 
                         Row(

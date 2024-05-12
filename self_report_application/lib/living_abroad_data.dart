@@ -81,7 +81,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     await prefs.setString('Alamat Lengkap di Luar Negeri', _address.text);
     await prefs.setString('Negara', _country.text);
     await prefs.setString('Kode Pos', _postalCode.text);
-    await prefs.setString('Provinsi', provinceDropdownValue.toString());
     await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
     await prefs.setString('Nama File Dokumen Bukti Tinggal', _proofOfStayingDocName.text);
     await prefs.setString('Nomor Area Canada', _canadianAreaCode.text);
@@ -241,7 +240,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           validatorWarning: 'Please select a province',
                           hintContents: 'Pilih Propinsi',
                           dropdownValue: provinceDropdownValue,
-                          dropdownContents: provinces
+                          dropdownContents: provinces,
+                          dropdownKey: 'Provinsi',
                         ),
                         SizedBox(height: 30,),
                         FormContainer(

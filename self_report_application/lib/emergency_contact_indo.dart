@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/form_container.dart';
+import 'package:self_report_application/overview.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,7 +68,6 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
     await prefs.setString('Nama Kontak Darurat di Indonesia', _emergencyContactIndoName.text);
     await prefs.setString('Email Kontak Darurat di Indonesia', _emergencyContactIndoEmail.text);
     await prefs.setString('Telepon Kontak Darurat di Indonesia', _emergencyContactIndoPhone.text);
-    await prefs.setString('Hubungan Kontak Darurat di Indonesia', relationshipDropdownValue.toString()); 
   }
 
   @override
@@ -119,7 +119,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EmergencyContactIndoPage()
+        builder: (context) => OverviewPage()
       )
     );
   }
@@ -181,7 +181,8 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
                           validatorWarning: 'Harap mengisi hubungan anda dengan kontak darurat',
                           hintContents: 'Pilih Hubungan',
                           dropdownValue: relationshipDropdownValue,
-                          dropdownContents: relationship
+                          dropdownContents: relationship,
+                          dropdownKey: 'Hubungan Kontak Darurat di Indonesia',
                         ),
                         SizedBox(height: 30,),
                         FormContainer(

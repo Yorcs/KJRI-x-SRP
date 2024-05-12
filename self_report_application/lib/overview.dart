@@ -21,62 +21,62 @@ class OverviewState extends StatefulWidget {
 
 class _OverviewFormState extends State<OverviewState> {
   //Personal Data
-  late String name;
-  late String dob;
-  late String passport;
-  late String idNumber;
-  late String gender;
+  String name = '';
+  String dob = '';
+  String passport = '';
+  String idNumber = '';
+  String gender = '';
 
   //Living Abroad Data
-  late String address;
-  late String country;
-  late String postalCode;
-  late String province;
-  late String proofOfStayingDoc;
-  late String proofOfStayingDocName;
-  late String canadianAreaCode;
-  late String canadianPhoneNumber;
+  String address = '';
+  String country = '';
+  String postalCode = '';
+  String province = '';
+  String proofOfStayingDoc = '';
+  String proofOfStayingDocName = '';
+  String canadianAreaCode = '';
+  String canadianPhoneNumber = '';
 
   //Living Abroad Data Continued
-  late String visaNumber;
-  late String visaStartDate;
-  late String visaEndDate;
-  late String permitToStayDoc;
-  late String permitToStayDocName;
-  late String dateOfArrival;
-  late String lengthOfStayMonth;
-  late String lengthOfStayYear;
+  String visaNumber = '';
+  String visaStartDate = '';
+  String visaEndDate = '';
+  String permitToStayDoc = '';
+  String permitToStayDocName = '';
+  String dateOfArrival = '';
+  String lengthOfStayMonth = '';
+  String lengthOfStayYear = '';
 
   //Goal of Staying
-  late String goalOfStaying;
-  late String secondaryGoalOfStaying;
+  String goalOfStaying = '';
+  String secondaryGoalOfStaying = '';
 
-  late String description;
+  String description = '';
 
-  late String employmentName;
-  late String employmentIndustry;
-  late String employerName;
-  late String employerAddress;
-  late String agenPenyalur;
-  late String perusahaanPenyalur;
+  String employmentName = '';
+  String employmentIndustry = '';
+  String employerName = '';
+  String employerAddress = '';
+  String agenPenyalur = '';
+  String perusahaanPenyalur = '';
 
-  late String schoolName;
-  late String schoolProgram;
-  late String schoolDegree;
-  late String lengthOfSchoolMonth;
-  late String lengthOfSchoolYear;
+  String schoolName = '';
+  String schoolProgram = '';
+  String schoolDegree = '';
+  String lengthOfSchoolMonth = '';
+  String lengthOfSchoolYear = '';
 
   //Emergency Contact Abroad
-  late String emergencyContactAbroadName;
-  late String emergencyContactAbroadEmail;
-  late String emergencyContactAbroadPhone;
-  late String emergencyContactAbroadRelationship;
+  String emergencyContactAbroadName = '';
+  String emergencyContactAbroadEmail = '';
+  String emergencyContactAbroadPhone = '';
+  String emergencyContactAbroadRelationship = ''; 
 
   //Emergency Contact Indonesia
-  late String emergencyContactIndoName;
-  late String emergencyContactIndoEmail;
-  late String emergencyContactIndoPhone;
-  late String emergencyContactIndoRelationship;
+  String emergencyContactIndoName = '';
+  String emergencyContactIndoEmail = '';
+  String emergencyContactIndoPhone = '';
+  String emergencyContactIndoRelationship = '';
 
   Future<(String, String, String, String, String,
    String, String, String, String, String, String, String, String,
