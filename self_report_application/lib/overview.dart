@@ -326,7 +326,7 @@ class _OverviewFormState extends State<OverviewState> {
                       SizedBox(height: 30,),
                       OverviewLabelWidget(
                         labelName: 'Nomor Visa', 
-                        content: proofOfStayingDocName,
+                        content: visaNumber,
                       ),
                       SizedBox(height: 30,),
                       OverviewHeaderLabelWidget(

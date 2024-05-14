@@ -818,7 +818,9 @@ class DropdownFormState extends State<DropdownForm> {
           if(value ==null || value =='' || value.isEmpty){
             return widget.validatorWarning;
           }
+          widget.dropdownValue = value;
           saveData();
+          return null;
         }
       ]),
       onChanged: (String? newValue){

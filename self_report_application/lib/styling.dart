@@ -250,7 +250,7 @@ class _FilePickerState extends State<FilePickerButton> {
               ),
             ),
             SizedBox(
-              width: 30,
+              width: 10,
             ),
             if(fileName != null)...[
               SizedBox(
