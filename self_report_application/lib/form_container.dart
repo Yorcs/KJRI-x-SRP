@@ -4,6 +4,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 
 // Main Labels
 class LabelingWidget extends StatelessWidget {
@@ -222,7 +223,7 @@ class OverviewHeaderLabelWidget extends StatelessWidget{
   }
 }
 
-// Disabled text form for phone number
+//TODO: DELETE. Disabled text form for phone number
 class FormContainerWithDisabledText extends StatelessWidget {
   const FormContainerWithDisabledText({
     super.key,
@@ -298,7 +299,7 @@ class FormContainerWithDisabledText extends StatelessWidget {
   }
 }
 
-//Phone number container for enabled area code
+//TODO: DELETE. Phone number container for enabled area code
 class FormContainerWithTwoEnabledText extends StatelessWidget {
   const FormContainerWithTwoEnabledText({
     super.key,
@@ -377,8 +378,31 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
   }
 }
 
+//Phone Number Container
+class PhoneFormFields extends StatelessWidget{
+  const PhoneFormFields({
+    required this.controller,
+  });
 
-// TODO: Two inputs with date time
+  final PhoneController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return PhoneFormField(
+      controller: controller,
+      validator:  PhoneValidator.compose(
+        [PhoneValidator.required(errorText: "Tolong periksa ulang nomor telepon"),PhoneValidator.validMobile()]
+      ),
+      countrySelectorNavigator: const CountrySelectorNavigator.dialog(),
+      enabled: true,
+      isCountrySelectionEnabled: true,
+      isCountryChipPersistent: false,
+    );
+  }
+
+}
+
+// Two inputs with date time
 class FormContainerWithTwoInputs extends StatelessWidget {
   const FormContainerWithTwoInputs({
     super.key,

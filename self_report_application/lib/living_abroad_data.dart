@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
@@ -29,7 +30,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
-  final TextEditingController _canadianAreaCode = TextEditingController();
+  // final TextEditingController _canadianAreaCode = TextEditingController();
   final TextEditingController _canadianPhoneNumber = TextEditingController();
   final TextEditingController _proofOfStayingDoc = TextEditingController();
   final TextEditingController _proofOfStayingDocName = TextEditingController();
@@ -47,10 +48,10 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   late String provinceDropdownValueString;
   late String proofOfStayingDocString;
   late String proofOfStayingDocNameString;
-  late String canadianAreaCodeString;
+  // late String canadianAreaCodeString;
   late String canadianPhoneNumberString;
 
-  Future<(String, String, String, String, String, String, String, String)> getSharedPrefs() async{
+  Future<(String, String, String, String, String, String, String)> getSharedPrefs() async{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
@@ -59,7 +60,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
     proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
     proofOfStayingDocNameString = prefs.getString('Nama File Dokumen Bukti Tinggal') ?? '';
-    canadianAreaCodeString = prefs.getString('Nomor Area Canada') ??'';
     canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
 
     setState(() {
@@ -69,11 +69,10 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       provinceDropdownValue = provinceDropdownValueString;
       _proofOfStayingDoc.text = proofOfStayingDocString;
       _proofOfStayingDocName.text = proofOfStayingDocNameString;
-      _canadianAreaCode.text = canadianAreaCodeString;
       _canadianPhoneNumber.text = canadianPhoneNumberString;
     });
 
-    return (addressString, countryString, postalCodeString, provinceDropdownValueString, proofOfStayingDocString, proofOfStayingDocNameString, canadianAreaCodeString, canadianPhoneNumberString);
+    return (addressString, countryString, postalCodeString, provinceDropdownValueString, proofOfStayingDocString, proofOfStayingDocNameString, canadianPhoneNumberString);
   }
 
   Future<void> saveData() async{
@@ -83,7 +82,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     await prefs.setString('Kode Pos', _postalCode.text);
     await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
     await prefs.setString('Nama File Dokumen Bukti Tinggal', _proofOfStayingDocName.text);
-    await prefs.setString('Nomor Area Canada', _canadianAreaCode.text);
     await prefs.setString('Nomor Telepon Canada', _canadianPhoneNumber.text);
   }
 
@@ -118,17 +116,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       );
     });
 
-    _canadianAreaCode.addListener(() {
-      final String text = _canadianAreaCode.text;
-      _canadianAreaCode.value = _canadianAreaCode.value.copyWith(
-        text: text,
-        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing:  TextRange.empty,
-      );
-    });
-
     _canadianPhoneNumber.addListener(() {
-      final String text = _canadianPhoneNumber.text;
+      final String text = _canadianPhoneNumber.toString();
       _canadianPhoneNumber.value = _canadianPhoneNumber.value.copyWith(
         text: text,
         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
@@ -163,7 +152,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     _proofOfStayingDoc.dispose();
     _proofOfStayingDocName.dispose();
     _canadianPhoneNumber.dispose();
-    _canadianAreaCode.dispose();
     super.dispose();
   }
 
@@ -256,17 +244,29 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           manualErrorText: 'Tolong periksa ulang kode pos',                
                         ),
                         SizedBox(height: 30,),
-                        FormContainerWithTwoEnabledText(
+                        // FormContainerWithTwoEnabledText(
+                        //   labels: 'Telepon',
+                        //   needsInfoButton: false,
+                        //   isDataRequired: AutovalidateMode.onUserInteraction,
+                        //   hintContents: '',
+                        //   buttonContent: '',
+                        //   valueConstraints: r'^[+0-9 ]+$',
+                        //   requiredDataChecker: true,
+                        //   controller: _canadianAreaCode, 
+                        //   controller2: _canadianPhoneNumber, 
+                        //   manualErrorText: 'Tolong periksa ulang nomor telepon anda',            
+                        // ),
+                        FormContainerWithDisabledText(
                           labels: 'Telepon',
                           needsInfoButton: false,
                           isDataRequired: AutovalidateMode.onUserInteraction,
                           hintContents: '',
                           buttonContent: '',
-                          valueConstraints: r'^[+0-9 ]+$',
-                          requiredDataChecker: true,
-                          controller: _canadianAreaCode, 
-                          controller2: _canadianPhoneNumber, 
-                          manualErrorText: 'Tolong periksa ulang nomor telepon anda',            
+                          valueConstraints: r"^[0-9]+$",
+                          areaCode: '+1',
+                          controller: _canadianPhoneNumber, 
+                          requiredDataChecker: true,      
+                          manualErrorText: 'Tolong periksa ulang nomor telpon anda',           
                         ),
                         SizedBox(height: 40,), 
                         Row(

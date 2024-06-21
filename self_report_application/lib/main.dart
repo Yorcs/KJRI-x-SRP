@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:self_report_application/goal_of_staying.dart';
+import 'package:self_report_application/living_abroad_data.dart';
 import 'firebase_options.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
@@ -49,7 +50,7 @@ class MyAppState extends ChangeNotifier {
 Future <void> getItemAndNavigate (BuildContext context) async {
     await Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (context) => RequirementsPage()
+      builder: (context) => LivingAbroadDataPage()
     )
   );
 }

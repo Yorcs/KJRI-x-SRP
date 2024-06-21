@@ -1,3 +1,8 @@
+import 'dart:typed_data';
+import 'dart:convert';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
@@ -20,6 +25,7 @@ class OverviewState extends StatefulWidget {
 }
 
 class _OverviewFormState extends State<OverviewState> {
+  final db = FirebaseFirestore.instance;
   //Personal Data
   String name = '';
   String dob = '';
@@ -34,7 +40,6 @@ class _OverviewFormState extends State<OverviewState> {
   String province = '';
   String proofOfStayingDoc = '';
   String proofOfStayingDocName = '';
-  String canadianAreaCode = '';
   String canadianPhoneNumber = '';
 
   //Living Abroad Data Continued
@@ -79,12 +84,13 @@ class _OverviewFormState extends State<OverviewState> {
   String emergencyContactIndoRelationship = '';
 
   Future<(String, String, String, String, String,
-   String, String, String, String, String, String, String, String,
+   String, String, String, String, String, String, String,
    String, String, String, String, String, String, String, String,
    String, String, String, String, String, String, String, String, String, 
    String, String, String, String, String,
    String, String, String, String,
-   String, String, String, String)> getSharedPrefs() async{
+   String, String, String, String
+   )> getSharedPrefs() async{
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -95,17 +101,16 @@ class _OverviewFormState extends State<OverviewState> {
     String idNumberString = prefs.getString('NIK') ?? '';
     String genderString = prefs.getString('Jenis Kelamin') ?? '';
 
-    //Living Abroad Data
+    // //Living Abroad Data
     String addressString = prefs.getString('Alamat Lengkap di Luar Negeri') ?? '';
     String countryString = prefs.getString('Negara') ?? 'Kanada';
     String postalCodeString = prefs.getString('Kode Pos') ?? '';
     String provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
     String proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
     String proofOfStayingDocNameString = prefs.getString('Nama File Dokumen Bukti Tinggal') ?? '';
-    String canadianAreaCodeString = prefs.getString('Nomor Area Canada') ??'';
     String canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
 
-    //Living Abroad Data Continued
+    // //Living Abroad Data Continued
     String visaNumberString = prefs.getString('Nomor Visa') ?? '';
     String visaEndDateString = prefs.getString('Expired Visa') ??'';
     String visaStartDateString = prefs.getString('Start Visa') ?? '';
@@ -115,7 +120,7 @@ class _OverviewFormState extends State<OverviewState> {
     String lengthOfStayYearString = prefs.getString('Perkiraan Lama Menetap (Tahun)') ?? '';
     String lengthOfStayMonthString = prefs.getString('Perkiraan Lama Menetap (Bulan)') ?? '';
 
-    //Goal Of Staying
+    // //Goal Of Staying
     String goalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap') ?? '';
     String secondaryGoalOfStayingDropdownValueString = prefs.getString('Tujuan Menetap Lainnya') ?? '';
 
@@ -134,13 +139,13 @@ class _OverviewFormState extends State<OverviewState> {
     String lengthOfSchoolYearString = prefs.getString('Lama Pendidikan (Tahun)') ?? '';
     String lengthOfSchoolMonthString = prefs.getString('Lama Pendidikan (Bulan)') ?? '';
 
-    //Emergency Contact Abroad
+    // //Emergency Contact Abroad
     String emergencyContactAbroadNameString = prefs.getString('Nama Kontak Darurat di Luar Negeri') ?? '';
     String emergencyContactAbroadEmailString = prefs.getString('Email Kontak Darurat di Luar Negeri') ??'';
     String emergencyContactAbroadPhoneString = prefs.getString('Telepon Kontak Darurat di Luar Negeri') ?? '';
     String emergencyContactAbroadRelationshipString = prefs.getString('Hubungan Kontak Darurat di Luar Negeri') ?? '';
 
-    //Emergency Contact Indonesia
+    // //Emergency Contact Indonesia
     String emergencyContactIndoNameString = prefs.getString('Nama Kontak Darurat di Indonesia') ?? '';
     String emergencyContactIndoEmailString = prefs.getString('Email Kontak Darurat di Indonesia') ??'';
     String emergencyContactIndoPhoneString = prefs.getString('Telepon Kontak Darurat di Indonesia') ?? '';
@@ -161,7 +166,6 @@ class _OverviewFormState extends State<OverviewState> {
       province = provinceDropdownValueString;
       proofOfStayingDoc = proofOfStayingDocString;
       proofOfStayingDocName = proofOfStayingDocNameString;
-      canadianAreaCode = canadianAreaCodeString;
       canadianPhoneNumber = canadianPhoneNumberString;
 
       //Living Abroad Data Continue
@@ -207,7 +211,7 @@ class _OverviewFormState extends State<OverviewState> {
     });
 
     return(name, dob, passport, idNumber, gender,
-     address, country, postalCode, province, proofOfStayingDoc, proofOfStayingDocName, canadianAreaCode, canadianPhoneNumber,
+     address, country, postalCode, province, proofOfStayingDoc, proofOfStayingDocName, canadianPhoneNumber,
      visaNumber, visaStartDate, visaEndDate, permitToStayDoc, permitToStayDocName, dateOfArrival,lengthOfStayMonth, lengthOfStayYear,
      goalOfStaying, secondaryGoalOfStaying, description, employmentIndustry, employmentName, employerName, employerAddress, perusahaanPenyalur, agenPenyalur,
      schoolName, schoolDegree, schoolProgram, lengthOfSchoolMonth, lengthOfSchoolYear,
@@ -221,6 +225,85 @@ class _OverviewFormState extends State<OverviewState> {
     super.initState();
     getSharedPrefs();
   }
+
+  UploadTask? uploadTask;
+  String? uploadString;
+
+  Future uploadFile(String filePath, String fileName) async {
+    Uint8List decodedBytes = base64.decode(filePath);
+    File decodedimgFile = await File(fileName).writeAsBytes(decodedBytes);
+    final path = 'files/$fileName';
+    final file = decodedimgFile;
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    uploadTask = ref.putFile(file);
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    setState(() {
+      uploadString = urlDownload;
+    });
+
+  }
+
+  goBack(BuildContext context)=> Navigator.pop(context);
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    final user = <String, dynamic>{
+      //Personal Data
+      "Nama Lengkap" : name,
+      "Tanggal Lahir" : dob,
+      "Nomor Paspor" : passport,
+      "NIK" : idNumber,
+      "Jenis Kelamin" : gender,
+
+      //Living Abroad Data
+      "Alamat Lengkap di Luar Negeri" : address,
+      "Negara": country,
+      "Kode Pos": postalCode,
+      "Provinsi": province,
+      "Nomor Telepon Canada" : canadianPhoneNumber,
+      "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
+
+      //Living Abroad Data Continue
+      "Nomor Visa": visaNumber,
+      "Start Visa" : visaStartDate,
+      "Expired Visa" : visaEndDate,
+      "Waktu Kedatangan" : dateOfArrival,
+      "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
+      "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
+      "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
+
+      //Goal of Staying
+      "Tujuan Menetap": goalOfStaying,
+      "Tujuan Menetap Lainnya": secondaryGoalOfStaying,
+
+      "Keterangan": description,
+
+      "Nama Perusahaan / Pengguna Jasa": employerName,
+      "Alamat Pekerjaan di Luar Negeri": employerAddress,
+      "Bidang Kerja": employmentIndustry,
+      "Pekerjaan": employmentName,
+      "Perusahaan Penyalur / Penempatan": perusahaanPenyalur,
+      "Agen Penyalur di Luar Negeri": agenPenyalur,
+
+      "Nama Sekolah": schoolName,
+      "Jenjang" : schoolDegree,
+      "Program / Bidang Studi" : schoolProgram,
+      "Lama Pendidikan (Tahun)" : lengthOfSchoolYear,
+      "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
+
+      //Emergency Contact Abroad
+
+      //Emergency Contact Indonesia
+
+
+      "timestamp" : FieldValue.serverTimestamp(), //NECESSARY TO QUERY THE DATA IN GSHEETS
+      
+    };
+    await db.collection("datas").add(user).then((DocumentReference doc) => print('DocumentSnapshot added with ID:${doc.id}'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -276,14 +359,14 @@ class _OverviewFormState extends State<OverviewState> {
                       ),
                       SizedBox(height: 30,),
 
-                      //Living Abroad Data & Living Abroad Data Continue section
+                      // //Living Abroad Data & Living Abroad Data Continue section
                       Text(
                         'DATA LUAR NEGERI',
                         style: TextStyling.regularBoldTextStyle,
                       ),
                       SizedBox(height: 30,),
 
-                      //Living Abroad Data
+                      // //Living Abroad Data
                       OverviewLabelWidget(
                         labelName: 'Alamat Lengkap di Luar Negeri', 
                         content: address,
@@ -301,10 +384,9 @@ class _OverviewFormState extends State<OverviewState> {
                         content: postalCode,
                       ),                      
                       SizedBox(height: 30,),
-                      OverviewLabelCombinedStringWidget(
+                      OverviewLabelWidget(
                         labelName: 'Telepon', 
-                        content1: canadianAreaCode,
-                        content2: canadianPhoneNumber,
+                        content: canadianPhoneNumber,
                       ),
                       SizedBox(height: 30,),
                       OverviewLabelWidget(
@@ -313,7 +395,7 @@ class _OverviewFormState extends State<OverviewState> {
                       ),
                       SizedBox(height: 30,),
 
-                      //Living Abroad Data Continued
+                      // //Living Abroad Data Continued
                       OverviewLabelWidget(
                         labelName: 'Waktu Kedatangan', 
                         content: dateOfArrival,
@@ -346,7 +428,7 @@ class _OverviewFormState extends State<OverviewState> {
                       ),
                       SizedBox(height: 30,),
 
-                      //Goal of Staying Section
+                      // //Goal of Staying Section
                       Text(
                         'TUJUAN MENETAP',
                         style: TextStyling.regularBoldTextStyle,
@@ -528,14 +610,14 @@ class _OverviewFormState extends State<OverviewState> {
                       ],
                       SizedBox(height: 30,),
 
-                      //Emergency Contact Section
+                      // //Emergency Contact Section
                       Text(
                         'KONTAK DARURAT',
                         style: TextStyling.regularBoldTextStyle,
                       ),
                       SizedBox(height: 30,),
 
-                      //Emergency Contact Abroad
+                      // //Emergency Contact Abroad
                       OverviewHeaderWidget(
                         headerLabelName: 'Di Luar Negeri'
                       ),
@@ -560,7 +642,7 @@ class _OverviewFormState extends State<OverviewState> {
                       ),
                       SizedBox(height: 30,),
 
-                      //Emergency Contact Indonesia
+                      // //Emergency Contact Indonesia
                       OverviewHeaderWidget(
                         headerLabelName: 'Di Indonesia'
                       ),
@@ -583,7 +665,19 @@ class _OverviewFormState extends State<OverviewState> {
                         labelName: 'Telepon', 
                         content: emergencyContactIndoPhone,
                       ),
-                      SizedBox(height: 30,),
+                      SizedBox(height: 40,),                     
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            BackButtons(
+                              onPressed: () => goBack(context),
+                            ),
+                            ForwardButtons(
+                              onPressed: () => getItemAndNavigate(context)
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 50,), 
                     ]
                   )
                 )

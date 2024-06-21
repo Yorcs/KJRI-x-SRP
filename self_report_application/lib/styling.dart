@@ -200,7 +200,7 @@ class FilePickerButton extends StatefulWidget {
 class _FilePickerState extends State<FilePickerButton> {
 
   String? fileName;
-  String? fileBytesDecoded;
+  String? fileBytesEncoded;
   Uint8List? fileBytes;
   double _sizekbs = 0;
   final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
@@ -226,8 +226,8 @@ class _FilePickerState extends State<FilePickerButton> {
     setState(() {
       fileName = result.files.first.name;
       // fileBytesDecoded = fileBytes.toString();
-      fileBytesDecoded = base64Encode(fileBytes!);
-      widget.fileController.text = fileBytesDecoded!;
+      fileBytesEncoded = base64Encode(fileBytes!);
+      widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text = result.files.first.name;
     });
   }
@@ -254,7 +254,7 @@ class _FilePickerState extends State<FilePickerButton> {
             ),
             if(fileName != null)...[
               SizedBox(
-                width: 200,
+                width: 180,
                 child: Text(fileName!),
               ),
               SizedBox(

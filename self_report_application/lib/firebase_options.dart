@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'kjri-self-report-app.appspot.com',
     measurementId: 'G-K6LC98BQ4V',
   );
+
 }
