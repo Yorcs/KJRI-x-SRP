@@ -294,16 +294,8 @@ class _OverviewFormState extends State<OverviewState> {
       "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
 
       //Emergency Contact Abroad
-      "Nama Kontak Darurat di Luar Negeri": emergencyContactAbroadName,
-      "Email Kontak Darurat di Luar Negeri": emergencyContactAbroadEmail,
-      "Telepon Kontak Darurat di Luar Negeri": emergencyContactAbroadPhone,
-      "Hubungan Kontak Darurat di Luar Negeri": emergencyContactAbroadRelationship,
 
       //Emergency Contact Indonesia
-      "Nama Kontak Darurat di Indonesia": emergencyContactIndoName,
-      "Email Kontak Darurat di Indonesia": emergencyContactIndoEmail,
-      "Telepon Kontak Darurat di Indonesia": emergencyContactIndoPhone,
-      "Hubungan Kontak Darurat di Indonesia": emergencyContactIndoRelationship,
 
 
       "timestamp" : FieldValue.serverTimestamp(), //NECESSARY TO QUERY THE DATA IN GSHEETS
