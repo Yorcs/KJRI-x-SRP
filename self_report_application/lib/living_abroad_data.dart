@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:phone_form_field/phone_form_field.dart';
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
+import 'package:self_report_application/overview.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:self_report_application/styling.dart';
@@ -30,7 +32,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   final TextEditingController _address = TextEditingController();
   final TextEditingController _country = TextEditingController();
   final TextEditingController _postalCode = TextEditingController();
-  // final TextEditingController _canadianAreaCode = TextEditingController();
   final TextEditingController _canadianPhoneNumber = TextEditingController();
   final TextEditingController _proofOfStayingDoc = TextEditingController();
   final TextEditingController _proofOfStayingDocName = TextEditingController();
@@ -42,6 +43,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     'Yukon',
   ];
 
+  late PlatformFile proofOfStayingDocFile;
   late String addressString;
   late String countryString;
   late String postalCodeString;
@@ -60,7 +62,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
     proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
     proofOfStayingDocNameString = prefs.getString('Nama File Dokumen Bukti Tinggal') ?? '';
-    canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
+    canadianPhoneNumberString = prefs.getString('Nomor Telepon di Canada') ??'';
 
     setState(() {
       _address.text = addressString;
@@ -82,7 +84,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     await prefs.setString('Kode Pos', _postalCode.text);
     await prefs.setString('Dokumen Bukti Tinggal', _proofOfStayingDoc.text);
     await prefs.setString('Nama File Dokumen Bukti Tinggal', _proofOfStayingDocName.text);
-    await prefs.setString('Nomor Telepon Canada', _canadianPhoneNumber.text);
+    await prefs.setString('Nomor Telepon di Canada', _canadianPhoneNumber.text);
   }
 
   @override
@@ -164,7 +166,9 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => LivingAbroadDataContinuePage()
+        builder: (context) => LivingAbroadDataContinuePage(
+          proofOfStayingDocFile: proofOfStayingDocFile,
+        )
       )
     );
     }
@@ -199,6 +203,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022 ID Card\n\u2022 Driver License\n\u2022 Rekening Bank\n\u2022 Kontrak Rumah\n\u2022 Tagihan Telepon\n\u2022 Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
                           fileController: _proofOfStayingDoc,
                           fileName: _proofOfStayingDocName,
+                          fileType: proofOfStayingDocFile,
                         ),
                         SizedBox(height: 30,),
                         FormContainer(
@@ -244,6 +249,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           manualErrorText: 'Tolong periksa ulang kode pos',                
                         ),
                         SizedBox(height: 30,),
+                        
                         // FormContainerWithTwoEnabledText(
                         //   labels: 'Telepon',
                         //   needsInfoButton: false,
@@ -256,18 +262,18 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         //   controller2: _canadianPhoneNumber, 
                         //   manualErrorText: 'Tolong periksa ulang nomor telepon anda',            
                         // ),
-                        FormContainerWithDisabledText(
-                          labels: 'Telepon',
-                          needsInfoButton: false,
-                          isDataRequired: AutovalidateMode.onUserInteraction,
-                          hintContents: '',
-                          buttonContent: '',
-                          valueConstraints: r"^[0-9]+$",
-                          areaCode: '+1',
-                          controller: _canadianPhoneNumber, 
-                          requiredDataChecker: true,      
-                          manualErrorText: 'Tolong periksa ulang nomor telpon anda',           
-                        ),
+                        // FormContainerWithDisabledText(
+                        //   labels: 'Telepon',
+                        //   needsInfoButton: false,
+                        //   isDataRequired: AutovalidateMode.onUserInteraction,
+                        //   hintContents: '',
+                        //   buttonContent: '',
+                        //   valueConstraints: r"^[0-9]+$",
+                        //   areaCode: '+1',
+                        //   controller: _canadianPhoneNumber, 
+                        //   requiredDataChecker: true,      
+                        //   manualErrorText: 'Tolong periksa ulang nomor telpon anda',           
+                        // ),
                         SizedBox(height: 40,), 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

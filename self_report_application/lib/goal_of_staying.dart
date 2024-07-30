@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/emergency_contact_abroad.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
@@ -9,16 +10,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // Goal of staying page
 class GoalOfStayingPage extends StatelessWidget { 
-  const GoalOfStayingPage({super.key});
+  const GoalOfStayingPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  final PlatformFile proofOfStayingDocFile;
+  final PlatformFile permitToStayFile;
 
   @override
   Widget build(BuildContext context) {
-    return GoalOfStayingForm();
+    return GoalOfStayingForm(
+      proofOfStayingDocFile: proofOfStayingDocFile,
+      permitToStayFile: permitToStayFile,
+    );
   }
 }
 
 class GoalOfStayingForm extends StatefulWidget {
-  const GoalOfStayingForm({super.key});
+  const GoalOfStayingForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  final PlatformFile proofOfStayingDocFile;
+  final PlatformFile permitToStayFile;
 
 
   @override

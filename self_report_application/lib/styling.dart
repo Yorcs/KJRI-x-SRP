@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path_provider/path_provider.dart';
 
 //This class is strictly for styling purposes only. Created for reusability.
 
@@ -188,10 +190,11 @@ class InfoButton extends StatelessWidget {
 
 //File Picker
 class FilePickerButton extends StatefulWidget {
-  const FilePickerButton({super.key, required this.fileController, required this.fileName});
+  FilePickerButton({super.key, required this.fileController, required this.fileName, required this.fileType});
 
   final TextEditingController fileController;
   final TextEditingController fileName;
+  PlatformFile fileType;
 
     @override
   State<FilePickerButton> createState() => _FilePickerState();
@@ -223,10 +226,15 @@ class _FilePickerState extends State<FilePickerButton> {
       return;
     }
 
+    // final tempDir = await getTemporaryDirectory();
+    // File file = await File('${tempDir.path}$fileName').create();
+
     setState(() {
       fileName = result.files.first.name;
+      widget.fileType = result.files.first;
       // fileBytesDecoded = fileBytes.toString();
       fileBytesEncoded = base64Encode(fileBytes!);
+      debugPrint(fileBytesEncoded);
       widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text = result.files.first.name;
     });
@@ -268,17 +276,17 @@ class _FilePickerState extends State<FilePickerButton> {
                   )),
               ),
             //Extracting file name
-              SizedBox(
-                width: 0,
-                child: Visibility(
-                  visible: false,
-                  child: TextFormField(
-                    controller: widget.fileController,
-                    enabled: false,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
+              // SizedBox(
+              //   width: 0,
+              //   child: Visibility(
+              //     visible: false,
+              //     child: TextFormField(
+              //       controller: widget.fileController,
+              //       enabled: false,
+              //       textAlign: TextAlign.center,
+              //     ),
+              //   ),
+              // )
             ] else ...[
               
             ]

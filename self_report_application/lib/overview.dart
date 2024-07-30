@@ -108,7 +108,7 @@ class _OverviewFormState extends State<OverviewState> {
     String provinceDropdownValueString = prefs.getString('Provinsi') ?? '';
     String proofOfStayingDocString = prefs.getString('Dokumen Bukti Tinggal') ?? '';
     String proofOfStayingDocNameString = prefs.getString('Nama File Dokumen Bukti Tinggal') ?? '';
-    String canadianPhoneNumberString = prefs.getString('Nomor Telepon Canada') ??'';
+    String canadianPhoneNumberString = prefs.getString('Nomor Telepon di Canada') ??'';
 
     // //Living Abroad Data Continued
     String visaNumberString = prefs.getString('Nomor Visa') ?? '';
@@ -227,23 +227,25 @@ class _OverviewFormState extends State<OverviewState> {
   }
 
   UploadTask? uploadTask;
-  String? uploadString;
+  String uploadString = '';
+
 
   Future uploadFile(String filePath, String fileName) async {
-    Uint8List decodedBytes = base64.decode(filePath);
-    File decodedimgFile = await File(fileName).writeAsBytes(decodedBytes);
-    final path = 'files/$fileName';
-    final file = decodedimgFile;
+    try{
+      List<int>list = utf8.encode(filePath);
+      Uint8List decodedBytes = Uint8List.fromList(list);
+      // String fixed = base64.normalize(filePath);
+      // Uint8List decodedBytes = base64Decode(fixed);
+      File decodedimgFile = await File(fileName).writeAsBytes(decodedBytes);
+      final path = 'files/$fileName';
+      final ref = FirebaseStorage.instance.ref().child(path);
 
-    final ref = FirebaseStorage.instance.ref().child(path);
-    uploadTask = ref.putFile(file);
+      ref.putFile(decodedimgFile);
 
-    final snapshot = await uploadTask!.whenComplete(() {});
-
-    final urlDownload = await snapshot.ref.getDownloadURL();
-    setState(() {
-      uploadString = urlDownload;
-    });
+    } on FirebaseException catch (e){
+      print("Failed with error '${e.code}': ${e.message}");
+      return 'null';
+    }
 
   }
 
@@ -258,40 +260,39 @@ class _OverviewFormState extends State<OverviewState> {
       "Jenis Kelamin" : gender,
 
       //Living Abroad Data
-      "Alamat Lengkap di Luar Negeri" : address,
-      "Negara": country,
-      "Kode Pos": postalCode,
-      "Provinsi": province,
-      "Nomor Telepon Canada" : canadianPhoneNumber,
-      "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
+      // "Alamat Lengkap di Luar Negeri" : address,
+      // "Negara": country,
+      // "Kode Pos": postalCode,
+      // "Provinsi": province,
+      // "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
 
-      //Living Abroad Data Continue
-      "Nomor Visa": visaNumber,
-      "Start Visa" : visaStartDate,
-      "Expired Visa" : visaEndDate,
-      "Waktu Kedatangan" : dateOfArrival,
-      "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
-      "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
-      "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
+      // //Living Abroad Data Continue
+      // "Nomor Visa": visaNumber,
+      // "Start Visa" : visaStartDate,
+      // "Expired Visa" : visaEndDate,
+      // "Waktu Kedatangan" : dateOfArrival,
+      // "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
+      // "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
+      // "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
 
-      //Goal of Staying
-      "Tujuan Menetap": goalOfStaying,
-      "Tujuan Menetap Lainnya": secondaryGoalOfStaying,
+      // //Goal of Staying
+      // "Tujuan Menetap": goalOfStaying,
+      // "Tujuan Menetap Lainnya": secondaryGoalOfStaying,
 
-      "Keterangan": description,
+      // "Keterangan": description,
 
-      "Nama Perusahaan / Pengguna Jasa": employerName,
-      "Alamat Pekerjaan di Luar Negeri": employerAddress,
-      "Bidang Kerja": employmentIndustry,
-      "Pekerjaan": employmentName,
-      "Perusahaan Penyalur / Penempatan": perusahaanPenyalur,
-      "Agen Penyalur di Luar Negeri": agenPenyalur,
+      // "Nama Perusahaan / Pengguna Jasa": employerName,
+      // "Alamat Pekerjaan di Luar Negeri": employerAddress,
+      // "Bidang Kerja": employmentIndustry,
+      // "Pekerjaan": employmentName,
+      // "Perusahaan Penyalur / Penempatan": perusahaanPenyalur,
+      // "Agen Penyalur di Luar Negeri": agenPenyalur,
 
-      "Nama Sekolah": schoolName,
-      "Jenjang" : schoolDegree,
-      "Program / Bidang Studi" : schoolProgram,
-      "Lama Pendidikan (Tahun)" : lengthOfSchoolYear,
-      "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
+      // "Nama Sekolah": schoolName,
+      // "Jenjang" : schoolDegree,
+      // "Program / Bidang Studi" : schoolProgram,
+      // "Lama Pendidikan (Tahun)" : lengthOfSchoolYear,
+      // "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
 
       //Emergency Contact Abroad
 
@@ -673,7 +674,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
-                              onPressed: () => getItemAndNavigate(context)
+                              onPressed: () => uploadFile(permitToStayDoc, permitToStayDocName)
                             ),
                           ],
                         ),
