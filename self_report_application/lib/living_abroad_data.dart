@@ -43,7 +43,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     'Yukon',
   ];
 
-  late PlatformFile proofOfStayingDocFile;
+  PlatformFile? proofOfStayingDocFile;
   late String addressString;
   late String countryString;
   late String postalCodeString;
@@ -112,15 +112,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     _postalCode.addListener(() {
       final String text = _postalCode.text;
       _postalCode.value = _postalCode.value.copyWith(
-        text: text,
-        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing:  TextRange.empty,
-      );
-    });
-
-    _canadianPhoneNumber.addListener(() {
-      final String text = _canadianPhoneNumber.toString();
-      _canadianPhoneNumber.value = _canadianPhoneNumber.value.copyWith(
         text: text,
         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
         composing:  TextRange.empty,
@@ -249,31 +240,18 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           manualErrorText: 'Tolong periksa ulang kode pos',                
                         ),
                         SizedBox(height: 30,),
-                        
-                        // FormContainerWithTwoEnabledText(
-                        //   labels: 'Telepon',
-                        //   needsInfoButton: false,
-                        //   isDataRequired: AutovalidateMode.onUserInteraction,
-                        //   hintContents: '',
-                        //   buttonContent: '',
-                        //   valueConstraints: r'^[+0-9 ]+$',
-                        //   requiredDataChecker: true,
-                        //   controller: _canadianAreaCode, 
-                        //   controller2: _canadianPhoneNumber, 
-                        //   manualErrorText: 'Tolong periksa ulang nomor telepon anda',            
-                        // ),
-                        // FormContainerWithDisabledText(
-                        //   labels: 'Telepon',
-                        //   needsInfoButton: false,
-                        //   isDataRequired: AutovalidateMode.onUserInteraction,
-                        //   hintContents: '',
-                        //   buttonContent: '',
-                        //   valueConstraints: r"^[0-9]+$",
-                        //   areaCode: '+1',
-                        //   controller: _canadianPhoneNumber, 
-                        //   requiredDataChecker: true,      
-                        //   manualErrorText: 'Tolong periksa ulang nomor telpon anda',           
-                        // ),
+                      //  FormContainerWithDisabledText(
+                      //     labels: 'Telepon',
+                      //     needsInfoButton: false,
+                      //     isDataRequired: AutovalidateMode.onUserInteraction,
+                      //     hintContents: '',
+                      //     buttonContent: '',
+                      //     valueConstraints: r"^[0-9]+$",
+                      //     requiredDataChecker: true,
+                      //     areaCode: '+62',     
+                      //     controller: _canadianPhoneNumber,   
+                      //     manualErrorText: 'Tolong periksa ulang nomor telepon',           
+                      //   ),
                         SizedBox(height: 40,), 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

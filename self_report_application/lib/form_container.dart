@@ -4,7 +4,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:phone_form_field/phone_form_field.dart';
 
 // Main Labels
 class LabelingWidget extends StatelessWidget {
@@ -378,29 +377,6 @@ class FormContainerWithTwoEnabledText extends StatelessWidget {
   }
 }
 
-//Phone Number Container
-class PhoneFormFields extends StatelessWidget{
-  const PhoneFormFields({
-    required this.controller,
-  });
-
-  final PhoneController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    return PhoneFormField(
-      controller: controller,
-      validator:  PhoneValidator.compose(
-        [PhoneValidator.required(errorText: "Tolong periksa ulang nomor telepon"),PhoneValidator.validMobile()]
-      ),
-      countrySelectorNavigator: const CountrySelectorNavigator.dialog(),
-      enabled: true,
-      isCountrySelectionEnabled: true,
-      isCountryChipPersistent: false,
-    );
-  }
-
-}
 
 // Two inputs with date time
 class FormContainerWithTwoInputs extends StatelessWidget {

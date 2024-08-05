@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/styling.dart';
 
@@ -44,7 +43,7 @@ class FilePickerContainer extends StatelessWidget {
   final String labels;
   final String buttonContent;
   final TextEditingController fileController;
-  final PlatformFile fileType;
+  final PlatformFile? fileType;
 
   // final TextEditingController controllerName;
   // final String sharedPrefValue;

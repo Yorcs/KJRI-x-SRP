@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
   const LivingAbroadDataContinuePage({super.key, required this.proofOfStayingDocFile});
-  final PlatformFile proofOfStayingDocFile;
+  final PlatformFile? proofOfStayingDocFile;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class LivingAbroadDataContinuePage extends StatelessWidget {
 
 class LivingAbroadDataContinueForm extends StatefulWidget {
   const LivingAbroadDataContinueForm({super.key, required this.proofOfStayingDocFile});
-  final PlatformFile proofOfStayingDocFile;
+  final PlatformFile? proofOfStayingDocFile;
 
   @override
   State<LivingAbroadDataContinueForm> createState() => _LivingAbroadDataContinueFormState();
@@ -38,7 +38,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _permitToStayDocName = TextEditingController();
   final TextEditingController _dateOfArrival = TextEditingController();
 
-  late PlatformFile permitToStayFile;
+  PlatformFile? permitToStayFile;
   late String visaNumberString;
   late String visaStartDateString;
   late String visaEndDateString;

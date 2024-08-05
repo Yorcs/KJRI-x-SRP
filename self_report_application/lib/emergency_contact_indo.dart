@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/overview.dart';
@@ -8,17 +9,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact in Indonesia Page
 class EmergencyContactIndoPage extends StatelessWidget {
-  const EmergencyContactIndoPage({super.key});
+  const EmergencyContactIndoPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  final PlatformFile? proofOfStayingDocFile;
+  final PlatformFile? permitToStayFile;
 
 
   @override
   Widget build(BuildContext context) {
-    return EmergencyContactIndoForm();
+    return EmergencyContactIndoForm(
+      proofOfStayingDocFile: proofOfStayingDocFile,
+      permitToStayFile: permitToStayFile,
+    );
   }
 }
 
 class EmergencyContactIndoForm extends StatefulWidget {
-  const EmergencyContactIndoForm({super.key});
+  const EmergencyContactIndoForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  final PlatformFile? proofOfStayingDocFile;
+  final PlatformFile? permitToStayFile;
   
   @override
   State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
@@ -119,7 +127,10 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => OverviewPage()
+        builder: (context) => OverviewPage(
+          proofOfStayingDocFile: widget.proofOfStayingDocFile,
+          permitToStayFile: widget.permitToStayFile,
+        )
       )
     );
   }

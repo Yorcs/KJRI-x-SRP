@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'dart:convert';
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +12,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Overview Page
 class OverviewPage extends StatelessWidget {
- const OverviewPage({super.key});
+ const OverviewPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+ final PlatformFile? proofOfStayingDocFile;
+ final PlatformFile? permitToStayFile;
 
   @override
   Widget build(BuildContext context) {
-    return OverviewState();
+    return OverviewState(
+      proofOfStayingDocFile: proofOfStayingDocFile,
+      permitToStayFile: permitToStayFile,
+    );
   }
 }
 
 class OverviewState extends StatefulWidget {
+  const OverviewState({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  final PlatformFile? proofOfStayingDocFile;
+  final PlatformFile? permitToStayFile;
+
   @override
   State<OverviewState> createState() => _OverviewFormState();
 }
@@ -226,21 +236,19 @@ class _OverviewFormState extends State<OverviewState> {
     getSharedPrefs();
   }
 
-  UploadTask? uploadTask;
-  String uploadString = '';
 
-
-  Future uploadFile(String filePath, String fileName) async {
+  Future uploadFile(PlatformFile? pickedFile) async {
     try{
-      List<int>list = utf8.encode(filePath);
-      Uint8List decodedBytes = Uint8List.fromList(list);
-      // String fixed = base64.normalize(filePath);
-      // Uint8List decodedBytes = base64Decode(fixed);
-      File decodedimgFile = await File(fileName).writeAsBytes(decodedBytes);
-      final path = 'files/$fileName';
+      final path = 'files/$name/${pickedFile!.name}';
+      final file = File(pickedFile.path!);
       final ref = FirebaseStorage.instance.ref().child(path);
 
-      ref.putFile(decodedimgFile);
+      UploadTask uploadTask = ref.putFile(file);
+
+      final snapshot = await uploadTask.whenComplete(() {});
+
+      final String urlDownload = await snapshot.ref.getDownloadURL();
+      return urlDownload;
 
     } on FirebaseException catch (e){
       print("Failed with error '${e.code}': ${e.message}");
@@ -260,39 +268,39 @@ class _OverviewFormState extends State<OverviewState> {
       "Jenis Kelamin" : gender,
 
       //Living Abroad Data
-      // "Alamat Lengkap di Luar Negeri" : address,
-      // "Negara": country,
-      // "Kode Pos": postalCode,
-      // "Provinsi": province,
-      // "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
+      "Alamat Lengkap di Luar Negeri" : address,
+      "Negara": country,
+      "Kode Pos": postalCode,
+      "Provinsi": province,
+      "Dokumen Bukti Tinggal" : uploadFile(widget.permitToStayFile),
 
       // //Living Abroad Data Continue
-      // "Nomor Visa": visaNumber,
-      // "Start Visa" : visaStartDate,
-      // "Expired Visa" : visaEndDate,
-      // "Waktu Kedatangan" : dateOfArrival,
-      // "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
-      // "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
-      // "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
+      "Nomor Visa": visaNumber,
+      "Start Visa" : visaStartDate,
+      "Expired Visa" : visaEndDate,
+      "Waktu Kedatangan" : dateOfArrival,
+      "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
+      "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
+      "Ijin Tinggal" : uploadFile(widget.proofOfStayingDocFile),
 
       // //Goal of Staying
-      // "Tujuan Menetap": goalOfStaying,
-      // "Tujuan Menetap Lainnya": secondaryGoalOfStaying,
+      "Tujuan Menetap": goalOfStaying,
+      "Tujuan Menetap Lainnya": secondaryGoalOfStaying,
 
-      // "Keterangan": description,
+      "Keterangan": description,
 
-      // "Nama Perusahaan / Pengguna Jasa": employerName,
-      // "Alamat Pekerjaan di Luar Negeri": employerAddress,
-      // "Bidang Kerja": employmentIndustry,
-      // "Pekerjaan": employmentName,
-      // "Perusahaan Penyalur / Penempatan": perusahaanPenyalur,
-      // "Agen Penyalur di Luar Negeri": agenPenyalur,
+      "Nama Perusahaan / Pengguna Jasa": employerName,
+      "Alamat Pekerjaan di Luar Negeri": employerAddress,
+      "Bidang Kerja": employmentIndustry,
+      "Pekerjaan": employmentName,
+      "Perusahaan Penyalur / Penempatan": perusahaanPenyalur,
+      "Agen Penyalur di Luar Negeri": agenPenyalur,
 
-      // "Nama Sekolah": schoolName,
-      // "Jenjang" : schoolDegree,
-      // "Program / Bidang Studi" : schoolProgram,
-      // "Lama Pendidikan (Tahun)" : lengthOfSchoolYear,
-      // "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
+      "Nama Sekolah": schoolName,
+      "Jenjang" : schoolDegree,
+      "Program / Bidang Studi" : schoolProgram,
+      "Lama Pendidikan (Tahun)" : lengthOfSchoolYear,
+      "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
 
       //Emergency Contact Abroad
 
@@ -674,7 +682,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
-                              onPressed: () => uploadFile(permitToStayDoc, permitToStayDocName)
+                              onPressed: () => uploadFile(widget.permitToStayFile)
                             ),
                           ],
                         ),

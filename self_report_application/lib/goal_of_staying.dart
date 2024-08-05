@@ -11,8 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 // Goal of staying page
 class GoalOfStayingPage extends StatelessWidget { 
   const GoalOfStayingPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile proofOfStayingDocFile;
-  final PlatformFile permitToStayFile;
+  final PlatformFile? proofOfStayingDocFile;
+  final PlatformFile? permitToStayFile;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class GoalOfStayingPage extends StatelessWidget {
 
 class GoalOfStayingForm extends StatefulWidget {
   const GoalOfStayingForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile proofOfStayingDocFile;
-  final PlatformFile permitToStayFile;
+  final PlatformFile? proofOfStayingDocFile;
+  final PlatformFile? permitToStayFile;
 
 
   @override
@@ -496,7 +496,10 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EmergencyContactAbroadPage()
+        builder: (context) => EmergencyContactAbroadPage(
+          proofOfStayingDocFile: widget.proofOfStayingDocFile,
+          permitToStayFile: widget.permitToStayFile,
+        )
       )
     );
     }

@@ -194,7 +194,7 @@ class FilePickerButton extends StatefulWidget {
 
   final TextEditingController fileController;
   final TextEditingController fileName;
-  PlatformFile fileType;
+  PlatformFile? fileType;
 
     @override
   State<FilePickerButton> createState() => _FilePickerState();
@@ -233,9 +233,9 @@ class _FilePickerState extends State<FilePickerButton> {
       fileName = result.files.first.name;
       widget.fileType = result.files.first;
       // fileBytesDecoded = fileBytes.toString();
-      fileBytesEncoded = base64Encode(fileBytes!);
-      debugPrint(fileBytesEncoded);
-      widget.fileController.text = fileBytesEncoded!;
+      // fileBytesEncoded = base64Encode(fileBytes!);
+      // debugPrint(fileBytesEncoded);
+      // widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text = result.files.first.name;
     });
   }
