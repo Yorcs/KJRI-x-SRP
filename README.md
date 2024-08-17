@@ -18,5 +18,5 @@ Currently, we are facing a challenge in passing file picker data to the database
 
 - Project Leader / Front-End Designer: Kelly Hady
 - Front-End Designer: Joshua Lukman
-- Full-Stack Developer / Lead Developer: (Dominic) Chelsea Jennifer Irawan
+- Full-Stack Developer / Lead Developer: Dominic (Chelsea) Jennifer Irawan
 - Negotiator: Rishabh Johri
