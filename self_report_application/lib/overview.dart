@@ -237,13 +237,13 @@ class _OverviewFormState extends State<OverviewState> {
   }
 
 
-  Future uploadFile(PlatformFile? pickedFile) async {
+  Future<String> uploadFile(String pickedFile, String fileName) async {
     try{
-      final path = 'files/$name/${pickedFile!.name}';
-      final file = File(pickedFile.path!);
+      final path = 'files/$name/${fileName}';
+      Uint8List bytes = base64Decode(pickedFile);
       final ref = FirebaseStorage.instance.ref().child(path);
 
-      UploadTask uploadTask = ref.putFile(file);
+      UploadTask uploadTask = ref.putData(bytes);
 
       final snapshot = await uploadTask.whenComplete(() {});
 
@@ -272,7 +272,7 @@ class _OverviewFormState extends State<OverviewState> {
       "Negara": country,
       "Kode Pos": postalCode,
       "Provinsi": province,
-      "Dokumen Bukti Tinggal" : uploadFile(widget.permitToStayFile),
+      "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
 
       // //Living Abroad Data Continue
       "Nomor Visa": visaNumber,
@@ -281,7 +281,7 @@ class _OverviewFormState extends State<OverviewState> {
       "Waktu Kedatangan" : dateOfArrival,
       "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
       "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
-      "Ijin Tinggal" : uploadFile(widget.proofOfStayingDocFile),
+      "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
 
       // //Goal of Staying
       "Tujuan Menetap": goalOfStaying,
@@ -682,7 +682,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
-                              onPressed: () => uploadFile(widget.permitToStayFile)
+                              onPressed: () => uploadFile(permitToStayDoc, permitToStayDocName)
                             ),
                           ],
                         ),

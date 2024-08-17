@@ -233,9 +233,9 @@ class _FilePickerState extends State<FilePickerButton> {
       fileName = result.files.first.name;
       widget.fileType = result.files.first;
       // fileBytesDecoded = fileBytes.toString();
-      // fileBytesEncoded = base64Encode(fileBytes!);
+      fileBytesEncoded = base64Encode(fileBytes!);
       // debugPrint(fileBytesEncoded);
-      // widget.fileController.text = fileBytesEncoded!;
+      widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text = result.files.first.name;
     });
   }
@@ -276,17 +276,17 @@ class _FilePickerState extends State<FilePickerButton> {
                   )),
               ),
             //Extracting file name
-              // SizedBox(
-              //   width: 0,
-              //   child: Visibility(
-              //     visible: false,
-              //     child: TextFormField(
-              //       controller: widget.fileController,
-              //       enabled: false,
-              //       textAlign: TextAlign.center,
-              //     ),
-              //   ),
-              // )
+              SizedBox(
+                width: 0,
+                child: Visibility(
+                  visible: false,
+                  child: TextFormField(
+                    controller: widget.fileController,
+                    enabled: false,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )
             ] else ...[
               
             ]
