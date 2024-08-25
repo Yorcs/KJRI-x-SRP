@@ -12,23 +12,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Overview Page
 class OverviewPage extends StatelessWidget {
- const OverviewPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+ const OverviewPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
  final PlatformFile? proofOfStayingDocFile;
  final PlatformFile? permitToStayFile;
+
+ final Uint8List? proofOfStayingDocBytes;
+ final Uint8List? permitToStayBytes;
 
   @override
   Widget build(BuildContext context) {
     return OverviewState(
       proofOfStayingDocFile: proofOfStayingDocFile,
       permitToStayFile: permitToStayFile,
+
+      proofOfStayingDocBytes: proofOfStayingDocBytes,
+      permitToStayBytes: permitToStayBytes,
     );
   }
 }
 
 class OverviewState extends StatefulWidget {
-  const OverviewState({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  const OverviewState({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
+
+  final Uint8List? proofOfStayingDocBytes;
+  final Uint8List? permitToStayBytes;
 
   @override
   State<OverviewState> createState() => _OverviewFormState();
@@ -237,13 +246,12 @@ class _OverviewFormState extends State<OverviewState> {
   }
 
 
-  Future<String> uploadFile(String pickedFile, String fileName) async {
+  Future<String> uploadFile(Uint8List? fileBytes, String fileName) async {
     try{
       final path = 'files/$name/${fileName}';
-      Uint8List bytes = base64Decode(pickedFile);
       final ref = FirebaseStorage.instance.ref().child(path);
 
-      UploadTask uploadTask = ref.putData(bytes);
+      UploadTask uploadTask = ref.putData(fileBytes!);
 
       final snapshot = await uploadTask.whenComplete(() {});
 
@@ -272,7 +280,7 @@ class _OverviewFormState extends State<OverviewState> {
       "Negara": country,
       "Kode Pos": postalCode,
       "Provinsi": province,
-      "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
+      "Dokumen Bukti Tinggal" : uploadFile(widget.permitToStayBytes, permitToStayDocName),
 
       // //Living Abroad Data Continue
       "Nomor Visa": visaNumber,
@@ -281,7 +289,7 @@ class _OverviewFormState extends State<OverviewState> {
       "Waktu Kedatangan" : dateOfArrival,
       "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
       "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
-      "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
+      "Ijin Tinggal" : uploadFile(widget.proofOfStayingDocBytes, proofOfStayingDocName),
 
       // //Goal of Staying
       "Tujuan Menetap": goalOfStaying,
@@ -682,7 +690,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
-                              onPressed: () => uploadFile(permitToStayDoc, permitToStayDocName)
+                              onPressed: () => uploadFile(widget.permitToStayBytes, permitToStayDocName)
                             ),
                           ],
                         ),

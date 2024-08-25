@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/file_picker_container.dart';
@@ -44,6 +45,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   ];
 
   PlatformFile? proofOfStayingDocFile;
+  Uint8List? proofOfStayingDocBytes;
   late String addressString;
   late String countryString;
   late String postalCodeString;
@@ -159,6 +161,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataContinuePage(
           proofOfStayingDocFile: proofOfStayingDocFile,
+          proofOfStayingDocBytes: proofOfStayingDocBytes,
         )
       )
     );
@@ -195,6 +198,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           fileController: _proofOfStayingDoc,
                           fileName: _proofOfStayingDocName,
                           fileType: proofOfStayingDocFile,
+                          bytes: proofOfStayingDocBytes,
                         ),
                         SizedBox(height: 30,),
                         FormContainer(

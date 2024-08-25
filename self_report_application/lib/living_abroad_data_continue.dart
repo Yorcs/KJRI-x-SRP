@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/file_picker_container.dart';
@@ -10,20 +12,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
-  const LivingAbroadDataContinuePage({super.key, required this.proofOfStayingDocFile});
+  const LivingAbroadDataContinuePage({super.key, required this.proofOfStayingDocFile, required this.proofOfStayingDocBytes});
   final PlatformFile? proofOfStayingDocFile;
+  final Uint8List? proofOfStayingDocBytes;
 
   @override
   Widget build(BuildContext context) {
     return LivingAbroadDataContinueForm(
       proofOfStayingDocFile: proofOfStayingDocFile,
+      proofOfStayingDocBytes: proofOfStayingDocBytes,
     );
   }
 }
 
 class LivingAbroadDataContinueForm extends StatefulWidget {
-  const LivingAbroadDataContinueForm({super.key, required this.proofOfStayingDocFile});
+  const LivingAbroadDataContinueForm({super.key, required this.proofOfStayingDocFile, required this.proofOfStayingDocBytes});
   final PlatformFile? proofOfStayingDocFile;
+  final Uint8List? proofOfStayingDocBytes;
 
   @override
   State<LivingAbroadDataContinueForm> createState() => _LivingAbroadDataContinueFormState();
@@ -39,6 +44,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _dateOfArrival = TextEditingController();
 
   PlatformFile? permitToStayFile;
+  Uint8List? permitToStayBytes;
   late String visaNumberString;
   late String visaStartDateString;
   late String visaEndDateString;
@@ -206,6 +212,8 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       MaterialPageRoute(
       builder: (context) => GoalOfStayingPage(
         proofOfStayingDocFile: widget.proofOfStayingDocFile,
+        proofOfStayingDocBytes: widget.proofOfStayingDocBytes,
+        permitToStayBytes: permitToStayBytes,
         permitToStayFile: permitToStayFile,
       )
       ) 
@@ -255,6 +263,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           fileController: _permitToStayDoc,
                           fileName: _permitToStayDocName,
                           fileType: permitToStayFile,
+                          bytes: permitToStayBytes,
                         ),
                         SizedBox(height: 30,),
                          DateFormContainer(

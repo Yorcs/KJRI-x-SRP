@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/emergency_contact_abroad.dart';
@@ -10,23 +12,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // Goal of staying page
 class GoalOfStayingPage extends StatelessWidget { 
-  const GoalOfStayingPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  const GoalOfStayingPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
+
+  final Uint8List? proofOfStayingDocBytes;
+  final Uint8List? permitToStayBytes;
 
   @override
   Widget build(BuildContext context) {
     return GoalOfStayingForm(
       proofOfStayingDocFile: proofOfStayingDocFile,
       permitToStayFile: permitToStayFile,
+
+      proofOfStayingDocBytes: proofOfStayingDocBytes,
+      permitToStayBytes: permitToStayBytes,
     );
   }
 }
 
 class GoalOfStayingForm extends StatefulWidget {
-  const GoalOfStayingForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  const GoalOfStayingForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
+
+  final Uint8List? proofOfStayingDocBytes;
+  final Uint8List? permitToStayBytes;
 
 
   @override
@@ -499,6 +510,9 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
         builder: (context) => EmergencyContactAbroadPage(
           proofOfStayingDocFile: widget.proofOfStayingDocFile,
           permitToStayFile: widget.permitToStayFile,
+
+          proofOfStayingDocBytes: widget.proofOfStayingDocBytes,
+          permitToStayBytes: widget.permitToStayBytes,
         )
       )
     );

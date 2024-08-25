@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/styling.dart';
@@ -34,6 +36,7 @@ class FilePickerContainer extends StatelessWidget {
     required this.buttonContent,
     required this.fileController,
     required this.fileType,
+    required this.bytes,
     // required this.controllerName,
     // required this.sharedPrefValue,
     required this.fileName,
@@ -44,6 +47,7 @@ class FilePickerContainer extends StatelessWidget {
   final String buttonContent;
   final TextEditingController fileController;
   final PlatformFile? fileType;
+  final Uint8List? bytes;
 
   // final TextEditingController controllerName;
   // final String sharedPrefValue;
@@ -62,6 +66,7 @@ class FilePickerContainer extends StatelessWidget {
           child: FilePickerButton(
             fileController: fileController,
             fileType: fileType,
+            bytes: bytes,
             // controllerName: controllerName,
             // sharedPrefValue: sharedPrefValue,
             fileName: fileName,

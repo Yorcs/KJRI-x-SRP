@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:path_provider/path_provider.dart';
 
 //This class is strictly for styling purposes only. Created for reusability.
 
@@ -189,12 +186,14 @@ class InfoButton extends StatelessWidget {
 }
 
 //File Picker
+// ignore: must_be_immutable
 class FilePickerButton extends StatefulWidget {
-  FilePickerButton({super.key, required this.fileController, required this.fileName, required this.fileType});
+  FilePickerButton({super.key, required this.fileController, required this.fileName, required this.fileType, required this.bytes});
 
   final TextEditingController fileController;
   final TextEditingController fileName;
   PlatformFile? fileType;
+  Uint8List? bytes;
 
     @override
   State<FilePickerButton> createState() => _FilePickerState();
@@ -232,8 +231,9 @@ class _FilePickerState extends State<FilePickerButton> {
     setState(() {
       fileName = result.files.first.name;
       widget.fileType = result.files.first;
+      widget.bytes = fileBytes;
       // fileBytesDecoded = fileBytes.toString();
-      fileBytesEncoded = base64Encode(fileBytes!);
+      // fileBytesEncoded = base64Encode(fileBytes!);
       // debugPrint(fileBytesEncoded);
       widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text = result.files.first.name;

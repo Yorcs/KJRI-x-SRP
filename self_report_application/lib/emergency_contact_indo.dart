@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/overview.dart';
@@ -9,9 +10,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact in Indonesia Page
 class EmergencyContactIndoPage extends StatelessWidget {
-  const EmergencyContactIndoPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  const EmergencyContactIndoPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
+
+  final Uint8List? proofOfStayingDocBytes;
+  final Uint8List? permitToStayBytes;
 
 
   @override
@@ -19,14 +23,20 @@ class EmergencyContactIndoPage extends StatelessWidget {
     return EmergencyContactIndoForm(
       proofOfStayingDocFile: proofOfStayingDocFile,
       permitToStayFile: permitToStayFile,
+
+      proofOfStayingDocBytes: proofOfStayingDocBytes,
+      permitToStayBytes: permitToStayBytes,
     );
   }
 }
 
 class EmergencyContactIndoForm extends StatefulWidget {
-  const EmergencyContactIndoForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
+  const EmergencyContactIndoForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
+
+  final Uint8List? proofOfStayingDocBytes;
+  final Uint8List? permitToStayBytes;
   
   @override
   State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
@@ -130,6 +140,9 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
         builder: (context) => OverviewPage(
           proofOfStayingDocFile: widget.proofOfStayingDocFile,
           permitToStayFile: widget.permitToStayFile,
+
+          proofOfStayingDocBytes: widget.proofOfStayingDocBytes,
+          permitToStayBytes: widget.permitToStayBytes,
         )
       )
     );
