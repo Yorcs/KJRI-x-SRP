@@ -4,6 +4,7 @@ import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/goal_of_staying.dart';
 import 'package:self_report_application/header.dart';
+import 'package:self_report_application/overview.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -204,7 +205,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-      builder: (context) => GoalOfStayingPage(
+      builder: (context) => OverviewPage(
         proofOfStayingDocFile: widget.proofOfStayingDocFile,
         permitToStayFile: permitToStayFile,
       )

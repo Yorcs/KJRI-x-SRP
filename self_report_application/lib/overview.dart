@@ -243,12 +243,9 @@ class _OverviewFormState extends State<OverviewState> {
       Uint8List bytes = base64Decode(pickedFile);
       final ref = FirebaseStorage.instance.ref().child(path);
 
-      UploadTask uploadTask = ref.putData(bytes);
-
-      final snapshot = await uploadTask.whenComplete(() {});
-
-      final String urlDownload = await snapshot.ref.getDownloadURL();
-      return urlDownload;
+      var snapshot = await ref.putData(bytes);
+      print(snapshot.ref.getDownloadURL());
+      return await snapshot.ref.getDownloadURL();
 
     } on FirebaseException catch (e){
       print("Failed with error '${e.code}': ${e.message}");

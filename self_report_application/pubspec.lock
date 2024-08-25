@@ -337,10 +337,10 @@ packages:
     dependency: "direct main"
     description:
       name: open_file
-      sha256: a5a32d44acb7c899987d0999e1e3cbb0a0f1adebbf41ac813ec6d2d8faa0af20
+      sha256: "0ebdc2ad29df46e4b1dcb92edb369e3066efe195349170c830fdf2cb669f0eb8"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.2"
+    version: "3.4.0"
   path:
     dependency: transitive
     description:
