@@ -92,7 +92,7 @@ class BackButtons extends StatelessWidget{
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+        foregroundColor: WidgetStateProperty.all<Color>(Colors.grey),
       ),
       onPressed: onPressed,
       child: const Text('Kembali'),
@@ -116,12 +116,12 @@ class ForwardButtons extends StatelessWidget{
       alignment: Alignment.centerRight,
       child: ElevatedButton(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
-          shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
-          overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(73, 105, 221, 1)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
-          padding:MaterialStateProperty.all(EdgeInsets.all(18)),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
+          shadowColor: WidgetStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
+          overlayColor: WidgetStateProperty.all<Color>(Color.fromRGBO(73, 105, 221, 1)),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
+          padding:WidgetStateProperty.all(EdgeInsets.all(18)),
         ),
         onPressed: onPressed,
         child: const Text('Lanjut'),
@@ -146,12 +146,12 @@ class FileButtonsStyle extends StatelessWidget{
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(136, 205, 255, 1)),
-          shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
-          overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(117, 185, 234, 1)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
-          padding:MaterialStateProperty.all(EdgeInsets.all(16)),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Color.fromRGBO(136, 205, 255, 1)),
+          shadowColor: WidgetStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
+          overlayColor: WidgetStateProperty.all<Color>(Color.fromRGBO(117, 185, 234, 1)),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
+          padding:WidgetStateProperty.all(EdgeInsets.all(16)),
         ),
         onPressed: onPressed,
         child: const Text('Unggah File'),
