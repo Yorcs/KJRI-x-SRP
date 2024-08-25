@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart';
 import 'package:self_report_application/emergency_contact_indo.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
@@ -10,32 +9,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact Abroad Page
 class EmergencyContactAbroadPage extends StatelessWidget {
-  const EmergencyContactAbroadPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
+  const EmergencyContactAbroadPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
-
-  final Uint8List? proofOfStayingDocBytes;
-  final Uint8List? permitToStayBytes;
 
   @override
   Widget build(BuildContext context) {
     return EmergencyContactAbroadForm(
       proofOfStayingDocFile: proofOfStayingDocFile,
       permitToStayFile: permitToStayFile,
-
-      proofOfStayingDocBytes: proofOfStayingDocBytes,
-      permitToStayBytes: permitToStayBytes,
     );
   }
 }
 
 class EmergencyContactAbroadForm extends StatefulWidget {
-  const EmergencyContactAbroadForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile, this.proofOfStayingDocBytes, this.permitToStayBytes});
+  const EmergencyContactAbroadForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
   final PlatformFile? proofOfStayingDocFile;
   final PlatformFile? permitToStayFile;
-
-  final Uint8List? proofOfStayingDocBytes;
-  final Uint8List? permitToStayBytes;
   
   @override
   State<EmergencyContactAbroadForm> createState() => _EmergencyContactAbroadFormState();
@@ -140,9 +130,6 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
         builder: (context) => EmergencyContactIndoPage(
           proofOfStayingDocFile: widget.proofOfStayingDocFile,
           permitToStayFile: widget.permitToStayFile,
-
-          proofOfStayingDocBytes: widget.proofOfStayingDocBytes,
-          permitToStayBytes: widget.permitToStayBytes,
         )
       )
     );
