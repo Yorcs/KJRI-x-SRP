@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:self_report_application/emergency_contact_abroad.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/overview.dart';
@@ -128,7 +127,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EmergencyContactAbroadPage(
+        builder: (context) => OverviewPage(
           proofOfStayingDocFile: widget.proofOfStayingDocFile,
           permitToStayFile: widget.permitToStayFile,
         )

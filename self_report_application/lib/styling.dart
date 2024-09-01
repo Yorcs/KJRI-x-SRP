@@ -191,7 +191,6 @@ class InfoButton extends StatelessWidget {
 }
 
 //File Picker
-// ignore: must_be_immutable
 class FilePickerButton extends StatefulWidget {
   FilePickerButton({super.key, required this.fileController, required this.fileName, required this.fileType});
 
@@ -209,6 +208,7 @@ class _FilePickerState extends State<FilePickerButton> {
   String? fileBytesEncoded;
   String? filePath;
   Uint8List? fileBytes;
+  double _sizekbs = 0;
   File? newImage;
   final int maxSizeinBytes = 5 * 1048576; //1024 kb = 1 mb
 
@@ -233,9 +233,9 @@ class _FilePickerState extends State<FilePickerButton> {
     setState(() {
       filePath = newImage!.path;
       // fileBytesDecoded = fileBytes.toString();
-      // fileBytesEncoded = base64Encode(fileBytes!);
+      fileBytesEncoded = base64Encode(fileBytes!);
       // debugPrint(fileBytesEncoded);
-      widget.fileController.text = filePath!;
+      widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text = fileName!;
     });
   }
@@ -254,6 +254,9 @@ class _FilePickerState extends State<FilePickerButton> {
               child: FileButtonsStyle(
                 onPressed: () {
                   pickFiles();
+                  if(fileName != null){
+
+                  }
                 },
               ),
             ),

@@ -158,6 +158,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataContinuePage(
+          proofOfStayingDocFile: proofOfStayingDocFile,
         )
       )
     );
