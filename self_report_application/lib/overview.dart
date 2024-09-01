@@ -12,23 +12,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Overview Page
 class OverviewPage extends StatelessWidget {
- const OverviewPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
- final PlatformFile? proofOfStayingDocFile;
- final PlatformFile? permitToStayFile;
+ const OverviewPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return OverviewState(
-      proofOfStayingDocFile: proofOfStayingDocFile,
-      permitToStayFile: permitToStayFile,
+
     );
   }
 }
 
 class OverviewState extends StatefulWidget {
-  const OverviewState({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile? proofOfStayingDocFile;
-  final PlatformFile? permitToStayFile;
+  const OverviewState({super.key});
+
 
   @override
   State<OverviewState> createState() => _OverviewFormState();
@@ -240,10 +237,10 @@ class _OverviewFormState extends State<OverviewState> {
   Future<String> uploadFile(String pickedFile, String fileName) async {
     try{
       final path = 'files/$name/${fileName}';
-      Uint8List bytes = base64Decode(pickedFile);
+      final file = File(pickedFile);
       final ref = FirebaseStorage.instance.ref().child(path);
 
-      var snapshot = await ref.putData(bytes);
+      var snapshot = await ref.putFile(file);
       print(snapshot.ref.getDownloadURL());
       return await snapshot.ref.getDownloadURL();
 

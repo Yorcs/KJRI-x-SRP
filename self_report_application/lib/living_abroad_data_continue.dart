@@ -11,21 +11,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
-  const LivingAbroadDataContinuePage({super.key, required this.proofOfStayingDocFile});
-  final PlatformFile? proofOfStayingDocFile;
+  const LivingAbroadDataContinuePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return LivingAbroadDataContinueForm(
-      proofOfStayingDocFile: proofOfStayingDocFile,
     );
   }
 }
 
 class LivingAbroadDataContinueForm extends StatefulWidget {
-  const LivingAbroadDataContinueForm({super.key, required this.proofOfStayingDocFile});
-  final PlatformFile? proofOfStayingDocFile;
-
+  const LivingAbroadDataContinueForm({super.key});
   @override
   State<LivingAbroadDataContinueForm> createState() => _LivingAbroadDataContinueFormState();
 }
@@ -206,8 +202,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       await Navigator.of(context).push(
       MaterialPageRoute(
       builder: (context) => OverviewPage(
-        proofOfStayingDocFile: widget.proofOfStayingDocFile,
-        permitToStayFile: permitToStayFile,
       )
       ) 
       );
