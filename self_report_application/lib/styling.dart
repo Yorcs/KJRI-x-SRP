@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 
 //This class is strictly for styling purposes only. Created for reusability.
 
@@ -94,7 +92,7 @@ class BackButtons extends StatelessWidget{
   Widget build(BuildContext context) {
     return TextButton(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
+        foregroundColor: WidgetStateProperty.all<Color>(Colors.grey)
       ),
       onPressed: onPressed,
       child: const Text('Kembali'),
@@ -118,12 +116,12 @@ class ForwardButtons extends StatelessWidget{
       alignment: Alignment.centerRight,
       child: ElevatedButton(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
-          shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
-          overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(73, 105, 221, 1)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
-          padding:MaterialStateProperty.all(EdgeInsets.all(18)),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Color.fromRGBO(85, 119, 238, 1)),
+          shadowColor: WidgetStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
+          overlayColor: WidgetStateProperty.all<Color>(Color.fromRGBO(73, 105, 221, 1)),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
+          padding:WidgetStateProperty.all(EdgeInsets.all(18)),
         ),
         onPressed: onPressed,
         child: const Text('Lanjut'),
@@ -148,12 +146,12 @@ class FileButtonsStyle extends StatelessWidget{
       alignment: Alignment.centerLeft,
       child: ElevatedButton(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-          backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(136, 205, 255, 1)),
-          shadowColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
-          overlayColor: MaterialStateProperty.all<Color>(Color.fromRGBO(117, 185, 234, 1)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
-          padding:MaterialStateProperty.all(EdgeInsets.all(16)),
+          foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          backgroundColor: WidgetStateProperty.all<Color>(Color.fromRGBO(136, 205, 255, 1)),
+          shadowColor: WidgetStateProperty.all<Color>(Color.fromRGBO(0, 0, 0, 0)),
+          overlayColor: WidgetStateProperty.all<Color>(Color.fromRGBO(117, 185, 234, 1)),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
+          padding:WidgetStateProperty.all(EdgeInsets.all(16)),
         ),
         onPressed: onPressed,
         child: const Text('Unggah File'),
@@ -191,6 +189,7 @@ class InfoButton extends StatelessWidget {
 }
 
 //File Picker
+// ignore: must_be_immutable
 class FilePickerButton extends StatefulWidget {
   FilePickerButton({super.key, required this.fileController, required this.fileName, required this.fileType});
 
@@ -206,37 +205,39 @@ class _FilePickerState extends State<FilePickerButton> {
 
   String? fileName;
   String? fileBytesEncoded;
-  String? filePath;
   Uint8List? fileBytes;
   double _sizekbs = 0;
-  File? newImage;
-  final int maxSizeinBytes = 5 * 1048576; //1024 kb = 1 mb
+  final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
-    final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if(image == null) return;
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpeg', 'jpg']);
 
-    var imagePath = await image.readAsBytes();
-
-    var fileSize = imagePath.length;
-    if(fileSize <= maxSizeinBytes){
-      fileName = basename(image.path);
-      final File file = File(fileName!);
-      final duplicateFile = await getTemporaryDirectory();
-      final String duplicateFilePath = duplicateFile.path;
-      newImage = await file.copy('$duplicateFilePath/$fileName');
-
+    
+    if (result!= null && result.files.isNotEmpty){
+      final size = result.files.first.size;
+      _sizekbs = size / 1024;
+      if(_sizekbs < maxSizeKbs){
+        fileBytes = result.files.first.bytes;
+        fileName = result.files.first.name;
+      }
+      else{
+        return;
+      }
     } else {
       return;
     }
 
+    // final tempDir = await getTemporaryDirectory();
+    // File file = await File('${tempDir.path}$fileName').create();
+
     setState(() {
-      filePath = newImage!.path;
+      fileName = result.files.first.name;
+      widget.fileType = result.files.first;
       // fileBytesDecoded = fileBytes.toString();
       fileBytesEncoded = base64Encode(fileBytes!);
       // debugPrint(fileBytesEncoded);
       widget.fileController.text = fileBytesEncoded!;
-      widget.fileName.text = fileName!;
+      widget.fileName.text = result.files.first.name;
     });
   }
 
@@ -254,9 +255,6 @@ class _FilePickerState extends State<FilePickerButton> {
               child: FileButtonsStyle(
                 onPressed: () {
                   pickFiles();
-                  if(fileName != null){
-
-                  }
                 },
               ),
             ),
