@@ -2,7 +2,7 @@
 
 ## Overview
 
-Tools: Flutter | Dart | Google Sheets
+Tools: Flutter | Dart | Firebase
 
 This mobile application is designed to simplify the self-reporting procedure for Indonesian citizens residing abroad, with a current focus on those living in Vancouver, BC. The Self-Reporting Process application aims to minimize user input errors, thereby enabling the consulate team to allocate their manpower more efficiently.
 
