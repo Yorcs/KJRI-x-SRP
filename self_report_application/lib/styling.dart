@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 //This class is strictly for styling purposes only. Created for reusability.
 
@@ -204,39 +206,37 @@ class _FilePickerState extends State<FilePickerButton> {
 
   String? fileName;
   String? fileBytesEncoded;
+  String? filePath;
   Uint8List? fileBytes;
   double _sizekbs = 0;
-  final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
+  File? newImage;
+  final int maxSizeinBytes = 5 * 1048576; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpeg', 'jpg']);
+    final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if(image == null) return;
 
-    
-    if (result!= null && result.files.isNotEmpty){
-      final size = result.files.first.size;
-      _sizekbs = size / 1024;
-      if(_sizekbs < maxSizeKbs){
-        fileBytes = result.files.first.bytes;
-        fileName = result.files.first.name;
-      }
-      else{
-        return;
-      }
+    var imagePath = await image.readAsBytes();
+
+    var fileSize = imagePath.length;
+    if(fileSize <= maxSizeinBytes){
+      fileName = basename(image.path);
+      final File file = File(fileName!);
+      final duplicateFile = await getTemporaryDirectory();
+      final String duplicateFilePath = duplicateFile.path;
+      newImage = await file.copy('$duplicateFilePath/$fileName');
+
     } else {
       return;
     }
 
-    // final tempDir = await getTemporaryDirectory();
-    // File file = await File('${tempDir.path}$fileName').create();
-
     setState(() {
-      fileName = result.files.first.name;
-      widget.fileType = result.files.first;
+      filePath = newImage!.path;
       // fileBytesDecoded = fileBytes.toString();
       fileBytesEncoded = base64Encode(fileBytes!);
       // debugPrint(fileBytesEncoded);
       widget.fileController.text = fileBytesEncoded!;
-      widget.fileName.text = result.files.first.name;
+      widget.fileName.text = fileName!;
     });
   }
 
@@ -254,6 +254,9 @@ class _FilePickerState extends State<FilePickerButton> {
               child: FileButtonsStyle(
                 onPressed: () {
                   pickFiles();
+                  if(fileName != null){
+
+                  }
                 },
               ),
             ),
