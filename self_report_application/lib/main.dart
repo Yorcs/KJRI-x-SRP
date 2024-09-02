@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +10,7 @@ import 'firebase_options.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 
 
@@ -28,9 +31,25 @@ class MyApp extends StatelessWidget {
     await prefs.clear();
   }
 
+  Future <void> requestStoragePermission() async{
+    if(Platform.isAndroid){
+  if (await Permission.storage.request().isGranted) {
+      var storage = await getExternalStorageDirectories(type: StorageDirectory.documents);
+        if(storage != null && storage.isNotEmpty) {
+          await Permission.manageExternalStorage.request();
+        } else {
+          openAppSettings();
+        }
+  } else if (await Permission.storage.request().isPermanentlyDenied) {
+    openAppSettings();
+  }
+}
+  }
+
   @override
   Widget build(BuildContext context) {
     clearData();
+    requestStoragePermission();
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(

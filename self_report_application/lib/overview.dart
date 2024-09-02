@@ -239,11 +239,13 @@ class _OverviewFormState extends State<OverviewState> {
 
   Future<String> uploadFile(String pickedFile, String fileName) async {
     try{
-      final path = 'files/$name/${fileName}';
+      final path = 'files/$name/$fileName';
+      debugPrint(pickedFile);
       Uint8List bytes = base64Decode(pickedFile);
+      final file = await File(fileName).writeAsBytes(bytes);
       final ref = FirebaseStorage.instance.ref().child(path);
 
-      var snapshot = await ref.putData(bytes);
+      var snapshot = await ref.putFile(file);
       print(snapshot.ref.getDownloadURL());
       return await snapshot.ref.getDownloadURL();
 
