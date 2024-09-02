@@ -210,7 +210,7 @@ class _FilePickerState extends State<FilePickerButton> {
   final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpeg', 'jpg']);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, withData: true, allowedExtensions: ['png', 'jpeg', 'jpg'],);
 
     
     if (result!= null && result.files.isNotEmpty){
