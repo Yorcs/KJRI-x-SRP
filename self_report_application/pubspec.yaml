@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^5.2.0
   firebase_app_check: ^0.3.0+5
   permission_handler: ^11.3.1
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:

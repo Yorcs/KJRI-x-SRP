@@ -175,6 +175,7 @@ class _OverviewFormState extends State<OverviewState> {
       postalCode = postalCodeString;
       province = provinceDropdownValueString;
       proofOfStayingDoc = proofOfStayingDocString;
+      debugPrint(proofOfStayingDoc);
       proofOfStayingDocName = proofOfStayingDocNameString;
       canadianPhoneNumber = canadianPhoneNumberString;
 
@@ -239,6 +240,8 @@ class _OverviewFormState extends State<OverviewState> {
 
   Future<String> uploadFile(String pickedFile, String fileName) async {
     try{
+      debugPrint(fileName);
+      debugPrint(pickedFile);
       final path = 'files/$name/$fileName';
       debugPrint(pickedFile);
       Uint8List bytes = base64Decode(pickedFile);

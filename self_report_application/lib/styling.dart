@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -206,6 +207,7 @@ class _FilePickerState extends State<FilePickerButton> {
   String? fileBytesEncoded;
   Uint8List? fileBytes;
   double _sizekbs = 0;
+  File? file;
   final int maxSizeKbs = 1024 * 5; //1024 kb = 1 mb
 
   Future<void> pickFiles() async {
@@ -213,30 +215,44 @@ class _FilePickerState extends State<FilePickerButton> {
 
     
     if (result!= null && result.files.isNotEmpty){
-      final size = result.files.first.size;
-      _sizekbs = size / 1024;
-      if(_sizekbs < maxSizeKbs){
-        fileBytes = result.files.first.bytes;
-        fileName = result.files.first.name;
-      }
-      else{
+      file = File(result.files.first.path!);
+      debugPrint(result.files.first.path);
+      int sizeInBytes = file!.lengthSync();
+      double sizeInMb = sizeInBytes / (1024 * 1024);
+      if(sizeInMb <= 5){
+        fileName = basename(file!.path);
+        fileBytes = file!.readAsBytesSync();
+      } else {
         return;
       }
     } else {
       return;
     }
+    //   final size = result.files.first.size;
+    //   _sizekbs = size / 1024;
+    //   if(_sizekbs < maxSizeKbs){
+    //     fileBytes = result.files.first.bytes;
+    //     fileName = result.files.first.name;
+    //   }
+    //   else{
+    //     return;
+    //   }
+    // } else {
+    //   return;
+    // }
 
     // final tempDir = await getTemporaryDirectory();
     // File file = await File('${tempDir.path}$fileName').create();
 
     setState(() {
-      fileName = result.files.first.name;
+      fileName = basename(file!.path);
       widget.fileType = result.files.first;
       // fileBytesDecoded = fileBytes.toString();
       fileBytesEncoded = base64Encode(fileBytes!);
-      debugPrint(fileBytesEncoded);
       widget.fileController.text = fileBytesEncoded!;
-      widget.fileName.text = result.files.first.name;
+      widget.fileName.text =fileName!;
+      debugPrint(fileBytesEncoded);
+      debugPrint(fileName);
     });
   }
 
