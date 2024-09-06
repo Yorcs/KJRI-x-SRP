@@ -155,6 +155,8 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     if(!isValid){
     } else {
       saveData();
+      debugPrint(_proofOfStayingDoc.text);
+      debugPrint(_proofOfStayingDocName.text);
       await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataContinuePage(

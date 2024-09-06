@@ -251,8 +251,8 @@ class _FilePickerState extends State<FilePickerButton> {
       fileBytesEncoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text =fileName!;
-      debugPrint(fileBytesEncoded);
-      debugPrint(fileName);
+      // debugPrint(fileBytesEncoded);
+      // debugPrint(fileName);
     });
   }
 
