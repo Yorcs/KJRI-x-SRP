@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,18 +33,21 @@ class MyApp extends StatelessWidget {
   }
 
   Future <void> requestStoragePermission() async{
-    if(Platform.isAndroid){
-  if (await Permission.storage.request().isGranted) {
-      var storage = await getExternalStorageDirectories(type: StorageDirectory.documents);
-        if(storage != null && storage.isNotEmpty) {
-          await Permission.manageExternalStorage.request();
-        } else {
-          openAppSettings();
-        }
-  } else if (await Permission.storage.request().isPermanentlyDenied) {
-    openAppSettings();
-  }
-}
+    final androidInfo = await DeviceInfoPlugin().androidInfo;
+    late final Map<Permission, PermissionStatus> statusess;
+
+    if(androidInfo.version.sdkInt <= 32){
+      statusess = await [Permission.storage].request();
+    } else {
+      statusess = await [Permission.photos].request();
+    }
+
+    statusess.forEach((permission, status){
+      if(status != PermissionStatus.granted){
+        AlertDialog(content: Text('Please allow storage permission to access the application'));
+        openAppSettings();
+      }
+    });
   }
 
   @override
