@@ -29,7 +29,6 @@ dependencies:
   firebase_app_check: ^0.3.0+5
   permission_handler: ^11.3.1
   device_info_plus: ^10.1.2
-  open_file: ^3.5.3
   path: ^1.9.0
 
 dev_dependencies:

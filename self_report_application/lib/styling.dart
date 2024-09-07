@@ -220,7 +220,7 @@ class _FilePickerState extends State<FilePickerButton> {
       int sizeInBytes = file!.lengthSync();
       double sizeInMb = sizeInBytes / (1024 * 1024);
       if(sizeInMb <= 5){
-        fileName = basename(file!.path);
+        fileName = file!.path;
         fileBytes = file!.readAsBytesSync();
       } else {
         return;
@@ -228,31 +228,13 @@ class _FilePickerState extends State<FilePickerButton> {
     } else {
       return;
     }
-    //   final size = result.files.first.size;
-    //   _sizekbs = size / 1024;
-    //   if(_sizekbs < maxSizeKbs){
-    //     fileBytes = result.files.first.bytes;
-    //     fileName = result.files.first.name;
-    //   }
-    //   else{
-    //     return;
-    //   }
-    // } else {
-    //   return;
-    // }
-
-    // final tempDir = await getTemporaryDirectory();
-    // File file = await File('${tempDir.path}$fileName').create();
 
     setState(() {
-      fileName = basename(file!.path);
+      fileName = file!.path;
       widget.fileType = result.files.first;
-      // fileBytesDecoded = fileBytes.toString();
       fileBytesEncoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text =fileName!;
-      // debugPrint(fileBytesEncoded);
-      // debugPrint(fileName);
     });
   }
 
