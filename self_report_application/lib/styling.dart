@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 //This class is strictly for styling purposes only. Created for reusability.
 
@@ -220,7 +221,12 @@ class _FilePickerState extends State<FilePickerButton> {
       int sizeInBytes = file!.lengthSync();
       double sizeInMb = sizeInBytes / (1024 * 1024);
       if(sizeInMb <= 5){
-        fileName = file!.path;
+        if(kIsWeb){
+          fileName = result.files.first.name;
+        }
+        else{
+          fileName = file!.path;
+        }
         fileBytes = file!.readAsBytesSync();
       } else {
         return;
@@ -230,7 +236,12 @@ class _FilePickerState extends State<FilePickerButton> {
     }
 
     setState(() {
-      fileName = file!.path;
+      if(kIsWeb){
+        fileName = result.files.first.name;
+      }
+      else{
+        fileName = file!.path;
+      }
       widget.fileType = result.files.first;
       fileBytesEncoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesEncoded!;

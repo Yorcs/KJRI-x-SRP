@@ -684,7 +684,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
-                              onPressed: () => uploadFile(proofOfStayingDoc, proofOfStayingDocName)
+                              onPressed: () => getItemAndNavigate(context),
                             ),
                           ],
                         ),
