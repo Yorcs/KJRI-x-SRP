@@ -12,6 +12,7 @@ import 'package:self_report_application/styling.dart';
 import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 
 
@@ -53,7 +54,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     clearData();
-    requestStoragePermission();
+    if(!kIsWeb){
+      requestStoragePermission();
+    }
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
