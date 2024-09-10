@@ -8,6 +8,47 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 //This class is strictly for styling purposes only. Created for reusability.
+class DropdownStyling {
+  InputDecoration dropdownDecoration(String? hintContent){
+    return InputDecoration(
+      errorStyle: TextStyle(
+      fontFamily: 'Source Sans Pro',
+      color: Color.fromRGBO(255, 5, 5, 1),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          width: 0.5,
+          color: Color.fromRGBO(255, 5, 5, 1),
+        )
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          width: 0.5,
+          color: Color.fromRGBO(255, 5, 5, 1),
+        )
+      ),
+      focusColor: Color.fromRGBO(74, 74, 74, 1),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          width: 0.5,
+          color: Color.fromRGBO(74, 74, 74, 1),
+        ),
+      ),
+      contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+      prefix: const Padding(
+        padding: EdgeInsets.only(left: 15),
+      ),
+      hintText: hintContent,
+      isDense: true,
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          width: 0.5,
+          color: Color.fromRGBO(179, 179, 179, 1),
+        )
+      ),
+    );
+  }
+}
 
 //Text styles (Including headers)
 class TextStyling {
