@@ -13,23 +13,16 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 //Overview Page
 class OverviewPage extends StatelessWidget {
- const OverviewPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
- final PlatformFile? proofOfStayingDocFile;
- final PlatformFile? permitToStayFile;
+ const OverviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return OverviewState(
-      proofOfStayingDocFile: proofOfStayingDocFile,
-      permitToStayFile: permitToStayFile,
-    );
+    return OverviewState();
   }
 }
 
 class OverviewState extends StatefulWidget {
-  const OverviewState({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile? proofOfStayingDocFile;
-  final PlatformFile? permitToStayFile;
+  const OverviewState({super.key});
 
   @override
   State<OverviewState> createState() => _OverviewFormState();
@@ -176,7 +169,6 @@ class _OverviewFormState extends State<OverviewState> {
       postalCode = postalCodeString;
       province = provinceDropdownValueString;
       proofOfStayingDoc = proofOfStayingDocString;
-      debugPrint(proofOfStayingDoc);
       proofOfStayingDocName = proofOfStayingDocNameString;
       canadianPhoneNumber = canadianPhoneNumberString;
 

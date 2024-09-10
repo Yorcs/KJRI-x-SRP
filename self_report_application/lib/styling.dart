@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -192,11 +191,10 @@ class InfoButton extends StatelessWidget {
 //File Picker
 // ignore: must_be_immutable
 class FilePickerButton extends StatefulWidget {
-  FilePickerButton({super.key, required this.fileController, required this.fileName, required this.fileType});
+  FilePickerButton({super.key, required this.fileController, required this.fileName});
 
   final TextEditingController fileController;
   final TextEditingController fileName;
-  PlatformFile? fileType;
 
     @override
   State<FilePickerButton> createState() => _FilePickerState();
@@ -205,6 +203,7 @@ class FilePickerButton extends StatefulWidget {
 class _FilePickerState extends State<FilePickerButton> {
 
   String? fileName;
+  String? mobileFileName;
   String? fileBytesEncoded;
   Uint8List? fileBytes;
   double _sizekbs = 0;
@@ -228,12 +227,12 @@ class _FilePickerState extends State<FilePickerButton> {
 
       } else {
         file = File(result.files.first.path!);
-        debugPrint(result.files.first.path);
         int sizeInBytes = file!.lengthSync();
         double sizeInMb = sizeInBytes / (1024 * 1024);
         if(sizeInMb <= 5){
           fileName = file!.path;
           fileBytes = file!.readAsBytesSync();
+          mobileFileName = result.files.first.name;
         }
         else {
           return;
@@ -244,13 +243,6 @@ class _FilePickerState extends State<FilePickerButton> {
     }
 
     setState(() {
-      // if(kIsWeb){
-      //   fileName = result.files.first.name;
-      // }
-      // else{
-      //   fileName = file!.path;
-      // }
-      widget.fileType = result.files.first;
       fileBytesEncoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesEncoded!;
       widget.fileName.text =fileName!;
@@ -278,10 +270,17 @@ class _FilePickerState extends State<FilePickerButton> {
               width: 10,
             ),
             if(fileName != null)...[
-              SizedBox(
-                width: 180,
-                child: Text(fileName!),
-              ),
+              if(kIsWeb)...[
+                SizedBox(
+                  width: 180,
+                  child: Text(fileName!),
+                ),
+              ] else ...[
+                SizedBox(
+                  width: 180,
+                  child: Text(mobileFileName!),
+                ),
+              ],
               SizedBox(
                 width: 0,
                 child: Visibility(

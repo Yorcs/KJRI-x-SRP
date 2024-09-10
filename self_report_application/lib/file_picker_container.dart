@@ -33,9 +33,6 @@ class FilePickerContainer extends StatelessWidget {
     required this.labels,
     required this.buttonContent,
     required this.fileController,
-    required this.fileType,
-    // required this.controllerName,
-    // required this.sharedPrefValue,
     required this.fileName,
   });
 
@@ -43,10 +40,6 @@ class FilePickerContainer extends StatelessWidget {
   final String labels;
   final String buttonContent;
   final TextEditingController fileController;
-  final PlatformFile? fileType;
-
-  // final TextEditingController controllerName;
-  // final String sharedPrefValue;
   final TextEditingController fileName;
 
   @override
@@ -61,9 +54,6 @@ class FilePickerContainer extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: FilePickerButton(
             fileController: fileController,
-            fileType: fileType,
-            // controllerName: controllerName,
-            // sharedPrefValue: sharedPrefValue,
             fileName: fileName,
           ),
         ), 

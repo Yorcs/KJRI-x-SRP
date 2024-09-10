@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/file_picker_container.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/living_abroad_data_continue.dart';
-import 'package:self_report_application/overview.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:self_report_application/styling.dart';
@@ -43,7 +40,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     'Yukon',
   ];
 
-  PlatformFile? proofOfStayingDocFile;
   late String addressString;
   late String countryString;
   late String postalCodeString;
@@ -163,12 +159,9 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     if(!isValid){
     } else {
       saveData();
-      debugPrint(_proofOfStayingDoc.text);
-      debugPrint(_proofOfStayingDocName.text);
       await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => LivingAbroadDataContinuePage(
-          proofOfStayingDocFile: proofOfStayingDocFile,
         )
       )
     );
@@ -204,7 +197,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           buttonContent: 'Diunggah bukti tinggal dengan\ndokumen yang mencantumkan\nalamat domisili terkini seperti:\n\u2022 ID Card\n\u2022 Driver License\n\u2022 Rekening Bank\n\u2022 Kontrak Rumah\n\u2022 Tagihan Telepon\n\u2022 Pernyataan alamat dari kampus (Contoh: Confirmation of campus residence)\n\n\nTidak menerima file format HEIC',
                           fileController: _proofOfStayingDoc,
                           fileName: _proofOfStayingDocName,
-                          fileType: proofOfStayingDocFile,
                         ),
                         SizedBox(height: 30,),
                         FormContainer(

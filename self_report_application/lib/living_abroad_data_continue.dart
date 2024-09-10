@@ -11,20 +11,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Living Abroad cont. Page
 class LivingAbroadDataContinuePage extends StatelessWidget {
-  const LivingAbroadDataContinuePage({super.key, required this.proofOfStayingDocFile});
-  final PlatformFile? proofOfStayingDocFile;
+  const LivingAbroadDataContinuePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LivingAbroadDataContinueForm(
-      proofOfStayingDocFile: proofOfStayingDocFile,
-    );
+    return LivingAbroadDataContinueForm();
   }
 }
 
 class LivingAbroadDataContinueForm extends StatefulWidget {
-  const LivingAbroadDataContinueForm({super.key, required this.proofOfStayingDocFile});
-  final PlatformFile? proofOfStayingDocFile;
+  const LivingAbroadDataContinueForm({super.key});
 
   @override
   State<LivingAbroadDataContinueForm> createState() => _LivingAbroadDataContinueFormState();
@@ -39,7 +35,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
   final TextEditingController _permitToStayDocName = TextEditingController();
   final TextEditingController _dateOfArrival = TextEditingController();
 
-  PlatformFile? permitToStayFile;
   late String visaNumberString;
   late String visaStartDateString;
   late String visaEndDateString;
@@ -205,10 +200,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-      builder: (context) => OverviewPage(
-        proofOfStayingDocFile: widget.proofOfStayingDocFile,
-        permitToStayFile: permitToStayFile,
-      )
+      builder: (context) => OverviewPage()
       ) 
       );
     }
@@ -255,7 +247,6 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                           buttonContent: 'Diunggah dengan file format\nPNG/JPEG/JPG\n\nTidak menerima file format HEIC\n\nDiunggah halaman utama,\nmenghadap kedepan\n\nDiterima:\n\u2022 Study Permit\n\u2022 Work Permit\n\u2022 Kartu PR',
                           fileController: _permitToStayDoc,
                           fileName: _permitToStayDocName,
-                          fileType: permitToStayFile,
                         ),
                         SizedBox(height: 30,),
                          DateFormContainer(

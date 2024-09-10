@@ -9,24 +9,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact in Indonesia Page
 class EmergencyContactIndoPage extends StatelessWidget {
-  const EmergencyContactIndoPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile? proofOfStayingDocFile;
-  final PlatformFile? permitToStayFile;
+  const EmergencyContactIndoPage({super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    return EmergencyContactIndoForm(
-      proofOfStayingDocFile: proofOfStayingDocFile,
-      permitToStayFile: permitToStayFile,
-    );
+    return EmergencyContactIndoForm();
   }
 }
 
 class EmergencyContactIndoForm extends StatefulWidget {
-  const EmergencyContactIndoForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile? proofOfStayingDocFile;
-  final PlatformFile? permitToStayFile;
+  const EmergencyContactIndoForm({super.key});
   
   @override
   State<EmergencyContactIndoForm> createState() => _EmergencyContactIndoFormState();
@@ -127,10 +120,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => OverviewPage(
-          proofOfStayingDocFile: widget.proofOfStayingDocFile,
-          permitToStayFile: widget.permitToStayFile,
-        )
+        builder: (context) => OverviewPage()
       )
     );
   }

@@ -9,23 +9,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //Emergency Contact Abroad Page
 class EmergencyContactAbroadPage extends StatelessWidget {
-  const EmergencyContactAbroadPage({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile? proofOfStayingDocFile;
-  final PlatformFile? permitToStayFile;
+  const EmergencyContactAbroadPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return EmergencyContactAbroadForm(
-      proofOfStayingDocFile: proofOfStayingDocFile,
-      permitToStayFile: permitToStayFile,
-    );
+    return EmergencyContactAbroadForm();
   }
 }
 
 class EmergencyContactAbroadForm extends StatefulWidget {
-  const EmergencyContactAbroadForm({super.key, required this.proofOfStayingDocFile, required this.permitToStayFile});
-  final PlatformFile? proofOfStayingDocFile;
-  final PlatformFile? permitToStayFile;
+  const EmergencyContactAbroadForm({super.key});
   
   @override
   State<EmergencyContactAbroadForm> createState() => _EmergencyContactAbroadFormState();
@@ -127,10 +120,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EmergencyContactIndoPage(
-          proofOfStayingDocFile: widget.proofOfStayingDocFile,
-          permitToStayFile: widget.permitToStayFile,
-        )
+        builder: (context) => EmergencyContactIndoPage()
       )
     );
   }
