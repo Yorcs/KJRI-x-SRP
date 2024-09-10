@@ -2127,7 +2127,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               buttonContent: '',
                               valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",  
                               controller: _agenPenyalur, 
-                              requiredDataChecker: false,
+                              requiredDataChecker: true,
                               manualErrorText: "Harap memeriksa ulang perusahaan penyalur",                  
                             ),
                           ]
@@ -3713,7 +3713,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             buttonContent: '',
                             valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",  
                             controller: _agenPenyalur, 
-                            requiredDataChecker: false,
+                            requiredDataChecker: true,
                             manualErrorText: "Harap memeriksa ulang perusahaan penyalur",                  
                           ),
 
