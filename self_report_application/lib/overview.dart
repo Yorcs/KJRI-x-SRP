@@ -9,6 +9,7 @@ import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 //Overview Page
 class OverviewPage extends StatelessWidget {
@@ -239,16 +240,20 @@ class _OverviewFormState extends State<OverviewState> {
 
 
   Future<String> uploadFile(String pickedFile, String fileName) async {
+    TaskSnapshot snapshot;
     try{
       debugPrint(fileName);
       debugPrint(pickedFile);
       final path = 'files/$name/$fileName';
-      debugPrint(pickedFile);
       Uint8List bytes = base64Decode(pickedFile);
-      final file = await File(fileName).writeAsBytes(bytes);
       final ref = FirebaseStorage.instance.ref().child(path);
+      if(kIsWeb){
+        snapshot = await ref.putData(bytes);
+      } else {
+        final file = await File(fileName).writeAsBytes(bytes);
+        snapshot = await ref.putFile(file);
+      }
 
-      var snapshot = await ref.putFile(file);
       print(snapshot.ref.getDownloadURL());
       return await snapshot.ref.getDownloadURL();
 
@@ -684,7 +689,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
-                              onPressed: () => getItemAndNavigate(context),
+                              onPressed: () => uploadFile(proofOfStayingDoc, proofOfStayingDocName),
                             ),
                           ],
                         ),

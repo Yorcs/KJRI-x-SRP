@@ -216,32 +216,40 @@ class _FilePickerState extends State<FilePickerButton> {
 
     
     if (result!= null && result.files.isNotEmpty){
-      file = File(result.files.first.path!);
-      debugPrint(result.files.first.path);
-      int sizeInBytes = file!.lengthSync();
-      double sizeInMb = sizeInBytes / (1024 * 1024);
-      if(sizeInMb <= 5){
-        if(kIsWeb){
+      if(kIsWeb){
+        final size = result.files.first.size;
+        _sizekbs = size / 1024;
+        if(_sizekbs < maxSizeKbs){
+          fileBytes = result.files.first.bytes;
           fileName = result.files.first.name;
+        } else {
+          return;
         }
-        else{
-          fileName = file!.path;
-        }
-        fileBytes = file!.readAsBytesSync();
+
       } else {
-        return;
+        file = File(result.files.first.path!);
+        debugPrint(result.files.first.path);
+        int sizeInBytes = file!.lengthSync();
+        double sizeInMb = sizeInBytes / (1024 * 1024);
+        if(sizeInMb <= 5){
+          fileName = file!.path;
+          fileBytes = file!.readAsBytesSync();
+        }
+        else {
+          return;
+        }
       }
     } else {
       return;
     }
 
     setState(() {
-      if(kIsWeb){
-        fileName = result.files.first.name;
-      }
-      else{
-        fileName = file!.path;
-      }
+      // if(kIsWeb){
+      //   fileName = result.files.first.name;
+      // }
+      // else{
+      //   fileName = file!.path;
+      // }
       widget.fileType = result.files.first;
       fileBytesEncoded = base64Encode(fileBytes!);
       widget.fileController.text = fileBytesEncoded!;

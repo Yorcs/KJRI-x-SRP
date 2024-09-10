@@ -77,7 +77,7 @@ class MyAppState extends ChangeNotifier {
 Future <void> getItemAndNavigate (BuildContext context) async {
     await Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (context) => LivingAbroadDataPage()
+      builder: (context) => IdentityPage()
     )
   );
 }
