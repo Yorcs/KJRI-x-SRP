@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 //This class is strictly for styling purposes only. Created for reusability.
 
 //Styling for box form
+
 class FormStyling {
   InputDecoration formDecoration(String? hintContent){
     return InputDecoration(
@@ -51,6 +52,45 @@ class FormStyling {
     );
   }
 }
+
+//Dropdown Decoration for Goal of Styling
+InputDecoration noHintFormDecoration = 
+InputDecoration(
+  errorStyle: TextStyle(
+    fontFamily: 'Source Sans Pro',
+    color: Color.fromRGBO(255, 5, 5, 1),
+  ),
+  errorBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      width: 0.5,
+      color: Color.fromRGBO(255, 5, 5, 1),
+    )
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      width: 0.5,
+      color: Color.fromRGBO(255, 5, 5, 1),
+    )
+  ),
+  focusColor: Color.fromRGBO(74, 74, 74, 1),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      width: 0.5,
+      color: Color.fromRGBO(74, 74, 74, 1),
+    ),
+  ),
+  contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
+  prefix: Padding(
+    padding: EdgeInsets.only(left: 15),
+  ),
+  isDense: true,
+  enabledBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      width: 0.5,
+      color: Color.fromRGBO(179, 179, 179, 1),
+    )
+  ),
+);
 
 //Text styles (Including headers)
 class TextStyling {
