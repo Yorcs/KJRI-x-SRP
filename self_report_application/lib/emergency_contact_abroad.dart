@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:self_report_application/emergency_contact_indo.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
