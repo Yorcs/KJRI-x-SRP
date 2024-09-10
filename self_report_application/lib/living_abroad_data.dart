@@ -50,7 +50,6 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
   late String provinceDropdownValueString;
   late String proofOfStayingDocString;
   late String proofOfStayingDocNameString;
-  // late String canadianAreaCodeString;
   late String canadianPhoneNumberString;
 
   Future<(String, String, String, String, String, String, String)> getSharedPrefs() async{
@@ -130,6 +129,15 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
     _proofOfStayingDocName.addListener(() {
       final String text = _proofOfStayingDocName.text;
       _proofOfStayingDocName.value = _proofOfStayingDocName.value.copyWith(
+        text: text,
+        selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing:  TextRange.empty,
+      );
+    });
+
+    _canadianPhoneNumber.addListener(() {
+      final String text = _canadianPhoneNumber.text;
+      _canadianPhoneNumber.value = _canadianPhoneNumber.value.copyWith(
         text: text,
         selection: TextSelection(baseOffset: text.length, extentOffset: text.length),
         composing:  TextRange.empty,
@@ -242,18 +250,17 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           manualErrorText: 'Tolong periksa ulang kode pos',                
                         ),
                         SizedBox(height: 30,),
-                      //  FormContainerWithDisabledText(
-                      //     labels: 'Telepon',
-                      //     needsInfoButton: false,
-                      //     isDataRequired: AutovalidateMode.onUserInteraction,
-                      //     hintContents: '',
-                      //     buttonContent: '',
-                      //     valueConstraints: r"^[0-9]+$",
-                      //     requiredDataChecker: true,
-                      //     areaCode: '+62',     
-                      //     controller: _canadianPhoneNumber,   
-                      //     manualErrorText: 'Tolong periksa ulang nomor telepon',           
-                      //   ),
+                        FormContainer(
+                          labels: 'Telepon',
+                          needsInfoButton: false,
+                          isDataRequired: AutovalidateMode.onUserInteraction,
+                          hintContents: '',
+                          buttonContent: '',
+                          valueConstraints: r'^[0-9+]+$',
+                          controller: _canadianPhoneNumber,   
+                          requiredDataChecker: true, 
+                          manualErrorText: 'Tolong periksa ulang nomor telepon',                
+                        ),
                         SizedBox(height: 40,), 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
