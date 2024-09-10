@@ -728,43 +728,7 @@ class DatePicker extends StatelessWidget {
       firstDate: firstDates,
       lastDate: lastDates,
       format: DateFormat('yyyy-MM-dd'),
-      decoration: InputDecoration(
-        errorStyle: TextStyle(
-          fontFamily: 'Source Sans Pro',
-          color: Color.fromRGBO(255, 5, 5, 1),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(255, 5, 5, 1),
-          )
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(255, 5, 5, 1),
-          )
-        ),
-        focusColor: Color.fromRGBO(74, 74, 74, 1),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(74, 74, 74, 1),
-          ),
-        ),
-        contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-        prefix: const Padding(
-          padding: EdgeInsets.only(left: 15),
-        ),
-        hintText: hintContent,
-        isDense: true,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(179, 179, 179, 1),
-            )
-          ),
-      ),
+      decoration: FormStyling().formDecoration(hintContent),
       validator: (value){
         if (value == null){
           return 'Please select a date';
@@ -829,44 +793,7 @@ class DropdownFormState extends State<DropdownForm> {
           }
         );
       },
-      decoration: InputDecoration(
-        errorStyle: TextStyle(
-          fontFamily: 'Source Sans Pro',
-          color: Color.fromRGBO(255, 5, 5, 1),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(255, 5, 5, 1),
-          )
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(255, 5, 5, 1),
-          )
-        ),
-        hintStyle: TextStyling.hintTextStyle,
-        hintText: widget.hintContents,
-        isDense: true,
-        contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-        prefix: const Padding(
-          padding: EdgeInsets.only(left: 15),
-        ),
-        focusColor: Color.fromRGBO(74, 74, 74, 1),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(74, 74, 74, 1),
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(179, 179, 179, 1),
-          )
-        )
-      ),
+      decoration: FormStyling().formDecoration(widget.hintContents),
       items: widget.dropdownContents
       .map((obj) => DropdownMenuItem<String>(
         value: obj,
@@ -911,43 +838,7 @@ class TextsForm extends StatelessWidget {
       autovalidateMode: requiredData,
       controller: controller,
       cursorColor: Colors.black,
-      decoration: InputDecoration(
-        errorStyle: TextStyle(
-          fontFamily: 'Source Sans Pro',
-          color: Color.fromRGBO(255, 5, 5, 1),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(255, 5, 5, 1),
-          )
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(255, 5, 5, 1),
-          )
-        ),
-        focusColor: Color.fromRGBO(74, 74, 74, 1),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(74, 74, 74, 1),
-          ),
-        ),
-        contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-        prefix: const Padding(
-          padding: EdgeInsets.only(left: 15),
-        ),
-        hintText: hintContent,
-        isDense: true,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: Color.fromRGBO(179, 179, 179, 1),
-            )
-          ),
-      ),
+      decoration: FormStyling().formDecoration(hintContent),
       validator: FormBuilderValidators.compose([
         (value){
           if(!requiredDataChecker){
