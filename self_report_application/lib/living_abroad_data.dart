@@ -161,8 +161,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => LivingAbroadDataContinuePage(
-        )
+        builder: (context) => LivingAbroadDataContinuePage()
       )
     );
     }
@@ -223,7 +222,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           needsInfoButton: false,
                           buttonContent: '',
                           dropdownName: 'province',
-                          validatorWarning: 'Please select a province',
+                          validatorWarning: 'Harap periksa ulang propinsi anda',
                           hintContents: 'Pilih Propinsi',
                           dropdownValue: provinceDropdownValue,
                           dropdownContents: provinces,
