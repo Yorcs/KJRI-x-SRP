@@ -500,7 +500,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          //TODO: Readjust margin and padding
           body: SingleChildScrollView(
             child: FormBuilder(
               key: _goalOfStayingKey,
@@ -531,7 +530,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select a goal of staying'; //TODO: Change prompt
+                                return 'Harap memilih tujuan menetap'; 
                               }
                               saveDropdownData('Tujuan Menetap', value);
                               return null;
@@ -576,7 +575,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             validator: FormBuilderValidators.compose([
                               (value){
                                 if(value ==null || value =='' || value.isEmpty){
-                                  return 'Please select a goal of staying'; //TODO: Change prompt
+                                  return 'Harap memilih tujuan menetap lainnya'; 
                                 }
                                 saveDropdownData('Tujuan Menetap Lainnya', value);
                                 return null;
@@ -610,7 +609,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             ),
                           ]
                           else if(secondaryGoalOfStayingDropdownValue.toString() == 'Bekerja') ... [
-                            // TODO: Change hint contents
+                            
                             Text(
                                 'Bidang Kerja',
                                 style: TextStyling.regularTextStyle,
@@ -622,7 +621,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your industry'; //TODO: Change prompt
+                                    return 'Harap memilih bidang kerja';
                                   }
                                   saveDropdownData('Bidang Kerja', value);
                                   return null;
@@ -643,7 +642,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             ),
                             SizedBox(height: 30),
                             
-                            // TODO: Change placeholder
+                            
                             if(employmentIndustry.toString() == 'Pertambangan') ... [
                               Text(
                                 'Pekerjaan',
@@ -656,7 +655,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -687,7 +686,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -718,7 +717,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -749,7 +748,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -780,7 +779,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -811,7 +810,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -842,7 +841,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -873,7 +872,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -904,7 +903,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -935,7 +934,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -966,7 +965,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -997,7 +996,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1028,7 +1027,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1059,7 +1058,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1090,7 +1089,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1121,7 +1120,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1152,7 +1151,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1183,7 +1182,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1214,7 +1213,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1245,7 +1244,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your job'; //TODO: Change prompt
+                                    return 'Harap memilih pekerjaan'; 
                                   }
                                   saveDropdownData('Pekerjaan', value);
                                   return null;
@@ -1323,7 +1322,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               valueConstraints: r"^[a-z A-Z 0-9',.\-]+$",  
                               controller: _agenPenyalur, 
                               requiredDataChecker: true,
-                              manualErrorText: "Harap memeriksa ulang perusahaan penyalur",                  
+                              manualErrorText: "Harap memeriksa ulang agen penyalur",                  
                             ),
                           ]
                           else if(secondaryGoalOfStayingDropdownValue.toString() == 'Belajar') ...[
@@ -1349,7 +1348,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               validator: FormBuilderValidators.compose([
                                 (value){
                                   if(value ==null || value =='' || value.isEmpty){
-                                    return 'Please select your degree'; //TODO: Change prompt
+                                    return 'Harap memilih jenjang sekolah'; 
                                   }
                                   saveDropdownData('Jenjang', value);
                                   return null;
@@ -1378,7 +1377,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               valueConstraints: r'^[a-z A-Z 0-9,.\-]+$',   
                               controller: _schoolProgram,
                               requiredDataChecker: true,   
-                              manualErrorText: 'Harap mengisi program / bidag studi',              
+                              manualErrorText: 'Harap mengisi program / bidang studi',              
                             ),
                             SizedBox(height: 30),
                           Text(
@@ -1426,7 +1425,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                         ] 
                         //Bekerja
                         else if(goalOfStayingDropdownValue.toString() == 'Bekerja') ...[
-                        // TODO: Change hint contents
                         Text(
                             'Bidang Kerja',
                             style: TextStyling.regularTextStyle,
@@ -1438,7 +1436,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your industry'; //TODO: Change prompt
+                                return 'Harap memilih bidang kerja'; 
                               }
                               saveDropdownData('Bidang Kerja', value);
                               return null;
@@ -1458,8 +1456,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                         SizedBox(height: 30),
-                        
-                        // TODO: Change placeholder
                         if(employmentIndustry.toString() == 'Pertambangan') ... [
                           Text(
                             'Pekerjaan',
@@ -1472,7 +1468,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1503,7 +1499,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1534,7 +1530,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1565,7 +1561,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1596,7 +1592,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1627,7 +1623,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1658,7 +1654,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1689,7 +1685,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                              saveDropdownData('Pekerjaan', value);
                              return null;
@@ -1720,7 +1716,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1751,7 +1747,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1782,7 +1778,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1813,7 +1809,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1844,7 +1840,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1875,7 +1871,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1906,7 +1902,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1937,7 +1933,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1968,7 +1964,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -1999,7 +1995,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -2030,7 +2026,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -2061,7 +2057,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               saveDropdownData('Pekerjaan', value);
                               return null;
@@ -2168,7 +2164,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             validator: FormBuilderValidators.compose([
                               (value){
                                 if(value ==null || value =='' || value.isEmpty){
-                                  return 'Please select your degree'; //TODO: Change prompt
+                                  return 'Harap memilih jenjang sekolah'; 
                                 }
                                 saveDropdownData('Jenjang', value);
                                 return null;
@@ -2241,7 +2237,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your industry'; //TODO: Change prompt
+                                return 'Harap memilih bidang kerja'; 
                               }
                               return null;
                             }
@@ -2260,7 +2256,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             )).toList()
                         ),
                           SizedBox(height: 30,),
-                        // TODO: Change placeholder
+                        
                         if(employmentIndustry.toString() == 'Pertambangan') ... [
                           Text(
                             'Pekerjaan',
@@ -2273,7 +2269,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2303,7 +2299,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2333,7 +2329,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2363,7 +2359,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2393,7 +2389,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2423,7 +2419,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2453,7 +2449,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2483,7 +2479,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2513,7 +2509,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2543,7 +2539,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2573,7 +2569,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2603,7 +2599,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2633,7 +2629,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2663,7 +2659,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2693,7 +2689,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2723,7 +2719,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2753,7 +2749,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2783,7 +2779,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2813,7 +2809,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2843,7 +2839,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                           validator: FormBuilderValidators.compose([
                             (value){
                               if(value ==null || value =='' || value.isEmpty){
-                                return 'Please select your job'; //TODO: Change prompt
+                                return 'Harap memilih pekerjaan'; 
                               }
                               return null;
                             }
@@ -2906,7 +2902,6 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                             BackButtons(
                               onPressed: () => goBack(context),
                             ),
-                            // TODO: Adjust button position
                             ForwardButtons(
                               onPressed: () => getItemAndNavigate(context)
                             ),
