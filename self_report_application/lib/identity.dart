@@ -207,7 +207,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           needsInfoButton: false,
                           buttonContent: '',
                           dropdownName: 'gender',
-                          validatorWarning: 'Please select gender',
+                          validatorWarning: 'Harap pilih jenis kelamin',
                           hintContents: 'Pilih Jenis Kelamin',
                           dropdownValue: dropdownValue,
                           dropdownContents: genderOptions,
