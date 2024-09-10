@@ -8,8 +8,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 //This class is strictly for styling purposes only. Created for reusability.
-class DropdownStyling {
-  InputDecoration dropdownDecoration(String? hintContent){
+
+//Styling for box form
+class FormStyling {
+  InputDecoration formDecoration(String? hintContent){
     return InputDecoration(
       errorStyle: TextStyle(
       fontFamily: 'Source Sans Pro',
