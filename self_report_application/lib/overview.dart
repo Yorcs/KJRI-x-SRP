@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:self_report_application/form_container.dart';
 import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
+import 'package:self_report_application/submitted.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -211,6 +212,10 @@ class _OverviewFormState extends State<OverviewState> {
       emergencyContactIndoEmail = emergencyContactIndoEmailString;
       emergencyContactIndoPhone = emergencyContactIndoPhoneString;
       emergencyContactIndoRelationship = emergencyContactIndoRelationshipString;
+      debugPrint(emergencyContactIndoEmailString);
+      debugPrint(emergencyContactIndoPhoneString);
+      debugPrint(emergencyContactIndoPhone);
+      debugPrint(emergencyContactIndoEmail);
     });
 
     return(name, dob, passport, idNumber, gender,
@@ -233,8 +238,6 @@ class _OverviewFormState extends State<OverviewState> {
   Future<String> uploadFile(String pickedFile, String fileName) async {
     TaskSnapshot snapshot;
     try{
-      debugPrint(fileName);
-      debugPrint(pickedFile);
       final path = 'files/$name/$fileName';
       Uint8List bytes = base64Decode(pickedFile);
       final ref = FirebaseStorage.instance.ref().child(path);
@@ -256,6 +259,15 @@ class _OverviewFormState extends State<OverviewState> {
   }
 
   goBack(BuildContext context)=> Navigator.pop(context);
+  Future<void> navigateToNewPage(BuildContext context) async{
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SubmittedPage()
+      )
+    );
+  }
+
+
   Future <void> pushToFirebase (BuildContext context) async {
     final user = <String, dynamic>{
       //Personal Data
@@ -270,7 +282,7 @@ class _OverviewFormState extends State<OverviewState> {
       "Negara": country,
       "Kode Pos": postalCode,
       "Provinsi": province,
-      "Dokumen Bukti Tinggal" : uploadFile(permitToStayDoc, permitToStayDocName),
+      "Dokumen Bukti Tinggal" : await uploadFile(permitToStayDoc, permitToStayDocName),
 
       // //Living Abroad Data Continue
       "Nomor Visa": visaNumber,
@@ -279,7 +291,7 @@ class _OverviewFormState extends State<OverviewState> {
       "Waktu Kedatangan" : dateOfArrival,
       "Perkiraan Lama Menetap (Tahun)" : lengthOfStayYear,
       "Perkiraan Lama Menetap (Bulan)" : lengthOfStayMonth,
-      "Ijin Tinggal" : uploadFile(proofOfStayingDoc, proofOfStayingDocName),
+      "Ijin Tinggal" : await uploadFile(proofOfStayingDoc, proofOfStayingDocName),
 
       // //Goal of Staying
       "Tujuan Menetap": goalOfStaying,
@@ -300,22 +312,24 @@ class _OverviewFormState extends State<OverviewState> {
       "Lama Pendidikan (Tahun)" : lengthOfSchoolYear,
       "Lama Pendidikan (Bulan)" : lengthOfSchoolMonth,
 
-      //Emergency Contact Abroad
-      "Nama Kontak Darurat di Luar Negeri" : emergencyContactAbroadName,
-      "Email Kontak Darurat di Luar Negeri" : emergencyContactAbroadEmail,
-      "Telepon Kontak Darurat di Luar Negeri" : emergencyContactAbroadPhone,
-      "Hubungan Kontak Darurat di Luar Negeri" : emergencyContactAbroadRelationship,
+      // //Emergency Contact Abroad
+      // "Nama Kontak Darurat di Luar Negeri" : emergencyContactAbroadName,
+      // "Email Kontak Darurat di Luar Negeri" : emergencyContactAbroadEmail,
+      // "Telepon Kontak Darurat di Luar Negeri" : emergencyContactAbroadPhone,
+      // "Hubungan Kontak Darurat di Luar Negeri" : emergencyContactAbroadRelationship,
 
-      //Emergency Contact Indonesia
-      "Nama Kontak Darurat di Indonesia" : emergencyContactIndoName,
-      "Email Kontak Darurat di Indonesia" : emergencyContactIndoEmail,
-      "Telepon Kontak Darurat di Indonesia" : emergencyContactIndoPhone,
-      "Hubungan Kontak Darurat di Indonesia" : emergencyContactIndoRelationship,
+      // //Emergency Contact Indonesia
+      // "Nama Kontak Darurat di Indonesia" : emergencyContactIndoName,
+      // "Email Kontak Darurat di Indonesia" : emergencyContactIndoEmail,
+      // "Telepon Kontak Darurat di Indonesia" : emergencyContactIndoPhone,
+      // "Hubungan Kontak Darurat di Indonesia" : emergencyContactIndoRelationship,
 
       "timestamp" : FieldValue.serverTimestamp(), //NECESSARY TO QUERY THE DATA IN GSHEETS
       
     };
     await db.collection("datas").add(user).then((DocumentReference doc) => print('DocumentSnapshot added with ID:${doc.id}'));
+    // if(!context.mounted)return;
+    // navigateToNewPage(context);
   }
 
   @override
