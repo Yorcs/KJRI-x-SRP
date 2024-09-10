@@ -588,42 +588,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 }
                               );
                             },
-                            decoration: InputDecoration(
-                              errorStyle: TextStyle(
-                                fontFamily: 'Source Sans Pro',
-                                color: Color.fromRGBO(255, 5, 5, 1),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                )
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                )
-                              ),
-                              focusColor: Color.fromRGBO(74, 74, 74, 1),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(74, 74, 74, 1),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                              prefix: const Padding(
-                                padding: EdgeInsets.only(left: 15),
-                              ),
-                              isDense: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(179, 179, 179, 1),
-                                  )
-                                ),
-                            ),
+                            decoration: noHintFormDecoration,
                             items: secondaryGoals
                             .map((items) => DropdownMenuItem<String>(
                               value: items,
@@ -669,42 +634,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: industries
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -738,42 +668,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: pertambanganName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -804,42 +699,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: pemerintahanName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -870,42 +730,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: kesehatanName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -936,42 +761,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: konstruksiName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1002,42 +792,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: industriManufakturName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1068,42 +823,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: orgInterName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1134,42 +854,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: parwisName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1200,42 +885,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: pendidikanName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1266,42 +916,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: penerbanganName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1332,42 +947,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: keuanganName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1398,42 +978,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: pertanianOrPerkebunanName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1464,42 +1009,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: hukumName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1530,42 +1040,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: domestikName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1596,42 +1071,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: techName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1662,42 +1102,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: mediaElektronikName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1728,42 +1133,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: senbudName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1794,42 +1164,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: wirausahaName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1860,42 +1195,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: kelautanName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1926,42 +1226,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: industriModeName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -1992,42 +1257,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: perikananName
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -2131,42 +1361,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                   }
                                 );
                               },
-                              decoration: InputDecoration(
-                                errorStyle: TextStyle(
-                                  fontFamily: 'Source Sans Pro',
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(255, 5, 5, 1),
-                                  )
-                                ),
-                                focusColor: Color.fromRGBO(74, 74, 74, 1),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(74, 74, 74, 1),
-                                  ),
-                                ),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                                prefix: const Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                ),
-                                isDense: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    width: 0.5,
-                                    color: Color.fromRGBO(179, 179, 179, 1),
-                                    )
-                                  ),
-                              ),
+                              decoration: noHintFormDecoration,
                               items: jenjang
                               .map((items) => DropdownMenuItem<String>(
                                 value: items,
@@ -2985,42 +2180,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                                 }
                               );
                             },
-                            decoration: InputDecoration(
-                              errorStyle: TextStyle(
-                                fontFamily: 'Source Sans Pro',
-                                color: Color.fromRGBO(255, 5, 5, 1),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                )
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(255, 5, 5, 1),
-                                )
-                              ),
-                              focusColor: Color.fromRGBO(74, 74, 74, 1),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(74, 74, 74, 1),
-                                ),
-                              ),
-                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 10),
-                              prefix: const Padding(
-                                padding: EdgeInsets.only(left: 15),
-                              ),
-                              isDense: true,
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  width: 0.5,
-                                  color: Color.fromRGBO(179, 179, 179, 1),
-                                  )
-                                ),
-                            ),
+                            decoration: noHintFormDecoration,
                             items: jenjang
                             .map((items) => DropdownMenuItem<String>(
                               value: items,
