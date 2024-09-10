@@ -207,7 +207,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                         valueConstraints: r'^[a-z A-Z 0-9,.\-]+$', 
                         controller: _address, 
                         requiredDataChecker: true,
-                        manualErrorText: 'Tolong periksa ulang alamat anda',                   
+                        manualErrorText: 'Harap periksa ulang alamat anda',                   
                         ),
                         SizedBox(height: 30,),
                         DisabledFormContainer(
@@ -238,7 +238,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           valueConstraints: r'^[A-Z 0-9]+$',
                           controller: _postalCode,   
                           requiredDataChecker: true, 
-                          manualErrorText: 'Tolong periksa ulang kode pos',                
+                          manualErrorText: 'Harap periksa ulang kode pos',                
                         ),
                         SizedBox(height: 30,),
                         FormContainer(
@@ -250,7 +250,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                           valueConstraints: r'^[0-9+]+$',
                           controller: _canadianPhoneNumber,   
                           requiredDataChecker: true, 
-                          manualErrorText: 'Tolong periksa ulang nomor telepon',                
+                          manualErrorText: 'Harap periksa ulang nomor telepon',                
                         ),
                         SizedBox(height: 40,), 
                         Row(
