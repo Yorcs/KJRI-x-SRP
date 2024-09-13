@@ -119,7 +119,10 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
       saveData();
       await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => OverviewPage()
+        builder: (context) => OverviewPage(
+          emergencyContactIndoEmailSt: _emergencyContactIndoEmail.text,
+          emergencyContactIndoPhoneSt: _emergencyContactIndoPhone.text,
+        )
       )
     );
   }

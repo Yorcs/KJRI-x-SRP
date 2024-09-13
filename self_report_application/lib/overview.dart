@@ -13,16 +13,23 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 //Overview Page
 class OverviewPage extends StatelessWidget {
- const OverviewPage({super.key});
+ const OverviewPage({super.key, required this.emergencyContactIndoPhoneSt, required this.emergencyContactIndoEmailSt});
+ final String emergencyContactIndoPhoneSt;
+ final String emergencyContactIndoEmailSt;
 
   @override
   Widget build(BuildContext context) {
-    return OverviewState();
+    return OverviewState(
+      emergencyContactIndoPhoneSt : emergencyContactIndoPhoneSt,
+      emergencyContactIndoEmailSt: emergencyContactIndoEmailSt,
+    );
   }
 }
 
 class OverviewState extends StatefulWidget {
-  const OverviewState({super.key});
+  const OverviewState({super.key, required this.emergencyContactIndoPhoneSt, required this.emergencyContactIndoEmailSt});
+  final String emergencyContactIndoPhoneSt;
+  final String emergencyContactIndoEmailSt;
 
   @override
   State<OverviewState> createState() => _OverviewFormState();
@@ -201,6 +208,11 @@ class _OverviewFormState extends State<OverviewState> {
       lengthOfSchoolYear = lengthOfSchoolYearString;
       lengthOfSchoolMonth = lengthOfSchoolMonthString;
 
+      emergencyContactIndoName = emergencyContactIndoNameString;
+      emergencyContactIndoEmail = emergencyContactIndoEmailString;
+      emergencyContactIndoPhone = emergencyContactIndoPhoneString;
+      emergencyContactIndoRelationship = emergencyContactIndoRelationshipString;
+
       //Emergency Contact Abroad
       emergencyContactAbroadName = emergencyContactAbroadNameString;
       emergencyContactAbroadEmail = emergencyContactAbroadEmailString;
@@ -209,13 +221,10 @@ class _OverviewFormState extends State<OverviewState> {
 
       //Emergency Contact Indo
       emergencyContactIndoName = emergencyContactIndoNameString;
-      emergencyContactIndoEmail = emergencyContactIndoEmailString;
-      emergencyContactIndoPhone = emergencyContactIndoPhoneString;
+      emergencyContactIndoEmail = widget.emergencyContactIndoEmailSt;
+      emergencyContactIndoPhone =widget.emergencyContactIndoPhoneSt;
       emergencyContactIndoRelationship = emergencyContactIndoRelationshipString;
-      debugPrint(emergencyContactIndoEmailString);
-      debugPrint(emergencyContactIndoPhoneString);
-      debugPrint(emergencyContactIndoPhone);
-      debugPrint(emergencyContactIndoEmail);
+
     });
 
     return(name, dob, passport, idNumber, gender,
