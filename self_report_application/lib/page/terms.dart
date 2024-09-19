@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:self_report_application/page/requirements_page.dart';
 import 'package:self_report_application/styling.dart';
+import '../components/agreements.dart' as full_dialog;
 
 //Terms and Conditions page
 class TermPage extends StatelessWidget {
@@ -76,7 +77,7 @@ class _TermsScreenState extends State<TermScreen> {
   Future _openAgreeDialog(context) async {
     String result = await Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) {
-          return fullDialog.CreateAgreement();
+          return full_dialog.Agreements();
         },
         //true to display with a dismiss button rather than a return navigation arrow
         fullscreenDialog: true));
