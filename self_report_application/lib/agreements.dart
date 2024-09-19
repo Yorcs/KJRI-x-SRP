@@ -1,33 +1,21 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:pdfx/pdfx.dart';
 
-// class Agreements extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//        return SafeArea(
-//         child: Scaffold(
-//           appBar: AppBar(
-//             title: const Text('Agreement'),
-//             actions: [
-//               FlatButton(
-//                   onPressed: () {
-//                     Navigator
-//                         .of(context)
-//                         .pop('User Agreed');
-//                   },
-//                   child: Text('AGREE',
-//                       style: Theme
-//                           .of(context)
-//                           .textTheme
-//                           .subhead
-//                           .copyWith(color: Colors.white))),
-//             ],
-//         ),
-//         backgroundColor: Colors.white,
-//         body: SingleChildScrollView(
-//                 child: Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Text(pdfText),
-//           ),
-//         )));
-//   }
-// }
+class Agreements extends StatefulWidget {
+  @override
+  State<Agreements> createState() => _AgreementsState();
+}
+
+class _AgreementsState extends State<Agreements> {
+  late PDFControllerPinch pdfControllerPinch;
+
+  @override
+  void initState(){
+    super.initState();
+    pdfControllerPinch = PdfControllerPinch(document: document);
+  }
+  @override
+  Widget build(BuildContext context) {
+       
+  }
+}

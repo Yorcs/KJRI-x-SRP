@@ -30,6 +30,7 @@ dependencies:
   permission_handler: ^11.3.1
   device_info_plus: ^10.1.2
   path: ^1.9.0
+  pdfx: ^2.7.0
 
 dev_dependencies:
   flutter_test:
