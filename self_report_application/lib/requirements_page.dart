@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:self_report_application/page/identity.dart';
+import 'package:self_report_application/identity.dart';
 import 'package:self_report_application/styling.dart';
 
 Future <void> getItemAndNavigate (BuildContext context) async {

@@ -4,10 +4,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:self_report_application/components/form_container.dart';
-import 'package:self_report_application/components/header.dart';
+import 'package:self_report_application/form_container.dart';
+import 'package:self_report_application/header.dart';
 import 'package:self_report_application/styling.dart';
-import 'package:self_report_application/page/submitted.dart';
+import 'package:self_report_application/submitted.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 

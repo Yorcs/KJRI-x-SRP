@@ -2,10 +2,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:self_report_application/page/terms.dart';
-import '../firebase_options.dart';
+import 'package:self_report_application/terms.dart';
+import 'firebase_options.dart';
 import 'package:self_report_application/styling.dart';
-import 'package:self_report_application/page/requirements_page.dart';
+import 'package:self_report_application/requirements_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -73,7 +73,7 @@ class MyAppState extends ChangeNotifier {
 Future <void> getItemAndNavigate (BuildContext context) async {
     await Navigator.of(context).push(
     MaterialPageRoute(
-      builder: (context) => TermPage()
+      builder: (context) => RequirementsPage()
     )
   );
 }
