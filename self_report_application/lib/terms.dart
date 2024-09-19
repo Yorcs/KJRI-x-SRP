@@ -47,7 +47,7 @@ class _TermsScreenState extends State<TermScreen> {
                   children: [
                     ElevatedButton(
                       child: Text(
-                        'Create Account',
+                        'UU 23 Nomor 2006',
                         style: TextStyle(color: Colors.black),
                       ),
                       onPressed: () {
