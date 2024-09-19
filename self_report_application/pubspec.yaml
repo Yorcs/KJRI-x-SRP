@@ -85,6 +85,7 @@ flutter:
     - images/identitas-active.svg
     - images/kontak-active.svg
     - images/tujuan-active.svg
+    - pdfs/UU23_2006.pdf
 
   fonts:
   - family: Source Sans Pro
