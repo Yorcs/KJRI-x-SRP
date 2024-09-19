@@ -210,6 +210,7 @@ class _EmergencyContactAbroadFormState extends State<EmergencyContactAbroadForm>
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],

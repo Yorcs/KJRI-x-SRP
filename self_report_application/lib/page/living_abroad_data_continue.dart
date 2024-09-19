@@ -312,6 +312,7 @@ class _LivingAbroadDataContinueFormState extends State<LivingAbroadDataContinueF
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],

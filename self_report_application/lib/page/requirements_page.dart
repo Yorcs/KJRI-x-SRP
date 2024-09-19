@@ -99,6 +99,7 @@ class RequirementsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ForwardButtons(
+                        enableButton: true,
                         onPressed: () => getItemAndNavigate(context)
                       ),
                     ],

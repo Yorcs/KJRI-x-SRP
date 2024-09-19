@@ -218,6 +218,7 @@ class _IdentityFormState extends State<IdentityForm> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],

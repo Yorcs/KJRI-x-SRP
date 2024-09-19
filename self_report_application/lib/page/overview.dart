@@ -710,6 +710,7 @@ class _OverviewFormState extends State<OverviewState> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => pushToFirebase(context),
                             ),
                           ],

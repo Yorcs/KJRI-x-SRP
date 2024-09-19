@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:self_report_application/page/requirements_page.dart';
+import 'package:self_report_application/styling.dart';
 
 //Terms and Conditions page
 class TermPage extends StatelessWidget {
@@ -20,6 +22,14 @@ class TermScreen extends StatefulWidget {
 
 class _TermsScreenState extends State<TermScreen> {
   bool termChecker = false;
+
+  Future <void> getItemAndNavigate (BuildContext context) async {
+    await Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => RequirementsPage()
+    )
+    );
+  }
 
   @override
    Widget build(BuildContext context) {
@@ -43,6 +53,17 @@ class _TermsScreenState extends State<TermScreen> {
                         _openAgreeDialog(context);
                       },
                     ),
+                    SizedBox(height: 135,), 
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ForwardButtons(
+                          enableButton: termChecker,
+                          onPressed: () => getItemAndNavigate(context)
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20,), 
                   ],
                 ),
               )
@@ -67,7 +88,7 @@ class _TermsScreenState extends State<TermScreen> {
   }
 
   letsDoSomething(context) {
-    print('succreed');
+    termChecker = true;
   }
 
 }

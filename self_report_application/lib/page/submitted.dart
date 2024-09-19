@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:self_report_application/page/identity.dart';
 import 'package:self_report_application/page/main.dart';
 import 'package:self_report_application/styling.dart';
 
@@ -82,14 +80,14 @@ class SubmittedPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20,), 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      ForwardButtons(
-                        onPressed: () => getItemAndNavigate(context)
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: <Widget>[
+                  //     ForwardButtons(
+                  //       onPressed: () => getItemAndNavigate(context)
+                  //     ),
+                  //   ],
+                  // ),
                 ]
               )
             )

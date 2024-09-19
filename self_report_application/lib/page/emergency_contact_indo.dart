@@ -220,6 +220,7 @@ class _EmergencyContactIndoFormState extends State<EmergencyContactIndoForm> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],

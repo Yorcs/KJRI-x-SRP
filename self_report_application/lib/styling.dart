@@ -188,9 +188,11 @@ class ForwardButtons extends StatelessWidget{
   const ForwardButtons({
     super.key,
     required this.onPressed,
+    required this.enableButton,
   });
 
   final VoidCallback? onPressed;
+  final bool enableButton;
 
 
   @override
@@ -206,7 +208,7 @@ class ForwardButtons extends StatelessWidget{
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(3))),
           padding:WidgetStateProperty.all(EdgeInsets.all(18)),
         ),
-        onPressed: onPressed,
+        onPressed: enableButton ? onPressed : null,
         child: const Text('Lanjut'),
       ),
     );

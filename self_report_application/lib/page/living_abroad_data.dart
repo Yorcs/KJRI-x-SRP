@@ -260,6 +260,7 @@ class _LivingAbroadDataFormState extends State<LivingAbroadDataForm> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],

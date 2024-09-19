@@ -2903,6 +2903,7 @@ class _GoalOfStayingFormState extends State<GoalOfStayingForm> {
                               onPressed: () => goBack(context),
                             ),
                             ForwardButtons(
+                              enableButton: true,
                               onPressed: () => getItemAndNavigate(context)
                             ),
                           ],
