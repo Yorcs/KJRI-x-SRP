@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:self_report_application/emergency_contact_indo.dart';
-import 'package:self_report_application/form_container.dart';
-import 'package:self_report_application/header.dart';
+import 'package:self_report_application/page/emergency_contact_indo.dart';
+import 'package:self_report_application/components/form_container.dart';
+import 'package:self_report_application/components/header.dart';
 import 'package:self_report_application/styling.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
