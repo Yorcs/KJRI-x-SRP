@@ -7,7 +7,7 @@ Future <void> getItemAndNavigate (BuildContext context) async {
     MaterialPageRoute(
       builder: (context) => IdentityPage()
     )
-  );
+    );
 }
 
 //Requirements Page
