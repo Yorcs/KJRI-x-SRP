@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pdfx/pdfx.dart';
 
 class Agreements extends StatefulWidget {
+  Agreements({
+    super.key,
+    required this.formchecker,
+  });
+  final bool formchecker;
+  
   @override
   State<Agreements> createState() => _AgreementsState();
 }

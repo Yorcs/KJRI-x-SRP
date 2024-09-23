@@ -77,7 +77,7 @@ class _TermsScreenState extends State<TermScreen> {
   Future _openAgreeDialog(context) async {
     String result = await Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) {
-          return full_dialog.Agreements();
+          return full_dialog.Agreements(formchecker: termChecker,);
         },
         //true to display with a dismiss button rather than a return navigation arrow
         fullscreenDialog: true));
